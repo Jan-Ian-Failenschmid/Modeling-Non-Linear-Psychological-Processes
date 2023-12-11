@@ -1,0 +1,48 @@
+\subsection{Kernel Regression}
+
+Kernel regression is a non-parametric regression technique that can be used to 
+approximate non-linear functions. In time series analysis, this is used to infer a global 
+function relating the underlying state to time
+\parencite{tsay_nonlinear_2019}. This is achieved by 
+averaging observations across time, thus removing the measurement error. 
+However, to accommodate the fact that the state value changes over time, 
+observations that are closer in time are given a higher weight when averaging 
+than observations that are more distant (Nadaraya-Watson estimator; 
+\cite{nadaraya_estimating_1964, watson_smooth_1964, bierens_topics_1994}). 
+This means that the averages are calculated locally, for each point in time, with a 
+unique set of weights. Here, the precise weight that is given to each of the observations is determined 
+using a so-called kernel function. 
+
+Kernel functions are usually centered, symmetric probability density functions. 
+As such, they associate larger weights to closer observations and smaller weights to more distant observations
+\parencite{nadaraya_estimating_1964}. Common choices for kernel functions are the 
+Gaussian or the symmetric Beta density. The width of the kernel function is 
+referred to as the bandwidth. It modulates the extent by which the 
+weights decrease as the observations get more distant. In practice, this
+means that the bandwidth controls the smoothness of the estimated state function. Many methods,
+such as mean integrated squared error minimization or generalized cross-validation, exist to determine the optimal 
+bandwidth based on the data \parencite{kohler_review_2014, debruyne_model_2008}. 
+
+One common extension of this estimator is local polynomial regression. Instead of 
+calculating local weighted averages, the underlying non-linear regression function
+is here approximated using locally fitted weighted polynomial regressions of a 
+low, odd order \parencite{fan_adaptive_1995, ruppert_multivariate_1994, 
+fan_local_2018, avery_literature_nodate}. Alternatively, it is possible 
+to approximate non-linear auto-regressive functions, 
+which relate the state value at a certain time point to the previous observations. 
+Here one may either choose to estimate the non-linear function directly, by including 
+the lagged observations as inputs in a multivariate kernel regression  
+\parencite{tsay_nonlinear_2019, schimek_multivariate_2000}, or to model the auto-regressive 
+parameters in a classical autoregressive model as varying over time and approximate this function 
+instead \parencite{haslbeck_tutorial_2021, shim_kernel_2009}. 
+
+Kernel regression is the most flexible method considered in this review and relies on the least assumptions. 
+Hence, it can accommodate most forms of non-linearity that could be found in ILD. Since the Nadaraya-Watson
+estimator uses one constant bandwidth, which may be understood as a measure of wigglyness of the approximated function.
+This means that wigglyness has to be constant for the estimator to perform well. However, 
+this limitation is overcome by the additional freedom that local polynomial regression provides. This additional 
+flexibility makes it possible to approximate functions with varying degrees of wigglyness as 
+well as discontinuities relatively well. Considering its nonparametric nature, kernel regression is suitable for situations
+in which no assumptions on the form of the underlying function can be made based on theory. As a consequence, 
+it also provides very little amount of information about the process and beyond visual inspection and
+provides only the bandwidth estimate as an interpretable parameter of the functional behavior. 

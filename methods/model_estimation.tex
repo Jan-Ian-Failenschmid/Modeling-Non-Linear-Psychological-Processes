@@ -1,0 +1,34 @@
+\subsection{Model estimation}
+
+After simulating the deta, four methods were used to infer the state process for 
+each data set. First, general additive models (GAM) were fit to each data set 
+using the mgcv package. Specifically, a model with a single smooth function 
+relating the state value to time was chosen and approximated using $50$ 
+thin-plate splines. The weight of the penalty term of the GAM was determined 
+using the generalized cross-validation procedure that is incorporated in mgcv. 
+The fitted model was then used to obtain state estiamtes at each time point as 
+well as respective 95\% Bayesian credible intervals 
+
+Secondly, a local polynomial regression was fit to each data set using the 
+nprobust package. We used first order local polynomials, resulting in a local 
+linear regression. Further, we used a gaussian kernel and optimized the bandwidth 
+of the kernel function using the build-in mean squared error optimization. Afterwards, 
+bias corrected state estimates and robust standard error were obtained, to 
+account for the inherrent bias of the local polynomial model. Lastly, we used 
+these estiamtes and standard errors to construct 95\% confidence bands for the
+state function. 
+
+In order to fit the Gaussian processes efficiently for a large number of data 
+sets we used a Hilbert space approximate Gaussian process model in Stan.
+This approximation uses a linear combination of basis functions that are derived 
+from the covariance matrix of the Gaussian process. The number of basis 
+function was chosen in accordance to the length scale of the 
+Gaussian process and boundary factor of the approximation. This was achieved 
+by following the selection procedure detailed by Riutort-Mayol et al. (2023) 
+To concur with how Gaussian 
+processes are usually applied we selected a zero mean function together with a 
+quadratic exponential covariance functions. This covariance function is both symmetric and 
+stationary. Point estimates for the state value as well as 95\% credible interval 
+were obtained from posterior distribution of the Gaussian process. 
+
+Lastly, a dynamic model 

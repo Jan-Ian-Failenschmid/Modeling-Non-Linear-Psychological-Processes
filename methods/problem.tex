@@ -1,0 +1,42 @@
+A simulation study was conducted, to evaluate the performance of the different 
+introduced smoothing techniques in recovering non-linear state processes. 
+Specifically, we were interested in the extend to which different types 
+of non-linear state functions could be estimated under conditions that are 
+realisitcally found in ESM research. For the present simulation we further 
+limited considerations to univariate single subject desgins, for simplicity and 
+to use each method in the form in which they are currently available in software.
+Thus, we manipulated two 
+conditions, which were theorized to influence the state recovey. First, the type 
+of non-linearity present in the state process, the quality of information 
+about the state process.
+
+Based on theory underlying the considered smoothing techniques, we expect that 
+all considered smoothing techniques will perform best if the non-linear state process 
+is relatively smooth and follows a constant dynamic without regime switching. 
+In order to test this, we operationalized smoothness as either low or high 
+process noise. Since, we expect there will always be some process noise present 
+in ESM data, we did not include a completely smooth condition without process noise. 
+Further, we tested two types of regime switching. The first regime switching 
+condition changes the dynamic of the simulated process, but not the attractor, 
+whereas the second condition, switches the attractor of the state process, but not the 
+dynamic. 
+
+Further, we expected that all considered methods will infer the state process 
+with higher accuracy the better the quality of information is. To test this, 
+we varied two factors. The first is to the signal-to-noise ratio of the 
+data, which corresponds to the ratio of the variance of the centered process values 
+and the variance of the measurement noise. Thus a larger signal-to-noise ratio 
+corresplonds to more variation in the process itself relativ to the measurement 
+uncertainty. The second factor corresponds to the sample size or the 
+number of observations that are taken over a given time interval. 
+
+Therefore, the simulation consisted of five factors that were crossed in a complete 
+factorial desgin: 
+
+\begin{enumerate}
+    \item Process noise (small vs. large)
+    \item Dynamic regime switching (absent vs. present)
+    \item Attractor regime switching (absent vs. present)
+    \item Signal-to-noise ratio (small vs. large)
+    \item Sample size (small vs. large)
+\end{enumerate}

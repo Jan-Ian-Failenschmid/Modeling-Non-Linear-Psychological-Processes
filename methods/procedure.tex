@@ -1,0 +1,30 @@
+\subsection{Data generation}
+
+In all conditions, the data was generated from a univariate non-linear 
+state space model, with a state function described by:
+
+\begin{align*}
+    Y_{t+1} &= f_j (Y_{t}) + \eta_{t+1} \\
+    \eta_{t+1} &\sim N(0, \sigma^2_{Process})
+\end{align*}
+
+Where $f_j$ is either a single continous non-constant function in the single 
+regime condition or switching between two different functions according to a 
+Markov chain in the regime switching conditions. In the regime swtiching conditions 
+these functions were selected in such a way that either the dynamic of the system, 
+the attractor, or both change. In addition to that, the variance of the $\eta_{t+1}$
+was set according to the process noise condition and the time-points 
+were determined by subdevidign the interval from zero to one by the desired sample 
+size. After simulating the state values, we centered the state values and calculated
+the measurement error that would result in the required signal-to-noise ratio. 
+Laslty, the measurement error was added to the simulated state values to generate 
+observations. 
+
+$N$ number of data sets were generated per cell of the factorial desgin. This number 
+was determined by first running a small pilot simulation with 30 data sets per cell. 
+Afterwards, a seperate simulation was conducted on the outcome models. To simulate 
+from the outcome models we used the significant parameter estimates from the 
+pilot simulation and set the insignificant parameters to zero. Based on these 
+preliminary effect sizes $N$ observations per cell resulted in selecting the 
+correct outcome model $95\%$ of the time.
+

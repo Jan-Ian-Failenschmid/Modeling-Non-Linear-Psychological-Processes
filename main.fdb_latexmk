@@ -1,10 +1,10 @@
 # Fdb version 3
-["biber main"] 1709049561 "main.bcf" "main.bbl" "main" 1709051926
-  "main.bcf" 1709051926 123140 0e07e9b5a01f89812f0d79eed95a6c81 "pdflatex"
+["biber main"] 1709114826 "main.bcf" "main.bbl" "main" 1709132257
+  "main.bcf" 1709132257 123140 0e07e9b5a01f89812f0d79eed95a6c81 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1709051925 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1709051926
+["pdflatex"] 1709132256 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1709132257
   "/etc/texmf/web2c/texmf.cnf" 1701959205 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1709051924 1018 d534ab96a7e1c57a13af09f8d1e4603a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -173,6 +173,7 @@
   "/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc" 1254938640 2840 216e6e45ad352e2456e1149f28885bee ""
   "/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc" 1254938640 2327 9d6df24f9c4f7368395224341a95523a ""
   "/usr/share/texmf/fonts/tfm/public/lm/ec-lmbx12.tfm" 1254938640 12088 d750ac78274fa7c9f73ba09914c04f8a ""
+  "/usr/share/texmf/fonts/tfm/public/lm/ec-lmbxi10.tfm" 1254938640 17180 a5723008921cdcb0c5f4ebe997919b73 ""
   "/usr/share/texmf/fonts/tfm/public/lm/ec-lmr12.tfm" 1254938640 12092 7b1546e2d096cfd5dcbd4049b0b1ec2e ""
   "/usr/share/texmf/fonts/tfm/public/lm/lmbsy10.tfm" 1254938640 1300 2df9da0fc09d4a8c772b3dd386a47c6a ""
   "/usr/share/texmf/fonts/tfm/public/lm/lmbsy7.tfm" 1254938640 1304 535e0954c1961c817723e44bc6a9662c ""
@@ -192,6 +193,7 @@
   "/usr/share/texmf/fonts/tfm/public/lm/rm-lmr6.tfm" 1254938640 11836 e3b6ce3e601aec94f64a536e7f4224d5 ""
   "/usr/share/texmf/fonts/tfm/public/lm/rm-lmr8.tfm" 1254938640 11864 309fd7f43e4a0ba39f6f7644d76e8edf ""
   "/usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb" 1254938640 116908 1fca96723793882c2e0160350c192fc8 ""
+  "/usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb" 1254938640 112766 bdd4fa8b13a0d7dd137624085bd31d40 ""
   "/usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb" 1254938640 30696 2654571912f9cd384da9f7cb8a60c568 ""
   "/usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb" 1254938640 30635 833ec815d446ec453a4913fc26d24cbc ""
   "/usr/share/texmf/fonts/type1/public/lm/lmr12.pfb" 1254938640 113634 f99c44d58bae0863375faf0e1d74d612 ""
@@ -207,15 +209,16 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1701959211 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1701959216 1405647 6df1288992914e39f73c718765235eb3 ""
   "apa7.cls" 1641331868 60972 6534c85693a26297149282c69fe092d0 ""
-  "main.aux" 1709051926 1097 e8c8e9b589471f7d32d1d4020efca655 "pdflatex"
-  "main.bbl" 1709049562 466 ee04f40f768daeed26442158e95aba61 "biber main"
-  "main.out" 1709051926 396 b58ecd30fbc09db28022ddf7c9b4a464 "pdflatex"
-  "main.run.xml" 1709051926 2429 0b0ec1e900c0669f709b87f77ae472e2 "pdflatex"
+  "main.aux" 1709132257 2176 51b37989f9af0b70eeb201ba205666ff "pdflatex"
+  "main.bbl" 1709114827 466 ee04f40f768daeed26442158e95aba61 "biber main"
+  "main.out" 1709132257 1923 c15b8ae4c123d296d15ce52c0492b19b "pdflatex"
+  "main.run.xml" 1709132257 2429 0b0ec1e900c0669f709b87f77ae472e2 "pdflatex"
   "main.tex" 1709051924 1018 d534ab96a7e1c57a13af09f8d1e4603a ""
-  "methods/methods.tex" 1709048585 176 9624cb9f687f3396de926490ec5aed37 ""
-  "methods/model_estimation.tex" 1709051905 2114 6b46e481606307471ef82be9ad6216dc ""
-  "methods/problem.tex" 1709042278 2496 06bbc242fc08064c1bb98acf4f385125 ""
-  "methods/procedure.tex" 1709047638 1638 e5ca02f11e22c4dc4b775843768a61ab ""
+  "methods/methods.tex" 1709114824 221 fd3c5bb2bcb9ff97e1f4bc1ebb915ff5 ""
+  "methods/model_estimation.tex" 1709131138 2857 67acf3a0833eb009b4ecaae9d390b062 ""
+  "methods/outcomes.tex" 1709132112 2689 8fbef402c2efbea06ba82b135bc2a4e1 ""
+  "methods/problem.tex" 1709132255 2591 5da4285d33b487a9d2087873fff51814 ""
+  "methods/procedure.tex" 1709131685 1632 021f5e5405abf3d0cde26d4541005c78 ""
   (generated)
   "main.aux"
   "main.bcf"

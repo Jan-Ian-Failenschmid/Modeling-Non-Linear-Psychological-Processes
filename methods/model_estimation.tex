@@ -1,5 +1,7 @@
 \subsection{Model estimation}
 
+\subsubsection{General additive models}
+
 After simulating the deta, four methods were used to infer the state process for 
 each data set. First, general additive models (GAM) were fit to each data set 
 using the mgcv package. Specifically, a model with a single smooth function 
@@ -9,6 +11,8 @@ using the generalized cross-validation procedure that is incorporated in mgcv.
 The fitted model was then used to obtain state estiamtes at each time point as 
 well as respective 95\% Bayesian credible intervals 
 
+\subsubsection{Local polynomial regression}
+
 Secondly, a local polynomial regression was fit to each data set using the 
 nprobust package. We used first order local polynomials, resulting in a local 
 linear regression. Further, we used a gaussian kernel and optimized the bandwidth 
@@ -17,6 +21,8 @@ bias corrected state estimates and robust standard error were obtained, to
 account for the inherrent bias of the local polynomial model. Lastly, we used 
 these estiamtes and standard errors to construct 95\% confidence bands for the
 state function. 
+
+\subsubsection{Gaussian processes}
 
 In order to fit the Gaussian processes efficiently for a large number of data 
 sets we used a Hilbert space approximate Gaussian process model in Stan.
@@ -31,4 +37,13 @@ quadratic exponential covariance functions. This covariance function is both sym
 stationary. Point estimates for the state value as well as 95\% credible interval 
 were obtained from posterior distribution of the Gaussian process. 
 
-Lastly, a dynamic model 
+\subsubsection{State-space models}
+
+Lastly, a parametric dynamic model is fit to each data set using the dynr package.
+Here, the specific models were adapted to corrspond exactly to the data 
+generation models of each respective data set. This mimics the situation in which 
+prior theory about the parametric form of the dynamic model exists. Further, each 
+model was estimated 10 times using different starting values to minimize the 
+risk of obtaining local minimum solutions. Estimates for the smoothed state 
+values and the smoothing error covariance were obtained directly and used to 
+generate confidence intervals for the state inference.

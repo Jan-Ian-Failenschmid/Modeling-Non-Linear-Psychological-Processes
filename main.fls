@@ -1083,6 +1083,7 @@ INPUT methods/problem.tex
 INPUT ./methods/problem.tex
 INPUT ./methods/problem.tex
 INPUT methods/problem.tex
+INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmbxi10.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./methods/procedure.tex
 INPUT ./methods/procedure.tex
@@ -1147,6 +1148,13 @@ INPUT methods/model_estimation.tex
 INPUT ./methods/model_estimation.tex
 INPUT ./methods/model_estimation.tex
 INPUT methods/model_estimation.tex
+INPUT ./methods/outcomes.tex
+INPUT ./methods/outcomes.tex
+INPUT ./methods/outcomes.tex
+INPUT methods/outcomes.tex
+INPUT ./methods/outcomes.tex
+INPUT ./methods/outcomes.tex
+INPUT methods/outcomes.tex
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
@@ -1157,6 +1165,7 @@ INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb
+INPUT /usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmr12.pfb

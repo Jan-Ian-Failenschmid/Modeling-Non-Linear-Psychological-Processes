@@ -1,12 +1,12 @@
 # Fdb version 3
-["biber main"] 1709114826 "main.bcf" "main.bbl" "main" 1709132257
-  "main.bcf" 1709132257 123140 0e07e9b5a01f89812f0d79eed95a6c81 "pdflatex"
+["biber main"] 1709114826 "main.bcf" "main.bbl" "main" 1710319314
+  "main.bcf" 1710319314 123140 0e07e9b5a01f89812f0d79eed95a6c81 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1709132256 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1709132257
+["pdflatex"] 1710319313 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1710319314
   "/etc/texmf/web2c/texmf.cnf" 1701959205 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1709051924 1018 d534ab96a7e1c57a13af09f8d1e4603a ""
+  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1710319313 1018 d534ab96a7e1c57a13af09f8d1e4603a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm" 1246382020 928 2dc8d444221b7a635bb58038579b861a ""
@@ -207,18 +207,18 @@
   "/usr/share/texmf/tex/latex/lm/t1lmr.fd" 1256929440 1865 afbfccbe7fda9c2dc5078ad7c486bbed ""
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1701959211 128028 f533b797fba58d231669ea19e894e23e ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1701959216 1405647 6df1288992914e39f73c718765235eb3 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1709306699 1405644 59a4ab3d1f1985f1fed4834ec4b49789 ""
   "apa7.cls" 1641331868 60972 6534c85693a26297149282c69fe092d0 ""
-  "main.aux" 1709132257 2176 51b37989f9af0b70eeb201ba205666ff "pdflatex"
-  "main.bbl" 1709114827 466 ee04f40f768daeed26442158e95aba61 "biber main"
-  "main.out" 1709132257 1923 c15b8ae4c123d296d15ce52c0492b19b "pdflatex"
-  "main.run.xml" 1709132257 2429 0b0ec1e900c0669f709b87f77ae472e2 "pdflatex"
-  "main.tex" 1709051924 1018 d534ab96a7e1c57a13af09f8d1e4603a ""
+  "main.aux" 1710319314 2176 51b37989f9af0b70eeb201ba205666ff "pdflatex"
+  "main.bbl" 1709742123 466 ee04f40f768daeed26442158e95aba61 "biber main"
+  "main.out" 1710319314 1923 c15b8ae4c123d296d15ce52c0492b19b "pdflatex"
+  "main.run.xml" 1710319314 2429 0b0ec1e900c0669f709b87f77ae472e2 "pdflatex"
+  "main.tex" 1710319313 1018 d534ab96a7e1c57a13af09f8d1e4603a ""
   "methods/methods.tex" 1709114824 221 fd3c5bb2bcb9ff97e1f4bc1ebb915ff5 ""
-  "methods/model_estimation.tex" 1709131138 2857 67acf3a0833eb009b4ecaae9d390b062 ""
-  "methods/outcomes.tex" 1709132112 2689 8fbef402c2efbea06ba82b135bc2a4e1 ""
-  "methods/problem.tex" 1709132255 2591 5da4285d33b487a9d2087873fff51814 ""
-  "methods/procedure.tex" 1709131685 1632 021f5e5405abf3d0cde26d4541005c78 ""
+  "methods/model_estimation.tex" 1710319313 2857 67acf3a0833eb009b4ecaae9d390b062 ""
+  "methods/outcomes.tex" 1710319313 2689 8fbef402c2efbea06ba82b135bc2a4e1 ""
+  "methods/problem.tex" 1710319313 2591 5da4285d33b487a9d2087873fff51814 ""
+  "methods/procedure.tex" 1710319313 1632 021f5e5405abf3d0cde26d4541005c78 ""
   (generated)
   "main.aux"
   "main.bcf"

@@ -1,36 +1,75 @@
+% -----------------------------------------------------------------------------%
+% Title:                                                                       %
+% Author: Jan Ian Failenschmid                                                 %
+% Created Date: 07-12-2023                                                     %
+% -----                                                                        %
+% Last Modified: 27-03-2024                                                    %
+% Modified By: Jan Ian Failenschmid                                            %
+% -----                                                                        %
+% Copyright (c) 2024 by Jan Ian Failenschmid                                   %
+% E-mail: J.I.Failenschmid@tilburguniveristy.edu                               %
+% -----                                                                        %
+% License: GNU General Public License v3.0 or later                            %
+% License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html            %
+% -----------------------------------------------------------------------------%
+
 \subsection{Generalized Additive Models}
 
-Generalized additive models (GAM) choose a different approach to approximating the global 
-non-linear state function, relying on smoothing splines \parencite{wood_generalized_2006, wood_inference_2020, 
-hastie_generalized_1999}. 
+Generalized additive models (GAM) choose a different approach to approximating
+the global
+non-linear state function, relying on smoothing splines
+\parencite{wood_generalized_2006, wood_inference_2020,
+    hastie_generalized_1999}.
 Spline methods approximate a complex function piecewise by joining
-simpler functions, usually low-order polynomials, together at so-called knots. For this,
-it is important to constrain the basis functions to fit together smoothly and to choose 
-the knot locations optimally \parencite{tsay_nonlinear_2019}. To circumvent this, smoothing 
-splines approximate the complex function as a weighted sum of a collection of basis functions 
-that range over the entire domain of the underlying function. In order to do this, all basis functions are evaluated at each 
-time point, and the optimal weights for each basis function are found using penalized regression 
-methods. The penalty term here controls the smoothness of the approximation and prevents 
-over-fitting \parencite{gu_smoothing_2013, wahba_spline_1980}. Subsequently, the weight of the penalty term 
-is efficiently optimized using generalized cross-validation \parencite{wood_generalized_2006, 
-golub_generalized_1997}. Common sets of basis functions are natural cubic splines 
-\parencite{tsay_nonlinear_2019} or thin plate splines \parencite{wood_thin_2003}.
+simpler functions, usually low-order polynomials, together at so-called knots.
+For this,
+it is important to constrain the basis functions to fit together smoothly and
+to choose
+the knot locations optimally \parencite{tsay_nonlinear_2019}. To circumvent
+this, smoothing
+splines approximate the complex function as a weighted sum of a collection of
+basis functions
+that range over the entire domain of the underlying function. In order to do
+this, all basis functions are evaluated at each
+time point, and the optimal weights for each basis function are found using
+penalized regression
+methods. The penalty term here controls the smoothness of the approximation and
+prevents
+over-fitting \parencite{gu_smoothing_2013, wahba_spline_1980}. Subsequently,
+the weight of the penalty term
+is efficiently optimized using generalized cross-validation
+\parencite{wood_generalized_2006,
+    golub_generalized_1997}. Common sets of basis functions are natural cubic
+splines
+\parencite{tsay_nonlinear_2019} or thin plate splines
+\parencite{wood_thin_2003}.
 
-GAMs build upon smoothing splines and combine them in the form of a generalized linear model. 
-Meaning that the parameters of the general linear model smooth functions instead
-\parencite{wood_generalized_2006, hastie_generalized_1999}. This makes it possible to formulate time-
-varying auto-regressive models within the GAM framework \parencite{bringmann_changing_2017, 
-bringmann_modeling_2015}. In these models, any of the terms, intercept, or auto-regressive, 
-is modeled as varying smoothly over time, simultaneously describing non-linear trends and changes in the auto-regressive effect.
+GAMs build upon smoothing splines and combine them in the form of a generalized
+linear model.
+Meaning that the parameters of the general linear model smooth functions
+instead
+\parencite{wood_generalized_2006, hastie_generalized_1999}. This makes it
+possible to formulate time-
+varying auto-regressive models within the GAM framework
+\parencite{bringmann_changing_2017,
+    bringmann_modeling_2015}. In these models, any of the terms, intercept, or
+auto-regressive,
+is modeled as varying smoothly over time, simultaneously describing non-linear
+trends and changes in the auto-regressive effect.
 
 GAMs rely on the assumption that the underlying state function is smooth.
-One example of a process that may satisfy this assumption is emotional valence 
-\parencite{bringmann_modeling_2015}. Then, GAMs provide information about 
-the underlying process, in the form of interpretable time-varying intercept and autocorrelation
-parameters. However, the interpretation of these parameters is complicated by the interaction 
-between trend and autocorrelation effects in non-stationary models 
+One example of a process that may satisfy this assumption is emotional valence
+\parencite{bringmann_modeling_2015}. Then, GAMs provide information about
+the underlying process, in the form of interpretable time-varying intercept and
+autocorrelation
+parameters. However, the interpretation of these parameters is complicated by
+the interaction
+between trend and autocorrelation effects in non-stationary models
 \parencite{bauldry_nonlinear_2018, bollen_autoregressive_2004}.
-Additionally, it is possible to interpret the coefficients for the basis functions, 
-as the degree to which these basic trends are evident in the smooth functions describing the 
-time-varying parameters. However, this interpretation is again complicated by the presence 
+Additionally, it is possible to interpret the coefficients for the basis
+functions,
+as the degree to which these basic trends are evident in the smooth functions
+describing the
+time-varying parameters. However, this interpretation is again complicated by
+the presence
 of many other terms in the model and the penalization.

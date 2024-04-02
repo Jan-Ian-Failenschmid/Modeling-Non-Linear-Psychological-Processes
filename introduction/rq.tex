@@ -1,22 +1,50 @@
+% -----------------------------------------------------------------------------%
+% Title:                                                                       %
+% Author: Jan Ian Failenschmid                                                 %
+% Created Date: 07-12-2023                                                     %
+% -----                                                                        %
+% Last Modified: 27-03-2024                                                    %
+% Modified By: Jan Ian Failenschmid                                            %
+% -----                                                                        %
+% Copyright (c) 2024 by Jan Ian Failenschmid                                   %
+% E-mail: J.I.Failenschmid@tilburguniveristy.edu                               %
+% -----                                                                        %
+% License: GNU General Public License v3.0 or later                            %
+% License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html            %
+% -----------------------------------------------------------------------------%
+
 \subsection{Research Questions}
 
 While all of these methods are well established in the time series literature,
-the differences between time series data and ILD make it unclear to what degree 
-these methods are applicable to the latter and which method is best suited in a given 
-situation. Importantly, ILD is often composed of time series data from multiple individuals, 
-creating a multilevel structure, with several time points collected per individual.
-Additionally, observations may be spaced unevenly across time and include time-varying 
-and invariant confounders. Lastly, when choosing a method to analyze ILD, researchers 
-also need to take into account the available a-priori theory and what type of inference 
+the differences between time series data and ILD make it unclear to what degree
+
+these methods are applicable to the latter and which method is best suited in a
+given
+situation. Importantly, ILD is often composed of time series data from multiple
+individuals,
+creating a multilevel structure, with several time points collected per
+individual.
+Additionally, observations may be spaced unevenly across time and include
+time-varying
+and invariant confounders. Lastly, when choosing a method to analyze ILD,
+researchers
+also need to take into account the available a-priori theory and what type of
+inference
 is desired. To clarify this, we will investigate the following:
 
 \begin{APAitemize}
-    \item To what degree can each of these methods accommodate different types of non-linearity that can be suspected in ILD?
-    \item How well do each of the methods perform at sample sizes common in ILD, when specified correctly or misspecified?
-    \item To what degree can each method accommodate hierarchical data structures, unevenly spaced time points, and time-invariant confounders?
-    \item What degree of theory is required by each method and what type of inference does it yield? 
+    \item To what degree can each of these methods accommodate different types
+    of non-linearity that can be suspected in ILD?
+    \item How well do each of the methods perform at sample sizes common in
+    ILD, when specified correctly or misspecified?
+    \item To what degree can each method accommodate hierarchical data
+    structures, unevenly spaced time points, and time-invariant confounders?
+    \item What degree of theory is required by each method and what type of
+    inference does it yield?
 \end{APAitemize}
 
-To elucidate these issues, we will first compare and evaluate the described methods on
-simulated ILD. Afterwards, we will show how these methods can be used to gain insight 
+To elucidate these issues, we will first compare and evaluate the described
+methods on
+simulated ILD. Afterwards, we will show how these methods can be used to gain
+insight
 into non-linear processes in real ILD.

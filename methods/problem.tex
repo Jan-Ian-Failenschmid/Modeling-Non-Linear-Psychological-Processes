@@ -1,46 +1,133 @@
+% -----------------------------------------------------------------------------%
+% Title:                                                                       %
+% Author: Jan Ian Failenschmid                                                 %
+% Created Date: 13-03-2024                                                     %
+% -----                                                                        %
+% Last Modified: 02-04-2024                                                    %
+% Modified By: Jan Ian Failenschmid                                            %
+% -----                                                                        %
+% Copyright (c) 2024 by Jan Ian Failenschmid                                   %
+% E-mail: J.I.Failenschmid@tilburguniveristy.edu                               %
+% -----                                                                        %
+% License: GNU General Public License v3.0 or later                            %
+% License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html            %
+% -----------------------------------------------------------------------------%
+
 \subsubsection{Problem}
 
-A simulation study was conducted, to evaluate the performance of the different 
-introduced smoothing techniques in recovering non-linear state processes. 
-Specifically, we were interested in the extend to which different types 
-of non-linear state functions could be estimated under conditions that are 
-realisitcally found in ESM research. For the present simulation we further 
-limited considerations to univariate single subject desgins, for simplicity and 
-to use each method in the form in which they are currently available in software.
-Thus, we manipulated two 
-conditions, which were theorized to influence the state recovey. First, the type 
-of non-linearity present in the state process, the quality of information 
-about the state process.
+We conducted a simulation study to evaluate how well each of the introduced
+parametric and non-parametric statistical methods recovers different
+non-linear processes, which researchers are likely to encounter in ESM
+research. To facilitate an accessible introduction to these statistical methods
+and apply them under conditions for which software implementations are
+currently available, we employed a univariate single-subject design, such that
+the simulated data corresponds to repeated measurements of one variable for one
+individual. The theory underlying the non-linear analysis methods
+(i.e., generalized additive models, local polynomial regression,
+Gaussian processes) suggests, that each method in its default configuration
+should infer processes most accurately, if they
+(a) are without sudden jumps (i.e., continuous),
+(b) have constant wigglyness (i.e., constant second derivative), and
+(c) if they are smooth (i.e., differentiable).
+Thus, we specifically considered processes in this simulation that varied with
+regards to these characteristics. Additionally, it is expected that
+the inference is more accurate for larger sample sizes. Here we varied both
+(d) the overall length of the sampling period and
+(e) the sampling frequency, as both of these factors were expected to affect
+the
+inference differently for different processes and methods.
 
 \subsubsection{Design}
 
-Based on theory underlying the considered smoothing techniques, we expect that 
-all considered smoothing techniques will perform best if the non-linear state process 
-is relatively smooth and follows a constant dynamic without regime switching. 
-In order to test this, we operationalized smoothness as either low or high 
-process noise. Since, we expect there will always be some process noise present 
-in ESM data, we did not include a completely smooth condition without process noise. 
-Further, we tested two types of regime switching. The first regime switching 
-condition changes the dynamic of the simulated process, but not the attractor, 
-whereas the second condition, switches the attractor of the state process, but not the 
-dynamic. 
+To investigate their impact on the perfomance of the different analysis methods
+we manipulated the continuity, wigglyness, and smoothness, of the underlying
+process. To test (a) the continuity and (b) wigglyness we chose four exemplar
+processes that vary on these two characteristics. Each of these exemplar
+processes represents a theoretically feasible and empirically demonstrated
+psychological process which might be interesting to study using ESM.
+Depictions of each of the processes can be seen in Figure
+\ref{exemplar_no_process_noise}, in which the points represent the noisy
+observations and the line shows the latent process value at each time point.
 
-Further, we expected that all considered methods will infer the state process 
-with higher accuracy the better the quality of information is. To test this, 
-we varied two factors. The first is to the signal-to-noise ratio of the 
-data, which corresponds to the ratio of the variance of the centered process values 
-and the variance of the measurement noise. Thus a larger signal-to-noise ratio 
-corresplonds to more variation in the process itself relativ to the measurement 
-uncertainty. The second factor corresponds to the sample size or the 
-number of observations that are taken over a given time interval. 
+\begin{figure*}
+    \caption{Non-linear exemplar processes}
+    \fitfigure{figures/exemplar_no_process_noise.png}
+    \label{exemplar_no_process_noise}
+\end{figure*}
 
-Therefore, the simulation consisted of five factors that were crossed in a complete 
-factorial desgin: 
+The first two processes depict common growth curves in which the latent
+construct approaches a fixed value over time.
+Here, the exponential (1) and logistic (2) growth mainly differ in their
+respective growth velocity during the start of the process. Growth curves
+like these have been found to appear in cognitive and intellectual development
+\parencite{mcardle_comparative_2002,kunnen_dynamic_2012}, motor learning
+\parencite{newell_time_2001}, and second language acquisition
+\parencite{de_bot_dynamic_2007}. Both of these growth curves are continuous and
+change their wigglyness over time.
+
+The third process has been generated from a cusp catastrophe model.
+This dynamic model exhibits natural jumps or discontinuities when
+varying one of its parameters over time. This has made it popular for
+describing sudden changes in attitudes \parencite{van_der_maas_sudden_2003},
+flow \parencite{ceja_dynamics_2009}, or alcohol use relapse
+\parencite{witkiewitz_modeling_2007}. In addition to that, the cusp model also
+describes the average behavior of dichotomous network models
+\parencite{finnemann_theoretical_2021}, which are a popular way of modelling
+clinical symptoms \parencite{borsboom_network_2013}. This makes the cusp an
+attractive candidate for modelling therapy effects under these network
+theories.
+
+The last depicted process is a damped oscillator. As such it describes the
+return to baseline after a perturbation, while oscillating around this
+baseline. Because of this behavior, the damped oscillator has been proposed as
+a model for affect regulation \parencite{chow_emotion_2005, waugh_affect_2021}.
+This model shows a clear decrease in wigglyness over time.
+All of the considered processes were generated from state-space models,
+such that the value of the process at a given time point is determined by a
+(non-) linear function of the previous process value.
+
+To manipulate the (c) smoothness of the process we additionally added a dynamic
+or process noise component to the respective state-space models. This means,
+that at each time point the process value does not only depend on the previous
+process value but also on a random error, that is usually attributed to
+external shocks or perturbations. This results in processes that are not smooth
+(i.e., non-differentiable), where the degree of the roughness depends on the
+variance of the dynamic error component. The dynamic error standard deviations
+where chosen in relation to the range of the process. Here error standard
+deviations of \textbf{0.25} and \textbf{0.5} were considered reasonable.
+Figure \ref{exemplar_process_noise} shows possible realizations of
+the exemplar processes with dynamic noise. Importantly, a condition lacking
+dynamic noise was intentionally omitted from our study, as dynamic
+noise is reasonably expected to be present in all ESM measures.
+
+\begin{figure*}
+    \caption{Non-linear exemplar processes}
+    \fitfigure{figures/exemplar_process_noise.png}
+    \label{exemplar_process_noise}
+\end{figure*}
+
+Additionally, we altered the sample size during the simulation. Here
+we manipulated either (d) the sampling period or (e) the sampling frequency,
+since these are distinct methodological choices that are expected to affect
+the performance of the analysis methods differently. For example, since the
+local polynomial estimator \parencite{fan_local_1997} only uses data in the
+local neighborhood,
+extending the sampling period outside the neighborhood might not improve the
+estimation. On the contrary, if the process changes its optimal bandwidth over
+time, extending the sampling period might even negatively affect the inference.
+However, increasing the sampling frequency would provide more data within the
+local neighborhood and hence improve the inference. If one instead considers
+a method that uses all available data and does not assume constant
+wigglyness, such as the generalized additive models, both ways of increasing
+the sample size should facilitate the inference similarly.
+
+Therefore, the simulation consisted of four factors that were crossed in a
+full factorial design:
 
 \begin{APAenumerate}
-    \item Process noise (small vs. large)
-    \item Dynamic regime switching (absent vs. present)
-    \item Attractor regime switching (absent vs. present)
-    \item Signal-to-noise ratio (insert here common ESM effect sizes)
-    \item Sample size (insert here common ESM sample sizes)
+    \item Exemplar processes (combining continuity and wigglyness)
+    \item Smoothness ($\sigma$ = 0.25; $\sigma$ = 0.5;)
+    \item Sample size: Frequency (20 - 225; \textcite{wrzus_ecological_2023})
+    \item Sample size: Period length (20 - 225;
+    \textcite{wrzus_ecological_2023})
 \end{APAenumerate}

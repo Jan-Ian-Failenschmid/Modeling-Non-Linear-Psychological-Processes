@@ -1,30 +1,44 @@
+% -----------------------------------------------------------------------------%
+% Title:                                                                       %
+% Author: Jan Ian Failenschmid                                                 %
+% Created Date: 13-03-2024                                                     %
+% -----                                                                        %
+% Last Modified: 02-04-2024                                                    %
+% Modified By: Jan Ian Failenschmid                                            %
+% -----                                                                        %
+% Copyright (c) 2024 by Jan Ian Failenschmid                                   %
+% E-mail: J.I.Failenschmid@tilburguniveristy.edu                               %
+% -----                                                                        %
+% License: GNU General Public License v3.0 or later                            %
+% License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html            %
+% -----------------------------------------------------------------------------%
+
 \subsection{Procedure}
 
-In all conditions, the data was generated from a univariate non-linear 
-state space model, with a state function described by:
+For simulating the data, each of the exemplar processes was represented as a
+generative state-space model, such that at each time-point the value of the
+process corresponds to a (non-) linear function of the previous value and the
+dynamic noise component. In each condition we simulated data from each of the
+exemplar processes with the respective dynamic error variance, sampling
+frequency, and sampling period length. The parameters of the exemplar processes
+were chosen, so that they vary over a comparable range. Lastly, measurement
+errors from a standard normal distribution were added to the process values at
+each time point to generate noisy observations.
+For a detailed and technical explanation of the data
+generation process, please see \textbf{Appendix A}.
 
-\begin{align*}
-    Y_{t+1} &= f_j (Y_{t}) + \eta_{t+1} \\
-    \eta_{t+1} &\sim N(0, \sigma^2_{Process})
-\end{align*}
-
-Where $f_j$ is either a single continous non-constant function in the single 
-regime condition or switching between two different functions according to a 
-Markov chain in the regime switching conditions. In the regime swtiching conditions 
-these functions were selected in such a way that either the dynamic of the system, 
-the attractor, or both change. In addition to that, the variance of the $\eta_{t+1}$
-was set according to the process noise condition and the time-points 
-were determined by subdevidign the interval from zero to one by the desired sample 
-size. After simulating the state values, we centered the state values and calculated
-the measurement error that would result in the required signal-to-noise ratio. 
-Laslty, the measurement error was added to the simulated state values to generate 
-observations. 
-
-$N$ number of data sets were generated per cell of the factorial desgin. This number 
-was determined by first running a small pilot simulation with 30 data sets per cell. 
-Afterwards, a seperate simulation was conducted on the outcome models. To simulate 
-from the outcome models we used the significant parameter estimates from the 
-pilot simulation and set the insignificant parameters to zero. Based on these 
-preliminary effect sizes $N$ observations per cell resulted in selecting the 
-correct outcome model $95\%$ of the time.
-
+In order to determine the required amount of data sets per condition,
+we conducted a power simulation based on a pilot
+sample of 30 generated data sets per cell. Based on these data sets, we
+calculated the outcome measures (i.e., one MSE and one GCV value per data set)
+to which we fit the appropriate MANOVA model. This MANOVA model was used to
+obtain initial effect size estimates for the power simulation, by retaining all
+significant parameter estimates and setting all insignificant parameters to
+zero. After simulating from this MANOVA model, we employed an exhaustive
+AIC and BIC weight based model search, to recover the correct MANOVA
+model from the data. In addition to finding evidence in favor of the
+effects that are likely present this approach can
+also find evidence to indicate which effects are likely to be absent in the
+data \parencite{wagenmakers_aic_2004}. Here, \textbf{N} observations per
+condition were required to recover the correct model with at least
+\textbf{95\%} probability.

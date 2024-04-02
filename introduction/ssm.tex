@@ -1,48 +1,89 @@
+% -----------------------------------------------------------------------------%
+% Title:                                                                       %
+% Author: Jan Ian Failenschmid                                                 %
+% Created Date: 07-12-2023                                                     %
+% -----                                                                        %
+% Last Modified: 27-03-2024                                                    %
+% Modified By: Jan Ian Failenschmid                                            %
+% -----                                                                        %
+% Copyright (c) 2024 by Jan Ian Failenschmid                                   %
+% E-mail: J.I.Failenschmid@tilburguniveristy.edu                               %
+% -----                                                                        %
+% License: GNU General Public License v3.0 or later                            %
+% License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html            %
+% -----------------------------------------------------------------------------%
+
 \subsection{State Space Models}
 
-When constructing a parametric model for time-series data, one is faced with the 
-decision to model the state function globally, locally, or mixed. Global models, 
-that try to capture the entire behavior of a non-linear state function, are 
-oftentimes too simplistic and generalize poorly across time and individuals 
-\parencite{hunter_two_2022}. Because of this, in many situations, it is easier to 
-define a model in terms of a local dynamic. State space models (SSM) are a 
-flexible modeling framework that combines these local dynamic models with 
-measurement models, making them suitable for modeling psychological data 
-\parencite{durbin_time_2012}. While SSMs formally only include lag one relationships, 
-it is possible to include higher order lags by extending the 
-state space \parencite{hunter_state_2018}. Further, it is possible 
-to redefine the model in continuous time using differential equations. This approach is 
+When constructing a parametric model for time-series data, one is faced with
+the
+decision to model the state function globally, locally, or mixed. Global
+models,
+that try to capture the entire behavior of a non-linear state function, are
+oftentimes too simplistic and generalize poorly across time and individuals
+\parencite{hunter_two_2022}. Because of this, in many situations, it is easier
+to
+define a model in terms of a local dynamic. State space models (SSM) are a
+flexible modeling framework that combines these local dynamic models with
+measurement models, making them suitable for modeling psychological data
+\parencite{durbin_time_2012}. While SSMs formally only include lag one
+relationships,
+it is possible to include higher order lags by extending the
+state space \parencite{hunter_state_2018}. Further, it is possible
+to redefine the model in continuous time using differential equations. This
+approach is
 especially beneficial when observations are unequally spaced in time
 \parencite{van_montfort_continuous_2018}.
 
 \subsubsection{Latent Change Score Models}
 
-Importantly, when all the dynamic equations in an SSM are linear, this modeling approach is 
-very similar to estimating structural equation models with lagged variables 
-\parencite{asparouhov_dynamic_2018, usami_unified_2019}. One such model is the latent change score
-model (LCS), which models the amount by which the state changes as an additional latent variable. 
-This latent change variable is then linearly predicted from the state value at the previous time 
-point \parencite{cancer_dynamical_2021, cancer_effectiveness_2023}. Importantly, this model 
-highlights how a local linear dynamic results in a global exponential 
-trend. To describe this exponential trend meaningfully, the model can be parameterized in terms of an asymptote and a 
-growth rate. Such that, if the growth rate is smaller than one, the state converges 
-to the asymptote and if the growth rate is larger than one, it diverges. One example of a process 
-that could follow such a trajectory is the developmental trajectory of intelligence, 
-where one might suspect large increases in early childhood 
+Importantly, when all the dynamic equations in an SSM are linear, this modeling
+approach is
+very similar to estimating structural equation models with lagged variables
+\parencite{asparouhov_dynamic_2018, usami_unified_2019}. One such model is the
+latent change score
+model (LCS), which models the amount by which the state changes as an
+additional latent variable.
+This latent change variable is then linearly predicted from the state value at
+the previous time
+point \parencite{cancer_dynamical_2021, cancer_effectiveness_2023}.
+Importantly, this model
+highlights how a local linear dynamic results in a global exponential
+trend. To describe this exponential trend meaningfully, the model can be
+parameterized in terms of an asymptote and a
+growth rate. Such that, if the growth rate is smaller than one, the state
+converges
+to the asymptote and if the growth rate is larger than one, it diverges. One
+example of a process
+that could follow such a trajectory is the developmental trajectory of
+intelligence,
+where one might suspect large increases in early childhood
 that level off towards an asymptote \parencite{savi_evolving_2021}.
 
 \subsubsection{Regime Switching Models}
 
-Another class of commonly used SSMs in psychology are regime switching models \parencite{hamaker_regime-switching_2010}.
-Here one assumes that the system that underlies the time series has distinct regimes and that each 
-regime is governed by a different local dynamic. To accommodate this, regime switching models 
-combine multiple local models with a model for how the system switches between the regimes. 
-In this way, regime switching models describe both the behavior within each regime as well as the regime switching simultaneously.
-The dynamic equations are usually chosen as part of the ARIMA model family \parencite{box_time_1970}, such that only 
-the parameter values of the dynamic equations change between the regimes. The regime switching is commonly modeled using 
-one of two methods. First, threshold autoregressive models estimate a threshold value for one of the 
-observed variables to model the regime switching \parencite{tong_threshold_1980}. 
-Second, Markov switching autoregressive models use a discrete latent variable that follows a Markov chain 
-to capture the regime switching \parencite{hamilton_new_1989}. One example of a process, 
-in which one might reasonably suspect distinct regimes is flow, where individuals appear to
+Another class of commonly used SSMs in psychology are regime switching models
+\parencite{hamaker_regime-switching_2010}.
+Here one assumes that the system that underlies the time series has distinct
+regimes and that each
+regime is governed by a different local dynamic. To accommodate this, regime
+switching models
+combine multiple local models with a model for how the system switches between
+the regimes.
+In this way, regime switching models describe both the behavior within each
+regime as well as the regime switching simultaneously.
+The dynamic equations are usually chosen as part of the ARIMA model family
+\parencite{box_time_1970}, such that only
+the parameter values of the dynamic equations change between the regimes. The
+regime switching is commonly modeled using
+one of two methods. First, threshold autoregressive models estimate a threshold
+value for one of the
+observed variables to model the regime switching
+\parencite{tong_threshold_1980}.
+Second, Markov switching autoregressive models use a discrete latent variable
+that follows a Markov chain
+to capture the regime switching \parencite{hamilton_new_1989}. One example of a
+process,
+in which one might reasonably suspect distinct regimes is flow, where
+individuals appear to
 suddenly change in and out of a flow state \parencite{ceja_suddenly_2012}.

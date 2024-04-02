@@ -2791,6 +2791,48 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">bibliography.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
+    <bcf:citekey order="1">mcardle_comparative_2002</bcf:citekey>
+    <bcf:citekey order="1">kunnen_dynamic_2012</bcf:citekey>
+    <bcf:citekey order="2">newell_time_2001</bcf:citekey>
+    <bcf:citekey order="3">de_bot_dynamic_2007</bcf:citekey>
+    <bcf:citekey order="4">van_der_maas_sudden_2003</bcf:citekey>
+    <bcf:citekey order="5">ceja_dynamics_2009</bcf:citekey>
+    <bcf:citekey order="6">witkiewitz_modeling_2007</bcf:citekey>
+    <bcf:citekey order="7">finnemann_theoretical_2021</bcf:citekey>
+    <bcf:citekey order="8">borsboom_network_2013</bcf:citekey>
+    <bcf:citekey order="9">chow_emotion_2005</bcf:citekey>
+    <bcf:citekey order="9">waugh_affect_2021</bcf:citekey>
+    <bcf:citekey order="10">fan_local_1997</bcf:citekey>
+    <bcf:citekey order="11">wrzus_ecological_2023</bcf:citekey>
+    <bcf:citekey order="12">wrzus_ecological_2023</bcf:citekey>
+    <bcf:citekey order="13">wrzus_ecological_2023</bcf:citekey>
+    <bcf:citekey order="14">wrzus_ecological_2023</bcf:citekey>
+    <bcf:citekey order="15">wagenmakers_aic_2004</bcf:citekey>
+    <bcf:citekey order="16">wood_generalized_2006</bcf:citekey>
+    <bcf:citekey order="17">fan_local_1997</bcf:citekey>
+    <bcf:citekey order="18">rasmussen_gaussian_2006</bcf:citekey>
+    <bcf:citekey order="19">durbin_time_2012</bcf:citekey>
+    <bcf:citekey order="20">golub_generalized_1979</bcf:citekey>
+    <bcf:citekey order="21">golub_generalized_1979</bcf:citekey>
+    <bcf:citekey order="22">wagenmakers_aic_2004</bcf:citekey>
+    <bcf:citekey order="23">mcardle_comparative_2002</bcf:citekey>
+    <bcf:citekey order="24">kunnen_dynamic_2012</bcf:citekey>
+    <bcf:citekey order="25">newell_time_2001</bcf:citekey>
+    <bcf:citekey order="26">de_bot_dynamic_2007</bcf:citekey>
+    <bcf:citekey order="27">van_der_maas_sudden_2003</bcf:citekey>
+    <bcf:citekey order="28">ceja_dynamics_2009</bcf:citekey>
+    <bcf:citekey order="29">witkiewitz_modeling_2007</bcf:citekey>
+    <bcf:citekey order="30">finnemann_theoretical_2021</bcf:citekey>
+    <bcf:citekey order="31">borsboom_network_2013</bcf:citekey>
+    <bcf:citekey order="32">chow_emotion_2005</bcf:citekey>
+    <bcf:citekey order="33">waugh_affect_2021</bcf:citekey>
+    <bcf:citekey order="34">fan_local_1997</bcf:citekey>
+    <bcf:citekey order="35">wrzus_ecological_2023</bcf:citekey>
+    <bcf:citekey order="36">wagenmakers_aic_2004</bcf:citekey>
+    <bcf:citekey order="37">wood_generalized_2006</bcf:citekey>
+    <bcf:citekey order="38">rasmussen_gaussian_2006</bcf:citekey>
+    <bcf:citekey order="39">durbin_time_2012</bcf:citekey>
+    <bcf:citekey order="40">golub_generalized_1979</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

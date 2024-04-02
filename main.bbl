@@ -16,5 +16,1070 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{borsboom_network_2013}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=65b66c163ae7aa90fd735ab96a8cce25}{%
+           family={Borsboom},
+           familyi={B\bibinitperiod},
+           given={Denny},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3ce7024a652496bded95c2abbd11bfce}{%
+           family={Cramer},
+           familyi={C\bibinitperiod},
+           given={Angélique\bibnamedelima O.J.},
+           giveni={A\bibinitperiod\bibinitdelim O\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{be64bf6b26439b7b0616283f747fe0ab}
+      \strng{fullhash}{be64bf6b26439b7b0616283f747fe0ab}
+      \strng{bibnamehash}{be64bf6b26439b7b0616283f747fe0ab}
+      \strng{authorbibnamehash}{be64bf6b26439b7b0616283f747fe0ab}
+      \strng{authornamehash}{be64bf6b26439b7b0616283f747fe0ab}
+      \strng{authorfullhash}{be64bf6b26439b7b0616283f747fe0ab}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{In network approaches to psychopathology, disorders result from the causal interplay between symptoms (e.g., worry → insomnia → fatigue), possibly involving feedback loops (e.g., a person may engage in substance abuse to forget the problems that arose due to substance abuse). The present review examines methodologies suited to identify such symptom networks and discusses network analysis techniques that may be used to extract clinically and scientifically useful information from such networks (e.g., which symptom is most central in a person's network). The authors also show how network analysis techniques may be used to construct simulation models that mimic symptom dynamics. Network approaches naturally explain the limited success of traditional research strategies, which are typically based on the idea that symptoms are manifestations of some common underlying factor, while offering promising methodological alternatives. In addition, these techniques may offer possibilities to guide and evaluate therapeutic interventions.}
+      \field{issn}{1548-5943, 1548-5951}
+      \field{journaltitle}{Annual Review of Clinical Psychology}
+      \field{month}{3}
+      \field{number}{1}
+      \field{shorttitle}{Network {Analysis}}
+      \field{title}{Network {Analysis}: {An} {Integrative} {Approach} to the {Structure} of {Psychopathology}}
+      \field{urlday}{2}
+      \field{urlmonth}{2}
+      \field{urlyear}{2023}
+      \field{volume}{9}
+      \field{year}{2013}
+      \field{urldateera}{ce}
+      \field{pages}{91\bibrangedash 121}
+      \range{pages}{31}
+      \verb{doi}
+      \verb 10.1146/annurev-clinpsy-050212-185608
+      \endverb
+      \verb{file}
+      \verb Borsboom und Cramer - 2013 - Network Analysis An Integrative Approach to the S.pdf:C\:\\Users\\failensc\\Zotero\\storage\\L8F2Z4K7\\Borsboom und Cramer - 2013 - Network Analysis An Integrative Approach to the S.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.annualreviews.org/doi/10.1146/annurev-clinpsy-050212-185608
+      \endverb
+      \verb{url}
+      \verb https://www.annualreviews.org/doi/10.1146/annurev-clinpsy-050212-185608
+      \endverb
+    \endentry
+    \entry{ceja_dynamics_2009}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=67f91e0cacc8c23ed9b98a675ea53e23}{%
+           family={Ceja},
+           familyi={C\bibinitperiod},
+           given={Lucia},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b00215c275837c250de9a78124b88003}{%
+           family={Navarro},
+           familyi={N\bibinitperiod},
+           given={José},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{8ba0eedcbf02e378ae42f8ad1ab1587b}
+      \strng{fullhash}{8ba0eedcbf02e378ae42f8ad1ab1587b}
+      \strng{bibnamehash}{8ba0eedcbf02e378ae42f8ad1ab1587b}
+      \strng{authorbibnamehash}{8ba0eedcbf02e378ae42f8ad1ab1587b}
+      \strng{authornamehash}{8ba0eedcbf02e378ae42f8ad1ab1587b}
+      \strng{authorfullhash}{8ba0eedcbf02e378ae42f8ad1ab1587b}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{The aims of this study are to consider the experience of ﬂow from a nonlinear dynamics perspective. The processes and temporal nature of intrinsic motivation and ﬂow, would suggest that ﬂow experiences ﬂuctuate over time in a dynamical fashion. Thus it can be argued that the potential for chaos is strong. The sample was composed of 20 employees (both full and part time) recruited from a number of different organizations and work backgrounds. The Experience Sampling Method (ESM) was used for data collection. Once obtained the temporal series, they were subjected to various analyses proper to the complexity theory (Visual Recurrence Analysis and Surrogate Data Analysis). Results showed that in 80\% of the cases, ﬂow presented a chaotic dynamic, in that, ﬂow experiences delineated a complex dynamic whose patterns of change were not easy to predict. Implications of the study, its limitations and future research are discussed.}
+      \field{issn}{1389-4978, 1573-7780}
+      \field{journaltitle}{Journal of Happiness Studies}
+      \field{month}{12}
+      \field{number}{6}
+      \field{shorttitle}{Dynamics of {Flow}}
+      \field{title}{Dynamics of {Flow}: {A} {Nonlinear} {Perspective}}
+      \field{urlday}{28}
+      \field{urlmonth}{11}
+      \field{urlyear}{2023}
+      \field{volume}{10}
+      \field{year}{2009}
+      \field{urldateera}{ce}
+      \field{pages}{665\bibrangedash 684}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1007/s10902-008-9113-6
+      \endverb
+      \verb{file}
+      \verb Ceja and Navarro - 2009 - Dynamics of Flow A Nonlinear Perspective.pdf:C\:\\Users\\failensc\\Zotero\\storage\\IUIQ8YIZ\\Ceja and Navarro - 2009 - Dynamics of Flow A Nonlinear Perspective.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.1007/s10902-008-9113-6
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1007/s10902-008-9113-6
+      \endverb
+    \endentry
+    \entry{chow_emotion_2005}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=10ef95699b093c435905e1112d4c6068}{%
+           family={Chow},
+           familyi={C\bibinitperiod},
+           given={Sy-Miin},
+           giveni={S\bibinithyphendelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=22443c0194f31cc97e79a4a92217f905}{%
+           family={Ram},
+           familyi={R\bibinitperiod},
+           given={Nilam},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=139121b9346021d58300eba22bc2b9fc}{%
+           family={Boker},
+           familyi={B\bibinitperiod},
+           given={Steven\bibnamedelima M.},
+           giveni={S\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6537d596e8f182c717d4d9f7301377eb}{%
+           family={Fujita},
+           familyi={F\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=26da7e72ccdccc6e6d79fe107bc6de6b}{%
+           family={Clore},
+           familyi={C\bibinitperiod},
+           given={Gerald},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{61a1a187af0d7b982a696cebfc02aa16}
+      \strng{fullhash}{aba4c322c170ad4e712d698778d634b8}
+      \strng{bibnamehash}{aba4c322c170ad4e712d698778d634b8}
+      \strng{authorbibnamehash}{aba4c322c170ad4e712d698778d634b8}
+      \strng{authornamehash}{61a1a187af0d7b982a696cebfc02aa16}
+      \strng{authorfullhash}{aba4c322c170ad4e712d698778d634b8}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{1931-1516, 1528-3542}
+      \field{journaltitle}{Emotion}
+      \field{number}{2}
+      \field{shorttitle}{Emotion as a {Thermostat}}
+      \field{title}{Emotion as a {Thermostat}: {Representing} {Emotion} {Regulation} {Using} a {Damped} {Oscillator} {Model}.}
+      \field{urlday}{27}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{volume}{5}
+      \field{year}{2005}
+      \field{urldateera}{ce}
+      \field{pages}{208\bibrangedash 225}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1037/1528-3542.5.2.208
+      \endverb
+      \verb{file}
+      \verb Full Text:C\:\\Users\\failensc\\Zotero\\storage\\HKFSX9TD\\Chow et al. - 2005 - Emotion as a Thermostat Representing Emotion Regu.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.apa.org/doi/10.1037/1528-3542.5.2.208
+      \endverb
+      \verb{url}
+      \verb https://doi.apa.org/doi/10.1037/1528-3542.5.2.208
+      \endverb
+    \endentry
+    \entry{de_bot_dynamic_2007}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=5b76aa680325889fdfa604f12c1ac201}{%
+           family={De\bibnamedelima Bot},
+           familyi={D\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={Kees},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4390531dcac82a565b6f575e9e1fa1da}{%
+           family={Lowie},
+           familyi={L\bibinitperiod},
+           given={Wander},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=be66bcbcd995985d6bb37a96d4150c26}{%
+           family={Verspoor},
+           familyi={V\bibinitperiod},
+           given={Marjolijn},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{1a001907ab2d011b2aff5b75bb51e927}
+      \strng{fullhash}{cf25e3321a6050e45f0f881b0f56e033}
+      \strng{bibnamehash}{cf25e3321a6050e45f0f881b0f56e033}
+      \strng{authorbibnamehash}{cf25e3321a6050e45f0f881b0f56e033}
+      \strng{authornamehash}{1a001907ab2d011b2aff5b75bb51e927}
+      \strng{authorfullhash}{cf25e3321a6050e45f0f881b0f56e033}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1366-7289, 1469-1841}
+      \field{journaltitle}{Bilingualism: Language and Cognition}
+      \field{month}{4}
+      \field{number}{01}
+      \field{title}{A {Dynamic} {Systems} {Theory} approach to second language acquisition}
+      \field{urlday}{27}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{volume}{10}
+      \field{year}{2007}
+      \field{urldateera}{ce}
+      \field{pages}{7}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1017/S1366728906002732
+      \endverb
+      \verb{file}
+      \verb De Bot et al. - 2007 - A Dynamic Systems Theory approach to second langua.pdf:C\:\\Users\\failensc\\Zotero\\storage\\U865JTYY\\De Bot et al. - 2007 - A Dynamic Systems Theory approach to second langua.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://www.journals.cambridge.org/abstract_S1366728906002732
+      \endverb
+      \verb{url}
+      \verb http://www.journals.cambridge.org/abstract_S1366728906002732
+      \endverb
+    \endentry
+    \entry{durbin_time_2012}{book}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=6186d820e49f3adc10764a9c5595a360}{%
+           family={Durbin},
+           familyi={D\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=21f365c12bd59fa8a7120260bd39f1fc}{%
+           family={Koopman},
+           familyi={K\bibinitperiod},
+           given={Siem\bibnamedelima Jan},
+           giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {Oxford}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{a6d55ee23b49aa3ff87b3f18d97947aa}
+      \strng{fullhash}{a6d55ee23b49aa3ff87b3f18d97947aa}
+      \strng{bibnamehash}{a6d55ee23b49aa3ff87b3f18d97947aa}
+      \strng{authorbibnamehash}{a6d55ee23b49aa3ff87b3f18d97947aa}
+      \strng{authornamehash}{a6d55ee23b49aa3ff87b3f18d97947aa}
+      \strng{authorfullhash}{a6d55ee23b49aa3ff87b3f18d97947aa}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{annotation}{Hier auch später erschienene, unveränderte Nachdrucke Literaturverzeichnis: Seite [326]-339}
+      \field{edition}{Second edition}
+      \field{isbn}{978-0-19-964117-8}
+      \field{number}{no. 38}
+      \field{series}{Oxford statistical science series}
+      \field{title}{Time series analysis by state space methods}
+      \field{year}{2012}
+      \verb{file}
+      \verb (Oxford_Statistical_Science)_Durbin_J.__Koopman_S.J._-_Time_Series_Analysis_by_State_Space_Methods-Oxford_University_Press_(2012).pdf:C\:\\Users\\failensc\\Zotero\\storage\\J2K2HU23\\(Oxford_Statistical_Science)_Durbin_J.__Koopman_S.J._-_Time_Series_Analysis_by_State_Space_Methods-Oxford_University_Press_(2012).pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{fan_local_1997}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=2eb00838f3cea970c7377bfea9631787}{%
+           family={Fan},
+           familyi={F\bibinitperiod},
+           given={Jianqing},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ba02ee5ea60f9bdef33e7dbbcd754e88}{%
+           family={Gasser},
+           familyi={G\bibinitperiod},
+           given={Theo},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=96436f8aa32999c64d9c241bcea2cdb4}{%
+           family={Gijbels},
+           familyi={G\bibinitperiod},
+           given={Irène},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a9411108d642f6a306934e6e6ab67d64}{%
+           family={Brockmann},
+           familyi={B\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a82de3d5883d0fcf537772178c627fd2}{%
+           family={Engel},
+           familyi={E\bibinitperiod},
+           given={Joachim},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{df51a30a5b81b31d4ab32fe7c1190543}
+      \strng{fullhash}{7d9962963c13334b09995fe0c00abef8}
+      \strng{bibnamehash}{7d9962963c13334b09995fe0c00abef8}
+      \strng{authorbibnamehash}{7d9962963c13334b09995fe0c00abef8}
+      \strng{authornamehash}{df51a30a5b81b31d4ab32fe7c1190543}
+      \strng{authorfullhash}{7d9962963c13334b09995fe0c00abef8}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{0020-3157}
+      \field{journaltitle}{Annals of the Institute of Statistical Mathematics}
+      \field{month}{3}
+      \field{number}{1}
+      \field{shorttitle}{Local {Polynomial} {Regression}}
+      \field{title}{Local {Polynomial} {Regression}: {Optimal} {Kernels} and {Asymptotic} {Minimax} {Efficiency}}
+      \field{urlday}{1}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{volume}{49}
+      \field{year}{1997}
+      \field{urldateera}{ce}
+      \field{pages}{79\bibrangedash 99}
+      \range{pages}{21}
+      \verb{doi}
+      \verb 10.1023/A:1003162622169
+      \endverb
+      \verb{file}
+      \verb Fan et al. - 1997 - Local Polynomial Regression Optimal Kernels and A.pdf:C\:\\Users\\failensc\\Zotero\\storage\\9VT8BAA4\\Fan et al. - 1997 - Local Polynomial Regression Optimal Kernels and A.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.1023/A:1003162622169
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.1023/A:1003162622169
+      \endverb
+    \endentry
+    \entry{finnemann_theoretical_2021}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=e231d3f44f472864a9bab55cd4747b2e}{%
+           family={Finnemann},
+           familyi={F\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=65b66c163ae7aa90fd735ab96a8cce25}{%
+           family={Borsboom},
+           familyi={B\bibinitperiod},
+           given={Denny},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=66600a0658e8a46b993b0f97e042c84b}{%
+           family={Epskamp},
+           familyi={E\bibinitperiod},
+           given={Sacha},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2ef439c69d7f2078a7318c4e7365589e}{%
+           family={Maas},
+           familyi={M\bibinitperiod},
+           given={Han\bibnamedelimb L.\bibnamedelimi J.},
+           giveni={H\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0,
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{1f60cf838623041773b3b61ecf8de5e9}
+      \strng{fullhash}{1e4efb80d3d521a8a6481956c5b686ce}
+      \strng{bibnamehash}{1e4efb80d3d521a8a6481956c5b686ce}
+      \strng{authorbibnamehash}{1e4efb80d3d521a8a6481956c5b686ce}
+      \strng{authornamehash}{1f60cf838623041773b3b61ecf8de5e9}
+      \strng{authorfullhash}{1e4efb80d3d521a8a6481956c5b686ce}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{The “Ising model” refers to both the statistical and the theoretical use of the same equation. In this article, we introduce both uses and contrast their differences. We accompany the conceptual introduction with a survey of Ising-related software packages in R. Since the model’s different uses are best understood through simulations, we make this process easily accessible with fully reproducible examples. Using simulations, we show how the theoretical Ising model captures local-alignment dynamics. Subsequently, we present it statistically as a likelihood function for estimating empirical network models from binary data. In this process, we give recommendations on when to use traditional frequentist estimators as well as novel Bayesian options.}
+      \field{issn}{2624-8611}
+      \field{journaltitle}{Psych}
+      \field{month}{10}
+      \field{number}{4}
+      \field{shorttitle}{The {Theoretical} and {Statistical} {Ising} {Model}}
+      \field{title}{The {Theoretical} and {Statistical} {Ising} {Model}: {A} {Practical} {Guide} in {R}}
+      \field{urlday}{30}
+      \field{urlmonth}{1}
+      \field{urlyear}{2023}
+      \field{volume}{3}
+      \field{year}{2021}
+      \field{urldateera}{ce}
+      \field{pages}{594\bibrangedash 618}
+      \range{pages}{25}
+      \verb{doi}
+      \verb 10.3390/psych3040039
+      \endverb
+      \verb{file}
+      \verb Volltext:C\:\\Users\\failensc\\Zotero\\storage\\EEFGAPJS\\Finnemann et al. - 2021 - The Theoretical and Statistical Ising Model A Pra.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.mdpi.com/2624-8611/3/4/39
+      \endverb
+      \verb{url}
+      \verb https://www.mdpi.com/2624-8611/3/4/39
+      \endverb
+    \endentry
+    \entry{golub_generalized_1979}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=8b856da92ad549d323acc679ecf7f474}{%
+           family={Golub},
+           familyi={G\bibinitperiod},
+           given={Gene\bibnamedelima H.},
+           giveni={G\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a3d4e12442a4643ab562c79220dbe0fc}{%
+           family={Heath},
+           familyi={H\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8854589115ff3f8518458b3abd5243a4}{%
+           family={Wahba},
+           familyi={W\bibinitperiod},
+           given={Grace},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{247df6f2fb744ac1cb1581328797793d}
+      \strng{fullhash}{bbdd34b3e6e30c0fec4ee6c58be56b06}
+      \strng{bibnamehash}{bbdd34b3e6e30c0fec4ee6c58be56b06}
+      \strng{authorbibnamehash}{bbdd34b3e6e30c0fec4ee6c58be56b06}
+      \strng{authornamehash}{247df6f2fb744ac1cb1581328797793d}
+      \strng{authorfullhash}{bbdd34b3e6e30c0fec4ee6c58be56b06}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0040-1706, 1537-2723}
+      \field{journaltitle}{Technometrics}
+      \field{month}{5}
+      \field{number}{2}
+      \field{title}{Generalized {Cross}-{Validation} as a {Method} for {Choosing} a {Good} {Ridge} {Parameter}}
+      \field{urlday}{2}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{volume}{21}
+      \field{year}{1979}
+      \field{urldateera}{ce}
+      \field{pages}{215\bibrangedash 223}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1080/00401706.1979.10489751
+      \endverb
+      \verb{file}
+      \verb Golub et al. - 1979 - Generalized Cross-Validation as a Method for Choos.pdf:C\:\\Users\\failensc\\Zotero\\storage\\H95IWANJ\\Golub et al. - 1979 - Generalized Cross-Validation as a Method for Choos.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://www.tandfonline.com/doi/abs/10.1080/00401706.1979.10489751
+      \endverb
+      \verb{url}
+      \verb http://www.tandfonline.com/doi/abs/10.1080/00401706.1979.10489751
+      \endverb
+    \endentry
+    \entry{kunnen_dynamic_2012}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=3371380e05028c0c3ad492e29aa207b1}{%
+           family={Kunnen},
+           familyi={K\bibinitperiod},
+           given={Saskia\bibnamedelima Elske},
+           giveni={S\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {Hoboken}%
+      }
+      \list{publisher}{2}{%
+        {Taylor}%
+        {Francis}%
+      }
+      \strng{namehash}{3371380e05028c0c3ad492e29aa207b1}
+      \strng{fullhash}{3371380e05028c0c3ad492e29aa207b1}
+      \strng{bibnamehash}{3371380e05028c0c3ad492e29aa207b1}
+      \strng{authorbibnamehash}{3371380e05028c0c3ad492e29aa207b1}
+      \strng{authornamehash}{3371380e05028c0c3ad492e29aa207b1}
+      \strng{authorfullhash}{3371380e05028c0c3ad492e29aa207b1}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The dynamic systems approach is a rapidly expanding advancement in the study of developmental research, particularly in the domain of adolescent development. It provides a unique way of examining the subject, and this innovative study of developmental processes helps social scientists to translate dynamic systems conceptualizations into clear empirical research that readers will be able to implement themselves. The first part of this edited book discusses techniques that describe and assess specific process characteristics such as variability, sudden jumps and attractor states. The s}
+      \field{isbn}{978-1-136-51102-8}
+      \field{note}{OCLC: 823389367}
+      \field{title}{A {Dynamic} {Systems} {Approach} of {Adolescent} {Development}}
+      \field{year}{2012}
+      \verb{file}
+      \verb Kunnen - 2012 - A Dynamic Systems Approach of Adolescent Developme.pdf:C\:\\Users\\failensc\\Zotero\\storage\\VRMX2ZBE\\Kunnen - 2012 - A Dynamic Systems Approach of Adolescent Developme.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{mcardle_comparative_2002}{article}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=5dd6d24b178d9ced8100b7877cb4f88e}{%
+           family={McArdle},
+           familyi={M\bibinitperiod},
+           given={John\bibnamedelima J.},
+           giveni={J\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a3d633ddeeb7514fc8625317d9f8900a}{%
+           family={Ferrer-Caja},
+           familyi={F\bibinithyphendelim C\bibinitperiod},
+           given={Emilio},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=373386955667b886fd58da7e1554b5ad}{%
+           family={Hamagami},
+           familyi={H\bibinitperiod},
+           given={Fumiaki},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=673c5436c97b186edf12ea158997ca53}{%
+           family={Woodcock},
+           familyi={W\bibinitperiod},
+           given={Richard\bibnamedelima W.},
+           giveni={R\bibinitperiod\bibinitdelim W\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{512a021b2c0dcd34f9909ffbd8ed1e8c}
+      \strng{fullhash}{f0a164ca5dc9f0272a6678bbdee4a94f}
+      \strng{bibnamehash}{f0a164ca5dc9f0272a6678bbdee4a94f}
+      \strng{authorbibnamehash}{f0a164ca5dc9f0272a6678bbdee4a94f}
+      \strng{authornamehash}{512a021b2c0dcd34f9909ffbd8ed1e8c}
+      \strng{authorfullhash}{f0a164ca5dc9f0272a6678bbdee4a94f}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1939-0599, 0012-1649}
+      \field{journaltitle}{Developmental Psychology}
+      \field{number}{1}
+      \field{title}{Comparative longitudinal structural analyses of the growth and decline of multiple intellectual abilities over the life span.}
+      \field{urlday}{27}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{volume}{38}
+      \field{year}{2002}
+      \field{urldateera}{ce}
+      \field{pages}{115\bibrangedash 142}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.1037/0012-1649.38.1.115
+      \endverb
+      \verb{file}
+      \verb McArdle et al. - 2002 - Comparative longitudinal structural analyses of th.pdf:C\:\\Users\\failensc\\Zotero\\storage\\HQ2B78FC\\McArdle et al. - 2002 - Comparative longitudinal structural analyses of th.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.apa.org/doi/10.1037/0012-1649.38.1.115
+      \endverb
+      \verb{url}
+      \verb https://doi.apa.org/doi/10.1037/0012-1649.38.1.115
+      \endverb
+    \endentry
+    \entry{newell_time_2001}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=49145d0c76b64c8885b136cc14f0a02a}{%
+           family={Newell},
+           familyi={N\bibinitperiod},
+           given={Karl\bibnamedelima M.},
+           giveni={K\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e3e4bf6e743f476716a96120b8662a24}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yeou-Teh},
+           giveni={Y\bibinithyphendelim T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9b3d78735d49629fb31e72b329904bd4}{%
+           family={Mayer-Kress},
+           familyi={M\bibinithyphendelim K\bibinitperiod},
+           given={Gottfried},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{a6c3405eb567fcd56cfce0744aa20a36}
+      \strng{fullhash}{34c1f10945c6e52bca6b7440050019db}
+      \strng{bibnamehash}{34c1f10945c6e52bca6b7440050019db}
+      \strng{authorbibnamehash}{34c1f10945c6e52bca6b7440050019db}
+      \strng{authornamehash}{a6c3405eb567fcd56cfce0744aa20a36}
+      \strng{authorfullhash}{34c1f10945c6e52bca6b7440050019db}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1939-1471, 0033-295X}
+      \field{journaltitle}{Psychological Review}
+      \field{number}{1}
+      \field{title}{Time scales in motor learning and development.}
+      \field{urlday}{27}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{volume}{108}
+      \field{year}{2001}
+      \field{urldateera}{ce}
+      \field{pages}{57\bibrangedash 82}
+      \range{pages}{26}
+      \verb{doi}
+      \verb 10.1037/0033-295X.108.1.57
+      \endverb
+      \verb{file}
+      \verb Newell et al. - 2001 - Time scales in motor learning and development..pdf:C\:\\Users\\failensc\\Zotero\\storage\\GFHKW2RP\\Newell et al. - 2001 - Time scales in motor learning and development..pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.apa.org/doi/10.1037/0033-295X.108.1.57
+      \endverb
+      \verb{url}
+      \verb https://doi.apa.org/doi/10.1037/0033-295X.108.1.57
+      \endverb
+    \endentry
+    \entry{rasmussen_gaussian_2006}{book}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=58d90ed7b7348c7a5a9b4a2a8f46df7b}{%
+           family={Rasmussen},
+           familyi={R\bibinitperiod},
+           given={Carl\bibnamedelima Edward},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d34fdfcbfcb5412397b946351370db22}{%
+           family={Williams},
+           familyi={W\bibinitperiod},
+           given={Christopher\bibnamedelimb K.\bibnamedelimi I.},
+           giveni={C\bibinitperiod\bibinitdelim K\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, Mass}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{f0ccf4a09a3a6a91719405724e3ae5da}
+      \strng{fullhash}{f0ccf4a09a3a6a91719405724e3ae5da}
+      \strng{bibnamehash}{f0ccf4a09a3a6a91719405724e3ae5da}
+      \strng{authorbibnamehash}{f0ccf4a09a3a6a91719405724e3ae5da}
+      \strng{authornamehash}{f0ccf4a09a3a6a91719405724e3ae5da}
+      \strng{authorfullhash}{f0ccf4a09a3a6a91719405724e3ae5da}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0-262-18253-9}
+      \field{note}{OCLC: ocm61285753}
+      \field{series}{Adaptive computation and machine learning}
+      \field{title}{Gaussian processes for machine learning}
+      \field{year}{2006}
+      \verb{file}
+      \verb Rasmussen and Williams - 2006 - Gaussian processes for machine learning.pdf:C\:\\Users\\failensc\\Zotero\\storage\\PHIXG8C7\\Rasmussen and Williams - 2006 - Gaussian processes for machine learning.pdf:application/pdf
+      \endverb
+      \keyw{Gaussian processes,Data processing,Machine learning,Mathematical models}
+    \endentry
+    \entry{van_der_maas_sudden_2003}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=2ef439c69d7f2078a7318c4e7365589e}{%
+           family={Maas},
+           familyi={M\bibinitperiod},
+           given={Han\bibnamedelimb L.\bibnamedelimi J.},
+           giveni={H\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0,
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{un=0,uniquepart=base,hash=8c6ea6cf1cb7f6b93e9552d3e8c20f81}{%
+           family={Kolstein},
+           familyi={K\bibinitperiod},
+           given={Rogier},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1162d2adbf5cb28ee703e3654886ba44}{%
+           family={Pligt},
+           familyi={P\bibinitperiod},
+           given={Joop},
+           giveni={J\bibinitperiod},
+           givenun=0,
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{3d8e87c972a8e99aa6985f4f1669b375}
+      \strng{fullhash}{260caa10fbedc67b2de1e03fa5fbe0fc}
+      \strng{bibnamehash}{260caa10fbedc67b2de1e03fa5fbe0fc}
+      \strng{authorbibnamehash}{260caa10fbedc67b2de1e03fa5fbe0fc}
+      \strng{authornamehash}{3d8e87c972a8e99aa6985f4f1669b375}
+      \strng{authorfullhash}{260caa10fbedc67b2de1e03fa5fbe0fc}
+      \field{sortinit}{v}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Both the dynamic approach and catastrophe modeling have been warmly welcomed in research on attitudes and opinions. In this article, the authors discuss a general methodology for testing catastrophe models and apply it to the dynamics of attitude formation and change. First, by making use of the so-called catastrophe flags, converging support for the catastrophe model can be attained. Each flag relates to a specific hypothesis about attitudinal change. Second, fitting stochastic catastrophe models to data enables one to carry out a direct test of catastrophe models. Results of analyzing large data sets on political attitudes support the validity of the general catastrophe model of attitude change in which transitions in attitudes are a function of involvement and information. Present results suggest that in the case of political attitudes, involvement might well be correlated with attitude. A more refined approach to the measurement of information and involvement is suggested.}
+      \field{issn}{0049-1241, 1552-8294}
+      \field{journaltitle}{Sociological Methods \& Research}
+      \field{month}{11}
+      \field{number}{2}
+      \field{title}{Sudden {Transitions} in {Attitudes}}
+      \field{urlday}{11}
+      \field{urlmonth}{6}
+      \field{urlyear}{2023}
+      \field{volume}{32}
+      \field{year}{2003}
+      \field{urldateera}{ce}
+      \field{pages}{125\bibrangedash 152}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.1177/0049124103253773
+      \endverb
+      \verb{file}
+      \verb Van Der Maas et al. - 2003 - Sudden Transitions in Attitudes.pdf:C\:\\Users\\failensc\\Zotero\\storage\\A6ZI9YCM\\Van Der Maas et al. - 2003 - Sudden Transitions in Attitudes.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://journals.sagepub.com/doi/10.1177/0049124103253773
+      \endverb
+      \verb{url}
+      \verb http://journals.sagepub.com/doi/10.1177/0049124103253773
+      \endverb
+    \endentry
+    \entry{wagenmakers_aic_2004}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=d0127560e030afe2fdab5e2b35378c37}{%
+           family={Wagenmakers},
+           familyi={W\bibinitperiod},
+           given={Eric-Jan},
+           giveni={E\bibinithyphendelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=060041b0a14bacfe8f64f0654fafaed4}{%
+           family={Farrell},
+           familyi={F\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{b3f5d86bb2e278c1149c833a6a739b38}
+      \strng{fullhash}{b3f5d86bb2e278c1149c833a6a739b38}
+      \strng{bibnamehash}{b3f5d86bb2e278c1149c833a6a739b38}
+      \strng{authorbibnamehash}{b3f5d86bb2e278c1149c833a6a739b38}
+      \strng{authornamehash}{b3f5d86bb2e278c1149c833a6a739b38}
+      \strng{authorfullhash}{b3f5d86bb2e278c1149c833a6a739b38}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1069-9384, 1531-5320}
+      \field{journaltitle}{Psychonomic Bulletin \& Review}
+      \field{month}{2}
+      \field{number}{1}
+      \field{title}{{AIC} model selection using {Akaike} weights}
+      \field{urlday}{28}
+      \field{urlmonth}{2}
+      \field{urlyear}{2024}
+      \field{volume}{11}
+      \field{year}{2004}
+      \field{urldateera}{ce}
+      \field{pages}{192\bibrangedash 196}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.3758/BF03206482
+      \endverb
+      \verb{file}
+      \verb Wagenmakers and Farrell - 2004 - AIC model selection using Akaike weights.pdf:C\:\\Users\\failensc\\Zotero\\storage\\NSU6MMXK\\Wagenmakers and Farrell - 2004 - AIC model selection using Akaike weights.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.3758/BF03206482
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.3758/BF03206482
+      \endverb
+    \endentry
+    \entry{waugh_affect_2021}{book}{}
+      \name{editor}{2}{}{%
+        {{un=0,uniquepart=base,hash=b5638d029989c02550322f6928552ba3}{%
+           family={Waugh},
+           familyi={W\bibinitperiod},
+           given={Christian\bibnamedelima E.},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2863d27ddc4b78a7a0496654b8e15822}{%
+           family={Kuppens},
+           familyi={K\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{27d415d4061e79401d8fbde86fd5aa73}
+      \strng{fullhash}{27d415d4061e79401d8fbde86fd5aa73}
+      \strng{bibnamehash}{27d415d4061e79401d8fbde86fd5aa73}
+      \strng{editorbibnamehash}{27d415d4061e79401d8fbde86fd5aa73}
+      \strng{editornamehash}{27d415d4061e79401d8fbde86fd5aa73}
+      \strng{editorfullhash}{27d415d4061e79401d8fbde86fd5aa73}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{editor}
+      \field{labeltitlesource}{title}
+      \field{annotation}{Literaturangaben}
+      \field{isbn}{978-3-030-82964-3}
+      \field{title}{Affect dynamics}
+      \field{year}{2021}
+      \verb{doi}
+      \verb 10.1007/978-3-030-82965-0
+      \endverb
+      \verb{file}
+      \verb 978-3-030-82965-0.pdf:C\:\\Users\\failensc\\Zotero\\storage\\MZDRFRUN\\978-3-030-82965-0.pdf:application/pdf;Submitted Version:C\:\\Users\\failensc\\Zotero\\storage\\Q6TC6MTM\\Waugh and Kuppens - 2021 - Affect dynamics.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{witkiewitz_modeling_2007}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=33991bffc03e50602ef701d20c68da7b}{%
+           family={Witkiewitz},
+           familyi={W\bibinitperiod},
+           given={Katie},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6086984ca66e7df342e3a1704b5ca193}{%
+           family={Marlatt},
+           familyi={M\bibinitperiod},
+           given={G.\bibnamedelimi Alan},
+           giveni={G\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{03c64ed68663fa63abf54d73cec68e7c}
+      \strng{fullhash}{03c64ed68663fa63abf54d73cec68e7c}
+      \strng{bibnamehash}{03c64ed68663fa63abf54d73cec68e7c}
+      \strng{authorbibnamehash}{03c64ed68663fa63abf54d73cec68e7c}
+      \strng{authornamehash}{03c64ed68663fa63abf54d73cec68e7c}
+      \strng{authorfullhash}{03c64ed68663fa63abf54d73cec68e7c}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{02727358}
+      \field{journaltitle}{Clinical Psychology Review}
+      \field{month}{7}
+      \field{number}{6}
+      \field{shorttitle}{Modeling the complexity of post-treatment drinking}
+      \field{title}{Modeling the complexity of post-treatment drinking: {It}'s a rocky road to relapse}
+      \field{urlday}{28}
+      \field{urlmonth}{3}
+      \field{urlyear}{2024}
+      \field{volume}{27}
+      \field{year}{2007}
+      \field{urldateera}{ce}
+      \field{pages}{724\bibrangedash 738}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1016/j.cpr.2007.01.002
+      \endverb
+      \verb{file}
+      \verb Accepted Version:C\:\\Users\\failensc\\Zotero\\storage\\XESLJXHG\\Witkiewitz and Marlatt - 2007 - Modeling the complexity of post-treatment drinking.pdf:application/pdf;Witkiewitz and Marlatt - 2007 - Modeling the complexity of post-treatment drinking.pdf:C\:\\Users\\failensc\\Zotero\\storage\\8J7F643L\\Witkiewitz and Marlatt - 2007 - Modeling the complexity of post-treatment drinking.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0272735807000062
+      \endverb
+      \verb{url}
+      \verb https://linkinghub.elsevier.com/retrieve/pii/S0272735807000062
+      \endverb
+    \endentry
+    \entry{wood_generalized_2006}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=4f816a96f8d000d6cb78dea6a1f2da1d}{%
+           family={Wood},
+           familyi={W\bibinitperiod},
+           given={Simon\bibnamedelima N.},
+           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Boca Raton, FL}%
+      }
+      \list{publisher}{1}{%
+        {Chapman \& Hall/CRC}%
+      }
+      \strng{namehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{fullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{bibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{isbn}{978-1-58488-474-3}
+      \field{note}{OCLC: ocm64084887}
+      \field{series}{Texts in statistical science}
+      \field{shorttitle}{Generalized additive models}
+      \field{title}{Generalized additive models: an introduction with {R}}
+      \field{year}{2006}
+      \verb{file}
+      \verb Wood - 2006 - Generalized additive models an introduction with .pdf:C\:\\Users\\failensc\\Zotero\\storage\\QA2LCFMB\\Wood - 2006 - Generalized additive models an introduction with .pdf:application/pdf
+      \endverb
+      \keyw{R (Computer program language),Mathematical models,Linear models (Statistics),Random walks (Mathematics)}
+    \endentry
+    \entry{wrzus_ecological_2023}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=0b1b7ca970a58b2c6a630b0ca5eeb331}{%
+           family={Wrzus},
+           familyi={W\bibinitperiod},
+           given={Cornelia},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=115d301c92b37cf6d32f495fcc7f4f37}{%
+           family={Neubauer},
+           familyi={N\bibinitperiod},
+           given={Andreas\bibnamedelima B.},
+           giveni={A\bibinitperiod\bibinitdelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{d71122c2f5734b326343072d2080c711}
+      \strng{fullhash}{d71122c2f5734b326343072d2080c711}
+      \strng{bibnamehash}{d71122c2f5734b326343072d2080c711}
+      \strng{authorbibnamehash}{d71122c2f5734b326343072d2080c711}
+      \strng{authornamehash}{d71122c2f5734b326343072d2080c711}
+      \strng{authorfullhash}{d71122c2f5734b326343072d2080c711}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Ecological Momentary Assessments (i.e., EMA, repeated assessments in daily life) are widespread in many fields of psychology and related disciplines. Yet, little knowledge exists on how differences in study designs and samples predict study compliance and dropout—two central parameters of data quality in (micro-)longitudinal research. The current meta-analysis included k = 477 articles (496 samples, total N = 677,536). For each article, we coded the design, sample characteristics, compliance, and dropout rate. The results showed that on average EMA studies scheduled six assessments per day, lasted for 7 days, and obtained a compliance of 79\%. Studies with more assessments per day scheduled fewer assessment days, yet, the number of assessments did not predict compliance or dropout rates. Compliance was significantly higher in studies providing financial incentives. Otherwise, design or sample characteristics had little effects. We discuss the implications of the findings for planning, reporting, and reviewing EMA studies.}
+      \field{issn}{1073-1911, 1552-3489}
+      \field{journaltitle}{Assessment}
+      \field{month}{4}
+      \field{number}{3}
+      \field{shorttitle}{Ecological {Momentary} {Assessment}}
+      \field{title}{Ecological {Momentary} {Assessment}: {A} {Meta}-{Analysis} on {Designs}, {Samples}, and {Compliance} {Across} {Research} {Fields}}
+      \field{urlday}{2}
+      \field{urlmonth}{4}
+      \field{urlyear}{2024}
+      \field{volume}{30}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \field{pages}{825\bibrangedash 846}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1177/10731911211067538
+      \endverb
+      \verb{file}
+      \verb Full Text:C\:\\Users\\failensc\\Zotero\\storage\\3UWU6DD2\\Wrzus and Neubauer - 2023 - Ecological Momentary Assessment A Meta-Analysis o.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://journals.sagepub.com/doi/10.1177/10731911211067538
+      \endverb
+      \verb{url}
+      \verb http://journals.sagepub.com/doi/10.1177/10731911211067538
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

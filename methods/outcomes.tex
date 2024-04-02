@@ -1,43 +1,78 @@
+% -----------------------------------------------------------------------------%
+% Title:                                                                       %
+% Author: Jan Ian Failenschmid                                                 %
+% Created Date: 13-03-2024                                                     %
+% -----                                                                        %
+% Last Modified: 02-04-2024                                                    %
+% Modified By: Jan Ian Failenschmid                                            %
+% -----                                                                        %
+% Copyright (c) 2024 by Jan Ian Failenschmid                                   %
+% E-mail: J.I.Failenschmid@tilburguniveristy.edu                               %
+% -----                                                                        %
+% License: GNU General Public License v3.0 or later                            %
+% License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html            %
+% -----------------------------------------------------------------------------%
+
 \subsection{Outcome measures}
 
-\subsubsection{Root mean squared error}
+To analyze and compare the performance of the different analysis methods, we
+focused on three different outcome measures. The first two measured the
+accuracy of each methods in predicting the value of
+the process at or between the time points at which the observations
+were taken. These measures of predictive accuracy provide insight into how
+well the non-linear process is captured by each of the methods. The last
+outcome measure, concerned the accuracy of the uncertainty estimates provided
+by each of the methods. Here we investigated whether the confidence intervals
+provided by each method indeed include the true state value the correct
+proportion of times.
 
-To compare the in-sample predictive accuracy of the state inference accross 
-analysis methods and simulagtion conditions, we calculated the root mean 
-squared error (RMSE) between the smoothed state inference and the simulated 
-state values. The resulting RMSE values were then anaylzed using a repeated measures 
-ANOVA, as each data set was analyzed with every method. Thus, the analysis 
-method constitues a repeated-measuers effect, wheras the simulation conditions 
-were entered into the model as fixed effects. To find evidence of both 
-present and absent effects an exhaustative model selection based on AIC and BIC 
-model weights was conducted. 
+\subsubsection{Capturing the non-linear process}
 
-\subsubsection{Generalized cross-validation}
+In order to test how well each of the methods captured the non-linear process
+in each condition, the root mean squared error (RMSE)
+between the estimated and the generated values was calculated. Further, to
+estimate how well each of the methods predicts the process between two observed
+time-points, we calculated the generalized cross-validation
+(GCV; \textcite{golub_generalized_1979}) criterion
+for each method and data set. The GCV is a computationally more efficient and
+rotation invariant version of the ordinary leave-one-out cross-validation
+criterion with the same interpretation. The latter is calculated by
+removing one data point and refitting the
+model while keeping certain parameters fixed. Afterwards, the left out
+observation is predicted and the squared prediction error calculated.
+epeating this procedure for each data point and averaging the
+squared errors provides an estimate of how accurately the model predicts
+unobserved values within the observed range.
 
-To evaluate the out of sample interpolation predictive performance of each method 
-we obtained generalized cross-validation scores (GCV). The GCV 
-criterion is a computationally efficient and rotation invariant alternative 
-to the ordinary cross-validation criterion that would be obtaiend from a
-leave-one-out cross-validation. Because the GAMs, local polynomail regression, 
-and GPs are linear smoothers, the GCV can in these cases be obtained directly 
-from the influence matrix of the model. In addition, for linear parametric state-space models 
-there are approximate analytic results for ontaining the GCV from the innovation 
-covariance matrix. However, since in this simulation non-linear and regime 
-switching state-space models will be conidered, the GCV is instead calculated 
-by performing a leave-one-out cross validation and adjust the resulting errors. 
-The GCV values obtained for each analysis methods were anlyzed using the same 
-repeated measures ANOVA based model selection procedure as was used for the RMSEs. 
+Subsequently, a MANOVA was conducted to explain differences in the RMSE and
+GCV values between the simulation conditions and analysis methods. In order to
+also find evidence in favor of which factors likely do not affect the RMSE and
+GCV values, we conducted an exhaustive model search. Here the AIC and BIC
+based model weights were used as a criterion to identify which model is closest
+to the true data generating model. The AIC weights can directly
+be interpreted as the conditional model probabilities
+\parencite{wagenmakers_aic_2004}. Thus, if the true
+data generating model is among the tested models, the AIC weights indicate the
+probability that each tested model is the correct model given the data. This
+makes it possible, to quantify evidence both in favor and against the presence
+of any effect that could be included in the model. After establishing the most
+likely MANOVA model, we probed the included effects further by fitting
+univariate ANOVAs with the same predictors to the RMSE and the GCV values and
+followed up with Tukey's Honest Significant Difference test for the
+post-hoc comparisons.
 
-\subsubsection{Confidence interval coverage}
+\subsubsection{Uncertainty quantification}
 
-The last performance measure that was inestigated during the simulation 
-is the confidence interval coverage probability. That is, the probability that 
-the confidence generated by any of the analysis methods for the state inference, 
-falls around the true simulated state value. To analyze this, confidence or Bayesian 
-credible intervals were obtained for each of the state inferences and it was 
-recorded whether the the confidence interval included the true state value or not. 
-Afterwards, a multilevel logistic regression was used to predict the probability 
-of a confidence interval being around the true state value using the simulation 
-conditions and analysis methods as predictors. We again performed a exhaustative
-model search based on AIC and BIC model weights to evaluate the evidence for both 
-present and absent effects. 
+To investigate the uncertainty estimates that each method provides around the
+predicted process values, we recorded at each time point whether the true
+generated process value was within the confidence intervals created by each
+analysis method. Subsequently, by averaging over all time-points the average
+confidence interval coverage proportion for each method and simulation
+condition was obtained. Since, all obtained confidence or credible intervals
+had a confidence level of 95\% the expected coverage proportion should ideally
+be close to 95\%. Due to the Monte Carlo error of the simulation coverage
+proportions between 93\% and 97\% were considered sufficiently close to the
+expected 95\%. Conversely, coverage proportions larger than 97\% indicated
+overestimated standard errors, whereas coverage proportions below 93\% were
+interpreted to indicate either a poor approximation of the underlying process
+or a underestimation of the standard errors.

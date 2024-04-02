@@ -1,59 +1,95 @@
+% -----------------------------------------------------------------------------%
+% Title:                                                                       %
+% Author: Jan Ian Failenschmid                                                 %
+% Created Date: 07-12-2023                                                     %
+% -----                                                                        %
+% Last Modified: 27-03-2024                                                    %
+% Modified By: Jan Ian Failenschmid                                            %
+% -----                                                                        %
+% Copyright (c) 2024 by Jan Ian Failenschmid                                   %
+% E-mail: J.I.Failenschmid@tilburguniveristy.edu                               %
+% -----                                                                        %
+% License: GNU General Public License v3.0 or later                            %
+% License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html            %
+% -----------------------------------------------------------------------------%
+
 % Broad introduction
-Psychological constructs are increasingly understood as being part of dynamic 
-systems \parencite{nesselroade_studying_2004, wang_investigating_2012, 
-gelfand_dynamical_2012}. As such, they naturally vary not only between but also 
-within individuals. Thus, researchers are becoming more aware of the importance of 
-studying how these constructs change over time to gain valuable insights into the 
-underlying processes \parencite{molenaar_manifesto_2004}. This has led to a sharp 
-increase in experience sampling (ESM) studies, in which 
-individuals complete short questionnaires assessing psychological constructs over 
-a longer period of time \parencite{scollon_experience_2003, 
-miller_smartphone_2012}. The resulting 
-intensive longitudinal data (ILD) is then used to study how psychological 
-constructs change over time within individuals in their natural context and how 
-these dynamics vary between individuals. 
+Psychological constructs are increasingly understood as being part of dynamic
+systems \parencite{nesselroade_studying_2004, wang_investigating_2012,
+    gelfand_dynamical_2012}. As such, they naturally vary not only between but also
+
+within individuals. Thus, researchers are becoming more aware of the importance
+of
+studying how these constructs change over time to gain valuable insights into
+the
+underlying processes \parencite{molenaar_manifesto_2004}. This has led to a
+sharp
+increase in experience sampling (ESM) studies, in which
+individuals complete short questionnaires assessing psychological constructs
+over
+a longer period of time \parencite{scollon_experience_2003,
+    miller_smartphone_2012}. The resulting
+intensive longitudinal data (ILD) is then used to study how psychological
+constructs change over time within individuals in their natural context and how
+
+these dynamics vary between individuals.
 
 % Motivation
-Many of the phenomena that are interesting to study using ESM follow 
-non-linear trajectories through time. Typical examples of this are 
-second language acquisition \parencite{hohenberger_language_2009, 
-murakami_modeling_2016, reid_bifurcations_2019}, the onset 
-\parencite{nelson_moving_2017, van_de_leemput_critical_2014}, and treatment of 
-psychopathologies \parencite{hayes_change_2007, hosenfeld_major_2015, 
-schiepek_complexity_2009}, attitude change \parencite{van_der_maas_sudden_2003}, 
-mood instability in bipolar disorder \parencite{bonsall_nonlinear_2012}, and flow
-\parencite{ceja_suddenly_2012, ceja_dynamics_2009}. 
-Various methods for modeling non-linearity in time series exist, covering the entire spectrum 
-from completely data-driven exploratory tools to confirmatory modeling and 
-theory-testing frameworks. However, research extensively examining and comparing 
-these methods in the context of ILD is scarce. Since many of these methods can 
-capture different types of non-linearity, rely on different sets of assumptions, 
-and allow researchers to draw distinct kinds of inference, it is oftentimes 
-unclear which method is most suited in a specific situation. Because of this, in 
-the following, we will review common non-linear time series methods, discuss the 
-specific types of non-linearity that are described by each method, and show how 
-these methods may be applied to ILD. 
+Many of the phenomena that are interesting to study using ESM follow
+non-linear trajectories through time. Typical examples of this are
+second language acquisition \parencite{hohenberger_language_2009,
+    murakami_modeling_2016, reid_bifurcations_2019}, the onset
+\parencite{nelson_moving_2017, van_de_leemput_critical_2014}, and treatment of
+psychopathologies \parencite{hayes_change_2007, hosenfeld_major_2015,
+    schiepek_complexity_2009}, attitude change
+\parencite{van_der_maas_sudden_2003},
+mood instability in bipolar disorder \parencite{bonsall_nonlinear_2012}, and
+flow
+\parencite{ceja_suddenly_2012, ceja_dynamics_2009}.
+Various methods for modeling non-linearity in time series exist, covering the
+entire spectrum
+from completely data-driven exploratory tools to confirmatory modeling and
+theory-testing frameworks. However, research extensively examining and
+comparing
+these methods in the context of ILD is scarce. Since many of these methods can
+capture different types of non-linearity, rely on different sets of
+assumptions,
+and allow researchers to draw distinct kinds of inference, it is oftentimes
+unclear which method is most suited in a specific situation. Because of this,
+in
+the following, we will review common non-linear time series methods, discuss
+the
+specific types of non-linearity that are described by each method, and show how
+
+these methods may be applied to ILD.
 
 % Working definitions and setting
-In ILD, researchers are usually measuring at least one construct over time, using 
-imperfect indicators, typically in the form of questionnaires. Hence, it is 
-assumed that the observations, which are the specific values that the indicators 
-take at a given time point, are caused by the underlying 
-state or values of the construct \parencite{mcneish_measurement_2021, 
-vogelsmeier_assessing_2023}. The difference between the observations and the 
-state constitutes the measurement error. Further, it is important to note that 
-this error is qualitatively distinct from dynamic error, which relates to 
-disturbances or innovations to the state and carries forward into subsequent time 
-points \parencite{schuurman_incorporating_2015}. 
+In ILD, researchers are usually measuring at least one construct over time,
+using
+imperfect indicators, typically in the form of questionnaires. Hence, it is
+assumed that the observations, which are the specific values that the
+indicators
+take at a given time point, are caused by the underlying
+state or values of the construct \parencite{mcneish_measurement_2021,
+    vogelsmeier_assessing_2023}. The difference between the observations and the
+state constitutes the measurement error. Further, it is important to note that
+this error is qualitatively distinct from dynamic error, which relates to
+disturbances or innovations to the state and carries forward into subsequent
+time
+points \parencite{schuurman_incorporating_2015}.
 
 % Give some structure to the following review
-When dealing with such data, researchers typically aim to infer the 
-system's state from the observations and examine the process of how 
-the state evolves over time. This process can be described using a global 
-model that establishes a relationship between time and the state values or 
-a local model that links the extent of the state's change to its present value. 
-Local or dynamic models take the form of difference equations in discrete time 
+When dealing with such data, researchers typically aim to infer the
+system's state from the observations and examine the process of how
+the state evolves over time. This process can be described using a global
+model that establishes a relationship between time and the state values or
+a local model that links the extent of the state's change to its present value.
+
+Local or dynamic models take the form of difference equations in discrete time
 \parencite{durbin_time_2012, galor_discrete_2007}
-and differential equations in continuous time \parencite{van_montfort_continuous_2018}. 
-Lastly, non-parametric methods can be used to approximate these models in a data-driven way,
-whereas semi- or fully parametric models make it possible to test specific theories about the data.
+and differential equations in continuous time
+\parencite{van_montfort_continuous_2018}.
+Lastly, non-parametric methods can be used to approximate these models in a
+data-driven way,
+whereas semi- or fully parametric models make it possible to test specific
+theories about the data.

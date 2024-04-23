@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 27-03-2024                                                   #
+#' Last Modified: 22-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -49,7 +49,7 @@ latent_change <- new("gen_model",
 )
 
 make_exemplar_plot(latent_change,
-  main = "1: Exponential Growth Curve",
+  main = "a) Exponential Growth Curve",
   xlab = "Time", ylab = "Y", cex = cex
 )
 
@@ -71,7 +71,7 @@ log_growth <- new("gen_model",
 )
 
 make_exemplar_plot(log_growth,
-  main = "2: Logistic Growth Curve",
+  main = "b) Logistic Growth Curve",
   xlab = "Time", ylab = "Y", cex = cex
 )
 
@@ -96,7 +96,7 @@ cusp_catastrophe <- new("gen_model",
 )
 
 make_exemplar_plot(cusp_catastrophe,
-  main = "3: Cusp Catastrophe",
+  main = "c) Cusp Catastrophe",
   xlab = "Time", ylab = "Y", cex = cex
 )
 
@@ -119,7 +119,7 @@ damp_osc <- new("gen_model",
 )
 
 make_exemplar_plot(damp_osc,
-  main = "4: Damped Oscillator",
+  main = "d) Damped Oscillator",
   xlab = "Time", ylab = "Y", cex = cex
 )
 

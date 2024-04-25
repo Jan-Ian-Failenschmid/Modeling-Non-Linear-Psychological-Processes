@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 23-04-2024                                                   #
+#' Last Modified: 25-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -19,16 +19,16 @@
 
 #' Generative models
 #' The gen_model class formalises and structures generative dynamic time-series
-#' models so that they can easily be simulated using sim_tsm. In this 
-#' simulation it is used to specify the different data generating processes 
-#' and to simulated from them. 
+#' models so that they can easily be simulated using sim_tsm. In this
+#' simulation it is used to specify the different data generating processes
+#' and to simulated from them.
 
 setClass(
   "gen_model",
   slots = list(
     # Model name to be copied into method
-    model_name = "character", 
-    # Model type is either DE: "differential equation" 
+    model_name = "character",
+    # Model type is either DE: "differential equation"
     # or SSM: "state-space model"
     model_type = "character",
     # End time of the simulation
@@ -37,7 +37,7 @@ setClass(
     delta = "numeric",
     # Stepsize of the simulated time-series
     stepsize = "numeric",
-    # List of parameters of the generative model, these parameters can be used 
+    # List of parameters of the generative model, these parameters can be used
     # in the following formulas
     pars = "list",
     # List of formulas specifying the initial conditions of the times-series
@@ -125,7 +125,7 @@ setMethod("initialize", "gen_model", function(
 # Methods
 setValidity("gen_model", function(object) {
   #' Validator for objects of the gen_model class
-  
+
   errors <- character()
   # If model type is not valid, return error
   if (!slot(object, "model_type") %in% c("SSM", "DE")) {
@@ -182,7 +182,7 @@ setValidity("gen_model", function(object) {
 
 setMethod("show", "gen_model", function(object) {
   #' Print method for objects of the gen_model class.
-  
+
   out <- character()
   if (slot(object, "model_type") == "SSM") {
     out <- c(out, paste0(
@@ -248,39 +248,44 @@ setMethod("show", "gen_model", function(object) {
 })
 
 ## Analysis methods
-#' The analysis methods are classes defined for each analysis method used in 
-#' the simulation. This is mainly done as a convenience to be able to define 
+#' The analysis methods are classes defined for each analysis method used in
+#' the simulation. This is mainly done as a convenience to be able to define
 #' the generic "fit" and "calculate_perfomance_measures" functions and assign
-#' seperate behaviours via methods to each analysis method. For this, a parent 
+#' seperate behaviours via methods to each analysis method. For this, a parent
 #' "method" class is created that should never be initialized. Instead it holds
-#' the structure for the simulation results and the generic function that can 
-#' be inherited by each of the specific analysis methods. Each analysis method 
-#' is then a seperate class that inherits from the method class and has their 
-#' respective methods specified in a seperate file. 
+#' the structure for the simulation results and the generic function that can
+#' be inherited by each of the specific analysis methods. Each analysis method
+#' is then a seperate class that inherits from the method class and has their
+#' respective methods specified in a seperate file.
 
 setClass(
   "method",
   slots = list(
+    # Method name
     method_name = "character",
+    # Name of the respective generative model
     gen_model = "character",
+    # Simulation conditions
     conditions = "list",
-    pars = "list",
-    fit = "ANY",
+    # Mean function estimate
     estimate = "numeric",
+    # Confidence interval estimate
     ci = "list",
+    # Mean squared error estimate
     mse = "numeric",
+    # Generalized Cross validation criterion
     gcv = "numeric",
+    # Confidence interval coverage
     ci_coverage = "numeric",
+    # Convergence
     converged = "logical"
   ),
   prototype = list(
     method_name = NA_character_,
     gen_model = NA_character_,
     conditions = list(),
-    pars = list(),
-    fit = NULL,
     estimate = NA_real_,
-    ci = list(),
+    ci = list(lb = NA, ub = NA),
     mse = NA_real_,
     gcv = NA_real_,
     ci_coverage = NA_real_,
@@ -294,113 +299,32 @@ setGeneric("fit", function(method, data) standardGeneric("fit"),
   signature = "method"
 )
 
-#' Generic function for obtaining performance measures from a fitted analysis 
-#' method to be inherited. 
-setGeneric("calculate_performance_measures",
-  function(method, data) standardGeneric("calculate_performance_measures"),
-  signature = "method"
-)
+#' Generic function for obtaining performance measures from a fitted analysis
+#' method to be inherited.
 
 setMethod("plot", "method", function(
     x, sim = NULL, observation = "y_obs",
     state = "y", ...) {
-  #' Plot method defined for method to be inherited by each analysis method. 
-  #' Can be used as a wrapper to pass the plot call to the fit slot of the 
-  #' method object or to obtain a custom plot by providing the output 
-  #' generated by simulate to the sim argument. 
-  if (is.null(sim)) {
-    tryCatch(
-      plot(slot(x, "fit"), ...),
-      error = function(cond) {
-        cat("No plot method available for fit.\n")
-        cat("Consider adding sim for default smoothing plot.\n")
-      }
-    )
-  } else {
-    m_id <- sim$res_grid$dat_id[sapply(sim$res_grid$method, identical, y = x)]
-    data <- sim$sim_grid$dat[sim$sim_grid$dat_id == m_id]
-    data <- get_tsm_data(data[[1]], TRUE, TRUE, TRUE)
+  #' Plot method defined for method to be inherited by each analysis method.
+  #' Can be used as a wrapper to pass the plot call to the fit slot of the
+  #' method object or to obtain a custom plot by providing the output
+  #' generated by simulate to the sim argument.
 
-    plot(x = data$time, data[[observation]], ...)
-    lines(x = data$time, y = data[[state]])
-    lines(x = data$time, y = slot(x, "estimate"), col = "red")
-    lines(x = data$time, y = slot(x, "ci")$lb, col = "red", lty = 2)
-    lines(x = data$time, y = slot(x, "ci")$ub, col = "red", lty = 2)
-  }
+  # Exctract data set from sim corresponding to the method x
+  data <- sim$dat[which(sapply(sim$method, function(method_list) {
+    any(sapply(method_list, identical, y = x))
+  }))][[1]]
+
+  plot(x = data$time, data[[observation]], ...)
+  lines(x = data$time, y = data[[state]])
+  lines(x = data$time, y = slot(x, "estimate"), col = "red")
+  lines(x = data$time, y = slot(x, "ci")$lb, col = "red", lty = 2)
+  lines(x = data$time, y = slot(x, "ci")$ub, col = "red", lty = 2)
 })
 
 setMethod("show", "method", function(object) {
   #' Print method defined for method to be inherited by each analysis method.
-   
-  out <- character()
-  # Print method name
-  out <- c(
-    out,
-    "Method object for", slot(object, "method_name")
-  )
-  # Print gen model
-  if (is.na(slot(object, "gen_model"))) {
-    out <- c(
-      out,
-      "\n\nNo generative model has been assigned to the moethod."
-    )
-  } else {
-    out <- c(
-      out,
-      "\n\nThe generative model for the method is",
-      slot(object, "gen_model")
-    )
-  }
-  # Print conditions
-  if (length(slot(object, "conditions")) == 0) {
-    out <- c(
-      out,
-      "\n\nNo conditions have been assigned to the method."
-    )
-  } else {
-    out <- c(
-      out,
-      "\n\nThe simulation conditions for the method are:\n",
-      paste(
-        paste(
-          names(slot(object, "conditions")),
-          slot(object, "conditions"),
-          sep = " = "
-        ),
-        sep = " "
-      )
-    )
-  }
-  # Print fit
-  if (is.null(slot(object, "fit"))) {
-    out <- c(
-      out,
-      "\n\nThe method has not been fit yet."
-    )
-    cat(out)
-  } else {
-    out <- c(
-      out,
-      "\n\nThe method has been fit:",
-      "\nMSE:", round(slot(object, "mse"), 3),
-      "\nGCV:", round(slot(object, "gcv"), 3),
-      "\nCI coverage:", round(slot(object, "ci_coverage"), 3),
-      "\n\nThe state inference is:\n"
-    )
-    cat(out)
-    print(data.frame(
-      lb = slot(object, "ci")[["lb"]],
-      state = slot(object, "estimate"),
-      ub = slot(object, "ci")[["ub"]]
-    ))
-  }
-})
 
-setMethod("summary", "method", function(object) {
-  #' Summary method defined for method to be inherited by each analysis method.
-  #' Just adds a wrapper for passign the summary call the fit slot of the 
-  #' method to the print method. 
-  
   out <- character()
   # Print method name
   out <- c(
@@ -440,27 +364,17 @@ setMethod("summary", "method", function(object) {
       )
     )
   }
-  # Print fit
-  if (is.null(slot(object, "fit"))) {
-    out <- c(
-      out,
-      "\n\nThe method has not been fit yet."
-    )
-    cat(out)
-  } else {
-    out <- c(
-      out,
-      "\n\nThe method has been fit:",
-      "\nMSE:", round(slot(object, "mse"), 3),
-      "\nGCV:", round(slot(object, "gcv"), 3),
-      "\nCI coverage:", round(slot(object, "ci_coverage"), 3), "\n\n"
-    )
-    cat(out)
-    tryCatch(
-      summary(slot(object, "fit")),
-      error = function(cond) {
-        print("No summary method for fit available.")
-      }
-    )
-  }
+  out <- c(
+    out,
+    "\nMSE:", round(slot(object, "mse"), 3),
+    "\nGCV:", round(slot(object, "gcv"), 3),
+    "\nCI coverage:", round(slot(object, "ci_coverage"), 3),
+    "\n\nThe state inference is:\n"
+  )
+  cat(out)
+  print(data.frame(
+    lb = slot(object, "ci")[["lb"]],
+    state = slot(object, "estimate"),
+    ub = slot(object, "ci")[["ub"]]
+  ))
 })

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 23-04-2024                                                   #
+#' Last Modified: 25-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -17,8 +17,7 @@
 
 ### Functions ------------------------------------------------------------------
 simulate <- function(
-    gen_model_list, method_list, conditions, repetitions,
-    cores = detectCores()) {
+    gen_model_list, method_list, conditions, repetitions) {
   #' Main simulation function
   #' gen_model_list is a list of objects of class gen_model
   #' method_list is a list of objects inheriting from the class method with
@@ -26,131 +25,78 @@ simulate <- function(
   #' conditions is a list of simulation conditions
   #' repetitions is a integer giving the number of repetitions per condition
 
-  # Paralelization
-  options("mc.cores" = cores)
-  
+  require(data.table)
+
   ## Setup-simulation and initialize objects
 
   # Create sim object by initiating objects from the gen_model list
-  sim_grid <- expand.grid(c(conditions, list(gen_model = gen_model_list)))
+  sim_grid <- as.data.table(
+    expand.grid(c(conditions, list(gen_model = gen_model_list)))
+  )
   sim_grid$conditions <- apply(
     subset(sim_grid, select = -gen_model),
     1, function(x) as.list(x)
   )
 
   # Incorporate simulation conditions into gen_model
-  sim_grid$gen_model <- parallel::mcmapply(
-    add_conditions,
-    model = sim_grid$gen_model, conditions = sim_grid$conditions
-  )
+  sim_grid[, gen_model := mapply(add_conditions, gen_model, conditions)]
 
   # Replicate the rows of sim_grid repetitions time
   sim_grid <- sim_grid[rep(seq_len(nrow(sim_grid)), each = repetitions), ]
 
-  # Add unique identifier for data files
-  sim_grid$dat_id <- paste(
-    parallel::mcmapply(
-      create_dat_id,
-      model = sim_grid$gen_model, conditions = sim_grid$conditions
-    ),
-    rep(seq_len(repetitions), nrow(sim_grid) / repetitions),
-    sep = "_"
-  )
-
-  # Initialize results grid by expanding the data ids over the elements of
-  # method_list
-  res_grid <- expand.grid(dat_id = sim_grid$dat_id, method = method_list)
-
   cat(
     "In total,", nrow(sim_grid), "data sets will be simulated and",
-    nrow(res_grid), "analyses will be performed."
+    length(method_list) * nrow(sim_grid), "analyses will be performed."
   )
 
-  # Update the time and gen_model slot of the method entries accordingly
-  res_grid$method <- parallel::mcmapply(
-    fill_in_method,
-    id = res_grid$dat_id, method = res_grid$method,
-    MoreArgs = list(sim_grid = sim_grid)
-  )
-
-  # Sample models and fit methods until the desired amount of repetitions is
-  # achieved
-  for (iter in c(0, 1)) {
-    # Indicators for which models are converged and which data sets
-    # need to be resampled
-    ind_res <- !sapply(res_grid$method, function(x) x@converged)
-    ind_sim <- sim_grid$dat_id %in% res_grid$dat_id[ind_res]
-
-    ## Data simulation
-
-    # Simulate data from each model object
-    if (iter == 0) {
-      cat("\n\nSimulating Data: ")
-    } else if (sum(ind_sim) > 0) {
-      ind_res <- res_grid$dat_id %in% sim_grid$dat_id[ind_sim]
-      cat("\n\nResampling", iter, "with", sum(ind_sim), "data sets: ")
+  ## Simulate the data
+  cat("\n\nSimulating Data: ")
+  sim_grid[, dat := lapply(
+    gen_model,
+    function(x) {
+      cat("=")
+      get_tsm_data(sim_tsm(x))
     }
-    sim_grid$dat[ind_sim] <- parallel::mclapply(
-      sim_grid$gen_model[ind_sim],
-      function(x) {
-        cat("=")
-        sim_tsm(x)
-      }
-    )
+  )]
 
-    ## Model fitting
-    if (iter == 0) {
-      cat("\n\nModel fitting: ")
-    } else if (sum(ind_sim) > 0) {
-      cat(
-        "\n\nModel refiting", iter, "with", sum(ind_res),
-        "models on", sum(ind_sim), "data sets: "
-      )
-    }
-
-    res_grid$method[ind_res] <- parallel::mcmapply(
-      function(id, method, sim_grid) {
-        cat("=")
-        fit(
-          method = method,
-          data = get_tsm_data(
-            sim_grid$dat[[which(sim_grid$dat_id == id)]], TRUE, TRUE, FALSE
-          )
-        )
-      },
-      id = res_grid$dat_id[ind_res], method = res_grid$method[ind_res],
-      MoreArgs = list(sim_grid = sim_grid), SIMPLIFY = FALSE
-    )
+  ## Add analysis methods to the simulation and fill in information
+  if (length(method_list) == 1) {
+    sim_grid[, method := list(list(method_list))]
+  } else {
+    sim_grid[, method := list(method_list)]
   }
 
-  ## Obtain results
-  cat("\n\nObtaining performance measures: ")
-  res_grid$method <- mapply(
-    function(method, id, sim_grid) {
-      cat("=")
-      calculate_performance_measures(
-        method,
-        get_tsm_data(
-          sim_grid$dat[[which(sim_grid$dat_id == id)]], TRUE,
-          TRUE, TRUE
-        )
+  sim_grid[, method := mapply(
+    function(method, conditions, gen_model) {
+      lapply(method, fill_in_method,
+        conditions = conditions,
+        gen_model = gen_model
       )
-    },
-    method = res_grid$method,
-    id = res_grid$dat_id,
-    MoreArgs = list(sim_grid = sim_grid)
-  )
+    }, method, conditions, gen_model,
+    SIMPLIFY = FALSE
+  )]
 
-  cat("\n")
+  ## Fit analysis methods and record performance measures
+  cat("\n\nModel Ftting:    ")
 
-  return(list(sim_grid = sim_grid, res_grid = res_grid))
+  sim_grid[, method := mapply(
+    function(method, data) {
+      cat("=")
+      lapply(method, fit, data = data)
+    }, method, dat,
+    SIMPLIFY = FALSE
+  )]
+
+  c("\n\n")
+
+  return(sim_grid)
 }
 
 add_conditions <- function(model, conditions) {
-  #' Convenience function to add the conditions list to the respective slots 
-  #' in the gen_model objects. Conditions will be added in order and according 
-  #' to name, first to slots with the same name, then to parameters with the 
-  #' same name and all remaining conditions will be appended to the paramters 
+  #' Convenience function to add the conditions list to the respective slots
+  #' in the gen_model objects. Conditions will be added in order and according
+  #' to name, first to slots with the same name, then to parameters with the
+  #' same name and all remaining conditions will be appended to the paramters
   #' slot.
 
   # Extract slot names
@@ -178,23 +124,9 @@ add_conditions <- function(model, conditions) {
   return(model)
 }
 
-create_dat_id <- function(model, conditions) {
-  #' Convenience function for creating unique data id's based on the gen_model, 
-  #' method, and simulation conditions. This dat_id is used to match the 
-  #' methods to their data set during the simulation.
-
-  # Paste together model name and conditions
-  paste(slot(model, "model_name"),
-    paste0(names(conditions), conditions, collapse = "_"),
-    sep = "_"
-  )
-}
-
-fill_in_method <- function(id, method, sim_grid) {
-  #' Convenience functio to copy over information and fill in the meta slots 
+fill_in_method <- function(method, conditions, gen_model) {
+  #' Convenience functio to copy over information and fill in the meta slots
   #' of the method objects
-  gen_model <- sim_grid$gen_model[[which(sim_grid$dat_id == id)]]
-  conditions <- sim_grid$conditions[[which(sim_grid$dat_id == id)]]
   slot(method, "gen_model") <- slot(gen_model, "model_name")
   slot(method, "conditions") <- conditions
   return(method)
@@ -294,7 +226,7 @@ sim_tsm <- function(model) {
       )
     }
     # Copy subsample at the desired time points over to data frame
-    # The rounding is unelegant but required to make the matching work with 
+    # The rounding is unelegant but required to make the matching work with
     # floating values.
     dat$state <- state[which(round(seq(
       from = dat$time[1], to = dat$time[nrow(dat)],
@@ -326,52 +258,43 @@ sim_tsm <- function(model) {
   return(dat)
 }
 
-get_tsm_data <- function(data,
-                         time = FALSE,
-                         observation = FALSE,
-                         state = FALSE) {
-  #' Convenience function to extract and reformat data generated by sim_tsm. 
-  #' This function takes the individual lists created by sim_tsm and reformats 
-  #' them into a data frame. 
-
+get_tsm_data <- function(data) {
+  #' Convenience function to extract and reformat data generated by sim_tsm.
+  #' This function takes the individual lists created by sim_tsm and reformats
+  #' them into a data frame.
   # Validation
-  if (!time && !observation && !state) {
-    cat("Select at least one data feature to be included. \n")
-  }
+  require(data.table)
 
   # Select data featrues
   res <- list()
 
-  if (time) res$time <- data$time
-  if (observation) {
-    res$observation <- do.call(
-      rbind.data.frame,
-      lapply(data$observation, rbind)
-    )
-  }
-  if (state) res$state <- do.call(rbind.data.frame, lapply(data$state, rbind))
+  res$time <- data$time
+  res$observation <- do.call(
+    rbind.data.frame,
+    lapply(data$observation, rbind)
+  )
+
+  res$state <- do.call(rbind.data.frame, lapply(data$state, rbind))
 
   nam <- unlist(sapply(res, names)) # Extract names
-  if (time) nam <- c("time", nam) # Add time name
+  nam <- c("time", nam) # Add time name
   res <- do.call(cbind, res) # Reformat data
   names(res) <- nam # Fix names
 
-  res <- as.data.frame(sapply(res, unlist)) # Get rid of lists within columns
+  res <- as.data.table(sapply(res, unlist)) # Get rid of lists within columns
 
   return(res)
 }
 
 calc_mse <- function(method, data) {
   #' Convenience function to calculate mse between method estimate and data
-  squared_err <- (slot(method, "estimate") - data$y)^2
-  mse <- sqrt(mean(squared_err))
-  return(mse)
+  return(sqrt(mean((slot(method, "estimate") - data$y)^2)))
 }
 
 ci_test <- function(method, data) {
-  #' Convenience function ot test if the actual state lies in the confidence 
+  #' Convenience function ot test if the actual state lies in the confidence
   #' interval
-  
+
   ci_incl <- mapply(function(y, ub, lb) y < ub & y > lb,
     y = data$y, ub = slot(method, "ci")$ub, lb = slot(method, "ci")$lb
   )
@@ -380,27 +303,19 @@ ci_test <- function(method, data) {
   return(ci_coverage)
 }
 
-set_na <- function(method) {
-  #' Convenience function to set all slot values to NA if the method did not 
-  #' converge.
-  
-  slot(method, "estimate") <- NA_real_
-  slot(method, "ci") <- list(ub = NA, lb = NA)
-  slot(method, "mse") <- NA_real_
-  slot(method, "gcv") <- NA_real_
-  slot(method, "ci_coverage") <- NA_real_
-
-  return(method)
-}
-
 extract_results <- function(sim) {
   #' Convenience function to extract the performance measures (i.e. mse, gcv,
-  #' and ci coverage) as well as all meta info from the two lists created during 
+  #' and ci coverage) as well as all meta info from the two lists created during
   #' the simulation.
 
-  res_grid <- sim$res_grid
 
-  results <- lapply(res_grid$method, function(x) {
+  dat <- subset(sim, select = c(-gen_model, -conditions, -dat, -method))[
+    rep(seq_len(nrow(sim)), each = length(sim$method[[1]]))
+  ]
+
+  dat[, method := unlist(sim$method)]
+
+  results <- lapply(dat$method, function(x) {
     c(list(
       method = slot(x, "method_name"),
       model = slot(x, "gen_model"),
@@ -410,7 +325,7 @@ extract_results <- function(sim) {
     ), slot(x, "conditions"))
   })
 
-  results <- cbind(dat_id = res_grid$dat_id, do.call(rbind.data.frame, results))
+  results <- do.call(rbind.data.frame, results)
 
   return(results)
 }
@@ -474,8 +389,8 @@ gp_post_pred <- function(
 gp_posterior_3d <- function(
     fit, f_name, draws = 200, grid_size = 225,
     state = NULL, obs = NULL, smooth = NULL) {
-  #' Function to generate 3d posterior predictive plots of a 2d gaussian 
-  #' process distribution using kernel smoothers. 
+  #' Function to generate 3d posterior predictive plots of a 2d gaussian
+  #' process distribution using kernel smoothers.
 
   require(plotly)
   require(MASS)
@@ -556,8 +471,8 @@ make_exemplar_plot <- function(gen_model, main, xlab, ylab, cex) {
 }
 
 plot_results <- function(res, outcome, ...) {
-  #' Convenience function to create discriptive plots of the performance 
-  #' measures. 
+  #' Convenience function to create discriptive plots of the performance
+  #' measures.
 
   factors <- dplyr::select(res, model, ...)
   res$group <- apply(factors, 1, function(x) {
@@ -594,10 +509,10 @@ plot_results <- function(res, outcome, ...) {
 }
 
 model_search <- function(fit_fun, predictors, data) {
-  #' Function to conduct and exhaustative model search based on AIC and BIC 
+  #' Function to conduct and exhaustative model search based on AIC and BIC
   #' model weights.
-  
-  # Create list of all substest of model terms. 
+
+  # Create list of all substest of model terms.
   term_list <- unlist(lapply(seq_along(predictors), function(i) {
     combn(predictors, i, FUN = function(z) {
       lapply(seq_along(z), function(m) {
@@ -649,9 +564,9 @@ model_weight <- function(ic) {
 }
 
 quiet <- function(x) {
-  #' Convenience function to silence functions during the simulation to keep 
-  #' the console clean. 
-  
+  #' Convenience function to silence functions during the simulation to keep
+  #' the console clean.
+
   sink(tempfile())
   on.exit(sink())
   invisible(force(x))

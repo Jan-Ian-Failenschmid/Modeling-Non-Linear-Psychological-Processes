@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 23-04-2024                                                   #
+#' Last Modified: 25-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -24,7 +24,7 @@ invisible(sapply(
 ))
 
 ### Load data ------------------------------------------------------------------
-# load("R/data/simulation_results_23_04_2024_12_26.Rdata")
+# load("R/data/simulation_results_25_04_2024_21_07.Rdata")
 
 ### Analysis -------------------------------------------------------------------
 ## Descriptives

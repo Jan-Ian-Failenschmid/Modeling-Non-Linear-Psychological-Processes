@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 11-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 23-04-2024                                                   #
+#' Last Modified: 25-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -27,38 +27,28 @@ setMethod("fit", "method_gam", function(method, data) {
   fit <- gam(y_obs ~ s(time, bs = "tp", k = nrow(data)), data = data)
 
   # Method generics schould always return the adjusted method object
-  slot(method, "fit") <- fit
   slot(method, "converged") <- fit$converged
 
+  if (slot(method, "converged")) {
+    inference <- predict(fit, se.fit = TRUE)
+
+    # Get mean inference
+    slot(method, "estimate") <- as.vector(inference$fit)
+    slot(method, "ci") <- list(
+      ub = as.vector(inference$fit + (qnorm(0.975) * inference$se.fit)),
+      lb = as.vector(inference$fit - (qnorm(0.975) * inference$se.fit))
+    )
+
+    # Calculate mse
+    slot(method, "mse") <- calc_mse(method, data)
+
+    # Calculate gcv
+    slot(method, "gcv") <- fit$gcv.ubre
+
+    # Calculate confidence interval coverage
+    slot(method, "ci_coverage") <- ci_test(method, data)
+  }
+
+  # Method generics schould always return the adjusted method object
   return(method)
 })
-
-setMethod(
-  "calculate_performance_measures", "method_gam",
-  function(method, data) {
-    if (slot(method, "converged")) {
-      inf <- predict(slot(method, "fit"), se.fit = TRUE)
-
-      # Get mean inference
-      slot(method, "estimate") <- as.vector(inf$fit)
-      slot(method, "ci") <- list(
-        ub = as.vector(inf$fit + (qnorm(0.975) * inf$se.fit)),
-        lb = as.vector(inf$fit - (qnorm(0.975) * inf$se.fit))
-      )
-
-      # Calculate mse
-      slot(method, "mse") <- calc_mse(method, data)
-
-      # Calculate gcv
-      slot(method, "gcv") <- slot(method, "fit")$gcv.ubre
-
-      # Calculate confidence interval coverage
-      slot(method, "ci_coverage") <- ci_test(method, data)
-    } else {
-      method <- set_na(method)
-    }
-
-    # Method generics schould always return the adjusted method object
-    return(method)
-  }
-)

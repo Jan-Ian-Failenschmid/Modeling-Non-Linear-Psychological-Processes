@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 15-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 23-04-2024                                                   #
+#' Last Modified: 25-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -24,79 +24,60 @@ setClass(
 
 setMethod("fit", "method_dynm", function(method, data) {
   # Fit appropriate dynr model
-  dynr_fit <- quiet(fit_dynr(method, data))
+  iter <- 1
+  conv <- FALSE
+  delta <- c(0, 0.1, 0.2)
 
-  # Determine convergence
-  if (class(dynr_fit) == "dynrCook") {
-    if (any(is.na(summary(dynr_fit)$Coefficients))) {
-      conv <- FALSE
-    } else {
-      conv <- ifelse(dynr_fit$exitflag > 0, TRUE, FALSE)
-    }
-  } else {
-    conv <- FALSE
+  # Fit model three times with different starting values in case
+  # of non-convergence
+  while (iter < 4 && !conv) {
+    # Fit the correct dynamic model based on the data generating model
+    dynr_fit <- quiet(fit_correct_dynr_model(method, data, delta[iter]))
+    # Determine convergence
+    conv <- class(dynr_fit) == "dynrCook" &&
+      !any(is.na(summary(dynr_fit)$Coefficients)) &&
+      dynr_fit$exitflag > 0
+
+    iter <- iter + 1
   }
 
-  # summary(dynr_fit)
-
-  # Method generics schould always return the adjusted method object
-  # print(conv)
-  slot(method, "fit") <- dynr_fit
   slot(method, "converged") <- conv
 
+  if (slot(method, "converged")) {
+    # Get mean inference
+    y_hat <- dynr_fit@eta_smooth_final[1, ]
+    # Get standard error
+    se <- sqrt(dynr_fit@error_cov_smooth_final[1, 1, ])
+
+    slot(method, "estimate") <- y_hat
+    slot(method, "ci") <- list(
+      ub = y_hat + (qnorm(0.975) * se),
+      lb = y_hat + (qnorm(0.025) * se)
+    )
+
+    # Calculate mse
+    slot(method, "mse") <- calc_mse(method, data)
+
+    # Obtain the trace of A
+    trace_a <- sum(
+      as.vector(dynr_fit@error_cov_smooth_final[1, 1, ]) /
+        coef(dynr_fit)["meas_er"]
+    )
+    # Extract errors
+    errors <- data$y_obs - y_hat
+    # Calculate gcv
+    slot(method, "gcv") <- nrow(data) * sum(errors^2) /
+      (nrow(data) - trace_a)^2 # GCV
+
+    # Calculate confidence interval coverage
+    slot(method, "ci_coverage") <- ci_test(method, data)
+  }
+
+  # Method generics schould always return the adjusted method object
   return(method)
 })
 
-setMethod(
-  "calculate_performance_measures", "method_ssm",
-  function(method, data) {
-    if (slot(method, "converged")) {
-      y_hat <- slot(method, "fit")@eta_smooth_final[1, ]
-      se <- sqrt(slot(method, "fit")@error_cov_smooth_final[1, 1, ])
-      # Get mean inference
-      slot(method, "estimate") <- y_hat
-      slot(method, "ci") <- list(
-        ub = y_hat + (qnorm(0.975) * se),
-        lb = y_hat + (qnorm(0.025) * se)
-      )
-
-      # Calculate mse
-      slot(method, "mse") <- calc_mse(method, data)
-
-      # ToDo: Test cross-validation for a couple of data sets and see how this
-      # works.
-      # Calculate gcv
-      cv_errors <- sapply(seq_len(nrow(data)), function(x, data, method) {
-        target <- data$y_obs[x] # Save target value
-        data$y_obs[x] <- NA
-        dynr_fit <- fit(method, data)@fit # Fit model with ssm method
-        e_i <- target - dynr_fit@eta_smooth_final[1, x] # Calculate cv error
-        return(e_i)
-      }, data = data, method = method)
-
-      # errors <- data$y_obs - y_hat # Get residuals
-
-      # # Caluclate trace of the influence matrix
-      # trace_a <- sum(1 - errors / cv_errors)
-      # # Get sample size
-      # n <- nrow(data)
-
-      # slot(method, "gcv") <- n * sum(errors^2) / (n - trace_a)^2 # GCV
-
-      slot(method, "gcv") <- mean(cv_errors^2)
-
-      # Calculate confidence interval coverage
-      slot(method, "ci_coverage") <- ci_test(method, data)
-    } else {
-      method <- set_na(method)
-    }
-
-    # Method generics schould always return the adjusted method object
-    return(method)
-  }
-)
-
-fit_dynr <- function(method, data) {
+fit_correct_dynr_model <- function(method, data, delta = 0) {
   #' Convenience function to fit the appropriate dynamic model with dynr
   # Prepare data
   dynr_dat <- dynr.data(
@@ -131,14 +112,19 @@ fit_dynr <- function(method, data) {
       y ~ yr * ya - yr * y
     )
 
+    slope <- (na.omit(data$y_obs)[length(na.omit(data$y_obs))] -
+      na.omit(data$y_obs)[1]) / length(na.omit(data$y_obs))
+    max_obs <- max(data$y_obs, na.rm = TRUE)
+
     # Prepare formula dynamics
     dynm <- prep.formulaDynamics(
       formula = fml_list, startval = c(
         # Start growth rate using the slope between the first and the last value
-        yr = (na.omit(data$y_obs)[length(na.omit(data$y_obs))] -
-          na.omit(data$y_obs)[1]) / length(na.omit(data$y_obs)),
+        yr = c(slope, 1e-6)[which.max(c(slope, 1e-6))] +
+          abs(rnorm(1, 0, delta)),
         # Use max observation as starting value
-        ya = max(data$y_obs, na.rm = TRUE)
+        ya = c(max_obs, 1e-6)[which.max(c(max_obs, 1e-6))] +
+          abs(rnorm(1, 0, delta))
       ),
       isContinuousTime = TRUE
     )
@@ -146,7 +132,7 @@ fit_dynr <- function(method, data) {
     # Prepare initial values
     initial <- prep.initial(
       # Use first observation of y_obs as starting value
-      values.inistate = na.omit(data$y_obs)[[1]],
+      values.inistate = na.omit(data$y_obs)[[1]] + rnorm(1, 0, delta),
       params.inistate = "y_nod",
       # Values fix starting variance to the variance of y_obs as an upper bound
       values.inicov = diag(var(data$y_obs, na.rm = TRUE), 1),
@@ -186,18 +172,24 @@ fit_dynr <- function(method, data) {
       y ~ r * y * (1 - (y / k))
     )
 
+    slope <- (na.omit(data$y_obs)[length(na.omit(data$y_obs))] -
+      na.omit(data$y_obs)[1]) / length(na.omit(data$y_obs))
+    max_obs <- max(data$y_obs, na.rm = TRUE)
+
     dynm <- prep.formulaDynamics(
       formula = fml_list, startval = c(
-        r = (na.omit(data$y_obs)[length(na.omit(data$y_obs))] -
-          na.omit(data$y_obs)[1]) / length(na.omit(data$y_obs)),
-        k = max(data$y_obs, na.rm = TRUE)
+        # Start growth rate using the slope between the first and the last value
+        r = c(slope, 1e-6)[which.max(c(slope, 1e-6))] + abs(rnorm(1, 0, delta)),
+        # Use max observation as starting value
+        k = c(max_obs, 1e-6)[which.max(c(max_obs, 1e-6))] +
+          abs(rnorm(1, 0, delta))
       ),
       isContinuousTime = TRUE
     )
 
     initial <- prep.initial(
       # Prepare initial values
-      values.inistate = na.omit(data$y_obs)[[1]],
+      values.inistate = na.omit(data$y_obs)[[1]] + rnorm(1, 0, delta),
       params.inistate = "y_nod",
       values.inicov = diag(var(data$y_obs, na.rm = TRUE), 1),
       params.inicov = diag("fixed", 1)
@@ -233,15 +225,18 @@ fit_dynr <- function(method, data) {
 
     dynamics <- prep.matrixDynamics(
       values.dyn = matrix(c(
-        0, -0.1, 1,
-        -0.2
+        0, -0.1 - abs(rnorm(1, 0, delta)),
+        1, -0.2 - abs(rnorm(1, 0, delta))
       ), 2, 2),
       params.dyn = matrix(c("fixed", "k", "fixed", "c"), 2, 2),
       isContinuousTime = TRUE
     )
 
     initial <- prep.initial(
-      values.inistate = c(na.omit(data$y_obs)[[1]], 0),
+      values.inistate = c(
+        na.omit(data$y_obs)[[1]] + rnorm(1, 0, delta),
+        0 + abs(rnorm(1, 0, delta))
+      ),
       params.inistate = c("y_nod", "v_nod"),
       values.inicov = diag(c(var(data$y_obs, na.rm = TRUE), 1), 2),
       params.inicov = diag("fixed", 2)
@@ -273,13 +268,20 @@ fit_dynr <- function(method, data) {
     )
 
     dynm <- prep.formulaDynamics(
-      formula = fml_list, startval = c(omega = -0.1, a = 0),
+      formula = fml_list, startval = c(
+        omega = -0.1 - abs(rnorm(1, 0, delta)),
+        a = 0 + rnorm(1, 0, delta)
+      ),
       isContinuousTime = TRUE
     )
 
     initial <- prep.initial(
       # Prepare initial values
-      values.inistate = c(na.omit(data$y_obs)[[1]], 0, 0),
+      values.inistate = c(
+        na.omit(data$y_obs)[[1]] + rnorm(1, 0, delta),
+        0 + rnorm(1, 0, delta),
+        0 + rnorm(1, 0, delta)
+      ),
       params.inistate = c("y_nod", "b_nod", "v_nod"),
       values.inicov = diag(c(var(data$y_obs, na.rm = TRUE), 1, 1), 3),
       params.inicov = diag("fixed", 3)

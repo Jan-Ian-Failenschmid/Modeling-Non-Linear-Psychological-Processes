@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 11-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 23-04-2024                                                   #
+#' Last Modified: 25-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -23,6 +23,7 @@ setClass(
 )
 
 setMethod("fit", "method_locpol", function(method, data) {
+  # Estimate local polynomial with orders 1, 3, and 5
   loc_fit_list <- lapply(c(1, 3, 5), function(p, method, data) {
     loc_fit <- lprobust_cust(
       x = data$time, y = data$y_obs, eval = data$time,
@@ -33,47 +34,38 @@ setMethod("fit", "method_locpol", function(method, data) {
     return(list(loc_fit, gcv))
   }, method = method, data = data)
 
+  # Select the local polynomial fit with the smalles gcv
   loc_fit <- loc_fit_list[[which.min(sapply(loc_fit_list, "[[", 2))]][[1]]
 
-  # Method generics schould always return the aFdjusted method object
-  slot(method, "fit") <- loc_fit
+  # There is no convergence, so just set to true
   slot(method, "converged") <- TRUE
 
+  inf <- as.data.frame(loc_fit$Estimate)
+
+  # Get mean inference
+  # bc = bias corrected
+  # rb = robust
+  slot(method, "estimate") <- inf$tau.bc
+  slot(method, "ci") <- list(
+    ub = as.vector(inf$tau.bc + (qnorm(0.975) * inf$se.rb)),
+    lb = as.vector(inf$tau.bc - (qnorm(0.975) * inf$se.rb))
+  )
+
+  # Calculate mse
+  slot(method, "mse") <- calc_mse(method, data)
+
+  # Calculate gcv
+  slot(method, "gcv") <- get_cv(
+    loc_fit$Estimate,
+    data$y_obs
+  )
+
+  # Calculate confidence interval coverage
+  slot(method, "ci_coverage") <- ci_test(method, data)
+
+  # Method generics schould always return the adjusted method object
   return(method)
 })
-
-setMethod(
-  "calculate_performance_measures", "method_locpol",
-  function(method, data) {
-    if (slot(method, "converged")) {
-      inf <- as.data.frame(slot(method, "fit")$Estimate)
-
-      # Get mean inference
-      slot(method, "estimate") <- inf$tau.bc
-      slot(method, "ci") <- list(
-        ub = as.vector(inf$tau.bc + (qnorm(0.975) * inf$se.rb)),
-        lb = as.vector(inf$tau.bc - (qnorm(0.975) * inf$se.rb))
-      )
-
-      # Calculate mse
-      slot(method, "mse") <- calc_mse(method, data)
-
-      # Calculate gcv
-      slot(method, "gcv") <- get_cv(
-        slot(method, "fit")$Estimate,
-        data$y_obs
-      )
-
-      # Calculate confidence interval coverage
-      slot(method, "ci_coverage") <- ci_test(method, data)
-    } else {
-      method <- set_na(method)
-    }
-
-    # Method generics schould always return the adjusted method object
-    return(method)
-  }
-)
 
 lprobust_cust <- function(
     y, x, eval = NULL, neval = NULL, p = NULL, deriv = NULL,
@@ -81,9 +73,9 @@ lprobust_cust <- function(
     bwcheck = 21, bwregul = 1, imsegrid = 30, vce = "nn", covgrid = FALSE,
     cluster = NULL, nnmatch = 3, level = 95, interior = FALSE,
     subset = NULL, diag_A = TRUE) {
-  #' Customization of the lprobust function from the nprobust package. 
-  #' Code added to obtain analytic cross-validatin criteria during the 
-  #' estimation. 
+  #' Customization of the lprobust function from the nprobust package.
+  #' Code added to obtain analytic cross-validatin criteria during the
+  #' estimation.
   if (!is.null(subset)) {
     x <- x[subset]
     y <- y[subset]
@@ -266,6 +258,7 @@ lprobust_cust <- function(
     if (h[i] > b[i]) {
       ind <- ind.h
     }
+    # Added indicators for A calculation here
     if (diag_A) {
       A_ind <- numeric(length(y))
       A_ind[i] <- 1
@@ -306,6 +299,7 @@ lprobust_cust <- function(
     beta.bc <- invG.p %*% crossprod(Q.q, eY)
     tau.cl <- factorial(deriv) * beta.p[(deriv + 1), 1]
     tau.bc <- factorial(deriv) * beta.bc[(deriv + 1), 1]
+    # Added A.cl and A.bc calculation here
     if (diag_A) {
       A.cl <- factorial(deriv) *
         (invG.p %*% crossprod(R.p * W.h, eA_ind))[(deriv + 1), 1]
@@ -357,6 +351,7 @@ lprobust_cust <- function(
         se.cl, se.rb
       )
     } else {
+      # Added A.cl and A.bc here
       Estimate[i, ] <- c(
         eval[i], h[i], b[i], eN, tau.cl, tau.bc,
         se.cl, se.rb, A.cl, A.bc
@@ -525,7 +520,7 @@ environment(lprobust_cust) <- asNamespace("nprobust")
 assignInNamespace("lprobust", lprobust_cust, ns = "nprobust")
 
 get_cv <- function(estimate, y, bc = TRUE, cv = "gcv") {
-  #' Convenience function to obtain the cross-validation criterion from the 
+  #' Convenience function to obtain the cross-validation criterion from the
   #' estimate matrix returned by lprobust_cust
   n <- nrow(estimate)
   if (bc) {

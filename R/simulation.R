@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 23-04-2024                                                   #
+#' Last Modified: 25-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -13,10 +13,10 @@
 #' License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html           #
 #' ----------------------------------------------------------------------------#
 
-#' Main simulation file. This file loads in all dependencies, defines the 
-#' simulation parameters and runs the simulation. The results are automatically 
-#' extracted and are saved alongside the generated data. 
-#' 
+#' Main simulation file. This file loads in all dependencies, defines the
+#' simulation parameters and runs the simulation. The results are automatically
+#' extracted and are saved alongside the generated data.
+#'
 #' This file is ideally executed in a shell by running:
 #' Rscript R/simulation.R
 
@@ -26,8 +26,7 @@ pacman::p_load(
   mgcv, # GAM's
   cmdstanr, # Stan interface
   dynr, # State-space modelling
-  nprobust, # Local polynomial estimator
-  parallel # Parallel computing
+  nprobust # Local polynomial estimator
 )
 
 # Load functions
@@ -35,6 +34,12 @@ invisible(sapply(
   c(paste0("./R/helper/", dir(path = "./R/helper"))),
   source
 ))
+
+# Create data directory
+if (!file.exists("R/data")) dir.create("R/data")
+
+# Document Session Info
+writeLines(capture.output(sessionInfo()), "R/sessionInfo.txt")
 
 ### Simulation parameters ------------------------------------------------------
 ## Generative Models
@@ -134,18 +139,25 @@ dynm <- new("method_dynm",
 )
 
 ### Run simulation -------------------------------------------------------------
+pilot <- TRUE
+if (pilot) {
+  set.seed(12345678)
+} else {
+  set.seed(87654321)
+}
+
 system.time({
   sim <- simulate(
     gen_model_list = list(
       latent_change, log_growth, damped_oscillator, cusp_catastrophe
     ),
-    method_list <- list(locpol, gp, gam, ssm),
+    method_list = list(locpol, gp, gam, dynm),
     conditions = list(
       time = c(50, 100),
-      stepsize = c(0.5, 1),
-      dyn_er = c(0.1, 0.25)
+      stepsize = c(.5, 1),
+      dyn_er = c(0.25)
     ),
-    repetitions = 1
+    repetitions = 30
   )
 })
 

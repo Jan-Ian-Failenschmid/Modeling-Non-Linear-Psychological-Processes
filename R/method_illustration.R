@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 04-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 18-04-2024                                                   #
+#' Last Modified: 26-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -74,7 +74,7 @@ damp_osc <- new("gen_model",
   meas_eq = list(formula(y_obs ~ y + rnorm(1, 0, 1)))
 )
 
-dat <- get_tsm_data(sim_tsm(damp_osc), T, T, T)
+dat <- get_tsm_data(sim_tsm(damp_osc))
 
 ### Fits and Plots -------------------------------------------------------------
 # Local polynomial
@@ -104,9 +104,10 @@ for (eval in c(50, 100, 150)) {
   )
 }
 # Legend
-legend(150, 4,
+legend(150, 3.5,
   legend = c("Process", "Prediction", "Local polynomials"),
-  col = c("black", "black", "red"), lty = c(2, 1, 1), cex = cex
+  col = c("black", "black", "red"), lty = c(2, 1, 1), cex = cex,
+  lwd = c(3, 3, 2)
 )
 
 dev.off()
@@ -136,9 +137,10 @@ for (i in seq_len(ncol(predmat))) {
   )
 }
 # Legend
-legend(150, 4,
+legend(150, 3.5,
   legend = c("Process", "Prediction", "Basis function value"),
-  col = c("black", "black", "red"), lty = c(2, 1, 1), cex = cex
+  col = c("black", "black", "red"), lty = c(2, 1, 1), cex = cex,
+  lwd = c(3, 3, 2)
 )
 
 dev.off()
@@ -150,7 +152,7 @@ data <- list(
   x_predict = dat$time
 )
 
-mod <- cmdstan_model("./R/stan_files/gp3.stan")
+mod <- cmdstan_model("./R/stan_files/gp.stan")
 
 gp_fit <- mod$sample(
   data = data,
@@ -168,16 +170,17 @@ png(
 # Posterior predictive draws
 gp_post_pred(gp_fit,
   f_name = "f_post_predict", time = dat$time,
-  obs = dat$y_obs, state = rep(-20, 200), alpha = 0.2,
+  obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
   main = "Gaussian process demonstration",
   xlab = "Time", ylab = "Y",
 )
 lines(dat$time, dat$y, lty = 2, lwd = 3)
 lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
-legend(150, 4,
+legend(150, 3.5,
   legend = c("Process", "Prediction", "Posterior function draws"),
-  col = c("black", "black", "red"), lty = c(2, 1, 1), cex = cex
+  col = c("black", "black", "red"), lty = c(2, 1, 1), cex = cex,
+  lwd = c(3, 3, 1)
 )
 
 dev.off()

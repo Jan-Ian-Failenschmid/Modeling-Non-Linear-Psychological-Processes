@@ -139,13 +139,6 @@ dynm <- new("method_dynm",
 )
 
 ### Run simulation -------------------------------------------------------------
-pilot <- TRUE
-if (pilot) {
-  set.seed(12345678)
-} else {
-  set.seed(87654321)
-}
-
 system.time({
   sim <- simulate(
     gen_model_list = list(
@@ -155,7 +148,7 @@ system.time({
     conditions = list(
       time = c(50, 100),
       stepsize = c(.5, 1),
-      dyn_er = c(0.25)
+      dyn_er = c(0.15, 0.25)
     ),
     repetitions = 30
   )

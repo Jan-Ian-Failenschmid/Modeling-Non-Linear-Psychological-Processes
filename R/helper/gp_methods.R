@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 25-04-2024                                                   #
+#' Last Modified: 26-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -39,8 +39,7 @@ setMethod("fit", "method_gp", function(method, data) {
     parallel_chains = 4,
     refresh = 500,
     show_messages = FALSE,
-    show_exceptions = FALSE,
-    adapt_delta = 0.5
+    show_exceptions = FALSE
   ))
 
   # Obtain summary measures for the parameters of the gp
@@ -64,8 +63,7 @@ setMethod("fit", "method_gp", function(method, data) {
       show_messages = FALSE,
       show_exceptions = FALSE,
       iter_warmup = 1000,
-      iter_sampling = 4000,
-      adapt_delta = 0.5
+      iter_sampling = 4000
     ))
 
     gp_sum <- gp_fit$summary(variables = c("rho", "alpha", "sigma"))[, c(8:10)]

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 25-04-2024                                                   #
+#' Last Modified: 26-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -473,6 +473,10 @@ make_exemplar_plot <- function(gen_model, main, xlab, ylab, cex) {
 plot_results <- function(res, outcome, ...) {
   #' Convenience function to create discriptive plots of the performance
   #' measures.
+  #'
+  require(ggplot2)
+  require(dplyr)
+  require(ggdist)
 
   factors <- dplyr::select(res, model, ...)
   res$group <- apply(factors, 1, function(x) {

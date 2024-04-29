@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 25-04-2024                                                   #
+#' Last Modified: 29-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -36,10 +36,11 @@ invisible(sapply(
 ))
 
 # Create data directory
-if (!file.exists("R/data")) dir.create("R/data")
+out_dir <- "./R/data"
+if (!file.exists(out_dir)) dir.create(out_dir)
 
 # Document Session Info
-writeLines(capture.output(sessionInfo()), "R/sessionInfo.txt")
+writeLines(capture.output(sessionInfo()), "./R/sessionInfo.txt")
 
 ### Simulation parameters ------------------------------------------------------
 ## Generative Models
@@ -150,17 +151,15 @@ system.time({
       stepsize = c(.5, 1),
       dyn_er = c(0.15, 0.25)
     ),
-    repetitions = 30
+    repetitions = 30,
+    out_dir = out_dir
   )
 })
 
 # Check object size of sim grid
 cat(utils::object.size(sim)[1] / (1e6), "mb")
 
-### Save simulated data --------------------------------------------------------
-sim_time <- format(Sys.time(), "%d_%m_%Y_%H_%M")
-save(sim, file = paste0("./R/data/simulated_data_", sim_time, ".Rdata"))
-
 ### Extract and save results ---------------------------------------------------
 res <- extract_results(sim)
-save(res, file = paste0("./R/data/simulation_results_", sim_time, ".Rdata"))
+sim_time <- format(Sys.time(), "%d_%m_%Y_%H_%M")
+save(res, file = paste0(out_dir, "/simulation_results_", sim_time, ".Rdata"))

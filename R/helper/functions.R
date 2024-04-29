@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 26-04-2024                                                   #
+#' Last Modified: 28-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -17,7 +17,8 @@
 
 ### Functions ------------------------------------------------------------------
 simulate <- function(
-    gen_model_list, method_list, conditions, repetitions) {
+    gen_model_list, method_list, conditions, repetitions,
+    out_dir = getwd()) {
   #' Main simulation function
   #' gen_model_list is a list of objects of class gen_model
   #' method_list is a list of objects inheriting from the class method with
@@ -40,6 +41,7 @@ simulate <- function(
 
   # Incorporate simulation conditions into gen_model
   sim_grid[, gen_model := mapply(add_conditions, gen_model, conditions)]
+  ncond <- nrow(sim_grid)
 
   # Replicate the rows of sim_grid repetitions time
   sim_grid <- sim_grid[rep(seq_len(nrow(sim_grid)), each = repetitions), ]
@@ -79,16 +81,33 @@ simulate <- function(
   ## Fit analysis methods and record performance measures
   cat("\n\nModel Ftting:    ")
 
-  sim_grid[, method := mapply(
-    function(method, data) {
-      cat("=")
-      lapply(method, fit, data = data)
-    }, method, dat,
-    SIMPLIFY = FALSE
-  )]
+  # Fit model by condition
+  for (i in seq_len(ncond)) {
+    # Indicator for all repetitions of a condition
+    ind <- seq(1, repetitions) + repetitions * (i - 1)
+    # Model fitting loop
+    sim_grid$method[ind] <- mapply(
+      function(method, data) {
+        cat("=")
+        lapply(method, fit, data = data)
+      },
+      method = sim_grid$method[ind], data = sim_grid$dat[ind],
+      SIMPLIFY = FALSE
+    )
+    # Save intermittend results in temp file
+    save(sim_grid, file = paste0(out_dir, "/temp.Rdata"))
+  }
 
   c("\n\n")
 
+  # Save simulation
+  sim_time <- format(Sys.time(), "%d_%m_%Y_%H_%M")
+  save(sim_grid, file = paste0(out_dir, "/simulated_data_", sim_time, ".Rdata"))
+
+  # Remove temporary results
+  file.remove(paste0(out_dir, "/temp.Rdata"))
+
+  # Return simulation grid
   return(sim_grid)
 }
 

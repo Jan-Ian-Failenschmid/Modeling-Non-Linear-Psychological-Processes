@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 15-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 25-04-2024                                                   #
+#' Last Modified: 29-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -26,11 +26,11 @@ setMethod("fit", "method_dynm", function(method, data) {
   # Fit appropriate dynr model
   iter <- 1
   conv <- FALSE
-  delta <- c(0, 0.1, 0.2)
+  delta <- c(0, 0.1, 0.2, 0.3, 0.4)
 
   # Fit model three times with different starting values in case
   # of non-convergence
-  while (iter < 4 && !conv) {
+  while (iter < 6 && !conv) {
     # Fit the correct dynamic model based on the data generating model
     dynr_fit <- quiet(fit_correct_dynr_model(method, data, delta[iter]))
     # Determine convergence

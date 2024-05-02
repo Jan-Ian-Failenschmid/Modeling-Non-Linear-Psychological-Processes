@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 29-04-2024                                                   #
+#' Last Modified: 02-05-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -26,7 +26,10 @@ pacman::p_load(
   mgcv, # GAM's
   cmdstanr, # Stan interface
   dynr, # State-space modelling
-  nprobust # Local polynomial estimator
+  nprobust, # Local polynomial estimator
+  tidyverse, # Data analysis
+  data.table, # Data table for storing the simulation grid
+  ggdist # Plotting
 )
 
 # Load functions
@@ -44,11 +47,13 @@ writeLines(capture.output(sessionInfo()), "./R/sessionInfo.txt")
 
 ### Simulation parameters ------------------------------------------------------
 ## Generative Models
-latent_change <- new("gen_model",
-  model_name = "latent_change",
+exp_growth <- new("gen_model",
+  model_name = " exp_growth",
   model_type = "DE",
+  # Set dyn_er to 0 and overwrite during the simulation
   pars = list(yr = 0.02, ya = 2, dyn_er = 0),
-  delta = 1 / 32,
+  delta = (50 / 7) / 234, # Integer divides 3, 6, and 9 obs. per day
+  stepsize = (50 / 7) / 3, # Gets overwritten anyway
   start = list(
     formula(y ~ -2)
   ),
@@ -64,8 +69,10 @@ latent_change <- new("gen_model",
 log_growth <- new("gen_model",
   model_name = "log_growth",
   model_type = "DE",
+  # Set dyn_er to 0 and overwrite during the simulation
   pars = list(k = 4.3, r = 0.04, dyn_er = 0),
-  delta = 1 / 32,
+  delta = (50 / 7) / 234, # Integer divides 3, 6, and 9 obs. per day
+  stepsize = (50 / 7) / 3, # Gets overwritten anyway
   start = list(
     formula(y ~ 0.3)
   ),
@@ -82,7 +89,9 @@ log_growth <- new("gen_model",
 cusp_catastrophe <- new("gen_model",
   model_name = "cusp_catastrophe",
   model_type = "DE",
-  delta = 1 / 32,
+  # Set dyn_er to 0 and overwrite during the simulation
+  delta = (50 / 7) / 234, # Integer divides 3, 6, and 9 obs. per day
+  stepsize = (50 / 7) / 3, # Gets overwritten anyway
   pars = list(a = -5, dyn_er = 0, omega = -(2 * pi / 50)^2),
   start = list(
     formula(y ~ 1.9),
@@ -105,7 +114,9 @@ cusp_catastrophe <- new("gen_model",
 damped_oscillator <- new("gen_model",
   model_name = "damped_oscillator",
   model_type = "DE",
-  delta = 1 / 32,
+  # Set dyn_er to 0 and overwrite during the simulation
+  delta = (50 / 7) / 234, # Integer divides 3, 6, and 9 obs. per day
+  stepsize = (50 / 7) / 3, # Gets overwritten anyway
   pars = list(k = 0.01, c = 0.1, dyn_er = 0),
   start = list(
     formula(y ~ 2),
@@ -140,26 +151,86 @@ dynm <- new("method_dynm",
 )
 
 ### Run simulation -------------------------------------------------------------
-system.time({
-  sim <- simulate(
-    gen_model_list = list(
-      latent_change, log_growth, damped_oscillator, cusp_catastrophe
-    ),
-    method_list = list(locpol, gp, gam, dynm),
-    conditions = list(
-      time = c(50, 100),
-      stepsize = c(.5, 1),
-      dyn_er = c(0.15, 0.25)
-    ),
-    repetitions = 30,
-    out_dir = out_dir
-  )
-})
+repetitions <- 30 # Number of repetitions in the pilot sample
+mc_error_target <- 0.05 # Desired monte carlo error
+for (run in c("pilot", "simulation")) {
+  # Set seed
+  if (run == "pilot") {
+    set.seed(12345)
+  } else if (run == "simulation") {
+    set.seed(54321)
+  }
 
-# Check object size of sim grid
-cat(utils::object.size(sim)[1] / (1e6), "mb")
+  # Run simulation
+  cat("Running", run, "---------------------------------------------------\n\n")
+  system.time({
+    sim <- simulate(
+      gen_model_list = list(
+        exp_growth, log_growth, damped_oscillator, cusp_catastrophe
+      ),
+      method_list = list(locpol, gp, gam, dynm),
+      conditions = list(
+        time = c(100, 200), # 2 & 4 weeks rescaled to 1 week = 50 units
+        # 3, 6, 9, measurements per day
+        stepsize = c((50 / 7) / 3, (50 / 7) / 6, (50 / 7) / 9),
+        # dynamic error variances of 12.5%, 25%, and 50% of the process range
+        dyn_er = sqrt(c(.5, 1, 2))
+      ),
+      repetitions = repetitions,
+      out_dir = out_dir
+    )
+  })
 
-### Extract and save results ---------------------------------------------------
-res <- extract_results(sim)
-sim_time <- format(Sys.time(), "%d_%m_%Y_%H_%M")
-save(res, file = paste0(out_dir, "/simulation_results_", sim_time, ".Rdata"))
+  # Check object size of sim grid
+  cat(utils::object.size(sim)[1] / (1e6), "mb")
+
+  # Save simulation
+  sim_time <- format(Sys.time(), "%d_%m_%Y_%H_%M")
+  save(sim, file = paste0(out_dir, "/", run, "_data_", sim_time, ".Rdata"))
+
+  # Extract and save results
+  res <- extract_results(sim)
+  save(res, file = paste0(out_dir, "/", run, "_results_", sim_time, ".Rdata"))
+
+  if (run == "pilot") {
+    rm(sim) # Remove sim from working environment
+    # Calculate summary statistics for each condition
+    res_summary <- res %>%
+      group_by(method, model, time, stepsize, dyn_er) %>%
+      summarise(
+        mean_mse = mean(mse, na.rm = TRUE),
+        missing_mse = sum(is.na(mse)),
+        sd_mse = sd(mse, na.rm = TRUE),
+        mean_gcv = mean(gcv, na.rm = TRUE),
+        sd_gcv = sd(gcv, na.rm = TRUE),
+        missing_gcv = sum(is.na(gcv)),
+        mean_ci_coverage = mean(ci_coverage, na.rm = TRUE),
+        sd_ci_coverage = sd(ci_coverage, na.rm = TRUE),
+        missing_ci_coverage = sum(is.na(ci_coverage))
+      )
+
+    # Create sequence of sample sizes
+    nsim <- seq(30, 1000, 5)
+    # Extract the largest standard deviation by metric across conditions
+    mc_sd_max <- res_summary %>%
+      ungroup() %>%
+      select(starts_with("sd")) %>%
+      sapply(max, na.rm = TRUE)
+    # Devide the largest stardard deviations by the sample sizes to find the
+    # MC standard errors
+    mcse <- lapply(
+      mc_sd_max, function(mce, nsim) mce / sqrt(nsim),
+      nsim = nsim
+    )
+    # Find the largest sample size such that the MC error is smaller than
+    # the desired criterion for all three metrics
+    n_ind <- max(sapply(mcse, function(x) min(which(x < mc_error_target))))
+    # Select the sufficient sample size, with an upper limit of 100
+    repetitions <- min(c(nsim[n_ind], 100))
+
+    cat(
+      "The simulation run will be perfomed with", repetitions,
+      "repetitions per cell.\n\n"
+    )
+  }
+}

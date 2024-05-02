@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 28-04-2024                                                   #
+#' Last Modified: 30-04-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -99,13 +99,6 @@ simulate <- function(
   }
 
   c("\n\n")
-
-  # Save simulation
-  sim_time <- format(Sys.time(), "%d_%m_%Y_%H_%M")
-  save(sim_grid, file = paste0(out_dir, "/simulated_data_", sim_time, ".Rdata"))
-
-  # Remove temporary results
-  file.remove(paste0(out_dir, "/temp.Rdata"))
 
   # Return simulation grid
   return(sim_grid)

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 30-04-2024                                                   #
+#' Last Modified: 29-05-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -53,10 +53,11 @@ simulate <- function(
 
   ## Simulate the data
   cat("\n\nSimulating Data: ")
+  sim_count <- counter()
   sim_grid[, dat := lapply(
     gen_model,
     function(x) {
-      cat("=")
+      cat(" ", sim_count(), " ")
       get_tsm_data(sim_tsm(x))
     }
   )]
@@ -80,7 +81,7 @@ simulate <- function(
 
   ## Fit analysis methods and record performance measures
   cat("\n\nModel Ftting:    ")
-
+  fit_count <- counter()
   # Fit model by condition
   for (i in seq_len(ncond)) {
     # Indicator for all repetitions of a condition
@@ -88,7 +89,7 @@ simulate <- function(
     # Model fitting loop
     sim_grid$method[ind] <- mapply(
       function(method, data) {
-        cat("=")
+        cat(" ", fit_count(), " ")
         lapply(method, fit, data = data)
       },
       method = sim_grid$method[ind], data = sim_grid$dat[ind],
@@ -470,58 +471,115 @@ gp_posterior_3d <- function(
   fig
 }
 
-make_exemplar_plot <- function(gen_model, main, xlab, ylab, cex) {
+make_exemplar_plot <- function(gen_model, main, xlab, ylab, cex, ...) {
   #' Convenience function to generate exemplar plots for each of the methods
   dat_list <- sim_tsm(gen_model)
-  dat <- get_tsm_data(dat_list, TRUE, TRUE, TRUE)
+  dat <- get_tsm_data(dat_list)
 
   plot(dat$time, dat$y_obs,
     main = main, xlab = xlab, ylab = ylab,
-    cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex
+    cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, ...
   )
   lines(dat$time, dat$y)
 }
 
-plot_results <- function(res, outcome, ...) {
+plot_results <- function(res, outcome, style = "all", ...) {
   #' Convenience function to create discriptive plots of the performance
   #' measures.
-  #'
+
+  require(data.table)
   require(ggplot2)
-  require(dplyr)
   require(ggdist)
 
-  factors <- dplyr::select(res, model, ...)
-  res$group <- apply(factors, 1, function(x) {
-    paste0(names(x), x, collapse = "_")
+  grp_var <- sapply(list(...), function(x) match.arg(x, names(res)))
+
+  factors <- res[, c("model", grp_var), with = FALSE]
+  res[, group := apply(factors, 1, function(x) {
+    paste0(names(x), " ", x, collapse = "-")
+  })]
+
+  if (style == "all") {
+    gg <- ggplot2::ggplot(res, aes(
+      x = group, y = !!sym(outcome), color = model
+    )) +
+      ggdist::stat_halfeye(
+        aes(fill = model),
+        adjust = .5,
+        width = .6,
+        .width = 0,
+        justification = -.3,
+        point_colour = NA
+      ) +
+      geom_boxplot(
+        width = .25,
+        outlier.shape = NA
+      ) +
+      geom_point(
+        size = 1.5,
+        alpha = .2,
+        position = position_jitter(
+          seed = 1, width = .1
+        )
+      ) +
+      facet_wrap(~method) +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      ylab(outcome)
+  } else if (style == "mean") {
+    res$outcome <- res[, c(outcome), with = FALSE]
+    res_sum <- res[, .(
+      mean = mean(outcome, na.rm = TRUE),
+      se = sd(outcome, na.rm = TRUE) / sqrt(.N),
+      group = unique(group)
+    ), by = c("model", "method", grp_var)]
+
+    gg <- ggplot2::ggplot(res_sum, aes(
+      x = group, y = mean, color = model
+    )) +
+      geom_point(
+        size = 1.5
+      ) +
+      geom_errorbar(
+        aes(ymin = mean - se, ymax = mean + se)
+      ) +
+      facet_wrap(~method) +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      ylab(outcome)
+  } else if (style == "missing") {
+    res$outcome <- res[, c(outcome), with = FALSE]
+    res_mis <- res[, .(
+      missing = sum(is.na(outcome)),
+      group = unique(group)
+    ), by = c("model", "method", grp_var)]
+
+    gg <- ggplot2::ggplot(res_mis, aes(
+      x = group, y = missing, fill = model
+    )) +
+      geom_col() +
+      facet_wrap(~method) +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      ylab(outcome)
+  }
+  g <- suppressWarnings(ggplot_build(gg))
+  breaks <- g$layout$panel_params[[4]]$x$breaks
+  breaks_new <- sapply(breaks, function(x) {
+    x <- strsplit(x, "-")[[1]]
+    return(paste(x[seq(2, length(x))], collapse = " - "))
   })
+  names(breaks_new) <- NULL
+  gg <- gg + scale_x_discrete(labels = breaks_new)
+  suppressWarnings(print(gg))
+}
 
-  gg <- ggplot2::ggplot(res, aes(
-    x = group, y = !!sym(outcome), color = model
-  )) +
-    ggdist::stat_halfeye(
-      aes(fill = model),
-      adjust = .5,
-      width = .6,
-      .width = 0,
-      justification = -.3,
-      point_colour = NA
-    ) +
-    geom_boxplot(
-      width = .25,
-      outlier.shape = NA
-    ) +
-    geom_point(
-      size = 1.5,
-      alpha = .2,
-      position = position_jitter(
-        seed = 1, width = .1
-      )
-    ) +
-    facet_wrap(~method) +
-    theme_bw() +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
-
-  print(gg)
+inspect <- function(data, method_name, sim) {
+  methods <- sim$method[[data]]
+  method <- methods[
+    sapply(methods, function(x) x@method_name) == method_name
+  ][[1]]
+  print(method)
+  plot(method, sim = sim)
 }
 
 model_search <- function(fit_fun, predictors, data) {
@@ -587,3 +645,13 @@ quiet <- function(x) {
   on.exit(sink())
   invisible(force(x))
 }
+
+counter <- function() {
+  i <- 0
+  function() {
+    i <<- i + 1
+    return(i)
+  }
+}
+
+test <- counter()

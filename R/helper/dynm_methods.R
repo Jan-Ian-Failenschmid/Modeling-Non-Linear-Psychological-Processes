@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 15-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 29-04-2024                                                   #
+#' Last Modified: 27-05-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -89,7 +89,7 @@ fit_correct_dynr_model <- function(method, data, delta = 0) {
     id = "id", time = "time", observed = "y_obs"
   )
 
-  if (method@gen_model == "latent_change") {
+  if (method@gen_model == "exp_growth") {
     # Measurement model fixed to 1
     meas <- prep.measurement(
       values.load = matrix(1, ncol = 1),

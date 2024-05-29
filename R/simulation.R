@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 02-05-2024                                                   #
+#' Last Modified: 29-05-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -25,9 +25,8 @@ if (!require(pacman)) install.packages("pacman")
 pacman::p_load(
   mgcv, # GAM's
   cmdstanr, # Stan interface
-  dynr, # State-space modelling
+  dynr, # Dynamic
   nprobust, # Local polynomial estimator
-  tidyverse, # Data analysis
   data.table, # Data table for storing the simulation grid
   ggdist # Plotting
 )
@@ -48,7 +47,7 @@ writeLines(capture.output(sessionInfo()), "./R/sessionInfo.txt")
 ### Simulation parameters ------------------------------------------------------
 ## Generative Models
 exp_growth <- new("gen_model",
-  model_name = " exp_growth",
+  model_name = "exp_growth",
   model_type = "DE",
   # Set dyn_er to 0 and overwrite during the simulation
   pars = list(yr = 0.02, ya = 2, dyn_er = 0),
@@ -194,39 +193,42 @@ for (run in c("pilot", "simulation")) {
 
   if (run == "pilot") {
     rm(sim) # Remove sim from working environment
+    res <- as.data.table(res)
     # Calculate summary statistics for each condition
-    res_summary <- res %>%
-      group_by(method, model, time, stepsize, dyn_er) %>%
-      summarise(
-        mean_mse = mean(mse, na.rm = TRUE),
-        missing_mse = sum(is.na(mse)),
-        sd_mse = sd(mse, na.rm = TRUE),
-        mean_gcv = mean(gcv, na.rm = TRUE),
-        sd_gcv = sd(gcv, na.rm = TRUE),
-        missing_gcv = sum(is.na(gcv)),
-        mean_ci_coverage = mean(ci_coverage, na.rm = TRUE),
-        sd_ci_coverage = sd(ci_coverage, na.rm = TRUE),
-        missing_ci_coverage = sum(is.na(ci_coverage))
-      )
+    res_summary <- res[, .(
+      mse_mean = mean(mse, na.rm = TRUE),
+      mse_sd = sd(mse, na.rm = TRUE),
+      mse_missing = sum(is.na(mse)),
+      gcv_mean = mean(gcv, na.rm = TRUE),
+      gcv_sd = sd(gcv, na.rm = TRUE),
+      gcv_missing = sum(is.na(gcv)),
+      ci_coverage_mean = mean(ci_coverage, na.rm = TRUE),
+      ci_coverage_sd = sd(ci_coverage, na.rm = TRUE),
+      ci_coverage_missing = sum(is.na(ci_coverage))
+    ),
+    by = .(method, model, time, stepsize, dyn_er)
+    ]
 
     # Create sequence of sample sizes
     nsim <- seq(30, 1000, 5)
     # Extract the largest standard deviation by metric across conditions
-    mc_sd_max <- res_summary %>%
-      ungroup() %>%
-      select(starts_with("sd")) %>%
-      sapply(max, na.rm = TRUE)
+    mc_sd_max <- sapply(res_summary[, .(mse_sd, gcv_sd, ci_coverage_sd)],
+      max,
+      na.rm = TRUE
+    )
+
     # Devide the largest stardard deviations by the sample sizes to find the
     # MC standard errors
     mcse <- lapply(
       mc_sd_max, function(mce, nsim) mce / sqrt(nsim),
       nsim = nsim
     )
+    # ToDo: Does not currently work
     # Find the largest sample size such that the MC error is smaller than
     # the desired criterion for all three metrics
     n_ind <- max(sapply(mcse, function(x) min(which(x < mc_error_target))))
     # Select the sufficient sample size, with an upper limit of 100
-    repetitions <- min(c(nsim[n_ind], 100))
+    repetitions <- min(c(nsim[n_ind], 100), na.rm = TRUE)
 
     cat(
       "The simulation run will be perfomed with", repetitions,

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 28-05-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 28-05-2024                                                   #
+#' Last Modified: 30-05-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -13,6 +13,8 @@
 #' License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html           #
 #' ----------------------------------------------------------------------------#
 set.seed(12345)
+fig_path <-
+  "/mnt/c/Users/failensc/OneDrive - Tilburg University/Documenten/SAA Presentation"
 cex <- 1.5
 # Exemplar plots -----
 
@@ -40,6 +42,21 @@ plot_pred <- function(data, pred, ind, var, ...) {
 }
 
 eval_points <- 200
+
+png(
+  file = paste0(fig_path, "/demonstration_nf.png"),
+  width = 1960, height = 1080
+)
+par(mfrow = c(2, 2))
+cex <- 1.5
+for (i in c(1, 2, 3, 4)) {
+  plot(
+    x = grouped_df[, data][[i]]$time, y = grouped_df[, data][[i]]$DEP_ES,
+    xlab = "Time", ylab = "Depression", main = paste("Participant", i),
+    cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex
+  )
+}
+dev.off()
 
 grouped_df[, gam_fit := lapply(data, function(data) {
   gam(DEP_ES ~ s(as.numeric(time),
@@ -116,7 +133,7 @@ plot_local_polynomial <- function(
 }
 
 png(
-  file = paste0(fig_path, "/locpol_demonstration7.png"),
+  file = paste0(fig_path, "/locpol_demonstration6.png"),
   width = 1960, height = 1080
 )
 
@@ -131,7 +148,7 @@ lines(dat$time, dat$y, lty = 2, lwd = 1) # State function
 lines(dat$time, lp_fit$Estimate[, 5], lwd = 1, col = "#5D4641") # Estimated line
 
 points(
-  x = c(49, 51, 53, 55), y = lp_fit$Estimate[c(50, 52, 54, 56), 5],
+  x = c(49, 51, 53), y = lp_fit$Estimate[c(50, 52, 54), 5],
   col = "#5D4641", cex = 2, pch = 19
 )
 
@@ -246,6 +263,43 @@ for (i in seq_len(ncol(predmat))) {
 dev.off()
 
 # Simulation Results
+plot_results(res = res, "mse", "all", "weeks", "meas", "dyn_var")
+
+ggsave("full_results.png",
+  device = "png", path = fig_path,
+  height = 1080, width = 1960, units = "px", dpi = 100
+)
+
+plot_results(res = res_clean, "mse", "all", "weeks", "meas", "dyn_var")
+
+ggsave("clean_results.png",
+  device = "png", path = fig_path,
+  height = 1080, width = 1960, units = "px", dpi = 100
+)
+
+plot_results(res = res_clean, "mse", "mean", "dyn_var")
+
+ggsave("dyn_var_results.png",
+  device = "png", path = fig_path,
+  height = 1080, width = 1960, units = "px", dpi = 100
+)
+
+plot_results(res = res_clean, "mse", "mean", "meas")
+
+ggsave("meas_results.png",
+  device = "png", path = fig_path,
+  height = 1080, width = 1960, units = "px", dpi = 100
+)
+
+plot_results(res = res_clean, "mse", "mean", "weeks")
+
+ggsave("time_results.png",
+  device = "png", path = fig_path,
+  height = 1080, width = 1960, units = "px", dpi = 100
+)
+
+plot_results(res = res_clean, "ci_coverage", "all", "weeks", "meas", "dyn_var")
+
 ggsave("ci_results.png",
   device = "png", path = fig_path,
   height = 1080, width = 1960, units = "px", dpi = 100

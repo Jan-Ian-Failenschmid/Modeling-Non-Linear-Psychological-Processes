@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 29-05-2024                                                   #
+#' Last Modified: 06-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -57,7 +57,7 @@ simulate <- function(
   sim_grid[, dat := lapply(
     gen_model,
     function(x) {
-      cat(" ", sim_count(), " ")
+      cat(sim_count(), " ")
       get_tsm_data(sim_tsm(x))
     }
   )]
@@ -89,7 +89,7 @@ simulate <- function(
     # Model fitting loop
     sim_grid$method[ind] <- mapply(
       function(method, data) {
-        cat(" ", fit_count(), " ")
+        cat(fit_count(), " ")
         lapply(method, fit, data = data)
       },
       method = sim_grid$method[ind], data = sim_grid$dat[ind],
@@ -523,7 +523,13 @@ plot_results <- function(res, outcome, style = "all", ...) {
       ) +
       facet_wrap(~method) +
       theme_minimal() +
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+        axis.title = element_text(size = 30),
+        legend.text = element_text(size = 30),
+        legend.title = element_text(size = 30),
+        strip.text = element_text(size = 30)
+      ) +
       ylab(outcome)
   } else if (style == "mean") {
     res$outcome <- res[, c(outcome), with = FALSE]
@@ -544,7 +550,10 @@ plot_results <- function(res, outcome, style = "all", ...) {
       ) +
       facet_wrap(~method) +
       theme_minimal() +
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+        text = element_text(size = 30)
+      ) +
       ylab(outcome)
   } else if (style == "missing") {
     res$outcome <- res[, c(outcome), with = FALSE]
@@ -563,7 +572,7 @@ plot_results <- function(res, outcome, style = "all", ...) {
       ylab(outcome)
   }
   g <- suppressWarnings(ggplot_build(gg))
-  breaks <- g$layout$panel_params[[4]]$x$breaks
+  breaks <- g$layout$panel_params[[1]]$x$breaks
   breaks_new <- sapply(breaks, function(x) {
     x <- strsplit(x, "-")[[1]]
     return(paste(x[seq(2, length(x))], collapse = " - "))
@@ -653,5 +662,3 @@ counter <- function() {
     return(i)
   }
 }
-
-test <- counter()

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 29-05-2024                                                   #
+#' Last Modified: 06-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -21,15 +21,12 @@
 #' Rscript R/simulation.R
 
 ### Dependencies ---------------------------------------------------------------
-if (!require(pacman)) install.packages("pacman")
-pacman::p_load(
-  mgcv, # GAM's
-  cmdstanr, # Stan interface
-  dynr, # Dynamic
-  nprobust, # Local polynomial estimator
-  data.table, # Data table for storing the simulation grid
-  ggdist # Plotting
-)
+library(mgcv)
+library(cmdstanr)
+library(dynr)
+library(nprobust)
+library(data.table)
+library(ggdist)
 
 # Load functions
 invisible(sapply(
@@ -43,6 +40,7 @@ if (!file.exists(out_dir)) dir.create(out_dir)
 
 # Document Session Info
 writeLines(capture.output(sessionInfo()), "./R/sessionInfo.txt")
+papaja::r_refs("./R_bib.bib", append = FALSE)
 
 ### Simulation parameters ------------------------------------------------------
 ## Generative Models
@@ -50,7 +48,8 @@ exp_growth <- new("gen_model",
   model_name = "exp_growth",
   model_type = "DE",
   # Set dyn_er to 0 and overwrite during the simulation
-  pars = list(yr = 0.02, ya = 2, dyn_er = 0),
+  time = 200,
+  pars = list(yr = 0.02, ya = 2, dyn_er = 1),
   delta = (50 / 7) / 234, # Integer divides 3, 6, and 9 obs. per day
   stepsize = (50 / 7) / 3, # Gets overwritten anyway
   start = list(
@@ -69,7 +68,8 @@ log_growth <- new("gen_model",
   model_name = "log_growth",
   model_type = "DE",
   # Set dyn_er to 0 and overwrite during the simulation
-  pars = list(k = 4.3, r = 0.04, dyn_er = 0),
+  time = 200,
+  pars = list(k = 4.3, r = 0.04, dyn_er = 1),
   delta = (50 / 7) / 234, # Integer divides 3, 6, and 9 obs. per day
   stepsize = (50 / 7) / 3, # Gets overwritten anyway
   start = list(
@@ -88,10 +88,11 @@ log_growth <- new("gen_model",
 cusp_catastrophe <- new("gen_model",
   model_name = "cusp_catastrophe",
   model_type = "DE",
+  time = 200,
   # Set dyn_er to 0 and overwrite during the simulation
   delta = (50 / 7) / 234, # Integer divides 3, 6, and 9 obs. per day
   stepsize = (50 / 7) / 3, # Gets overwritten anyway
-  pars = list(a = -5, dyn_er = 0, omega = -(2 * pi / 50)^2),
+  pars = list(a = -5, dyn_er = 1, omega = -(2 * pi / 50)^2),
   start = list(
     formula(y ~ 1.9),
     formula(v ~ 0),
@@ -113,10 +114,11 @@ cusp_catastrophe <- new("gen_model",
 damped_oscillator <- new("gen_model",
   model_name = "damped_oscillator",
   model_type = "DE",
+  time = 200,
   # Set dyn_er to 0 and overwrite during the simulation
   delta = (50 / 7) / 234, # Integer divides 3, 6, and 9 obs. per day
   stepsize = (50 / 7) / 3, # Gets overwritten anyway
-  pars = list(k = 0.01, c = 0.1, dyn_er = 0),
+  pars = list(k = 0.01, c = 0.1, dyn_er = 1),
   start = list(
     formula(y ~ 2),
     formula(v ~ 0)
@@ -150,9 +152,9 @@ dynm <- new("method_dynm",
 )
 
 ### Run simulation -------------------------------------------------------------
-repetitions <- 30 # Number of repetitions in the pilot sample
+repetitions <- 100 # Number of repetitions in the pilot sample
 mc_error_target <- 0.05 # Desired monte carlo error
-for (run in c("pilot", "simulation")) {
+for (run in c("gam_test")) {
   # Set seed
   if (run == "pilot") {
     set.seed(12345)
@@ -165,9 +167,11 @@ for (run in c("pilot", "simulation")) {
   system.time({
     sim <- simulate(
       gen_model_list = list(
-        exp_growth, log_growth, damped_oscillator, cusp_catastrophe
+        # exp_growth, log_growth, damped_oscillator, cusp_catastrophe
+        damped_oscillator, cusp_catastrophe
       ),
-      method_list = list(locpol, gp, gam, dynm),
+      # method_list = list(locpol, gp, gam, dynm),
+      method_list = list(gam),
       conditions = list(
         time = c(100, 200), # 2 & 4 weeks rescaled to 1 week = 50 units
         # 3, 6, 9, measurements per day

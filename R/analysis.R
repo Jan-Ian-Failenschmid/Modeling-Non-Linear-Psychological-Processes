@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 29-05-2024                                                   #
+#' Last Modified: 06-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -14,8 +14,9 @@
 #' ----------------------------------------------------------------------------#
 
 ### Dependencies ---------------------------------------------------------------
-if (!require(pacman)) install.packages("pacman")
-pacman::p_load(ggplot2, ggdist, data.table)
+library(ggplot2)
+library(ggdist)
+library(data.table)
 
 # Load functions
 invisible(sapply(
@@ -29,6 +30,8 @@ load("R/data/simulation_results_17_05_2024_06_59.Rdata")
 load("R/data/err_test_data_27_05_2024_15_11.Rdata")
 load("R/data/err_test_results_27_05_2024_15_11.Rdata")
 load("R/data/exp_growth_test_results_28_05_2024_04_13.Rdata")
+load("R/data/gam_test_data_06_08_2024_15_56.Rdata")
+load("R/data/gam_test_results_06_08_2024_15_56.Rdata")
 
 res <- as.data.table(res)
 sim <- as.data.table(sim)
@@ -82,11 +85,11 @@ View(res_summary)
 
 ## Visulization
 x11()
-plot_results(res = res, "mse", "all", "weeks", "meas", "dyn_var")
+plot_results(res = res, "mse", "mean", "weeks", "meas", "dyn_var")
 plot_results(res = res, "gcv", "all", "weeks", "meas", "dyn_var")
 plot_results(res = res, "ci_coverage", "all", "weeks", "meas", "dyn_var")
 
-## Clean data
+## Clean datas
 # Remove all oversmoothed GAMS
 ind_gam <- sim[, .I[sapply(method, function(x) {
   est <- x[[3]]@estimate
@@ -104,7 +107,7 @@ ind_gam <- sim[, .I[sapply(method, function(x) {
 ind_gam <- c(ind_gam, c(3028, 6772, 6103, 5521) * 4 - 1) # Remove rest manually
 
 # Remove all undersmoothed GAMS
-ind_gam <- c(ind_gam, which(res$gcv == 0)) # Find all gams with gcv = 897
+ind_gam <- c(ind_gam, which(res$gcv == 0)) # Find all gams with gcv = 0
 
 # Remove all dynm with NA confidence interval
 ind_dynm <- sim[, .I[sapply(method, function(x) {

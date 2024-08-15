@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 22-04-2024                                                   #
+#' Last Modified: 30-05-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -22,20 +22,20 @@ invisible(sapply(
 ))
 set.seed(41)
 fig_path <- c("./figures/")
-cex <- 2.5
+cex <- 1.5 # 2.5
 
 ### Create Exemplar Plot without Process Nosie ---------------------------------
 png(
-  file = paste0(fig_path, "exemplar_no_process_noise.png"),
+  file = paste0(fig_path, "/exemplar_process_noise.png"),
   width = 1960, height = 1080
 )
 
 par(mfrow = c(2, 2))
 
 # LCS ---
-latent_change <- new("gen_model",
+exp_growth <- new("gen_model",
   time = 200,
-  model_name = "lcs",
+  model_name = "exp_growth",
   model_type = "DE",
   pars = list(yr = 0.02, ya = 2),
   delta = 1 / 30,
@@ -48,9 +48,9 @@ latent_change <- new("gen_model",
   meas_eq = list(formula(y_obs ~ y + rnorm(1, 0, 1)))
 )
 
-make_exemplar_plot(latent_change,
-  main = "a) Exponential Growth Curve",
-  xlab = "Time", ylab = "Y", cex = cex
+make_exemplar_plot(exp_growth,
+  main = "Exponential Growth Curve",
+  xlab = "Time", ylab = "Y", cex = cex, xaxt = "n"
 )
 
 # Logistic growth ---
@@ -71,8 +71,8 @@ log_growth <- new("gen_model",
 )
 
 make_exemplar_plot(log_growth,
-  main = "b) Logistic Growth Curve",
-  xlab = "Time", ylab = "Y", cex = cex
+  main = "Logistic Growth Curve",
+  xlab = "Time", ylab = "Y", cex = cex, xaxt = "n"
 )
 
 # Cusp ---
@@ -96,12 +96,12 @@ cusp_catastrophe <- new("gen_model",
 )
 
 make_exemplar_plot(cusp_catastrophe,
-  main = "c) Cusp Catastrophe",
-  xlab = "Time", ylab = "Y", cex = cex
+  main = "Cusp Catastrophe",
+  xlab = "Time", ylab = "Y", cex = cex, xaxt = "n"
 )
 
 # Dampened Oscillator ---
-damp_osc <- new("gen_model",
+damped_oscillator <- new("gen_model",
   time = 200,
   model_name = "damped_oscillator",
   model_type = "DE",
@@ -118,9 +118,9 @@ damp_osc <- new("gen_model",
   meas_eq = list(formula(y_obs ~ y + rnorm(1, 0, 1)))
 )
 
-make_exemplar_plot(damp_osc,
-  main = "d) Damped Oscillator",
-  xlab = "Time", ylab = "Y", cex = cex
+make_exemplar_plot(damped_oscillator,
+  main = "Damped Oscillator",
+  xlab = "Time", ylab = "Y", cex = cex, xaxt = "n"
 )
 
 dev.off()

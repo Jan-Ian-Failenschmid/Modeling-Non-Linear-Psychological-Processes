@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 15-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 27-05-2024                                                   #
+#' Last Modified: 29-05-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -303,6 +303,8 @@ fit_correct_dynr_model <- function(method, data, delta = 0) {
     ] <- c(
       +1e+3, -1e-6, 1e+3, 1e+3, 1e+3, 1e+3, 1e+3
     )
+  } else {
+    stop("Generated Modell is not implemented for dynm method.")
   }
 
   dynr_fit <- tryCatch(dynr.cook(model),

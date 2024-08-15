@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 11-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 25-04-2024                                                   #
+#' Last Modified: 06-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -23,8 +23,12 @@ setClass(
 )
 
 setMethod("fit", "method_gam", function(method, data) {
-  # ToDo: Have K depend on N for model identifyability.
-  fit <- gam(y_obs ~ s(time, bs = "tp", k = nrow(data)), data = data)
+  # fit <- gam(y_obs ~ s(time, bs = "tp", k = nrow(data)), data = data)
+  n <- nrow(data)
+  fit <- gam(y_obs ~ s(time, bs = "tp", k = n - 1),
+    data = data, method = "ML"
+  )
+
 
   # Method generics schould always return the adjusted method object
   slot(method, "converged") <- fit$converged
@@ -43,7 +47,9 @@ setMethod("fit", "method_gam", function(method, data) {
     slot(method, "mse") <- calc_mse(method, data)
 
     # Calculate gcv
-    slot(method, "gcv") <- fit$gcv.ubre
+    # slot(method, "gcv") <- fit$gcv.ubre
+    slot(method, "gcv") <- (n * sum((data$y - as.vector(inference$fit))^2)) /
+      (n - sum(influence(fit)))
 
     # Calculate confidence interval coverage
     slot(method, "ci_coverage") <- ci_test(method, data)

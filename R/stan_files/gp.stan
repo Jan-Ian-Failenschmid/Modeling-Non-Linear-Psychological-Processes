@@ -3,7 +3,7 @@
 // Author: Jan Ian Failenschmid                                               //
 // Created Date: 08-04-2024                                                   //
 // -----                                                                      //
-// Last Modified: 17-06-2024                                                  //
+// Last Modified: 15-08-2024                                                  //
 // Modified By: Jan Ian Failenschmid                                          //
 // -----                                                                      //
 // Copyright (c) 2024 by Jan Ian Failenschmid                                 //
@@ -13,12 +13,35 @@
 // License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html          //
 // ---------------------------------------------------------------------------//
 
-
+functions {
+  vector tail_delta(vector y, vector theta, 
+                    array[] real x_r, array[] int x_i) {
+    vector[2] deltas;
+    deltas[1] = inv_gamma_cdf(theta[1]| exp(y[1]), exp(y[2])) - 0.01;
+    deltas[2] = 1 - inv_gamma_cdf(theta[2]| exp(y[1]), exp(y[2])) - 0.01;
+    return deltas;
+  }
+}
 
 data {
   int<lower=1> N_obs;
   array[N_obs] real x_obs;
   vector[N_obs] y_obs;
+  real t_diff_min;
+  real t_diff_max;
+}
+
+transformed data {
+  vector[2] par_guess = [log(10), log(20)]';
+  vector[2] theta = [t_diff_min, t_diff_max]';
+  vector[2] par;
+  array[0] real x_r;
+  array[0] int x_i;
+
+  par = algebra_solver(tail_delta, par_guess, theta, x_r, x_i);
+
+  print("a = ", exp(par[1]));
+  print("b = ", exp(par[2]));
 }
 
 parameters {
@@ -28,7 +51,7 @@ parameters {
 }
 
 model {
-  rho ~ inv_gamma(1.2213340, 0.1962925); // P[rho < 2.0] \approx 0.01, P[rho > 20] \approx 0.01
+  rho ~ inv_gamma(exp(par[1]), exp(par[2]));
   alpha ~ normal(0, 2);
   sigma ~ normal(0, 1);
 

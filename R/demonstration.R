@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 23-05-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 09-08-2024                                                   #
+#' Last Modified: 16-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -17,6 +17,7 @@
 # Load required packages
 library(mgcv) # GAM's
 library(cmdstanr) # Stan interface
+library(invgamma)
 library(dynr) # Dynamic modelling with regime switching
 library(nprobust) # Local polynomial estimator
 library(ggdist) # Plotting
@@ -32,12 +33,15 @@ invisible(sapply(
 ))
 
 ### Functions ------------------------------------------------------------------
-eval_points <- 200
-
 plot_pred <- function(data, pred, ind, var) {
-  time <- data[[ind]][, time]
-  eval_time <- seq(min(time), max(time), length.out = eval_points)
-  obs <- unlist((data[[ind]][, var, with = FALSE]))
+  data <- data[[ind]][!is.na(DEP_ES), ]
+  time <- data[, time]
+  if ("eval_points" %in% ls()) {
+    eval_time <- seq(min(time), max(time), length.out = eval_points)
+  } else {
+    eval_time <- time
+  }
+  obs <- unlist((data[, var, with = FALSE]))
   plot(x = time, y = obs)
   lines(x = eval_time, y = pred[[ind]]$est)
   lines(x = eval_time, y = pred[[ind]]$ub, lty = 2)
@@ -88,11 +92,14 @@ df_raw[
 
 
 df_raw[, time0 := difftime(time, min(time), units = "hours"), by = UUID]
-df_raw[, time0 := difftime(time, min(time[weekdays(time) == "Monday"]),
+
+min_monday <- min(df_raw$time[weekdays(df_raw$time) == "Monday"])
+df_raw[, time1 := difftime(time, min_monday,
   units = "hours"
 ), by = UUID]
-
-df_raw$DEP_ES[df_raw$UUID == unique(df_raw$UUID)[110]]
+df_raw[, time1 := time1 -
+  (round(min(time1) / (24 * 7), digits = 0) + 1) * (24 * 7), by = UUID]
+df_raw$time1[141:210]
 
 df_raw$UUID <- as.factor(df_raw$UUID)
 
@@ -102,6 +109,7 @@ grouped_df <- df[, .(data = list(.SD)),
   by = UUID, .SDcols = c("DEP_ES", "time", "time0")
 ]
 
+# Descriptives
 nrow(grouped_df) # Number of participants
 summary(df[, .(age = unique(AGE_BL)), by = UUID][, age])
 summary(df[, .(gender = unique(as.factor(GENDER_BL))), by = UUID][, gender])
@@ -115,12 +123,9 @@ grouped_df[, locpol_fit := lapply(data, function(data) {
   loc_fit <- lprobust_cust(
     x = as.numeric(data$time0),
     y = data$DEP_ES,
-    eval = as.numeric(seq(min(data[, time0]),
-      max(data[, time0]),
-      length.out = eval_points
-    )),
-    p = c(1), kernel = "gau", bwselect = "imse-dpi",
-    bwcheck = 0, diag_A = FALSE
+    eval = as.numeric(data$time0),
+    p = 3, kernel = "gau", bwselect = "imse-dpi",
+    bwcheck = 0, diag_A = TRUE
   )
 })]
 
@@ -140,7 +145,7 @@ grouped_df[, locpol_bw := lapply(locpol_fit, function(fit) {
 
 grouped_df[, locpol_resid := mapply(
   function(data, locpol_pred) {
-    data$DEP_ES - locpol_pred$est
+    na.omit(data$DEP_ES) - locpol_pred$est
   },
   data = data, locpol_pred = locpol_pred, SIMPLIFY = FALSE
 )]
@@ -150,50 +155,47 @@ grouped_df[, locpol_mse := lapply(
   function(resid) mean(resid^2, na.rm = TRUE)
 )]
 
+mean(unlist(grouped_df$locpol_bw))
+
 plot_pred(
   data = grouped_df[, data],
-  pred = grouped_df[, locpol_pred], ind = 50, var = "DEP_ES"
+  pred = grouped_df[, locpol_pred], ind = 7, var = "DEP_ES"
 ) # 13, 22, 30
 
-i <- 100:117
+i <- 1:10
 plot_ml_pred(
   id = grouped_df$UUID[i], pred = grouped_df$locpol_pred[i],
   dat = grouped_df$data[i], var = "DEP_ES", time = "time0"
 )
 
-which.min(grouped_df$locpol_bw)
 ### GP
 grouped_df[, gp_fit := lapply(data, function(data) {
   data <- data[!is.na(DEP_ES), ]
 
-  data$time0 <- (data$time0 - mean(data$time0)) / sd(data$time0)
+  t_diff <- as.numeric(abs(outer(data$time0, data$time0, FUN = "-")[
+    lower.tri(outer(data$time0, data$time0, FUN = "-"))
+  ]))
 
   stan_data <- list(
-    N = length(data$time0), x = as.numeric(data$time0), y = data$DEP_ES,
-    N_eval = eval_points, x_eval = as.numeric(seq(min(data[, time0]),
-      max(data[, time0]),
-      length.out = eval_points
-    )), c_f1 = 1.5,
-    M_f1 = 50
+    N_obs = length(data$time0), x_obs = as.numeric(data$time0),
+    y_obs = data$DEP_ES, t_diff_min = 2, t_diff_max = max(t_diff)
   )
 
-  mod <- quiet(cmdstan_model("./R/stan_files/gpbf1b.stan"))
+  mod <- quiet(cmdstan_model("./R/stan_files/gp.stan"))
 
-  gp_fit <- suppressWarnings(mod$sample(
+  gp_fit <- mod$sample(
     data = stan_data,
     seed = 5838298,
     chains = 4,
     parallel_chains = 4,
     refresh = 500,
     show_messages = TRUE,
-    show_exceptions = FALSE
-  ))
-})]
+    show_exceptions = TRUE
+  )
 
-grouped_df[, gp_pred := mapply(function(fit, data) {
   posterior_draws <- quiet(
-    as.data.frame(fit$draws(
-      "f",
+    as.data.frame(gp_fit$draws(
+      "f_predict",
       format = "draws_df"
     ))
   )
@@ -202,32 +204,29 @@ grouped_df[, gp_pred := mapply(function(fit, data) {
     ,
     seq(1, ncol(posterior_draws) - 3)
   ]
-  list(
-    time = as.numeric(seq(min(data[, time0]),
-      max(data[, time0]),
-      length.out = eval_points
-    )),
+
+  gp_pred <- list(
+    time = data$time0,
     est = sapply(posterior_draws, mean),
     ub = sapply(posterior_draws, quantile, probs = 0.975),
     lb = sapply(posterior_draws, quantile, probs = 0.025)
   )
-}, fit = gp_fit, data = data, SIMPLIFY = FALSE)]
 
-grouped_df[, gp_alpha := lapply(gp_fit, function(fit) {
-  mean(fit$draws("sigma_f1", format = "draws_df")$sigma_f1)
+  gp_alpha <- mean(gp_fit$draws("alpha", format = "draws_df")$alpha)
+  gp_rho <- mean(gp_fit$draws("rho", format = "draws_df")$rho)
+  gp_sigma <- mean(gp_fit$draws("sigma", format = "draws_df")$sigma)
+
+  return(list(gp_pred, gp_alpha, gp_rho, gp_sigma))
 })]
 
-grouped_df[, gp_rho := lapply(gp_fit, function(fit) {
-  mean(fit$draws("lengthscale_f1", format = "draws_df")$lengthscale_f1)
-})]
-
-grouped_df[, gp_sigma := lapply(gp_fit, function(fit) {
-  mean(fit$draws("sigma", format = "draws_df")$sigma)
-})]
+grouped_df[, gp_pred := lapply(gp_fit, "[[", 1)]
+grouped_df[, gp_alpha := lapply(gp_fit, "[[", 2)]
+grouped_df[, gp_rho := lapply(gp_fit, "[[", 3)]
+grouped_df[, gp_sigma := lapply(gp_fit, "[[", 4)]
 
 grouped_df[, gp_resid := mapply(
   function(data, gp_pred) {
-    data$DEP_ES - gp_pred$est
+    na.omit(data$DEP_ES) - gp_pred$est
   },
   data = data, gp_pred = gp_pred, SIMPLIFY = FALSE
 )]
@@ -237,10 +236,13 @@ grouped_df[, gp_mse := lapply(
   function(resid) mean(resid^2, na.rm = TRUE)
 )]
 
+mean(unlist(grouped_df$gp_rho))
+plot(unlist(grouped_df$gp_rho), unlist(grouped_df$locpol_bw))
+
 # Compare participant 4
 plot_pred(
   data = grouped_df[, data],
-  pred = grouped_df[, gp_pred], ind = 6, var = "DEP_ES"
+  pred = grouped_df[, gp_pred], ind = 24, var = "DEP_ES"
 ) # 13, 22, 30
 
 plot_ml_pred(
@@ -253,10 +255,11 @@ plot(x = grouped_df$locpol_bw, y = grouped_df$gp_rho)
 
 ### Fit GAMs -------------------------------------------------------------------
 grouped_df[, gam_fit := lapply(data, function(data) {
+  data <- data[!is.na(DEP_ES), ]
   gam(
     DEP_ES ~ s(as.numeric(time0),
       bs = "tp",
-      k = sum(!is.na(data$DEP_ES)) - 1
+      k = length(data$DEP_ES) - 1
     ),
     data = data, method = "ML"
   )
@@ -265,14 +268,10 @@ grouped_df[, gam_fit := lapply(data, function(data) {
 grouped_df[, gam_sp := lapply(gam_fit, function(fit) fit$sp)]
 
 grouped_df[, gam_pred := mapply(function(fit, data) {
-  eval_time <- data.frame(
-    time0 = seq(min(data[, time0]), max(data[, time0]),
-      length.out = eval_points
-    )
-  )
-  inference <- predict(fit, newdata = eval_time, se.fit = TRUE)
+  inference <- predict(fit, se.fit = TRUE)
+  data <- data[!is.na(DEP_ES), ]
   list(
-    time = eval_time$time0,
+    time = data$time0,
     est = as.vector(inference$fit),
     ub = as.vector(inference$fit + (qnorm(0.975) * inference$se.fit)),
     lb = as.vector(inference$fit - (qnorm(0.975) * inference$se.fit))
@@ -281,7 +280,7 @@ grouped_df[, gam_pred := mapply(function(fit, data) {
 
 grouped_df[, gam_resid := mapply(
   function(data, gam_pred) {
-    data$DEP_ES - gam_pred$est
+    na.omit(data$DEP_ES) - gam_pred$est
   },
   data = data, gam_pred = gam_pred, SIMPLIFY = FALSE
 )]
@@ -291,12 +290,21 @@ grouped_df[, gam_mse := lapply(
   function(resid) mean(resid^2, na.rm = TRUE)
 )]
 
+grouped_df$gam_sp[53]
+grouped_df$gam_sp[108]
+grouped_df$gam_sp[8]
 plot_pred(
   data = grouped_df[, data],
   pred = grouped_df[, gam_pred], ind = 8, var = "DEP_ES"
 ) # 7 & 13
 
-summary(grouped_df$gam_fit[[83]])
+data.frame(
+  lengthscale = unlist(grouped_df$gp_rho),
+  bandwidth = unlist(grouped_df$locpol_bw),
+  smooth_penalty = unlist(grouped_df$gam_sp)
+) |> GGally::ggpairs()
+
+summary(grouped_df$gam_fit[[8]])
 
 i <- c(52:63)
 plot_ml_pred(
@@ -304,21 +312,13 @@ plot_ml_pred(
   dat = grouped_df$data[i], var = "DEP_ES", time = "time0"
 )
 
-plot(x = grouped_df$locpol_bw[-108], y = grouped_df$gam_sp[-108])
-summary(unlist(grouped_df$locpol_bw))
-hist(unlist(grouped_df$gam_sp)[-108])
-cor(unlist(grouped_df$locpol_bw), unlist(grouped_df$gam_sp))
-order(unlist(grouped_df$gam_sp), decreasing = TRUE)
-unlist(grouped_df$gam_sp)[108]
-unlist(grouped_df$gam_sp)[83]
-### GAM ------------------------------------------------------------------------
-gamm <- gam(DEP_ES ~ s(as.numeric(time0)) +
-  s(as.numeric(time0), UUID, bs = "fs"), data = df)
+### GAMM------------------------------------------------------------------------
+gamm <- gam(DEP_ES ~ s(as.numeric(time1)) +
+  s(as.numeric(time1), UUID, bs = "fs"), data = df)
 summary(gamm)
 plot_predictions(gamm,
   condition = list(time0 = unique, UUID = unique(df$UUID)[1])
 )
-
 
 ### Parametric modelling -------------------------------------------------------
 set.seed(42)

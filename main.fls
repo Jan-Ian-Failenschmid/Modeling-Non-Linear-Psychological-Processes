@@ -1,9 +1,9 @@
-PWD /home/jan_failenschmid/research/project_1/paper_1
+PWD /home/jan_failenschmid/research/project_1/Modeling-Non-Linear-Psychological-Processes
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/jan_failenschmid/research/project_1/paper_1/main.tex
+INPUT /home/jan_failenschmid/research/project_1/Modeling-Non-Linear-Psychological-Processes/main.tex
 OUTPUT main.log
 INPUT ./apa7.cls
 INPUT ./apa7.cls
@@ -1267,6 +1267,11 @@ INPUT ./figures/exemplar_process_noise.png
 INPUT ./figures/exemplar_process_noise.png
 INPUT ./figures/exemplar_process_noise.png
 INPUT ./figures/exemplar_process_noise.png
+INPUT ./figures/demonstration_smooths.png
+INPUT ./figures/demonstration_smooths.png
+INPUT ./figures/demonstration_smooths.png
+INPUT ./figures/demonstration_smooths.png
+INPUT ./figures/demonstration_smooths.png
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out

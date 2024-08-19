@@ -1,0 +1,5 @@
+\begin{figure*}[!ht]
+  \caption{The ten least and most wiggly processes as inferred by each method}
+  \fitfigure{demonstration_smooths.png}
+  \label{fig:dem_smooth}
+\end{figure*}

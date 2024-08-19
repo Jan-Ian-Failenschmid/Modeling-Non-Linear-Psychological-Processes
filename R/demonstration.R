@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 23-05-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 16-08-2024                                                   #
+#' Last Modified: 18-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -15,15 +15,27 @@
 
 ### Set-up ---------------------------------------------------------------------
 # Load required packages
+# install.packages("mgcv") # GAM's
+# install.packages("cmdstanr") # Stan interface
+# install.packages("invgamma")
+# install.packages("dynr") # Dynamic modelling with regime switching
+# install.packages("nprobust") # Local polynomial estimator
+# install.packages("ggdist") # Plotting
+# install.packages("data.table") # Data table for storing the simulation grid
+# install.packages("marginaleffects") # GAMM probing
+# install.packages("ggplot2") # Plotting
+# install.packages("patchwork")
+# install.packages("papaja") # Export package list
+
 library(mgcv) # GAM's
 library(cmdstanr) # Stan interface
-library(invgamma)
 library(dynr) # Dynamic modelling with regime switching
 library(nprobust) # Local polynomial estimator
 library(ggdist) # Plotting
 library(data.table) # Data table for storing the simulation grid
 library(marginaleffects) # GAMM probing
 library(ggplot2) # Plotting
+library(patchwork)
 library(papaja) # Export package list
 
 # Load functions
@@ -70,14 +82,16 @@ plot_ml_pred <- function(id, pred, dat, var, time) {
     geom_line() +
     geom_ribbon(aes(ymin = lb, ymax = ub), alpha = .1) +
     geom_point(data = dat_dat, mapping = aes(y = val, x = time)) +
-    theme_apa() +
-    theme(legend.position = "none")
-  print(gg)
+    theme_apa()
+  return(gg)
 }
+
+plot_points <- 300
 
 ### Load in Data ---------------------------------------------------------------
 # Read in data from secure storage location
 inpd <- c("/mnt/c/Users/failensc/OneDrive - Tilburg University/Documenten/data")
+inpd <- c("/mnt/c/Users/janfa/OneDrive - Tilburg University/Documenten/data")
 inpf <- c("/data_downloads_XOVWITVGQ6_2023-11-09Leuven_clinical_study.csv")
 
 df_raw <- fread(paste0(inpd, inpf))
@@ -99,10 +113,9 @@ df_raw[, time1 := difftime(time, min_monday,
 ), by = UUID]
 df_raw[, time1 := time1 -
   (round(min(time1) / (24 * 7), digits = 0) + 1) * (24 * 7), by = UUID]
-df_raw$time1[141:210]
 
 df_raw$UUID <- as.factor(df_raw$UUID)
-
+levels(df_raw$UUID) <- 1:118
 df <- df_raw[UUID != unique(UUID)[110], ] # Part 110 excluded due to no var
 
 grouped_df <- df[, .(data = list(.SD)),
@@ -114,6 +127,8 @@ nrow(grouped_df) # Number of participants
 summary(df[, .(age = unique(AGE_BL)), by = UUID][, age])
 summary(df[, .(gender = unique(as.factor(GENDER_BL))), by = UUID][, gender])
 
+
+#### Idiographic modelling
 ### Fit Locpols ----------------------------------------------------------------
 grouped_df[, locpol_fit := lapply(data, function(data) {
   # Remove missing data
@@ -155,30 +170,51 @@ grouped_df[, locpol_mse := lapply(
   function(resid) mean(resid^2, na.rm = TRUE)
 )]
 
-mean(unlist(grouped_df$locpol_bw))
+grouped_df[, locpol_gcv := mapply(
+  function(fit, data) {
+    get_cv(fit$Estimate, na.omit(data$DEP_ES))
+  },
+  fit = locpol_fit, data = data, SIMPLIFY = FALSE
+)]
 
-plot_pred(
-  data = grouped_df[, data],
-  pred = grouped_df[, locpol_pred], ind = 7, var = "DEP_ES"
-) # 13, 22, 30
+grouped_df[, locpol_fit_plot := lapply(data, function(data) {
+  # Remove missing data
+  data <- data[!is.na(DEP_ES), ]
+  # Find best polynomial degree
+  # Evaluate kernel function with best degree
+  loc_fit <- lprobust_cust(
+    x = as.numeric(data$time0),
+    y = data$DEP_ES,
+    eval = seq(min(data$time0), max(data$time0), length.out = plot_points),
+    p = 3, kernel = "gau", bwselect = "imse-dpi",
+    bwcheck = 0, diag_A = FALSE
+  )
+})]
 
-i <- 1:10
-plot_ml_pred(
-  id = grouped_df$UUID[i], pred = grouped_df$locpol_pred[i],
-  dat = grouped_df$data[i], var = "DEP_ES", time = "time0"
-)
+grouped_df[, locpol_pred_plot := mapply(function(fit, data) {
+  data <- data[!is.na(DEP_ES), ]
+  inf <- as.data.frame(fit$Estimate)
+  list(
+    time = seq(min(data$time0), max(data$time0), length.out = plot_points),
+    est = inf$tau.bc,
+    ub = as.vector(inf$tau.bc + (qnorm(0.975) * inf$se.rb)),
+    lb = as.vector(inf$tau.bc - (qnorm(0.975) * inf$se.rb))
+  )
+}, fit = locpol_fit_plot, data = grouped_df$data, SIMPLIFY = FALSE)]
 
 ### GP
 grouped_df[, gp_fit := lapply(data, function(data) {
   data <- data[!is.na(DEP_ES), ]
 
-  t_diff <- as.numeric(abs(outer(data$time0, data$time0, FUN = "-")[
-    lower.tri(outer(data$time0, data$time0, FUN = "-"))
-  ]))
+  # t_diff <- as.numeric(abs(outer(scale(data$time0), scale(data$time0),
+  #   FUN = "-"
+  # )[
+  #   lower.tri(outer(data$time0, data$time0, FUN = "-"))
+  # ]))
 
   stan_data <- list(
     N_obs = length(data$time0), x_obs = as.numeric(data$time0),
-    y_obs = data$DEP_ES, t_diff_min = 2, t_diff_max = max(t_diff)
+    y_obs = data$DEP_ES # , t_diff_min = 2, t_diff_max = max(t_diff)
   )
 
   mod <- quiet(cmdstan_model("./R/stan_files/gp.stan"))
@@ -215,14 +251,16 @@ grouped_df[, gp_fit := lapply(data, function(data) {
   gp_alpha <- mean(gp_fit$draws("alpha", format = "draws_df")$alpha)
   gp_rho <- mean(gp_fit$draws("rho", format = "draws_df")$rho)
   gp_sigma <- mean(gp_fit$draws("sigma", format = "draws_df")$sigma)
+  gp_gcv <- mean(gp_fit$draws("gcv_val", format = "draws_df")$gcv_val)
 
-  return(list(gp_pred, gp_alpha, gp_rho, gp_sigma))
+  return(list(gp_pred, gp_alpha, gp_rho, gp_sigma, gp_gcv))
 })]
 
 grouped_df[, gp_pred := lapply(gp_fit, "[[", 1)]
 grouped_df[, gp_alpha := lapply(gp_fit, "[[", 2)]
 grouped_df[, gp_rho := lapply(gp_fit, "[[", 3)]
 grouped_df[, gp_sigma := lapply(gp_fit, "[[", 4)]
+grouped_df[, gp_gcv := lapply(gp_fit, "[[", 5)]
 
 grouped_df[, gp_resid := mapply(
   function(data, gp_pred) {
@@ -236,22 +274,57 @@ grouped_df[, gp_mse := lapply(
   function(resid) mean(resid^2, na.rm = TRUE)
 )]
 
-mean(unlist(grouped_df$gp_rho))
-plot(unlist(grouped_df$gp_rho), unlist(grouped_df$locpol_bw))
+grouped_df[, gp_fit_plot := lapply(data, function(data) {
+  data <- data[!is.na(DEP_ES), ]
 
-# Compare participant 4
-plot_pred(
-  data = grouped_df[, data],
-  pred = grouped_df[, gp_pred], ind = 24, var = "DEP_ES"
-) # 13, 22, 30
+  # t_diff <- as.numeric(abs(outer(scale(data$time0), scale(data$time0),
+  #   FUN = "-"
+  # )[
+  #   lower.tri(outer(data$time0, data$time0, FUN = "-"))
+  # ]))
 
-plot_ml_pred(
-  id = grouped_df$UUID[1:10], pred = grouped_df$gp_pred[1:10],
-  dat = grouped_df$data[1:10], var = "DEP_ES", time = "time0"
-)
+  stan_data <- list(
+    N_obs = length(data$time0), x_obs = as.numeric(data$time0),
+    y_obs = data$DEP_ES, N_pred = plot_points,
+    x_pred = seq(min(data$time0), max(data$time0), length.out = plot_points)
+    # , t_diff_min = 2, t_diff_max = max(t_diff)
+  )
 
-cor(grouped_df$locpol_bw, grouped_df$gp_rho)
-plot(x = grouped_df$locpol_bw, y = grouped_df$gp_rho)
+  mod <- quiet(cmdstan_model("./R/stan_files/gp_plot.stan"))
+
+  gp_fit <- mod$sample(
+    data = stan_data,
+    seed = 5838298,
+    chains = 4,
+    parallel_chains = 4,
+    refresh = 500,
+    show_messages = TRUE,
+    show_exceptions = TRUE
+  )
+
+  posterior_draws <- quiet(
+    as.data.frame(gp_fit$draws(
+      "f_predict",
+      format = "draws_df"
+    ))
+  )
+
+  posterior_draws <- posterior_draws[
+    ,
+    seq(1, ncol(posterior_draws) - 3)
+  ]
+
+  gp_pred <- list(
+    time = seq(min(data$time0), max(data$time0), length.out = plot_points),
+    est = sapply(posterior_draws, mean),
+    ub = sapply(posterior_draws, quantile, probs = 0.975),
+    lb = sapply(posterior_draws, quantile, probs = 0.025)
+  )
+
+  return(list(gp_pred))
+})]
+
+grouped_df[, gp_pred_plot := lapply(gp_fit_plot, "[[", 1)]
 
 ### Fit GAMs -------------------------------------------------------------------
 grouped_df[, gam_fit := lapply(data, function(data) {
@@ -265,8 +338,6 @@ grouped_df[, gam_fit := lapply(data, function(data) {
   )
 })]
 
-grouped_df[, gam_sp := lapply(gam_fit, function(fit) fit$sp)]
-
 grouped_df[, gam_pred := mapply(function(fit, data) {
   inference <- predict(fit, se.fit = TRUE)
   data <- data[!is.na(DEP_ES), ]
@@ -277,6 +348,10 @@ grouped_df[, gam_pred := mapply(function(fit, data) {
     lb = as.vector(inference$fit - (qnorm(0.975) * inference$se.fit))
   )
 }, fit = gam_fit, data = data, SIMPLIFY = FALSE)]
+
+grouped_df[, gam_sp := lapply(gam_fit, function(fit) {
+  fit$sp
+})]
 
 grouped_df[, gam_resid := mapply(
   function(data, gam_pred) {
@@ -290,37 +365,189 @@ grouped_df[, gam_mse := lapply(
   function(resid) mean(resid^2, na.rm = TRUE)
 )]
 
-grouped_df$gam_sp[53]
-grouped_df$gam_sp[108]
-grouped_df$gam_sp[8]
-plot_pred(
-  data = grouped_df[, data],
-  pred = grouped_df[, gam_pred], ind = 8, var = "DEP_ES"
-) # 7 & 13
+grouped_df[, gam_gcv := mapply(
+  function(fit, resid) {
+    n <- length(resid)
+    n * sum(resid^2) / (n - sum(influence(fit)))^2
+  },
+  fit = gam_fit, resid = gam_resid
+)]
 
-data.frame(
-  lengthscale = unlist(grouped_df$gp_rho),
-  bandwidth = unlist(grouped_df$locpol_bw),
-  smooth_penalty = unlist(grouped_df$gam_sp)
-) |> GGally::ggpairs()
+grouped_df[, gam_sigma := lapply(
+  gam_fit,
+  function(fit) {
+    sqrt(sum(fit$residuals^2) / fit$df.residual)
+  }
+)]
 
-summary(grouped_df$gam_fit[[8]])
+grouped_df[, gam_pred_plot := mapply(function(fit, data) {
+  data <- data[!is.na(DEP_ES), ]
+  inference <- predict(fit,
+    newdata = data.frame(
+      time0 = seq(min(data$time0), max(data$time0), length.out = plot_points)
+    ),
+    se.fit = TRUE
+  )
+  list(
+    time = seq(min(data$time0), max(data$time0), length.out = plot_points),
+    est = as.vector(inference$fit),
+    ub = as.vector(inference$fit + (qnorm(0.975) * inference$se.fit)),
+    lb = as.vector(inference$fit - (qnorm(0.975) * inference$se.fit))
+  )
+}, fit = gam_fit, data = data, SIMPLIFY = FALSE)]
 
-i <- c(52:63)
-plot_ml_pred(
-  id = grouped_df$UUID[i], pred = grouped_df$gam_pred[i],
-  dat = grouped_df$data[i], var = "DEP_ES", time = "time0"
+### Results --------------------------------------------------------------------
+res_df <- data.table(
+  method = as.factor(c(
+    rep("locpol", nrow(grouped_df)),
+    rep("gp", nrow(grouped_df)),
+    rep("gam", nrow(grouped_df))
+  )),
+  wiggliness = c(
+    unlist(grouped_df$locpol_bw),
+    unlist(grouped_df$gp_rho),
+    unlist(grouped_df$gam_sp)
+  ),
+  mse = c(
+    unlist(grouped_df$locpol_mse),
+    unlist(grouped_df$gp_mse),
+    unlist(grouped_df$gam_mse)
+  ),
+  gcv = c(
+    unlist(grouped_df$locpol_gcv),
+    unlist(grouped_df$gp_gcv),
+    unlist(grouped_df$gam_gcv)
+  )
 )
 
+res_df[, lapply(.SD, function(x) round(mean(x), 2)), by = method]
+res_df[, lapply(.SD, function(x) round(sd(x), 2)), by = method]
+res_df[, lapply(.SD, function(x) round(median(x), 2)), by = method]
+res_df[, lapply(.SD, function(x) round(IQR(x), 2)), by = method]
+
+data.table(
+  bandwidth = unlist(grouped_df$locpol_bw),
+  lengthscale = unlist(grouped_df$gp_rho),
+  smoothing_par = unlist(grouped_df$gam_sp)
+) |> cor()
+
+np <- 10
+locpol_high <- plot_ml_pred(
+  id = grouped_df$UUID[order(unlist(grouped_df$locpol_bw))[1:np]],
+  pred = grouped_df$locpol_pred_plot[order(unlist(grouped_df$locpol_bw))[1:np]],
+  dat = grouped_df$data[order(unlist(grouped_df$locpol_bw))[1:np]],
+  var = "DEP_ES", time = "time0"
+)
+locpol_high <- locpol_high +
+  ggtitle("LPRs with the lowest bandwidth") +
+  xlab("Momentary depression") +
+  ylab("Differenced time")
+
+locpol_low <- plot_ml_pred(
+  id = grouped_df$UUID[order(unlist(grouped_df$locpol_bw),
+    decreasing = TRUE
+  )[1:np]],
+  pred = grouped_df$locpol_pred_plot[order(unlist(grouped_df$locpol_bw),
+    decreasing = TRUE
+  )[1:np]],
+  dat = grouped_df$data[order(unlist(grouped_df$locpol_bw),
+    decreasing = TRUE
+  )[1:np]],
+  var = "DEP_ES", time = "time0"
+)
+locpol_low <- locpol_low +
+  ggtitle("LPRs with the highest bandwidth") +
+  xlab("Momentary depression") +
+  ylab("Differenced time")
+
+
+gp_high <- plot_ml_pred(
+  id = grouped_df$UUID[order(unlist(grouped_df$gp_rho))[1:np]],
+  pred = grouped_df$gp_pred_plot[order(unlist(grouped_df$gp_rho))[1:np]],
+  dat = grouped_df$data[order(unlist(grouped_df$gp_rho))[1:np]],
+  var = "DEP_ES", time = "time0"
+)
+gp_high <- gp_high +
+  ggtitle("GPs with the lowest lengthscale") +
+  xlab("Momentary depression") +
+  ylab("Differenced time")
+
+
+gp_low <- plot_ml_pred(
+  id = grouped_df$UUID[order(unlist(grouped_df$gp_rho),
+    decreasing = TRUE
+  )[1:np]],
+  pred = grouped_df$gp_pred_plot[order(unlist(grouped_df$gp_rho),
+    decreasing = TRUE
+  )[1:np]],
+  dat = grouped_df$data[order(unlist(grouped_df$gp_rho),
+    decreasing = TRUE
+  )[1:np]],
+  var = "DEP_ES", time = "time0"
+)
+gp_low <- gp_low +
+  ggtitle("GPs with the highest lengthscale") +
+  xlab("Momentary depression") +
+  ylab("Differenced time")
+
+gam_high <- plot_ml_pred(
+  id = grouped_df$UUID[order(unlist(grouped_df$gam_sp))[1:np]],
+  pred = grouped_df$gam_pred_plot[order(unlist(grouped_df$gam_sp))[1:np]],
+  dat = grouped_df$data[order(unlist(grouped_df$gam_sp))[1:np]],
+  var = "DEP_ES", time = "time0"
+)
+gam_high <- gam_high +
+  ggtitle("GAMs with the lowest smoothing parameter") +
+  xlab("Momentary depression") +
+  ylab("Differenced time")
+
+gam_low <- plot_ml_pred(
+  id = grouped_df$UUID[order(unlist(grouped_df$gam_sp),
+    decreasing = TRUE
+  )[1:np]],
+  pred = grouped_df$gam_pred_plot[order(unlist(grouped_df$gam_sp),
+    decreasing = TRUE
+  )[1:np]],
+  dat = grouped_df$data[order(unlist(grouped_df$gam_sp),
+    decreasing = TRUE
+  )[1:np]],
+  var = "DEP_ES", time = "time0"
+)
+gam_low <- gam_low +
+  ggtitle("GAMs with the highest smoothing parameter") +
+  xlab("Momentary depression") +
+  ylab("Differenced time")
+
+complete_plot <- (locpol_low | gp_low | gam_low) /
+  (locpol_high | gp_high | gam_high)
+
+ggsave("figures/demonstration_smooths.png", complete_plot,
+  width = 1920,
+  height = 1080, units = "px", dpi = "screen"
+)
+
+
+#### Multilevel modelling
 ### GAMM------------------------------------------------------------------------
+gamm_ri <- gam(DEP_ES ~ s(UUID, bs = "re"), data = df)
+gamm_free <- gam(DEP_ES ~ s(as.numeric(time1), by = UUID), data = df)
 gamm <- gam(DEP_ES ~ s(as.numeric(time1)) +
   s(as.numeric(time1), UUID, bs = "fs"), data = df)
+
+summary(gamm_ri)
 summary(gamm)
+summary(gamm_free)
+
+AIC(gamm_ri, gamm, gamm_free)
+BIC(gamm_ri, gamm, gamm_free)
+
+plot(gamm, select = 2)
 plot_predictions(gamm,
   condition = list(time0 = unique, UUID = unique(df$UUID)[1])
 )
 
-### Parametric modelling -------------------------------------------------------
+
+#### Parametric modelling ------------------------------------------------------
 set.seed(42)
 alloc <- rep(
   sample(c("train", "valid", "test"), 117,

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 11-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 06-08-2024                                                   #
+#' Last Modified: 17-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -49,7 +49,7 @@ setMethod("fit", "method_gam", function(method, data) {
     # Calculate gcv
     # slot(method, "gcv") <- fit$gcv.ubre
     slot(method, "gcv") <- (n * sum((data$y - as.vector(inference$fit))^2)) /
-      (n - sum(influence(fit)))
+      (n - sum(influence(fit)))^2
 
     # Calculate confidence interval coverage
     slot(method, "ci_coverage") <- ci_test(method, data)

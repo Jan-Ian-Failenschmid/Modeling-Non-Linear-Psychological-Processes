@@ -3,7 +3,7 @@
 % Author: Jan Ian Failenschmid                                                 %
 % Created Date: 13-03-2024                                                     %
 % -----                                                                        %
-% Last Modified: 15-08-2024                                                    %
+% Last Modified: 18-08-2024                                                    %
 % Modified By: Jan Ian Failenschmid                                            %
 % -----                                                                        %
 % Copyright (c) 2024 by Jan Ian Failenschmid                                   %
@@ -881,6 +881,68 @@ error variance. Lastly, the model fit was compared between the models
 using the AIC and BIC.
 
 \subsection{Results}
+
+\subsubsection{Exploratorty idiographic analysis}
+
+First, the three non-parametric and semi-parametric methods were used to
+estimate the individual latent depression processes. For the local cubic
+regression, the median optimal bandwidth was 21.28 hours (\textit{IQR}: 5.52).
+For the GP, the median optimal length scale was 22.57 standard deviations
+(\textit{IQR}: 15.09). Lastly, for the GAMs, the median optimal smoothing
+parameter was $8.1810^9$ (\textit{IQR}: $1.7610^{10}$). Unfortunately, these
+three measures of wiggliness are not only on different scales, but there is
+also only a moderate correlation between the bandwidth and lengthscale
+parameters (\textit{r} = 0.33). The smoothing parameter of the GAMs shows
+little to no correlation with the other two measures (bandwidth: \textit{r} =
+-0.03; length scale: \textit{r} = -0.08). This discrepancy arises because,
+while all three parameters reflect the wiggliness of the estimate, they capture
+different aspects of it. For example, in data with a linear trend, the
+bandwidth of the local cubic regression and the smoothing parameter of the GAMs
+would theoretically be infinite, while the length scale parameter of the GP
+would have a finite value. Additionally, the interpretation of each
+wiggliness parameter depends in the model configurations chosen and would
+change for different configurations of these methods.
+
+Because of this, there is not much value in interpreting the absolute values
+of these parameters. Instead, we explored the range of functional behaviours
+inferred by the most extreme values of each parameters. Figuer
+\ref{fig:dem_smooth} shows
+the ten least and most wiggly processes inferred by each method. This figure
+reveals considerably heterogeneity in the functional behaviour inferred by
+each method. Most interestingly, the least wiggly processes inferred by both
+the GPs and the GAMs are linear trends, indicating the absence of any
+dynamic errors for these individuals. In contrast to this, the processes
+with the highest inferred wigglyness, display either large dynamic errors
+around their respective person means or in addition to this a different
+non-linear dynamic.
+
+\begin{figure}[!ht]
+  \caption{The ten least and most wiggly processes as inferred by each method}
+  \fitfigure{demonstration_smooths.png}
+  \label{fig:dem_smooth}
+\end{figure}
+
+Lastly, a cross-validation was conducted using the generalized cross-validation
+criterion to investigate which method predicted the latent processes most
+accurately. The median GCV for the GAMs was 125.29 (\textit{IQR}: 201.04),
+the Go it was 248.27 (\textit{IQR}: 578.00), and for the LPR it was
+131.57 (\textit{IQR}: 213.73). In addition to this, the mean squared error
+was calculated between the predictions of each method and the data.
+Here the median MSE of the GAMs was 114.04 (\textit{IQR}: 171.59),
+for the GP it was 197.54 (\textit{IQR}: 388.40), and for the LPR it was
+101.74 (\textit{IQR}: 153.77). Together with the GCV this indicates that
+the GAMs inferred the latent processes most accurately, whereas the LPR
+slightly overfit the data and the GPs tended to underfit the data.
+
+\subsubsection{Multilevel analysis}
+
+To investigate this further, a mixed effects GAM was fit to the entire data,
+in which each participant has a seperate smooth term for time. Essentially,
+this model combines the previously fit idiographic GAMs in one model.
+
+\subsubsection{Parametric analysis}
+
+\textit{Not working yet}
 
 \section{Discussion}
 

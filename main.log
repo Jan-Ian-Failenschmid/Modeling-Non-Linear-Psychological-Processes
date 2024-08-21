@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.8.16)  21 AUG 2024 21:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  21 AUG 2024 22:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/jan_failenschmid/research/project_1/Modeling-Non-Linear-Psychological-Processes/main.tex
-(/home/jan_failenschmid/research/project_1/Modeling-Non-Linear-Psychological-Processes/main.tex
+**/home/jan_failenschmid/research/project_1/paper_1/main.tex
+(/home/jan_failenschmid/research/project_1/paper_1/main.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (./apa7.cls
 Document Class: apa7 2021/11/21 v2.14 APA formatting (7th edition)
@@ -1124,7 +1124,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 <./figures/exemplar_no_process_noise.png, id=146, 1967.35pt x 1084.05pt>
 File: ./figures/exemplar_no_process_noise.png Graphic file (type png)
 <use ./figures/exemplar_no_process_noise.png>
-Package pdftex.def Info: ./figures/exemplar_no_process_noise.png  used on input line 94.
+Package pdftex.def Info: ./figures/exemplar_no_process_noise.png  used on input line 92.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
  [3]
 Underfull \vbox (badness 1688) has occurred while \output is active []
@@ -1132,62 +1132,62 @@ Underfull \vbox (badness 1688) has occurred while \output is active []
  [4 <./figures/exemplar_no_process_noise.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [5]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6] [7]
-<./figures/locpol_demonstration.png, id=224, 1967.35pt x 1084.05pt>
+ [5] [6] [7]
+<./figures/locpol_demonstration.png, id=227, 1967.35pt x 1084.05pt>
 File: ./figures/locpol_demonstration.png Graphic file (type png)
 <use ./figures/locpol_demonstration.png>
-Package pdftex.def Info: ./figures/locpol_demonstration.png  used on input line 269.
+Package pdftex.def Info: ./figures/locpol_demonstration.png  used on input line 266.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8] [9 <./figures/locpol_demonstration.png (PNG copy)>]
-<./figures/gp_demonstration.png, id=246, 1967.35pt x 1084.05pt>
+ [8 <./figures/locpol_demonstration.png (PNG copy)>] [9]
+<./figures/gp_demonstration.png, id=249, 1967.35pt x 1084.05pt>
 File: ./figures/gp_demonstration.png Graphic file (type png)
 <use ./figures/gp_demonstration.png>
-Package pdftex.def Info: ./figures/gp_demonstration.png  used on input line 330.
+Package pdftex.def Info: ./figures/gp_demonstration.png  used on input line 328.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
  [10 <./figures/gp_demonstration.png (PNG copy)>] [11]
-<./figures/gam_demonstration.png, id=278, 1967.35pt x 1084.05pt>
+<./figures/gam_demonstration.png, id=279, 1967.35pt x 1084.05pt>
 File: ./figures/gam_demonstration.png Graphic file (type png)
 <use ./figures/gam_demonstration.png>
-Package pdftex.def Info: ./figures/gam_demonstration.png  used on input line 412.
+Package pdftex.def Info: ./figures/gam_demonstration.png  used on input line 410.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [12] [13 <./figures/gam_demonstration.png (PNG copy)>] [14] [15] [16]
-<./figures/exemplar_process_noise.png, id=322, 1967.35pt x 1084.05pt>
+ [12]
+Underfull \vbox (badness 1314) has occurred while \output is active []
+
+ [13 <./figures/gam_demonstration.png (PNG copy)>] [14]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [15] [16]
+<./figures/exemplar_process_noise.png, id=323, 1967.35pt x 1084.05pt>
 File: ./figures/exemplar_process_noise.png Graphic file (type png)
 <use ./figures/exemplar_process_noise.png>
-Package pdftex.def Info: ./figures/exemplar_process_noise.png  used on input line 608.
+Package pdftex.def Info: ./figures/exemplar_process_noise.png  used on input line 606.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [17] [18 <./figures/exemplar_process_noise.png>] [19] [20] [21]
-<./figures/results.png, id=365, 1927.2pt x 1084.05pt>
+<./figures/results.png, id=366, 1927.2pt x 1084.05pt>
 File: ./figures/results.png Graphic file (type png)
 <use ./figures/results.png>
-Package pdftex.def Info: ./figures/results.png  used on input line 837.
+Package pdftex.def Info: ./figures/results.png  used on input line 835.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
  [22] [23] [24 <./figures/results.png (PNG copy)>]
-<./figures/ci_plot.png, id=385, 1927.2pt x 1084.05pt>
+<./figures/ci_plot.png, id=386, 1927.2pt x 1084.05pt>
 File: ./figures/ci_plot.png Graphic file (type png)
 <use ./figures/ci_plot.png>
-Package pdftex.def Info: ./figures/ci_plot.png  used on input line 872.
+Package pdftex.def Info: ./figures/ci_plot.png  used on input line 870.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
 
 Underfull \vbox (badness 1097) has occurred while \output is active []
 
  [25 <./figures/ci_plot.png>] [26] [27] [28] [29]
-<./figures/demonstration_smooths.png, id=418, 1927.2pt x 1084.05pt>
+<./figures/demonstration_smooths.png, id=421, 1927.2pt x 1084.05pt>
 File: ./figures/demonstration_smooths.png Graphic file (type png)
 <use ./figures/demonstration_smooths.png>
-Package pdftex.def Info: ./figures/demonstration_smooths.png  used on input line 1046.
+Package pdftex.def Info: ./figures/demonstration_smooths.png  used on input line 1045.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
  [30 <./figures/demonstration_smooths.png (PNG copy)>]
 Underfull \vbox (badness 1990) has occurred while \output is active []
@@ -1202,18 +1202,18 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34234 strings out of 480247
- 653009 string characters out of 5896151
- 1402968 words of memory out of 5000000
- 51438 multiletter control sequences out of 15000+600000
+ 34245 strings out of 480247
+ 653293 string characters out of 5896151
+ 1403058 words of memory out of 5000000
+ 51447 multiletter control sequences out of 15000+600000
  515979 words of font info for 92 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 99i,12n,103p,1946b,5221s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 99i,12n,103p,1910b,5221s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (38 pages, 2356540 bytes).
+Output written on main.pdf (38 pages, 2357015 bytes).
 PDF statistics:
- 576 PDF objects out of 1000 (max. 8388607)
- 501 compressed objects within 6 object streams
- 137 named destinations out of 1000 (max. 500000)
+ 579 PDF objects out of 1000 (max. 8388607)
+ 504 compressed objects within 6 object streams
+ 138 named destinations out of 1000 (max. 500000)
  285 words of extra memory for PDF output out of 10000 (max. 10000000)
 

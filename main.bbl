@@ -1641,6 +1641,90 @@
       \verb http://journal.frontiersin.org/Article/10.3389/fpsyg.2015.00727/abstract
       \endverb
     \endentry
+    \entry{kalokerinos_emote_nodate}{unpublished}{}
+      \name{author}{11}{}{%
+        {{un=0,uniquepart=base,hash=1bf6cafb85e0a166a412f6a7ab0c9784}{%
+           family={Kalokerinos},
+           familyi={K\bibinitperiod},
+           given={E.\bibnamedelimi K.},
+           giveni={E\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a6c8f771edc4432681efa5e6116687ea}{%
+           family={Russo-Batterham},
+           familyi={R\bibinithyphendelim B\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=851fa94bc8bbfa7fc7c2d70e61ba9856}{%
+           family={Koval},
+           familyi={K\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=036a417277400dddce99f80b9c68fbb6}{%
+           family={Moeck},
+           familyi={M\bibinitperiod},
+           given={E.\bibnamedelimi K.},
+           giveni={E\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0f4665d1170c4f7bfb7eaf8498ae9b85}{%
+           family={Grewal},
+           familyi={G\bibinitperiod},
+           given={K.\bibnamedelimi K.},
+           giveni={K\bibinitperiod\bibinitdelim K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=97fe5911bbdb3753c82b98dd71dcc64d}{%
+           family={Greenaway},
+           familyi={G\bibinitperiod},
+           given={K.\bibnamedelimi H.},
+           giveni={K\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=5549fd6cdf2245f44a865174b5dcf9d6}{%
+           family={Shrestha},
+           familyi={S\bibinitperiod},
+           given={K.\bibnamedelimi M.},
+           giveni={K\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4b1ba662d599a1be69775e1a86ff464a}{%
+           family={Garrett},
+           familyi={G\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8ac596c9f98dc1fe3e638209e8148325}{%
+           family={Michalewicz},
+           familyi={M\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=58094bd24fc48bbc19b8b7e8b3b9117c}{%
+           family={Garber},
+           familyi={G\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2ac512b0f4e6bc75211eebf1fbe412a9}{%
+           family={Kuppens},
+           familyi={K\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a8f16b748645dadb545f377fa925aaeb}
+      \strng{fullhash}{e43e38edb294478ceb86a8a30236c68a}
+      \strng{bibnamehash}{e43e38edb294478ceb86a8a30236c68a}
+      \strng{authorbibnamehash}{e43e38edb294478ceb86a8a30236c68a}
+      \strng{authornamehash}{a8f16b748645dadb545f377fa925aaeb}
+      \strng{authorfullhash}{e43e38edb294478ceb86a8a30236c68a}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labeldatesource}{nodate}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The {EMOTE} {Database}: {An} open, searchable database of experience sampling data mapping everyday life}
+      \field{type}{Manuscript in preparation}
+    \endentry
     \entry{kohler_review_2014}{article}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=618a429305184fc779217a53e139d0c2}{%

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 06-08-2024                                                   #
+#' Last Modified: 20-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -483,7 +483,7 @@ make_exemplar_plot <- function(gen_model, main, xlab, ylab, cex, ...) {
   lines(dat$time, dat$y)
 }
 
-plot_results <- function(res, outcome, style = "all", ...) {
+plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
   #' Convenience function to create discriptive plots of the performance
   #' measures.
 
@@ -492,11 +492,15 @@ plot_results <- function(res, outcome, style = "all", ...) {
   require(ggdist)
 
   grp_var <- sapply(list(...), function(x) match.arg(x, names(res)))
-
-  factors <- res[, c("model", grp_var), with = FALSE]
-  res[, group := apply(factors, 1, function(x) {
-    paste0(names(x), " ", x, collapse = "-")
-  })]
+  if (length(grp_var) > 0) {
+    factors <- res[, c("model", grp_var), with = FALSE]
+    res[, group := apply(factors, 1, function(x) {
+      paste0(names(x), " ", x, collapse = "-")
+    })]
+  } else {
+    factors <- res[, model]
+    res[, group := as.character(model)]
+  }
 
   if (style == "all") {
     gg <- ggplot2::ggplot(res, aes(
@@ -533,12 +537,19 @@ plot_results <- function(res, outcome, style = "all", ...) {
       ylab(outcome)
   } else if (style == "mean") {
     res$outcome <- res[, c(outcome), with = FALSE]
-    res_sum <- res[, .(
-      mean = mean(outcome, na.rm = TRUE),
-      se = sd(outcome, na.rm = TRUE) / sqrt(.N),
-      group = unique(group)
-    ), by = c("model", "method", grp_var)]
-
+    if (length(grp_var) > 0) {
+      res_sum <- res[, .(
+        mean = mean(outcome, na.rm = TRUE),
+        se = sd(outcome, na.rm = TRUE) / sqrt(.N),
+        group = unique(group)
+      ), by = c("model", "method", grp_var)]
+    } else {
+      res_sum <- res[, .(
+        mean = mean(outcome, na.rm = TRUE),
+        se = sd(outcome, na.rm = TRUE) / sqrt(.N),
+        group = unique(group)
+      ), by = c("model", "method")]
+    }
     gg <- ggplot2::ggplot(res_sum, aes(
       x = group, y = mean, color = model
     )) +
@@ -551,8 +562,7 @@ plot_results <- function(res, outcome, style = "all", ...) {
       facet_wrap(~method) +
       theme_minimal() +
       theme(
-        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
-        text = element_text(size = 30)
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)
       ) +
       ylab(outcome)
   } else if (style == "missing") {
@@ -571,15 +581,22 @@ plot_results <- function(res, outcome, style = "all", ...) {
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
       ylab(outcome)
   }
-  g <- suppressWarnings(ggplot_build(gg))
-  breaks <- g$layout$panel_params[[1]]$x$breaks
-  breaks_new <- sapply(breaks, function(x) {
-    x <- strsplit(x, "-")[[1]]
-    return(paste(x[seq(2, length(x))], collapse = " - "))
-  })
-  names(breaks_new) <- NULL
-  gg <- gg + scale_x_discrete(labels = breaks_new)
-  suppressWarnings(print(gg))
+  if (length(grp_var) > 0) {
+    g <- suppressWarnings(ggplot_build(gg))
+    breaks <- g$layout$panel_params[[1]]$x$breaks
+    breaks_new <- sapply(breaks, function(x) {
+      x <- strsplit(x, "-")[[1]]
+      return(paste(x[seq(2, length(x))], collapse = " - "))
+    })
+    names(breaks_new) <- NULL
+    gg <- gg + scale_x_discrete(labels = breaks_new)
+    suppressWarnings(print(gg))
+  }
+  if (!legend) {
+    gg <- gg + theme(legend.position = "none")
+    suppressWarnings(print(gg))
+  }
+  return(gg)
 }
 
 inspect <- function(data, method_name, sim) {

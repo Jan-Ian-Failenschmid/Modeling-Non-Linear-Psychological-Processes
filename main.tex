@@ -3,7 +3,7 @@
 % Author: Jan Ian Failenschmid                                                 %
 % Created Date: 13-03-2024                                                     %
 % -----                                                                        %
-% Last Modified: 18-08-2024                                                    %
+% Last Modified: 20-08-2024                                                    %
 % Modified By: Jan Ian Failenschmid                                            %
 % -----                                                                        %
 % Copyright (c) 2024 by Jan Ian Failenschmid                                   %
@@ -709,7 +709,8 @@ observed time points, we calculated the mean squared error (MSE) between the
 estimated and generated process values. Additionally,
 to evaluate how well each method
 interpolated the process between the observed time points, we computed the
-generalized cross-validation (GCV; \textcite{golub_generalized_1979}) criterion
+generalized cross-validation (\parencite[GCV;][]{golub_generalized_1979})
+criterion
 for each method and data set. The GCV is a more computationally efficient and
 rotation-invariant version of the ordinary leave-one-out cross-validation
 criterion, with a similar interpretation. The latter is calculated by removing
@@ -721,22 +722,24 @@ the squared errors, leave-one-out cross-validation provides an estimate of
 how accurately the model
 predicts unobserved values within the design range.
 
-% Subsequently, a MANOVA was conducted to explain differences in the RMSE and
-% GCV values between the simulation conditions and analysis methods. In order to
-% also find evidence in favor of which factors likely do not affect the RMSE and
-% GCV values, we conducted an exhaustive model search. Here the AIC and BIC
-% based model weights were used as a criterion to identify which model is closest
-% to the true data generating model. The AIC weights can directly
-% be interpreted as the conditional model probabilities
-% \parencite{wagenmakers_aic_2004}. Thus, if the true
-% data generating model is among the tested models, the AIC weights indicate the
-% probability that each tested model is the correct model given the data. This
-% makes it possible, to quantify evidence both in favor and against the presence
-% of any effect that could be included in the model. After establishing the most
-% likely MANOVA model, we probed the included effects further by fitting
-% univariate ANOVAs with the same predictors to the RMSE and the GCV values and
-% followed up with Tukey's Honest Significant Difference test for the
-% post-hoc comparisons.
+Subsequently, two ANOVAs were conducted to analyze differences in MSE and GCV
+values across simulation conditions and analysis methods. To simultaneously
+identify both factors that likely
+do and do not affect MSE and GCV values, an exhaustive model search was
+performed. In this search, AIC and BIC model weights were used to determine the
+model, which provides the optimal balance between data fit and model
+complexity. Notably, AIC weights can
+be interpreted as conditional model probabilities when the true model is among
+the tested models \parencite{wagenmakers_aic_2004}. The specific hypotheses
+stated earlier
+were tested using post hoc tests and marginal comparisons with appropriate
+corrections for multiple comparisons.
+Model assumptions were assessed on the final selected model. Given
+the large sample sizes in this simulation, the ANOVAs were robust to moderate
+violations of normality, and any potential violations of homoscedasticity were
+addressed using heteroscedasticity-consistent standard errors. However, if both
+assumptions were severely violated, results were instead presented
+descriptively, using means and standard errors for the respective conditions.
 
 \subsubsection{Uncertainty quantification}
 
@@ -755,22 +758,93 @@ errors,
 while those below 93\% indicated either a poor approximation of the underlying
 process or an underestimation of the standard errors.
 
-\subsection{Results}
+\subsection{Results (Template)}
+
+\subsubsection{Capturing the non-linear process}
+
+For both outcome measures both the AIC and BIC model weights indicated the
+most complex model including all interactions as the best fitting model with a
+model weight of 1. While the residuals of both models showed considerable
+deviations from normality for both outcome measures by being platykurtic,
+the residual distributions were unimodel and approximately symmetric. Thus,
+we concluded that due to the large sample sizes in this simulation, the ANOVAs
+will be robust against these deviations. However, a Breush-Pagan test revealed
+that for both outcome measures the resiudals were heteroscedastic, which
+were corrected for in the following. Using these corrections and Bonferroni
+corrections for fitting two seperate ANOVAs the type-III ANOVA for the MSE
+showed significant main and interaction effects everywhere except for the five
+way interaction and one four way interaction. The type-III ANOVA fo the GCV
+values indicated that all effects were significant. However, most higher order
+interactions had partial-$\eta^2$ values very close to zero. Table
+\ref{tab:peta} shows the partial-$\eta^2$ values of all effects that indicated
+at least a small effect size. These effect sizes indicate that the largest
+effects are associated with the main effects, and interactions with
+the analysis method and the latent process. Therefore, the following
+section focuses on analysing these effects. For a full overview of all the
+effects in the model, see Appendix C.
+
+\begin{table}[htbp]
+  \vspace*{2em}
+  \begin{threeparttable}
+    \caption{All effect sizes that are least samll (0.01)}
+    \label{tab:peta}
+    \begin{tabular}{@{}lrrr@{}} \toprule
+      Factor                      & MSE partial-$\eta^2$ \\ \midrule
+      Method                      & 0.65                 \\
+      Process                     & 0.43                 \\
+      Sampling period (SP)        & 0.07                 \\
+      Sampling frequency (SF)     & 0.23                 \\
+      Dynamic error variance (DE) & 0.47                 \\
+      Method:Process              & 0.11                 \\
+      Method:SP                   & 0.10                 \\
+      Method:SF                   & 0.08                 \\
+      Method:DE                   & 0.18                 \\
+      Process:SF                  & 0.02                 \\
+      Process:DE                  & 0.18                 \\
+      SF:DE                       & 0.02                 \\
+      Method:Process:SF           & 0.03                 \\
+      Method:Process:DE           & 0.03                 \\ \midrule
+    \end{tabular}
+  \end{threeparttable}
+\end{table}
+
+\paragraph{Main and second-order interaction effects}
+
+Figure \ref{fig:results} illustrates the mean effect of the different analysis
+methods for each process by averaging over the sampling period, frequency,
+and the dynamic error variances. This shows that as expected on average
+the parametric models have the lowest MSE and GCV across all processes.
+Further, the GAMs appear to perform best among the semi- and non-parametric
+techniques, in term of the MSE and GCV, while the LPRs and GPs infer the latent
+process less accurately. Further, while there are only small differencess
+in how accurately both growth curves and the damped oscillator were inferred,
+the cusp-catastrophe process has been inferred with a lower MSE and GCV ny all
+methods, contradicting our expectation. For sampling period Figure
+\ref{fig:results} shows that sampling over the entire process
+
+\begin{figure}[!ht]
+  \caption{Non-linear exemplar processes}
+  \fitfigure{results.png}
+  \label{fig:results}
+\end{figure}
 
 \section{An Empirical Example}
 
 In the following, the four analysis methods previously introduced were
 applied to depression data from the Leuven clinical study. This study employed
 experience sampling measures to study the dynamics of anhedonia in
-individuals with major depressive disorder. This study was selected for its
+individuals with major depressive disorder \parencite{heininga_dynamical_2019}.
+This study was selected for its
 heterogeneous sample, which includes participants with major depressive
 disorder, borderline personality disorder, and healthy controls. This diversity
 increases the likelihood of the data exhibiting a range of non-linear dynamics
-and processes. Specifically, Houben et al. (date) found in their meta-analysis
+and processes. Specifically, \textcite{houben_relation_2015}
+found in their meta-analysis
 that individuals with lower psychological well-being tend to experience greater
 emotional variability, less emotional stability, and higher emotional inertia.
 However, this finding did not replicate in an analysis of positive affect
-within the Leuven clinical study (Hanega et al.). Additionally, emotional
+within the Leuven clinical study \parencite{heininga_dynamical_2019}.
+Additionally, emotional
 inertia, the extent to which an emotional state carries over across
 observations, has been shown to vary within individuals over time, which makes
 it likely that the processes underlying this data are non-stationary.
@@ -791,7 +865,8 @@ the introduced methods.
 
 The participants in the clinical sample of the Leuven clincial study were
 screened by clinicians during the intake
-in three Belgian psychiatric wards. Patients who met the DSM
+in three Belgian psychiatric wards \parencite{heininga_dynamical_2019}.
+Patients who met the DSM
 criteria for mood disorders or borderline personality disorder during the
 intake were eligible for enrollment, while those presenting with acute
 psychosis, mania, addiction, or (neuro-)cognitive symptoms were excluded.
@@ -816,7 +891,7 @@ symptoms. This analysis focused on the item assessing momentary depressive mood
 100. One additional participant was removed from the analysis for consistently
 reporting a score of zero across all assessments, resulting in a final sample
 of 117 participants. For a more thorough sample and data description, see
-Hanega et al.
+\textcite{heininga_dynamical_2019}.
 
 The published data set was obtained from the EMOTE database. The initial study
 procedure was approved by the KU Leuven Social and Societal Ethics Committee
@@ -846,17 +921,20 @@ method and data set to estimate the expected measurement error.
 
 \subsubsection{Multilevel analysis}
 
-After the idiographic analysis, a mixed effects GAM was fitted to the data.
-This GAM employs sum-to-zero smooth interactions to create a model that
-combines a single fixed non-linear process across participants with
-individual-specific random non-linear deviations from the fixed effect. This
-approach models both the average effect across individuals and individual
-differences, similar to a linear mixed effects model. To preserve possible
-time-of-day and day-of-week effects in the fixed smooth component across
-participants, the time-series for all participants were aligned to the same
-week while preserving the time and weekday of each assessment. Further, to
-reduce computational complexity, a single smoothing parameter was applied to
-all idiographic smooth functions.
+After the idiographic analysis, mixed-effects GAMs were fitted to the data to
+assess the extent to which common and idiographic smooth are necessacary for
+accurately modeling the data. The baseline model was a random intercept model,
+where each participant's data was modelled by a flat line.
+The second model fitted a random smooth, in which each participant's data
+was modelled by an individual smooth function with a common smoothing parameter
+through factor-smooth interactions. To determine if there was evidence of a
+common non-linear trend, this model was compared to an extended model,
+which combined fixed non-linear smooth with individual random non-linear
+deviations. These deviations were again modelled using factor-smooth
+interactions with a common smothing parameter. Finally, to test
+potential heterogeneity in the smoothing parameters across participants,
+a fourth model was fitted, which allowed for individual smooth terms with
+varying smoothing parameters.
 
 \subsubsection{Parametric analysis}
 
@@ -889,7 +967,7 @@ estimate the individual latent depression processes. For the local cubic
 regression, the median optimal bandwidth was 21.28 hours (\textit{IQR}: 5.52).
 For the GP, the median optimal length scale was 22.57 standard deviations
 (\textit{IQR}: 15.09). Lastly, for the GAMs, the median optimal smoothing
-parameter was $8.1810^9$ (\textit{IQR}: $1.7610^{10}$). Unfortunately, these
+parameter was $8.18*10^9$ (\textit{IQR}: $1.76*10^{10}$). Unfortunately, these
 three measures of wiggliness are not only on different scales, but there is
 also only a moderate correlation between the bandwidth and lengthscale
 parameters (\textit{r} = 0.33). The smoothing parameter of the GAMs shows
@@ -934,11 +1012,48 @@ for the GP it was 197.54 (\textit{IQR}: 388.40), and for the LPR it was
 the GAMs inferred the latent processes most accurately, whereas the LPR
 slightly overfit the data and the GPs tended to underfit the data.
 
-\subsubsection{Multilevel analysis}
+\subsubsection{Multilevel analysis (Numbers here are still wrong)}
 
-To investigate this further, a mixed effects GAM was fit to the entire data,
-in which each participant has a seperate smooth term for time. Essentially,
-this model combines the previously fit idiographic GAMs in one model.
+First, the baseline model with only the random intercepts had an
+adjusted $R^2$ of 0.75 (\textit{GCV} = 231). Extending the model to include
+random smooths for each individual with a common smoothing penalty increased
+the adjusted $R^2$ to 0.81 (\textit{GCV} = 194.89). However, adding a common
+smooth to this model reduced adjusted $R^2$ to 0.80 (\textit{GCV} = 197.44).
+Lasltly, using person-specific smooth terms for the random smooth increased
+the adjusted $R^2$ further to 0.81 (\textit{GCV} = 185.29). Table
+\ref{tab:ic_tab} compares the four models using the AIC and BIC. The AIC
+indicates the most complex model, providing
+evidence for the necessacity of individual smooth parameters. However,
+the BIC, which given the sample size uses a heavier penalty, indicates
+the random intercpet model as the best fitting model, highlighting that
+the majority of the variance in the data is due to mean level
+differences. Overall, there is conflicting evidence regarding to which model
+fits the data best.
+
+\begin{table}[htbp]
+  \vspace*{2em}
+  \begin{threeparttable}
+    \caption{Model information criteria for the four mixed effects GAMs}
+    \label{tab:ic_tab}
+    \begin{tabular}{@{}lrrr@{}} \toprule
+      Model                                 & Degrees of freedom & AIC      &
+      BIC
+      \\ \midrule
+      Random intercept                      & 117.3599           & 58997.31 &
+      59803.73
+      \\
+      Random smooth w. common penalty       & 708.5276           & 57712.79 &
+      62581.35
+      \\
+      Common smooth w. deviations           & 714.1653           & 57804.00 &
+      62711.29
+      \\
+      Random smooth w. individual penalties & 565.1936           & 57381.04 &
+      61264.69
+      \\ \midrule
+    \end{tabular}
+  \end{threeparttable}
+\end{table}
 
 \subsubsection{Parametric analysis}
 

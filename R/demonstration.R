@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 23-05-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 18-08-2024                                                   #
+#' Last Modified: 19-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -112,7 +112,7 @@ df_raw[, time1 := difftime(time, min_monday,
   units = "hours"
 ), by = UUID]
 df_raw[, time1 := time1 -
-  (round(min(time1) / (24 * 7), digits = 0) + 1) * (24 * 7), by = UUID]
+  ceiling(min(time1) / (24 * 7)) * (24 * 7), by = UUID]
 
 df_raw$UUID <- as.factor(df_raw$UUID)
 levels(df_raw$UUID) <- 1:118
@@ -530,22 +530,23 @@ ggsave("figures/demonstration_smooths.png", complete_plot,
 #### Multilevel modelling
 ### GAMM------------------------------------------------------------------------
 gamm_ri <- gam(DEP_ES ~ s(UUID, bs = "re"), data = df)
-gamm_free <- gam(DEP_ES ~ s(as.numeric(time1), by = UUID), data = df)
+gamm_ncs <- gam(DEP_ES ~ s(as.numeric(time1), UUID, bs = "fs"), data = df)
 gamm <- gam(DEP_ES ~ s(as.numeric(time1)) +
   s(as.numeric(time1), UUID, bs = "fs"), data = df)
+gamm_free <- gam(DEP_ES ~ s(as.numeric(time1), by = UUID), data = df)
 
 summary(gamm_ri)
+summary(gamm_ncs)
 summary(gamm)
 summary(gamm_free)
 
-AIC(gamm_ri, gamm, gamm_free)
-BIC(gamm_ri, gamm, gamm_free)
+AIC(gamm_ri, gamm_ncs, gamm, gamm_free)
+BIC(gamm_ri, gamm_ncs, gamm, gamm_free)
 
 plot(gamm, select = 2)
 plot_predictions(gamm,
   condition = list(time0 = unique, UUID = unique(df$UUID)[1])
 )
-
 
 #### Parametric modelling ------------------------------------------------------
 set.seed(42)

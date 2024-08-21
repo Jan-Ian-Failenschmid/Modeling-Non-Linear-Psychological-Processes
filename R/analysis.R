@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 06-08-2024                                                   #
+#' Last Modified: 20-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -17,6 +17,12 @@
 library(ggplot2)
 library(ggdist)
 library(data.table)
+library(lmtest)
+library(car)
+library(effectsize)
+library(marginaleffects)
+library(emmeans)
+library(patchwork)
 
 # Load functions
 invisible(sapply(
@@ -57,6 +63,7 @@ res$model <- factor(res$model,
     "Damped Oscillator", "Cusp Catastrophe"
   )
 )
+contrasts(res$model) <- contr.sum(levels(res$model))
 
 res$method <- factor(res$method,
   levels = c(
@@ -64,6 +71,16 @@ res$method <- factor(res$method,
     "Generall Additive Modelling", "Dynamic Modelling"
   )
 )
+contrasts(res$method) <- contr.sum(levels(res$method))
+
+res$weeks <- factor(res$weeks)
+contrasts(res$weeks) <- contr.sum(levels(res$weeks))
+
+res$meas <- factor(res$meas)
+contrasts(res$meas) <- contr.sum(levels(res$meas))
+
+res$dyn_var <- factor(res$dyn_var)
+contrasts(res$dyn_var) <- contr.sum(levels(res$dyn_var))
 
 ### Analysis -------------------------------------------------------------------
 ## Descriptives
@@ -123,8 +140,21 @@ ind_dynm <- c(ind_dynm, na.omit(res[
 res_clean <- res
 res_clean[c(ind_gam, ind_dynm), c("mse", "gcv", "ci_coverage")] <- NA
 
-plot_results(res = res_clean, "mse", "mean", "meas")
+### Plot results
+p1 <- plot_results(res = res_clean, "mse", "mean", legend = FALSE)
+p2 <- plot_results(res = res_clean, "mse", "mean", "weeks")
+p3 <- plot_results(res = res_clean, "mse", "mean", "meas", legend = FALSE)
+p4 <- plot_results(res = res_clean, "mse", "mean", "dyn_var")
 
+p_comp <- (p1 + p2) /
+  (p3 + p4)
+
+ggsave("figures/results.png", p_comp,
+  width = 1920,
+  height = 1080, units = "px", dpi = "screen"
+)
+
+# Mischellaneous
 dat_id <- res_clean[
   method == "dynm",
   order(gcv, decreasing = TRUE)[1:137]
@@ -141,7 +171,7 @@ y <- seq_along(x)
 test_fit <- lm(x ~ y)
 
 ## Inference
-predictor <- c("method", "model", "time", "stepsize", "dyn_er")
+predictor <- c("method", "model", "weeks", "meas", "dyn_var")
 
 # Model selection - Univariate
 # mse
@@ -174,9 +204,16 @@ fit_aic_mse <- lm(
   ),
   data = res_clean
 )
-anova(fit_aic_mse)
+qqnorm(resid(fit_aic_mse))
+qqline(resid(fit_aic_mse))
+hist(resid(fit_aic_mse))
+bptest(fit_aic_mse)
 
-emmeans(fit_aic_mse, specs = c("model", "method", "time"))
+aov_mse <- Anova(fit_aic_mse, singular.ok = TRUE)
+effectsize(aov_mse, partial = TRUE)
+
+emmeans(fit_aic_mse, specs = "model")
+emmeans(fit_aic_mse, specs = "method")
 
 fit_aic_gcv <- lm(
   as.formula(
@@ -184,8 +221,14 @@ fit_aic_gcv <- lm(
   ),
   data = res
 )
-anova(fit_aic_gcv)
 
+qqnorm(resid(fit_aic_gcv))
+qqline(resid(fit_aic_gcv))
+hist(resid(fit_aic_gcv))
+bptest(fit_aic_gcv)
+
+aov_gcv <- Anova(fit_aic_gcv, singular.ok = TRUE)
+effectsize(aov_gcv, partial = TRUE)
 # BIC
 fit_bic_mse <- lm(
   as.formula(

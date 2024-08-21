@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 20-08-2024                                                   #
+#' Last Modified: 21-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -562,7 +562,8 @@ plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
       facet_wrap(~method) +
       theme_minimal() +
       theme(
-        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+        text = element_text(size = 20)
       ) +
       ylab(outcome)
   } else if (style == "missing") {
@@ -578,7 +579,10 @@ plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
       geom_col() +
       facet_wrap(~method) +
       theme_minimal() +
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+      theme(
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+        text = element_text(size = 20)
+      ) +
       ylab(outcome)
   }
   if (length(grp_var) > 0) {

@@ -1,1 +1,10 @@
-demonstration_smooths
+gamm_ri <- gam(DEP_ES ~ s(UUID, bs = "re"), data = df)
+gamm_ncs <- gam(DEP_ES ~ s(as.numeric(time1), UUID, bs = "fs"), data = df)
+gamm <- gam(DEP_ES ~ s(as.numeric(time1)) +
+  s(as.numeric(time1), UUID, bs = "fs"), data = df)
+gamm_free <- gam(DEP_ES ~ s(as.numeric(time1), by = UUID), data = df)
+
+summary(gamm_ri)
+summary(gamm_ncs)
+summary(gamm)
+summary(gamm_free)

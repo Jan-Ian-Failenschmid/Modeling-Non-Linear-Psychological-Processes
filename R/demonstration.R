@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 23-05-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 19-08-2024                                                   #
+#' Last Modified: 21-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -82,7 +82,8 @@ plot_ml_pred <- function(id, pred, dat, var, time) {
     geom_line() +
     geom_ribbon(aes(ymin = lb, ymax = ub), alpha = .1) +
     geom_point(data = dat_dat, mapping = aes(y = val, x = time)) +
-    theme_apa()
+    theme_apa() +
+    theme(text = element_text(size = 20))
   return(gg)
 }
 

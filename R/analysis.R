@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 20-08-2024                                                   #
+#' Last Modified: 21-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -150,6 +150,15 @@ p_comp <- (p1 + p2) /
   (p3 + p4)
 
 ggsave("figures/results.png", p_comp,
+  width = 1920,
+  height = 1080, units = "px", dpi = "screen"
+)
+
+ci_plot <- plot_results(
+  res = res_clean, "ci_coverage", "mean", "weeks", "meas", "dyn_var"
+)
+
+ggsave("figures/ci_plot.png", ci_plot,
   width = 1920,
   height = 1080, units = "px", dpi = "screen"
 )

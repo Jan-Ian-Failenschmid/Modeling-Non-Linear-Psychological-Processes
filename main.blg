@@ -1,0 +1,20 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'main.blg'
+[30] biber:340> INFO - === Wed Aug 21, 2024, 15:50:08
+[38] Biber.pm:418> INFO - Reading 'main.bcf'
+[70] Biber.pm:972> INFO - Found 49 citekeys in bib section 0
+[75] Biber.pm:4383> INFO - Processing section 0
+[81] Biber.pm:4574> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[91] bibtex.pm:1713> INFO - LaTeX decoding ...
+[231] bibtex.pm:1518> INFO - Found BibTeX data source 'bibliography.bib'
+[362] Biber.pm:4574> INFO - Looking for bibtex file 'R_bib.bib' for section 0
+[362] bibtex.pm:1713> INFO - LaTeX decoding ...
+[366] bibtex.pm:1518> INFO - Found BibTeX data source 'R_bib.bib'
+[420] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[420] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[420] Biber.pm:4203> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[420] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[445] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[467] bbl.pm:757> INFO - Output to main.bbl
+[467] Biber.pm:130> WARN - ISBN '978-1-4419-2918-1 978-1-4757-3462-1' in entry 'harrell_general_2001' is invalid - run biber with '--validate_datamodel' for details.
+[468] Biber.pm:132> INFO - WARNINGS: 1

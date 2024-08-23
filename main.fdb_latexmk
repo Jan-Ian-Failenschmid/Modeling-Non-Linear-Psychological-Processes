@@ -1,14 +1,14 @@
 # Fdb version 3
-["biber main"] 1724270272 "main.bcf" "main.bbl" "main" 1724271564
+["biber main"] 1724271809 "main.bcf" "main.bbl" "main" 1724335532
   "R_bib.bib" 1722948594 3333 009cb5adf5865f2dc4d6146c26da9eb2 ""
   "bibliography.bib" 1724270014 284712 f82587b68d20468882ad1b3cbc9be01a ""
-  "main.bcf" 1724271564 130929 d5d432000a7e2d691e5160fbe1d050ca "pdflatex"
+  "main.bcf" 1724335531 131061 82659600c07376a8e9a63a2e4583146a "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1724271562 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1724271564
+["pdflatex"] 1724335529 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1724335532
   "/etc/texmf/web2c/texmf.cnf" 1701959205 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1724271562 60046 657b3dc909d7a4a32ef2586da6bcad81 ""
+  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1724335524 61998 5f73bd638d1962912b04e0b4b488ba2d ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -243,11 +243,11 @@
   "figures/gp_demonstration.png" 1714122207 584542 e30de3f8dc9a7d4aba92e20fd5c401c2 ""
   "figures/locpol_demonstration.png" 1714122102 122600 74e31a0c96b379e96b0c9e28979ab19c ""
   "figures/results.png" 1724269958 134960 0c014faf8d73e197b5b52b2c13a7f6a1 ""
-  "main.aux" 1724271564 21537 9e118e50d0a915d9d2519a1c0183b97e "pdflatex"
-  "main.bbl" 1724270273 135633 4fb40b58846ef101c175968510e22731 "biber main"
-  "main.out" 1724271564 4491 1544211037c96cec24de02e52adc1be6 "pdflatex"
-  "main.run.xml" 1724271564 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
-  "main.tex" 1724271562 60046 657b3dc909d7a4a32ef2586da6bcad81 ""
+  "main.aux" 1724335531 21749 60764677582f811466aafeea30038296 "pdflatex"
+  "main.bbl" 1724271810 138052 2315018dfcc4a82cef6020d229e8079b "biber main"
+  "main.out" 1724335531 4491 1544211037c96cec24de02e52adc1be6 "pdflatex"
+  "main.run.xml" 1724335531 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
+  "main.tex" 1724335524 61998 5f73bd638d1962912b04e0b4b488ba2d ""
   (generated)
   "main.aux"
   "main.bcf"

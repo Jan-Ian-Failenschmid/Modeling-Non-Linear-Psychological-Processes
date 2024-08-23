@@ -3,7 +3,7 @@
 % Author: Jan Ian Failenschmid                                                 %
 % Created Date: 13-03-2024                                                     %
 % -----                                                                        %
-% Last Modified: 21-08-2024                                                    %
+% Last Modified: 22-08-2024                                                    %
 % Modified By: Jan Ian Failenschmid                                            %
 % -----                                                                        %
 % Copyright (c) 2024 by Jan Ian Failenschmid                                   %
@@ -71,7 +71,8 @@ variations in latent psychological variables within an ecologically valid
 context and to explain them through (between-person differences)
 in within-person processes.
 
-Many psychological phenomena and processes have been discovered during the
+Many non-linear psychological phenomena and processes have been discovered
+during the
 recent years. Clear examples of this are the learning and growth curves
 observed in intellectual and cognitive development
 \parencite{kunnen_dynamic_2012, mcardle_comparative_2002}. In these cases, an
@@ -738,7 +739,8 @@ were tested using post hoc tests and marginal comparisons with appropriate
 corrections for multiple comparisons.
 Model assumptions were assessed on the final selected model. Given
 the large sample sizes in this simulation, the ANOVAs were robust to moderate
-violations of normality, and any potential violations of homoscedasticity were
+violations of normality \parencite{blanca_non-normal_2017},
+and any potential violations of homoscedasticity were
 addressed using heteroscedasticity-consistent standard errors. However, if both
 assumptions were severely violated, results were instead presented
 descriptively, using means and standard errors for the respective conditions.
@@ -1106,6 +1108,49 @@ fits the data best.
 \textit{Not working yet}
 
 \section{Discussion}
+
+- Gams perfomred best (why?)
+- Were defined to be the least wiggly smoother
+- But they are technically just weird Gaussian processes
+- Other two methods may have had protblems with the changing wigglyness
+- This is supported as theyr fit decreased for longer process lengthscale
+- Adaptiations for the other two methods are available that might equipped
+them to deal better with this
+
+- Against expectation the cusp-catastrophe was inferred best
+- Due to being more resistant to external perturbations
+- Higher gradient towards the attractor
+- Point at figure with dynamic errors
+- Rerunning the simulation with much lower dynamic error variances showed
+that then the cusp model was inferred better.
+
+- For the oter three simulation conditions, sampling at a higher frequency is
+generally desirable
+- Here choices may be influenced by prior knowledge about the variability
+of certain constructs
+- Sampling for longer periods of time is a design choice and if the
+functional behaviour of the latent process is expected to change over the
+sampling period that should be taken into account
+-Lastly, reducing dynamic errors is generally advisable.
+
+- Here we focussed on inferring non-liear trends but the possibilities of
+these methods are rather more interesting
+- Estimate non-linear autoregressive functions
+- Estimate state-space models or differential equation models
+non-parametrically
+- Infer input forces to differential equation models
+- Combine everything togther to test partial theories
+
+- Limitations
+- Only few processes considered
+- Processes with constant wigglyness in the sense of the LPR or GP may change
+the picture
+- Focus mostly on univariate singe subject desing with iid gaussian errors
+
+- There are many ways to extend these methods
+- Multilevel extensions are somewhat already available
+- Measurement models are somewhat already available
+- Multivariate models run into an issue of
 
 \section{Conclusion}
 

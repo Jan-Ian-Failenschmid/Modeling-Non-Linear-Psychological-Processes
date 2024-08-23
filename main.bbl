@@ -125,6 +125,68 @@
       \verb https://betanalpha.github.io/assets/case_studies/gaussian_processes.html
       \endverb
     \endentry
+    \entry{blanca_non-normal_2017}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=5896816ed30e737ce778a63cfd58dec2}{%
+           family={Blanca},
+           familyi={B\bibinitperiod},
+           given={María\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b91fb1540f74d53ac96a43b885fd4e6c}{%
+           family={Alarcón},
+           familyi={A\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=cae237f2af1d0f6db5618034c984010a}{%
+           family={Arnau},
+           familyi={A\bibinitperiod},
+           given={Jaume},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {eng}%
+      }
+      \strng{namehash}{14402d6587acd3b30b38c970f69a48e8}
+      \strng{fullhash}{61ab1e7f4d6e3809d4b94836ce09943b}
+      \strng{bibnamehash}{61ab1e7f4d6e3809d4b94836ce09943b}
+      \strng{authorbibnamehash}{61ab1e7f4d6e3809d4b94836ce09943b}
+      \strng{authornamehash}{14402d6587acd3b30b38c970f69a48e8}
+      \strng{authorfullhash}{61ab1e7f4d6e3809d4b94836ce09943b}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{journaltitle}{Psicothema}
+      \field{month}{11}
+      \field{number}{29.4}
+      \field{shorttitle}{Non-normal data}
+      \field{title}{Non-normal data: {Is} {ANOVA} still a valid option?}
+      \field{urlday}{21}
+      \field{urlmonth}{8}
+      \field{urlyear}{2024}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \field{pages}{552\bibrangedash 557}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.7334/psicothema2016.383
+      \endverb
+      \verb{file}
+      \verb Blanca et al. - 2017 - Non-normal data Is ANOVA still a valid option.pdf:C\:\\Users\\failensc\\Zotero\\storage\\HKTG2LHC\\Blanca et al. - 2017 - Non-normal data Is ANOVA still a valid option.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.7334/psicothema2016.383
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.7334/psicothema2016.383
+      \endverb
+    \endentry
     \entry{cooper_dynamical_2012}{inbook}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=139121b9346021d58300eba22bc2b9fc}{%

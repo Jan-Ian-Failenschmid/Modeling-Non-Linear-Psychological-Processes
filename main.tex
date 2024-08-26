@@ -3,7 +3,7 @@
 % Author: Jan Ian Failenschmid                                                 %
 % Created Date: 13-03-2024                                                     %
 % -----                                                                        %
-% Last Modified: 22-08-2024                                                    %
+% Last Modified: 24-08-2024                                                    %
 % Modified By: Jan Ian Failenschmid                                            %
 % -----                                                                        %
 % Copyright (c) 2024 by Jan Ian Failenschmid                                   %
@@ -1109,11 +1109,36 @@ fits the data best.
 
 \section{Discussion}
 
-- Gams perfomred best (why?)
-- Were defined to be the least wiggly smoother
-- But they are technically just weird Gaussian processes
-- Other two methods may have had protblems with the changing wigglyness
-- This is supported as theyr fit decreased for longer process lengthscale
+Both the simulation and empirical example demonstrated that GAMs inferred the
+latent processes more accurately than the LPR and GP in terms of MSE, GCV,
+and confidence interval coverage across all conditions. Additionally, the GAMs
+were nearly as accurate as the true data-generating parametric models in the
+simulation and outperformed the tested parametric models in predicting the
+empirical data based on the GCV\@. This finding was unexpected, as we
+anticipated
+that the smooth estimates produced by GAMs might not be optimally suited for
+inferring the rough (i.e., non-differentiable) processes that were simulated.
+However, the LPR and the default GP specifications also produce smooth
+estimates, causing similar misspecifications as the GAMs. This may suggests
+that the accuracy of the GAMs was least affected by the roughness of the latent
+process. However, another factor that may have influenced the accuracy of
+LPR and GP methods is that both assume constant wiggliness, as defined by their
+
+bandwidth and lengthscale parameters respectively, which was violated for the
+processes tested.
+
+Importantly, there are several theoretical reasons that indicate that the
+observed results may only be due to the specific configurations
+that were used for each method, rather than by the general methods
+themselves. The configurations for each method were chosen to reflect
+how each method is commonly applied in its most basic form and not too
+optimally infer the types of processes simulated. Thus, it is possible
+that different configurations and extensions might improve the perfromance
+of the LPR and GP\@. Specifically, Fan et al. () showed that the LPR is
+minmax efficient for certain processes and using extensions for variable
+bandwidth and polynomial selection as well as for bias correction
+might improve their inference accuracy.
+
 - Adaptiations for the other two methods are available that might equipped
 them to deal better with this
 

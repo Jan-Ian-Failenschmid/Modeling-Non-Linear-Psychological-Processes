@@ -3,7 +3,7 @@
 % Author: Jan Ian Failenschmid                                                 %
 % Created Date: 13-03-2024                                                     %
 % -----                                                                        %
-% Last Modified: 24-08-2024                                                    %
+% Last Modified: 29-08-2024                                                    %
 % Modified By: Jan Ian Failenschmid                                            %
 % -----                                                                        %
 % Copyright (c) 2024 by Jan Ian Failenschmid                                   %
@@ -59,33 +59,28 @@
 Psychological constructs are increasingly viewed as components of complex
 dynamic systems \parencite{nesselroade_studying_2004, wang_investigating_2012}.
 This perspective emphasizes that these constructs fluctuate over time and
-within
-individuals. To study these variations and the underlying processes,
+within individuals. To study these variations and the underlying processes,
 researchers are increasingly collecting intensive longitudinal data (ILD) using
 ecological momentary assessment (EMA), experience sampling, or similar methods
-\parencite{fritz_so_2023}. In
-these studies several individuals are assessed at a high
-frequency (up to multiple times per day) using brief questionnaires or
-passive measurement devices. This rich data allows researchers to examine
-variations in latent psychological variables within an ecologically valid
-context and to explain them through (between-person differences)
-in within-person processes.
+\parencite{fritz_so_2023}. In these studies one or more individuals are
+assessed at a high frequency (multiple times per day) using brief
+questionnaires or passive measurement devices. This rich data allows
+researchers to examine variations in latent psychological variables
+within an ecologically valid context and to explain them through
+(between-person differences) in within-person processes.
 
 Many non-linear psychological phenomena and processes have been discovered
-during the
-recent years. Clear examples of this are the learning and growth curves
+during recent years. Clear examples of this are the learning and growth curves
 observed in intellectual and cognitive development
 \parencite{kunnen_dynamic_2012, mcardle_comparative_2002}. In these cases, an
 individual's latent ability increases over time from a (person specific)
-starting point towards an (person specific) asymptote,
-which reflects their maximum ability. Additional examples of
-asymptotic growth over the shorter time spans that are typically studied with
-ILD include
+starting point towards an (person specific) asymptote, which reflects their
+maximum ability. Additional examples of asymptotic growth over the shorter
+time spans that are typically studied with ILD include
 motor skill development \parencite{newell_time_2001} and second language
 acquisition \parencite{de_bot_dynamic_2007}. Figure~\ref{fig:examplar_npn}
-illustrates these general growth curves through an exponential growth
-function (a) and a logistic growth function (b), both of which are common
-model choices for these kinds of processes.
+shows an exponential growth function (a) and a logistic growth function (b),
+both of which are common model choices for these kinds of processes.
 
 \begin{figure}[!ht]
   \caption{Examples of non-linear processes demonstrated to occur in
@@ -107,18 +102,17 @@ model choices for these kinds of processes.
   \label{fig:examplar_npn}
 \end{figure}
 
-Another commonly observed non-linear phenomenon involves the construct under
-study switching between multiple distinct states, which often
-correspond to different
-means. This occurs, for example, during the sudden perception of cognitive
+Another common non-linear phenomenon is that the construct of interest
+switches between distinct states, which often correspond to different mean
+levels. This occurs, for example, during the sudden perception of cognitive
 flow, where individuals abruptly switch from a `normal' state to a flow state
 and back \parencite{ceja_suddenly_2012}. Another example is alcohol use
 relapse, where patients suddenly switch from an abstinent state to a relapsed
-state \parencite{witkiewitz_modeling_2007}. This sudden switching behavior is
-exemplified in Figure~\ref{fig:examplar_npn}~(c)
-through a cusp catastrophe model. This model, drawn from catastrophe
-theory, naturally leads to mean level switches when varying one of its
-parameters \parencite{van_der_maas_sudden_2003,chow_cusp_2015}.
+state \parencite{witkiewitz_modeling_2007}. This sudden switching behavior has
+been modelled using a cusp catastrophe model. This dynamic model, drawn from
+catastrophe theory, naturally leads to mean level switches when varying one
+of its parameters \parencite{van_der_maas_sudden_2003,chow_cusp_2015}
+and has been exemplified in Figure~\ref{fig:examplar_npn}~(c).
 
 As a final example, one may consider (self-) regulatory systems, which maintain
 a desired state by counteracting external perturbations. These systems regulate
@@ -127,23 +121,31 @@ between the
 current and desired states. The common autoregressive model describes such a
 system in which the regulation strength depends linearly on this distance.
 However, this relationship may also be non-linear, such that the
-regulatory force increases disproportionately with larger mismatches. Such
-(self-) regulatory models have been proposed to describe for example emotion
-regulation
-\parencite{chow_emotion_2005}.
-Figure~\ref{fig:examplar_npn}~(d) illustrates a
-(self-) regulatory system exemplified as a damped oscillator.
+regulatory force changes disproportionately with larger mismatches. Such
+a (self-) regulatory model has been used to model, for example, emotion
+regulation \parencite{chow_emotion_2005} using a damped oscillator model.
+This model is exemplified in Figure~\ref{fig:examplar_npn}~(d).
 
 Although initial evidence for non-linearity in psychological research exists,
 theories about the nature and form of non-linear psychological processes remain
-scarce \parencite{tan_time-varying_2011}. This gap is largely due to the lack
-of advanced statistical methods that are flexible enough to study the complex
-behavior of these processes adequately. As a result, researchers are often
-ill-equipped to infer the functional characteristics of non-linear processes
-from ILD, which hinders the development and evaluation of guiding theories for
-subsequent studies. Due to this lack of adequate available statistical methods,
+scarce \parencite{tan_time-varying_2011}. Such theories would ideally
+take the form of formal dynamic models, describing how a process changes over
+time, such as differential equation \parencite{cooper_dynamical_2012} or
+state-space models \parencite{durbin_time_2012}. However, in order
+to develop these types of theories it is
+necessary to first identify phenomena, which are replicable and empirically
+observable features of the underlying processes, such as the described
+state switching or regulatory oscillations. Formal theories about the
+underlying process should then be able to explain these phenomena and different
+candidate theories can be compared on their success to do so
+\parencite{borsboom_theory_2021}.
+Unfortunately, reserachers are currently ill-equipped to infer non-linear
+phenomena from ILD due to a lack of advanced statistical methods that are
+flexible enough to adequately captrue and explore these processes, which
+hinders the development and evaluation of guiding theories.
+Due to this lack of adequate available statistical methods,
 non-linear trends are most often addressed in psychology through polynomial
-regression or regression splines.
+regression or spline regresison.
 
 Polynomial regression \parencite{jebb_time_2015} uses higher-order terms
 (e.g., squared or cubed time) as predictors in a standard multiple linear
@@ -170,11 +172,11 @@ precise guiding theories about the functional form of most psychological
 processes are lacking \parencite{tan_time-varying_2011}. This absence of clear
 guidance can easily lead to misspecified models and invalid results.
 
-These limitations in current practices underscore the need for alternative
-statistical methods to study non-linear processes. Various
-such advanced statistical
-methods, such as kernel regression, Gaussian processes, smoothing splines, and
-latent change score models, are available outside of psychology. However, these
+These limitations in the currently available methods underscore the need for
+alternative statistical methods to study and explore non-linear processes.
+Various such advanced statistical
+methods, such as kernel regression, Gaussian processes, and smoothing splines
+are available outside of psychology. However, these
 methods have rarely been applied in psychology because they have not been
 reviewed for an applied audience, nor have their assumptions and inference
 possibilities been evaluated in the context of ILD.\@ As a result,
@@ -185,59 +187,30 @@ non-linear process, which are generally unknown. Expecially, since the smooth
 processes for which many of these methods were originally developed are
 unlikely to occur in psychological research.
 
-To address this important gap, this article reviews four advanced non-linear
-analysis
-methods and evaluates their applicability to typical ILD.\@ Specifically, we
-compare how well each method can recover different latent processes under
-common ILD conditions in a simulation study. We also demonstrate the
-conclusions that can be drawn from each method by applying them to an existing
-dataset. The methods reviewed in this article range from data-driven
-non-parametric techniques to a flexible parametric modeling framework, which
-were selected to accommodate varying degrees of prior knowledge, as
-precise theories about the nature of non-linear psychological processes are
-often missing \parencite{tan_time-varying_2011}. Further, to introduce these
-methods accessibly and apply them under conditions where software
-implementations are available, this article focuses primarily on the univariate
-single-subject design.
+To address this important gap, this article reviews three advanced non-linear
+analysis methods and evaluates their applicability to typical ILD.\@
+Specifically, we compare how well each method can recover different latent
+processes under common ILD conditions in a simulation study. We also
+demonstrate the conclusions that can be drawn from each method by applying them
+to an existing dataset. The methods reviewed in this article are semi- and
+non-parametric regression techniques which
+are able flexibly infer non-linear functions from data
+while accommodating varying degrees of prior knowledge.
+Further, to introduce these methods accessibly and apply them under
+conditions where software implementations are available, this article
+focuses on the univariate single-subject design.
 
-\section{Method}
+\section{Non-linear analysis methods}
 
-\subsection{Data structure}
-
-Generally, any psychological construct under study follows a (possibly
-non-linear) function over time, as represented by the lines in Figure 1.
-However, since these psychological processes are typically unobservable or
-latent, they are measured through observable indicators, such as questionnaire
-items or passive measurements. The observations on these indicators
-(Figure~\ref{fig:examplar_npn}, dots)
-differ from the true values of the latent process due to measurement
-error, which may come from an imperfect measurement instrument.
-For this introduction, we assume that all time-point-specific measurement
-errors are independent and normally distributed. The model for the
-observations of a single indicator can then be written as:
-
-\begin{align}
-  Y_t = f(t) + \epsilon_t; \quad \epsilon_t \sim N(0, \sigma^2_{\epsilon})
-\end{align}
-
-\noindent where $f(t)$ represents the potentially non-linear latent process,
-and $\epsilon_t$ represents the time-point-specific measurement error.
-
-In this context, researchers typically aim to infer the underlying process and
-draw conclusions about its functional form. The following sections will
-introduce four methods to achieve these goals, two non-parametric techniques,
-one semi-parametric approach, and one parametric modeling framework, using the
-(self-) regulatory process depicted in Figure~\ref{fig:examplar_npn}~(d)
-as a running example.
-
-\subsubsection{Local polynomial regression}
+\subsection{Local polynomial regression}
 
 The first technique is called local polynomial regression (LPR). Similarly to
 regular polynomial regression, LPR approximates the process using polynomial
 basis functions (e.g., squared or cubed time). However, instead of using one
-large polynomial to approximate the entire process, LPR estimates smaller,
-local polynomials at each point in time. These local polynomials are then
-combined into a single non-linear function over the entire set of observations
+large polynomial function to approximate the entire process, LPR estimates
+smaller, local polynomials at ant point in time. These local polynomials are
+then combined into a single non-linear function over the entire set of
+observations
 \parencite{fan_adaptive_1995, ruppert_multivariate_1994, fan_local_2018}.
 
 To determine the value of the LPR at a specific time point, the data is
@@ -247,24 +220,25 @@ around it. Additionally, to account for the idea that data points closer in
 time are more related, a weighting function is applied during the polynomial
 estimation. This function assigns weights to each data point based on its
 distance from the point of interest. The value of the LPR at the chosen
-time point is then given, by the intercept of the locally weighted polynomial.
+time point is then given by the intercept of the locally weighted polynomial.
 To find the LPR value at a different time
 point, the same procedure is repeated, centering the data around the new point
 of interest. Since it is theoretically possible to repeat this process at
 infinitely many
 time points, LPR is a non-parametric technique. Figure~\ref{fig:locpol_dem}
-shows the estimated LPR for the example process depicted in
+shows the estimated LPR for the example process introduced in
 Figure~\ref{fig:examplar_npn}~(d).  In this figure, three truncated examples of
 local cubic regressions are shown
-in red, which contribute to the overarching LPR for this process .\@
+in red, which contribute to the overarching LPR for this process.\@
 
 \begin{figure}[!ht]
-  \caption{Demonstration of how local polynomial regression (solid black)
+  \caption{Demonstration of a local polynomial regression}
+  \fitfigure{locpol_demonstration.png}
+  \figurenote{This figure shows how local polynomial regression (solid black)
     estimates the underlying process (dotted black). Here, three local cubic
     functions (red) are shown as examples at the time points 50, 100, and 150,
     which provide the values of the local polynomial regression at these time
     points.}
-  \fitfigure{locpol_demonstration.png}
   \label{fig:locpol_dem}
 \end{figure}
 
@@ -272,32 +246,35 @@ When fitting an LPR, several decisions must be
 made regarding the degree of the local polynomials and the optimal weighting of
 the data. Typically, the degree of these local polynomials is kept low and odd.
 This choice reflects a bias-variance tradeoff, where higher-order polynomials
-reduce bias but increase variance, when transitioning from an odd
+reduce bias but increase variance only when transitioning from an odd
 to an even power \parencite{ruppert_multivariate_1994}. The data weighting
 in an LPR is achieved through a
 kernel function, which is usually centered and symmetric to assign weights
 based
 on the distance from the origin. Common kernel choices include the Gaussian and
-symmetric Beta distributions. However, most commonly used kernel functions
-yield similar
-inferences and a specific kernel can be selected to minimize a chosen criterion
-function. The kernel is further defined by a bandwidth
-parameter, which determines its width and effectively controls the influence of
-more distant data points. The bandwidth parameter, in practice, represents the
-wiggliness of the estimated process.
+Epanechnikov, with the latter being optimal in many applications and
+aspects \parencite{fan_local_1997}. Each kernel is further defined by a
+bandwidth parameter, which determines its width and effectively controls the
+influence of more distant data points. The bandwidth parameter, in practice,
+represents the wiggliness of the estimated process.
 Several methods are available to find the optimal bandwidth by optimizing a
 data-dependent criterion function, such as cross-validation or the mean
 integrated squared error \parencite{kohler_review_2014, debruyne_model_2008}.
 
 Due to its non-parametric nature, LPR makes minimal assumptions about the data.
 However, it does require that the underlying process is smooth or
-differentiable, which is
-a necessary condition for polynomial approximation.
+differentiable, which is a necessary condition for polynomial approximation.
+It is further noteworthy that the polynomial approximation is biased in
+most applications. However, this bias is usually negligable and there are
+methods available to correct for it \parencite{R-nprobust}.
 Another key assumption is that the process has constant
 wiggliness, represented by a single bandwidth parameter. However,
-this assumption may be relaxed by using a time-varying bandwidth.
+this assumption may be relaxed by using a time-varying bandwidth
+\parencite{fan_data-driven_1995} or
+polynomial degree \parencite{fan_adaptive_1995}, but this is beyond the scope
+of this introduction.
 
-\subsubsection{Gaussian process regression}
+\subsection{Gaussian process regression}
 
 The second non-parametric technique is Gaussian process (GP) regression, a
 Bayesian approach that directly defines a probability distribution over an
@@ -311,7 +288,8 @@ a prior distribution for the latent process. This prior is then combined
 with an appropriate likelihood for the observed data to obtain a posterior
 distribution for the latent process given the observed data.
 This posterior distribution represents an updated belief about which functions
-describe the latent process well, allowing one to draw inferences about the
+describe the latent process well
+\parencite{kruschke_doing_2011}, allowing one to draw inferences about the
 process itself. Figure~\ref{fig:gp_dem} illustrates such a posterior
 distribution for the running
 example process. The red lines represent a sample of non-linear functions
@@ -319,14 +297,15 @@ drawn from the posterior distribution, with the pointwise average of these
 functions providing a mean estimate for the underlying process.
 
 \begin{figure}[!ht]
-  \caption{Demonstration of how Gaussian process regression estimates the
+  \caption{Demonstration of a Gaussian process regression}
+  \fitfigure{gp_demonstration.png}
+  \figurenote{This figure shows how a Gaussian process regression estimates the
     underlying process (dotted black). Here, a sample of functions drawn from
     the
     posterior Gaussian process probability distribution is shown (red). The
     predicted value for the underlying process is then obtained by averaging
     the
     drawn functions.}
-  \fitfigure{gp_demonstration.png}
   \label{fig:gp_dem}
 \end{figure}
 
@@ -340,56 +319,61 @@ available, which does not constrain the posterior mean to zero but instead
 indicates a lack of prior information about its deviations from zero.
 The covariance function is typically based on a kernel function, which assigns
 covariances between time points only depending on their distance
-(e.g., quadratic exponential, Matern class). Finally, appropriate hyperpriors
-for the parameters of the mean and covariance functions are used to generate
-the corresponding posterior distribution. These hyperpriors reflect
-prior beliefs about the hyperparameters and can be used to constrain them to
-sensible values.
+(e.g., quadratic exponential, Matern class kernel).
 
-The functional behavior of a GP is entirely determined by the posterior mean
-and covariance function. Thus, to accurately capture a process, it is crucial
-that the functional familiy generated by a chosen mean and covariance function
-is similar to the actual process.
-Common choices for the covariance function result in smooth and
-covariance-stationary GPs with constant wiggliness. Unlike LPR, GP
-regression provides more interpretable information about the process through
-the posterior distributions of the hyperparameters.
-One typical hyperparameter, the characteristic length scale of the covariance
-function, is analogous to the bandwidth parameter in LPR, as it also describes
-the wiggliness of the estimated process. However, GP regression can
+Finally, appropriate
+hyperpriors for the parameters of the mean and covariance functions are used
+to generate the corresponding posterior distribution. These hyperpriors reflect
+prior beliefs about the hyperparameters and can be used to constrain them to
+sensible values. The corresponding posterior hyperparameter distributions
+also provide more interpretable infromation than the LPR about the process.
+Most common covariance kernels build on a
+characteristic lengthscale and a marginal standard deviation hyperparameter.
+The characteristic lengthscale determines the wigglyness of the estimated
+process, similarly to the bandwidth parameter in an LPR\@. The marginal
+standard deviation describes the spread of the functions which are described
+by the GP at any point in time. However, GP regression can also
 include additional hyperparameters, allowing for more specific theories to be
 tested through model comparison.
 
-\subsubsection{Generalized additive models}
+The functional behavior of a GP is entirely determined by the posterior mean
+and covariance function. Therefore, the assumptions made in a GP regression
+are directly tied to the chosen mean and covariance functions and the
+functional family that they are generating. For a GP to accurately capture a
+process, it is crucial that this functional familiy is similar to the actual
+process. Most common choices for the covariance function result in smooth and
+covariance-stationary GPs with constant wiggliness.
 
-Generalized additive models (GAM) are a semi-parametric modeling framework
-that builds on smooth terms, which are non-linear functions
-that are inferred from the data through
-smoothing splines \parencite{wood_generalized_2006, wood_inference_2020,
-  hastie_generalized_1999}. Smoothing splines are an extension of the regular
-spline
-regression introduced above, which circumvent the knot placement issue by
-placing a knot at each
-observation \parencite{tsay_nonlinear_2019}. This is equivalent to a
-basis function regression with as many basis functions as there are
-observations. However, using this many knots usually leads to overfitting. To
-prevent this, smoothing splines use a penalty term, similar to the penalty
-used in a lasso or ridge regression, which controls the smooth term's
-wigglyness
-\parencite{gu_smoothing_2013, wahba_spline_1980}. This penalty makes it
-possible to balance the flexibility and fitting of the smooth term,
-ensuring that the model captures the process
-accurately without excessive complexity. In practice, the optimal weight of the
-penalty is
-determined by minimizing a criterion function, such as the generalized
-cross-validation criterion \parencite{wood_generalized_2006,
-  golub_generalized_1997}. While researchers must still choose a set of basis
-functions, cubic \parencite{tsay_nonlinear_2019} and thin plate spline bases
-\parencite{wood_thin_2003} are optimal for many applications.
+\subsection{Generalized additive models}
 
-These smooth terms can then be combined in an additive regression model, where
-each smooth term essentially functions as a predictor within a regular
-regression
+Generalized additive models (GAMs) are a semi-parametric modeling framework
+that builds on smooth terms, which are
+non-linear functions that are inferred from the data through smoothing splines
+\parencite{wood_generalized_2006, wood_inference_2020,
+  hastie_generalized_1999}. Smoothing splines extend regular spline regression
+to avoid the knot placement problem by providing enough flexibility to the
+spline to overfit the data. One approach to this is to use
+cubic splines, which are piecewise cubic polynomials with knots placed at
+each data point. Alternatively, thin-plate splines can be used, which entirely
+avoid knots and instead utilize increasingly wiggly basis functions
+that are defined over the entire range of the data \parencite{wood_thin_2003}.
+These basis functions are combined in a regression model similar to polynomial
+regression. Using as many basis functions as there are data points is analogous
+to placing a knot at each data point.
+To prevent the resulting overfitting, smoothing splines
+add an additional penalty term, similar to those used in a
+lasso or ridge regression, to control the smooth term's flexibility during
+the estimation \parencite{gu_smoothing_2013, wahba_spline_1980}. This penalty
+balances the
+flexibility and fit of the smooth term, ensuring the model captures the
+underlying process accurately without introducing unnecessary complexity. The
+optimal weight of the penalty is typically determined by minimizing a criterion
+function, such as the generalized cross-validation criterion
+\parencite{wood_generalized_2006, golub_generalized_1997}.
+
+The resulting smooth terms can then be combined in an overarching additive
+regression model, where each smooth term essentially functions as a
+predictor within a regular regression
 analysis. In this model, smooth terms may be multiplied by covariates and
 summed into a single overall non-linear function to explain the data. This
 approach makes it possible to formulate models such as a time-varying
@@ -404,11 +388,12 @@ example process. Some of the scaled thin-plate smoothing spline basis
 functions that make up the smooth term are shown in red.
 
 \begin{figure}[!ht]
-  \caption{Demonstration of how generalized additive models (solid black)
+  \caption{Demonstration of a generalized additive model}
+  \fitfigure{gam_demonstration.png}
+  \figurenote{This figure shows how generalized additive models (solid black)
     estimate the underlying process (dotted black). Here, the predicted values
     for the process at any point in time correspond to the weighted average of
     the basis functions (red).}
-  \fitfigure{gam_demonstration.png}
   \label{fig:gam_dem}
 \end{figure}
 
@@ -423,148 +408,40 @@ Additionally, GAMs also provide an estimate of the wigglyness
 of the process through the weight that is assigned to the smoothing penalty.
 In contrast, to LPR and GP
 this penalty weight does not assume constant wigglyness. Lastly, the
-basis fu,nction coefficients within each smooth term can be interpreted,
+basis function coefficients within each smooth term can be interpreted,
 but the specific interpretations depend on the spline basis used.
-
-\subsubsection{Parametric models}
-
-Finally, several methods to parametrically model non-linear processes will be
-introduced. The most direct approach for this involves defining a non-linear
-regression model for the process itself. As with all parametric models,
-this approach requires a thorough
-prior theory about the functional form of the process, which is often difficult
-or even impossible to find in practice due to the
-complexity of the underlying dynamic systems.
-However, in the case of the running example, such a formulation exists.
-Due to the oscillatory nature of this (self-) regulatory process,
-a cosine function is a natural candidate to model it.
-Additionally, to account for the oscillations diminishing over time,
-the model needs to describe a decreasing amplitude. An example of such a
-model is:
-
-\begin{equation}
-  \begin{aligned}
-    f(t)   & = A e^{-c t} \cos(\omega t - \delta) \\
-    \omega & = \sqrt{k - \frac{c^2}{4}}
-  \end{aligned}
-\end{equation}
-
-\noindent where the parameters control the initial amplitude of the wave
-function ($A$),
-the frequency ($\omega$), the rate at which the amplitude decreases ($c$), and
-the phase ($\delta$). Even for this relatively simple system, this parametric
-form is already quite complex and for more intricate processes, finding an
-appropriate model of this form can be nearly impossible.
-
-Instead it is often more practical to define a model for how a process changes
-over
-time using a differential equation model \parencite{cooper_dynamical_2012}.
-These models describe the relationship between the current value of the process
-and its instantaneous rate of change. By combining a model of the process's
-change with information about its initial state, it is then possible to infer
-the entire trajectory of the process. Thus,
-differential equations form a general class of models capable of representing
-various dynamic processes. For the running example, we used a damped oscillator
-model. This is a classic differential equation model originally designed to
-describe the
-behavior of an oscillating spring with resistance. This model can be expressed
-as:
-
-\begin{equation}
-  \begin{aligned}
-    \frac{\partial f}{\partial t} & = v         \\
-    \frac{\partial v}{\partial t} & = -cv + -kf
-  \end{aligned}
-\end{equation}
-
-\noindent This model relates the rate of change of the position of the spring
-$f$ to
-its velocity $v$. In turn, the rate of change of the velocity is determined
-by the velocity itself through the damping coefficient $c$ and by the
-position of the spring through the spring constant $k$. Here, the spring
-constant is related to the frequency of the oscillations since a stiffer
-spring oscillates faster and the damping coefficient is related to how quickly
-the spring returns to its basis position after being perturbed.
-\textcite{chow_emotion_2005} show how this model can be applied in a
-psychological context to model emotional self-regulation. Such that a perturbed
-emotional state is regulated back to the desired baseline faster the larger
-the perturbation is. % This is not super accurate is it now. 
-
-Alternatively, when working with equally spaced time points, one can model
-dynamic local changes in discrete time using difference equations
-\parencite{durbin_time_2012}. These equations express the current value of the
-latent construct as a function of its previous value.
-A common example of this approach is the classic
-autoregressive model. While the smooth nature of the running
-example process cannot be perfectly captured by difference equations, it can be
-approximated by these equations:
-
-\begin{equation}
-  \begin{aligned}
-    f_{t} & = f_{t-1} + v_{t-1}        \\
-    v_{t} & = (1-c)v_{t-1} + -kf_{t-1}
-  \end{aligned}
-\end{equation}
-
-Lastly, when modeling a process through local dynamics, two types of errors
-should be taken into account. The first is dynamic error, which describes any
-external perturbations
-to the latent construct that are carried forward over time. For instance,
-if a participant experiences an unusually pleasant conversation that elevates
-their true positive affect, this change represents an error effect if it is
-not accounted for by the model. However, since the true
-positive affect level has increased, this will influence future measurements
-due to emotional inertia. Dynamic errors can be incorporated into the model in
-different ways, but the most common approach is to add a normally
-distributed error term to the deterministic dynamic change models described
-above.
-
-The second type of error that should be considered is measurement error,
-which represents the difference between observed measurements and the
-latent construct values, which may be introduced by an imperfect measurement
-instrument. These errors are typically
-modeled using a factor or item response model that links the observations to
-the latent construct. Combining a dynamic change model with a dynamic error
-component and a factor model yields a state space model \parencite[discrete
-  time;][]{durbin_time_2012} or a stochastic differential equation model
-(continuous time). These models can then be used to infer the process and
-estimate the parameters of the dynamic equations using the Kalman filter and
-its extensions \parencite{chow_unscented_2007}.
 
 \section{Simulation}
 
 \subsection{Problem}
 
 A simulation study was conducted to assess the effectiveness of the introduced
-parametric and non-parametric methods in recovering different
-non-linear processes, which may be encountered in EMA research
-(Figure~\ref{fig:examplar_npn}).
-To apply the methods under the conditions described in the
-introduction,
+methods in recovering different non-linear processes, which may be encountered
+in EMA research (Figure~\ref{fig:examplar_npn}). In addition to that, the
+introduced methods were also compared to the true, parametric data-generating
+models, which served as a benchmark for how accurately the processes can
+be recovered, if the dynamic form of the process is known.
+To apply the methods under the conditions described in the introduction,
 and within the constraints of available software implementations,
-the simulation focused on
-a univariate single-subject design. Hence, the simulated data represented
-repeated measurements of a single variable for one individual.
+the simulation focused on a univariate single-subject design.
+Hence, the simulated data represented repeated measurements of a single
+variable for one individual.
 
 \subsection{Design and Hypotheses}
 
-For the non-parametric analysis methods (i.e., LPR, GP), we expect that
-each method in its default configuration will most accurately infer processes
+For the LPR and the GP, we expect that
+both method in their default configuration will most accurately infer processes
 that are (a) continuous (i.e., without sudden jumps), (b) have constant
 wigglyness (i.e., constant second derivative), and (c) are smooth (i.e.,
-differentiable). We expect this, because both methods by default
-produce
+differentiable). We expect this, because both methods by default produce
 continuous, smooth estimates with a single constant bandwidth or lengthscale.
 For the GAMs, we expect that only criteria (a) and (c) will influence
 the performance, as GAMs do not assume constant wigglyness. The
 parametric modeling approach is expected to provide the most accurate
-inferences, serving as a benchmark for comparison with the other methods. We
-also expect that the performance of parametric models will decrease as the
-model complexity increases (e.g., with jumps or reduced smoothness), though
-likely less so than with non-parametric and semi-parametric models.
-Additionally, we expect that larger sample sizes will lead to more accurate
-inferences, with both (d) the overall length of the sampling period and (e) the
-sampling frequency being varied.
+inferences, serving as a benchmark for comparison with the other methods.
+Additionally, we expect that the overall sample size will influence the
+accuracy of the inferences, with both (d) the overall length of the sampling
+period and (e) the sampling frequency being varied.
 
 To conduct the simulation with processes that might be encountered in real
 EMA studies, we selected the exemplar processes illustrated in
@@ -581,23 +458,27 @@ second derivative) over time. However, while the wiggliness of the exponential
 and logistic growth functions and the damped oscillator decreases
 monotonically, the cusp catastrophe's wigglyness changes cyclically.
 Therefore, we hypothesize that longer sampling periods for the exponential and
-logistic
-growth curves and the damped oscillator will reduce the inference accuracy of
-the LPR and the GP, as the single bandwidth or lengthscale
+logistic growth curves and the damped oscillator will reduce the inference
+accuracy of the LPR and the GP, as the single bandwidth or lengthscale
 parameter becomes increasingly inadequate to capture the changing
 wigglyness over time. We do not expect this effect to occur for the cusp
-catastrophe process, or when using GAMs or parametric models.
+catastrophe process, or when using GAMs.
 
-To manipulate the (c) smoothness of the processes, a dynamic noise
-component was added to the data-generating models. This perturbed the
-processes at each point in time by a normally distributed error,
-resulting in non-smooth (i.e., non-differentiable or rough) trajectories.
-The degree of roughness was controlled
-by the variance of these dynamic errors and we considered variances of
-0.5, 1, and 2 reasonable relative to the process range.
-Figure~\ref{fig:exemplar_pn}
+To manipulate the (c) smoothness of the processes a dynamic error component
+was added to them. These dynamic errors reflect external perturbations
+to the latent construct that are carried forward over time. For instance,
+if a participant experiences an unusually pleasant conversation that elevates
+their true positive affect, this change represents an error effect if it is
+not accounted for by the model. However, since the true positive affect level
+has increased, this will influence future measurements due to emotional
+inertia. To add these errors, each process was perturbed by a normally
+distributed error at each point in time, resulting in non-smooth
+(i.e., non-differentiable or rough) trajectories. The degree of roughness
+was controlled by the variance of these
+dynamic errors and we considered variances of 0.5, 1, and 2 reasonable relative
+to the process range. Figure~\ref{fig:exemplar_pn}
 illustrates one possible realization of the exemplar processes with dynamic
-noise. Importantly, we intentionally omitted a condition without dynamic noise
+errors. Importantly, we intentionally omitted a condition without dynamic noise
 from this simulation, as dynamic noise is reasonably expected to be present in
 all psychological intensive longitudinal data (ILD).
 
@@ -610,54 +491,112 @@ all psychological intensive longitudinal data (ILD).
 
 Additionally, the sample size was varied during the simulation by manipulating
 both (d) the sampling period and (e) the sampling frequency, as these distinct
-methodological
-choices are expected to impact the performance of the analysis methods
-differently. Specifically, for the LPR and the GP, which rely only on data in
-local neighborhoods during the estimation, we expected that extending the
-sampling period beyond this
-neighborhood will not increase the inference accuracy.
-In fact, if the process exhibits
+methodological choices are expected to impact the performance of the
+analysis methods differently. Specifically, for the LPR and the GP, which rely
+only on data in local neighborhoods during the estimation, we expected
+that extending the sampling period beyond this neighborhood will not increase
+the inference accuracy. In fact, if the process exhibits
 changing wigglyness over the extended period, as previously discussed,
 increasing the sampling period might even negatively affect the inference
-accuracy. In contrast, we expeced GAMs and parametric models, which incorporate
-the entire dataset in their estimations, to perform better with a longer
-sampling period. Since there is no inherent scaling to the time axis in this
-simulation, we chose to simulate the first half of each process in one
-condition and the full process in another, referred to as sampling periods of
-one or two weeks. This scaling is arbitrary and could be changed to any time
-frame. Lastly, we expected that increasing the sampling frequency will
-generally improve the inference accuracy across all methods, as it provides
-more information about the latent processes.
-We tested sampling frequencies of three, six, and nine measurements per day,
-to align these choices with typical experience sampling study designs
-\parencite{wrzus_ecological_2023}.
+accuracy. In contrast to this, we expected the GAMs, which incorporate
+the entire dataset in their estimation, to perform better with a longer
+sampling period. Since within the simulation there is no inherent scaling to
+the time variable, we simulated either only the first half of each process
+or the entire process to represent different sampling periods. For the
+ease of reading and to correspond to typical EMA conditions, this will be
+referred to as sampling over either one or two weeks. However, this scaling
+is arbitrary and could be changed to any other time frame. Lastly, we expected
+that increasing the sampling frequency will generally improve the inference
+accuracy across all methods, since there is more information about the latent
+process available. Relative to the introduced weekly scale,
+we tested sampling frequencies of three, six, and nine measurements per day,
+to cover typical EMA sample sizes \parencite{wrzus_ecological_2023}.
 
-\subsection{Procedure}
+\subsection{Data generation}
 
-To simulate the data, each exemplar process was represented as a generative
-stochastic differential equation model. This means that, at each time point,
-the rate of change of the
-process was determined by a (non-linear) function of its current value combined
-with an
-additive dynamic error component modeled by a Wiener process. Data from these
-generative models were then simulated using the Euler-Maruyama method.
-This method draws samples from stochastic differential equation
-models with an arbitrary degree of accuracy, while making it possible to
-manipulate the sampling frequency and dynamic error variance.
-Measurement errors were added later to the latent process data at
-each time point from a standard normal distribution, generating the final sets
-of observations. For a detailed technical explanation of the data generation
-process, see Appendix A.
+To simulate data for each process, they must first be represented as parametric
+generative models that replicate the structure of psychological time series
+data. In such a time series, any psychological construct follows a (potentially
+non-linear) function over time, as depicted by the lines in
+Figure~\ref{fig:examplar_npn}. However, since these psychological processes are
+typically unobservable or latent, they are measured through observable
+indicators, such as questionnaire items. The observed values on these
+indicators (Figure~\ref{fig:examplar_npn}, dots)
+differ from the true values of the latent process due to measurement
+error, which may come from an imperfect measurement instrument.
+For this simulation, we assume that all time-point-specific measurement errors
+are independent and normally distributed. The model for the observations of a
+single indicator can then be expressed as follows:
 
-To determine the required number of data sets per condition, a
-power simulation was conducted
-based on an initial pilot sample of 30 generated data sets per
+\begin{align}
+  Y_t = f(t) + \epsilon_t; \quad \epsilon_t \sim N(0, \sigma^2_{\epsilon})
+\end{align}
+
+\noindent In this model, $f(t)$ represents a potentially non-linear latent
+process
+(like the ones presented in Figure Figure~\ref{fig:examplar_npn}, although
+other processes are also possible), and $\epsilon_t$ represents the
+time-point-specific measurement error. The most direct way to define a
+parametric model for $f(t)$ is as a (non-linear) function of time.
+Unfortunately, many processes have functional forms that are too complex for
+this representation, and this approach does not allow for the modeling of
+dynamic errors.
+
+Instead, each process was represented as a generative stochastic differential
+equation model. These dynamic models describe the relationship between the
+process's current value and its instantaneous rate of change. By combining
+these models with information about the initial state of the construct,
+it becomes possible to
+infer the entire trajectory of the process. Differential equations are a widely
+used class of dynamic models because they can capture complex processes in
+much simpler parametric forms. Nevetheless, they do requrie considerable
+theoretical knowledge about the process for applied modelling. For instance, a
+differential equation model representing the introduced logistic growth
+process can be expressed as follows:
+
+\begin{equation} \label{eq:2}
+  \frac{dy}{dt} = r y (1-\frac{y}{k})
+\end{equation}
+
+\noindent This model relates the rate of change of $y$ to its current value and
+to how far away the current value is from the asymptote $k$ through a
+growth rate constant $r$.
+
+There are different ways to add dynamic errors to differential equation models.
+However, the most common modelling choice is to add an additive Wiener process
+to the deterministic model.
+
+\begin{equation}
+  dy = r y (1-\frac{y}{k})dt + \sigma dW_t
+\end{equation}
+
+\noindent The Wiener process is a continuous non-differentiable stochastic
+process, which describes normally distributed dynamic errors over any given
+discrete time interval. These errors have a mean of zero and a variance
+dependent on the length of the time interval and $\sigma$, making them optimal
+for this simulation. Importantly, these dynamic errors continuously influence
+the rate of change of the process and are propagated forward in time through
+the deterministic dynamics of the model.
+
+All four processes were modeled as stochastic differential equations by
+substituting their respective deterministic dynamics into Equation~\ref{eq:2}.
+Latent process data were simulated using the Euler-Maruyama method, which
+approximates stochastic differential equations with high accuracy by
+linearizing them over small discrete time intervals. The resulting
+high-resolution data were then subsampled to achieve the desired sampling
+frequency. Finally, measurement errors were added to the
+latent process data at each time point from a standard normal distribution,
+generating the final sets of observations
+
+To determine the required number of data sets per condition, a power simulation
+was conducted based on an initial pilot sample of 30 generated data sets per
 condition. Based on the pilot sampel, the outcome measures
 (e.g., MSE, GCV, and confidence interval coverage scores) and their
 corresponding standard deviations were calculated by condition.
 These standard deviations were then used to
 predict the Monte Carlo standard errors of the means of each outcome measure
-across increasing sample sizes. These Monte Carlo standard errors reflect the
+across increasing sample sizes \parencite{siepe_simulation_2023}.
+These Monte Carlo standard errors reflect the
 expected variation in the outcome statistics due to random processes within the
 simulation. We selected the number of data sets per condition for the full
 simulation, so that the
@@ -674,8 +613,8 @@ correction for the bias inherent in LPRs. Second, GPs were estimated in STAN
 \parencite{R-cmdstanr} with a zero mean and a squared exponential covariance
 function, following common practice. Third, GAMs with a single smooth term for
 time were fitted using the MGCV package \parencite{R-mgcv_a}. Finally,
-parametric differential equation models corresponding to the true
-data-generating models were created and estimated using the Dynr package
+the parametric differential equation models corresponding to the true
+data-generating models were estimated using the Dynr package
 \parencite{R-dynr}. While the same non-parametric models were used across all
 conditions, the parametric models were tailored to each specific
 data-generating process. After fitting each model to
@@ -725,13 +664,12 @@ the squared errors, leave-one-out cross-validation provides an estimate of
 how accurately the model
 predicts unobserved values within the design range.
 
-Subsequently, two ANOVAs were conducted to analyze differences in MSE and GCV
-values across simulation conditions and analysis methods. To simultaneously
-identify both factors that likely
-do and do not affect the MSE and GCV values, an exhaustive model search was
-performed. In this search, AIC and BIC model weights were used to determine the
-model, which provides the optimal balance between data fit and model
-complexity. Notably, AIC weights can
+Subsequently, differences in MSE and GCV values across simulation conditions
+and analysis methods were analyzed using ANOVAs. To simultaneously
+identify both factors that likely do and do not affect the MSE and GCV values,
+an exhaustive ANOVA model search was performed. In this search, AIC and BIC
+model weights were used to determine the model, which provides the optimal
+balance between data fit and model complexity. Notably, AIC weights can
 be interpreted as conditional model probabilities when the true model is among
 the tested models \parencite{wagenmakers_aic_2004}. The specific hypotheses
 stated earlier
@@ -742,15 +680,14 @@ the large sample sizes in this simulation, the ANOVAs were robust to moderate
 violations of normality \parencite{blanca_non-normal_2017},
 and any potential violations of homoscedasticity were
 addressed using heteroscedasticity-consistent standard errors. However, if both
-assumptions were severely violated, results were instead presented
+assumptions were severely violated, the results were instead presented
 descriptively, using means and standard errors for the respective conditions.
 
 \subsubsection{Uncertainty quantification}
 
 To evaluate the uncertainty estimates provided by each method, we recorded
 whether the true generated process was located within the confidence or
-credible intervals at each time point.
-Subsequently, the average
+credible intervals at each time point. Subsequently, the average
 confidence interval coverage proportion for each method and data set was
 obtained, by averaging over all time points.
 Given that all confidence or credible intervals were set at a
@@ -814,7 +751,7 @@ For a comprehensive overview of all effects in the model, see Appendix C.
   \end{threeparttable}
 \end{table}
 
-Figure \ref{fig:results}~(a) shows the mean effect of different analysis
+Figure~\ref{fig:results}~(a) shows the mean effect of different analysis
 methods
 for each process, averaged across sampling periods, frequency, and dynamic
 error variances. As expected, the parametric models consistently show the
@@ -829,12 +766,13 @@ to our expectations, the cusp-catastrophe process was inferred with a lower MSE
 and GCV by all methods.
 
 \begin{figure}[!ht]
-  \caption{Average MSE values illustrating the simulation results. Panel (a)
+  \caption{Average MSE values based on the simulation results}
+  \fitfigure{results.png}
+  \figurenote{Panel (a)
     shows the effect of the analysis methods for each latent process. The other
     three panels show the effects of measurement period (b), measurement
     frequency (c), and dynamic error variance (d) for each analysis method and
     latent process.}
-  \fitfigure{results.png}
   \label{fig:results}
 \end{figure}
 
@@ -855,7 +793,7 @@ cusp-catastrophe model.
 
 \subsubsection{Uncertainty quantification}
 
-Figure \ref{fig:ci_plot} shows the average confidence interval coverage
+Figure~\ref{fig:ci_plot} shows the average confidence interval coverage
 proportion
 for each condition in the simulation. It can be seen that the only analysis
 method which produces an average confidence interval coverage within
@@ -864,7 +802,7 @@ All three non and semi-parametric analysis methods produced average
 confidence interval coverages considerably below 93\%. However, among
 these methods the average confidence interval coverages achieved by the GAM
 are more accurate and more stable across the different conditions than the
-coverages of the LPR and GP.
+coverages of the LPR and GP\@.
 
 \begin{figure}[!ht]
   \caption{Average confidence interval coverage across all processes,
@@ -873,9 +811,83 @@ coverages of the LPR and GP.
   \label{fig:ci_plot}
 \end{figure}
 
+\subsection{Conclusion}
+
+This simulation showed that the GAMs inferred
+the latent processes more accurately than the LPR and GP across all conditions,
+as indicated by the MSE, GCV, and confidence interval coverage. Furthermore,
+the GAMs were nearly as accurate as the true data-generating parametric models
+in the simulation. This result was unexpected, as we
+anticipated that the smooth estimates produced by GAMs might not be well-suited
+for inferring the rough (i.e., non-differentiable) processes in the
+simulation. However, the LPR and the default GP configurations that were used
+also produce smooth estimates, leading to
+similar misspecifications as the GAMs. This suggests that the accuracy of the
+GAMs might have been least affected by the roughness of the latent process.
+However, another factor potentially influencing the accuracy of the LPR and GP
+is their assumption of constant wiggliness, as defined by their respective
+bandwidth and lengthscale parameters, which was violated in the tested
+processes.
+
+It is important to note that the observed results may be attributable to the
+specific configurations used for each method rather than the methods
+themselves. These configurations were chosen to reflect how each method is
+commonly applied in its most basic form and not to optimally infer the types of
+processes simulated. Consequently, different configurations and extensions
+might improve the performance of the LPR and GP\@. Importantly, it has been
+shown that the standard GAM formulation is a (potentially improper) GP
+\parencite{wahba_improper_1978}, and the specific GAM used in this simulation
+can be expressed as a GP with a linear mean and a non-stationary covariance
+function \parencite{rasmussen_gaussian_2006}. This implies that there are
+certain GP formulations which perform at least as well as the GAMs did,
+although these formulations deviate from how GPs are most commonly applied.
+Regarding the LPR, several optimality results have been obtained for
+differentiable processes, indicating that LPR should be at least as
+accurate as the GAMs and GPs for these processes
+\parencite{fan_local_1997}. It is however unclear wheather these results
+generalize to the non-differentiable processes that we suspect can be found
+most often in psychology.
+
+Contrary to our expectations, the simulation indicated that the cusp
+catastrophe process was inferred most accurately by the LPR, GP, and GAM\@.
+We had anticipated that the smooth, continuous estimates produced by
+these methods would struggle to adapt to the apparent jumps exhibited by this
+process. However, this effect seems to have been mitigated by the cusp
+catastrophes strong resilience to external perturbations. This property
+is highlighted in Figure~\ref{fig:exemplar_pn}, where dynamic errors with the
+same variance have been applied to all four processes. Despite the
+perturbations having an equal variance, the cusp-catastrophe model appears to
+be the least affected and even closely resembles the unperturbed process
+(Figure~\ref{fig:examplar_npn}). Further evidence of this can be seen in the
+simulation, where the effect of increasing the dynamic error variance was
+weakest for the cusp process. Due to this, the simulation was rerun with
+considerably smaller dynamic error variances, and under these conditions, the
+cusp model was indeed inferred with the least accuracy.
+
+% Still need to add citations to this paragraph
+The results indicate that measuring at a higher frequency increased the
+inference accuracy of all considered methods. Therefore, it is generally
+advantageous from a statistical point of view to measure as frequently as
+possible. However, in practice, this
+must be balanced against considerations such as participant burden and
+fatigue, which can adversely affect data quality if measurements are taken
+too often. Similarly, when selecting the sampling period, it is essential
+to use domain knowledge about the scale of the underlying dynamics to ensure
+that the measurements capture sufficient variation in the latent process.
+Beyond this, the simulation showed that extending the sampling period
+improved the inference accuracy of the GAMs and parametric models but may
+decrease the accuracy of the LPR and GP\@. This reduction
+in accuracy could however possibly be mitigated by using extensions for a
+variable bandwidth, polynomial degree, or lengthscale respectively. Lastly, the
+simulation revealed that larger dynamic error variances decreased the accuracy
+of all methods. Therefore, reducing the magnitude of dynamic errors is
+advisable in practice. This could, for example, be achieved by measuring
+context variables and other sources of perturbations and incorporating
+them into the model.
+
 \section{An Empirical Example}
 
-In the following, the four analysis methods previously introduced were
+In the following, the three analysis methods previously introduced were
 applied to depression data from the Leuven clinical study. This study used
 experience sampling measures to study the dynamics of anhedonia in
 individuals with major depressive disorder \parencite{heininga_dynamical_2019}.
@@ -915,16 +927,14 @@ Patients who met the DSM
 criteria for mood disorders or borderline personality disorder during the
 intake were eligible for enrollment, while those presenting with acute
 psychosis, mania, addiction, or (neuro-)cognitive symptoms were excluded.
-Following the screening, 90 patients enrolled in the study. Additionally, 44
-control participants were matched to the clinical sample by gender and age,
-resulting in a total sample size of 134.
-Within the clinical sample, three patients withdrew during the baseline
-assessment, two were excluded due to faulty devices, and seven were removed for
-responding to less than half of the EMA measures. In the control sample, one
-participant was excluded for responding to less than half of the EMA measures,
-and three were removed for meeting the criteria for a current psychiatric
-disorder. Consequently, the final published data set included 78 participants
-in the clinical sample and 40 participants in the control sample.
+For a more thorough sample and data description, see
+\textcite{heininga_dynamical_2019}. The final data set used for this analysis
+contained 77 participants in the clinical sample and 40 participants in
+the control sample, who were matched to the clinical sample by gender and age,
+resulting in a total sample size of 117
+\footnote{The original published data set contained one additional participant
+  who was removed for this analysis since they had a depression score of
+  zero across all assessments.}.
 
 During the study, all participants completed a baseline assessment, followed by
 seven days of semi-random EMA assessments, with 10 equidistant assessments per
@@ -932,32 +942,26 @@ day. However, the starting date of the EMA measures varied between people.
 During each assessment, participants responded to 27 questions covering
 emotions, social expectancies, emotion regulation, context, and psychiatric
 symptoms. This analysis focused on the item assessing momentary depressive mood
-(i.e., "How depressed do you feel at the moment?") rated on a scale from 0 to
-100. One additional participant was removed from the analysis for consistently
-reporting a score of zero across all assessments, resulting in a final sample
-of 117 participants. For a more thorough sample and data description, see
-\textcite{heininga_dynamical_2019}.
+(i.e., `How depressed do you feel at the moment?') rated on a scale from 0 to
+100.
 
 The published data set was obtained from the EMOTE database
 \parencite{kalokerinos_emote_nodate}. The initial study
 procedure was approved by the KU Leuven Social and Societal Ethics Committee
 and the KU Leuven Medical Ethics Committee. This secondary data analysis was
 approved by the Ethics Review Board of the Tilburg School of Social and
-Behavioral Sciences.
+Behavioral Sciences (TSB RP FT16).
 
 \subsection{Analysis Plan}
 
-\subsubsection{Exploratorty idiographic analysis}
-
-First, the LPR, GP, and GAM were applied to explore the idiographic
+The LPR, GP, and GAM were applied to explore the idiographic
 latent processes underlying the data. Each method was applied separately to the
 time-series of each participant, using the same specifications as in the
 simulation study (Appendix B). However, for the LPR, only local cubic
-polynomials were
-considered to keep the interpretation of the bandwidth consistent across
-participants.
+polynomials were considered to keep the interpretation of the bandwidth
+consistent across participants.
 Since all participants were assessed over seven days, but not during the same
-period, the time-series for each participant was centered so that the first
+period, the time series for each participant was centered so that the first
 measurement time point served as the zero point. The LPR bandwidth, GP
 lengthscale, and GAM smoothing parameter were then analyzed to assess the
 wigglyness of the idiographic processes. Additionally, the GCV values produced
@@ -965,50 +969,9 @@ by each method were evaluated to determine which method provided the most
 accurate interpolations. Lastly, the mean squared error was calculated for each
 method and data set to estimate the expected measurement error.
 
-\subsubsection{Multilevel analysis}
+\subsection{Results (Template)}
 
-After the idiographic analysis, mixed-effects GAMs were fitted to the data to
-assess the extent to which common and idiographic smooth are necessacary for
-accurately modeling the data. The baseline model was a random intercept model,
-where each participant's data was modelled by a person-specific flat line.
-The second model fitted a random smooth, in which each participant's data
-was modelled by an individual smooth function with a common smoothing parameter
-through factor-smooth interactions. To determine if there was evidence of a
-common non-linear trend, this model was compared to an extended model,
-which combined a common non-linear smooth with individual random non-linear
-deviations. These deviations were again modelled using factor-smooth
-interactions with a common smothing parameter. Finally, to test
-potential heterogeneity in the smoothing parameters across participants,
-a fourth model was fitted, which allowed for individual smooth terms with
-varying smoothing parameters.
-
-\subsubsection{Parametric analysis}
-
-Lastly, three parametric differential equation models were applied to explore
-the data. The first model is a random-walk model, where the rate of change in
-the latent depression state does not depend on its current value, such that
-future values are only influenced by random perturbations in form of the
-dynamic errors.
-The second model is a continuous-time autoregressive model, where the
-depression score reverts to an individual's mean at a rate linearly dependent
-on the distance from this mean. Both the individual mean and autoregressive
-effect were treated as random effects by incorporating them as time-invariant
-state variables, similar to how random effects are included
-in dynamic structural equation models.
-The third model is the damped oscillator model discussed earlier. To adapt this
-model to the data structure, a random mean was added to account for
-between-person differences in the baseline level around which the depression
-score oscillates. Random effects were also included for the spring constant
-and damping coefficient to accommodate individual differences in oscillation
-patterns. All three models included components for measurement and dynamic
-error variances. Lastly, the model fit was compared between the models
-using the AIC and BIC\@.
-
-\subsection{Results}
-
-\subsubsection{Exploratorty idiographic analysis}
-
-First, the LPR, GP, and GAM were used to
+The LPR, GP, and GAM were used to
 estimate the individual latent depression processes. For the local cubic
 regression, the median optimal bandwidth was 21.28 hours (\textit{IQR}: 5.52).
 For the GP, the median optimal length scale was 22.57 standard deviations
@@ -1060,124 +1023,79 @@ for the GP it was 197.54 (\textit{IQR}: 388.40), and for the LPR it was
 the GAM inferred the latent processes most accurately, whereas the LPR
 slightly overfit the data and the GPs tended to underfit the data.
 
-\subsubsection{Multilevel analysis}
+\section{Conclusion}
 
-First, the baseline model with only the random intercepts had an
-adjusted $R^2$ of 0.75 (\textit{GCV} = 231). Extending the model to include
-random smooths for each individual with a common smoothing penalty increased
-the adjusted $R^2$ to 0.81 (\textit{GCV} = 194.89). However, adding a common
-smooth to this model did not change the model fit.
-Lastly, using person-specific smooth terms for the random smooth increased
-the adjusted $R^2$ further to 0.82 (\textit{GCV} = 184.29). Table
-\ref{tab:ic_tab} compares the four models using the AIC and BIC. The AIC
-indicates the most complex model, providing
-evidence for the necessacity of individual smooth parameters. However,
-the BIC, which given the sample size uses a heavier penalty, indicates
-the random intercpet model as the best fitting model, highlighting that
-the majority of the variance in the data is due to mean level
-differences. Overall, there is conflicting evidence regarding which model
-fits the data best.
-
-\begin{table}[htbp]
-  \vspace*{2em}
-  \begin{threeparttable}
-    \caption{Model information criteria for four mixed effects GAMs}
-    \label{tab:ic_tab}
-    \begin{tabular}{@{}lrrr@{}} \toprule
-      Model                                 & Degrees of freedom & AIC      &
-      BIC
-      \\ \midrule
-      Random intercept                      & 117.3599           & 58997.31 &
-      59803.73
-      \\
-      Random smooth w. common penalty       & 708.5276           & 57712.79 &
-      62581.35
-      \\
-      Common smooth w. deviations           & 708.0516           & 57712.76 &
-      62578.04
-      \\
-      Random smooth w. individual penalties & 625.9867           & 57331.22 &
-      61632.60
-      \\ \midrule
-    \end{tabular}
-  \end{threeparttable}
-\end{table}
-
-\subsubsection{Parametric analysis}
-
-\textit{Not working yet}
+\textit{WIP}
 
 \section{Discussion}
 
-Both the simulation and empirical example demonstrated that GAMs inferred the
-latent processes more accurately than the LPR and GP in terms of MSE, GCV,
-and confidence interval coverage across all conditions. Additionally, the GAMs
-were nearly as accurate as the true data-generating parametric models in the
-simulation and outperformed the tested parametric models in predicting the
-empirical data based on the GCV\@. This finding was unexpected, as we
-anticipated
-that the smooth estimates produced by GAMs might not be optimally suited for
-inferring the rough (i.e., non-differentiable) processes that were simulated.
-However, the LPR and the default GP specifications also produce smooth
-estimates, causing similar misspecifications as the GAMs. This may suggests
-that the accuracy of the GAMs was least affected by the roughness of the latent
-process. However, another factor that may have influenced the accuracy of
-LPR and GP methods is that both assume constant wiggliness, as defined by their
+% Rewrite into ---  
 
-bandwidth and lengthscale parameters respectively, which was violated for the
-processes tested.
+This article has several important limitations. Since, only a
+limited selection of processes was used it is possible that the presented
+results may not generalize to other processes. However, the used processes
+already constitute violations to the smoothness assumpiton made by the
+LPR, GP, and GAM to which these methods demonstrated some robustness. In
+addition to this, as explained earlier, using different configurations for
+the LPR, GP, and GAM is likely to change the presented results. Further,
+we focused on introducing these methods by inferring time dependent
+non-linear processes from univariate, single subject data with independent
+normally distributed measurement errors. This is a statistically idealised
+setting, which does not address many of the goals and challanges researchers
+are facing when workign with ILD\@. Frequently, ILD contains measurements
+for many individuals on several psychological constructs. Classically, this
+enables researchers to study how these constructs vary and interact over time
+and how these dynamics differ between people. In addition to that, each
+construct is frequently measured using multiple indicators with ordinal
+measurement errors, which are modelled using different psychometric models
+(e.g., factor models, item response models).
 
-Importantly, there are several theoretical reasons that indicate that the
-observed results may only be due to the specific configurations
-that were used for each method, rather than by the general methods
-themselves. The configurations for each method were chosen to reflect
-how each method is commonly applied in its most basic form and not too
-optimally infer the types of processes simulated. Thus, it is possible
-that different configurations and extensions might improve the perfromance
-of the LPR and GP\@. Specifically, Fan et al. () showed that the LPR is
-minmax efficient for certain processes and using extensions for variable
-bandwidth and polynomial selection as well as for bias correction
-might improve their inference accuracy.
+There are fortunetely many ways in which the presented methods can be adapted
+to
+these more complex data structures. The GP and GAM can be easily adapted
+to work with multilevel data without substentially extending the statistical
+theory underlying both methods. For the GAM this extension is already
+implemented in some software. Another approach may be to study between
+person differences in the latent processes using functional data analysis.
+In this analysis
+the individual latent processes are first estimated using one of the presented
+data driven techniques. Subsequently, the inferred processes are treated as
+function valued data, which can be analyzed to find for exampple group
+differences in a functional ANOVA \parencite{kaufman_bayesian_2010} or
+to find the functions which account for the maximum between person variation
+in a functional principal component analysis \parencite{aue_prediction_2015}.
 
-- Adaptiations for the other two methods are available that might equipped
-them to deal better with this
+Similarly, the GP and GAM are already equipped to estimate lantent variables in
+general and they are not limited to single indicators. Therefore, it
+is possible to extend them to incorporate typical psychometric
+measurement models, to accurately capture more complex measurement error
+distributions. Unfortunately, the software implementations of this may be
+computationally very intensive and are currently only available in a very
+limited form \parencite{clark_dynamic_2023}. The parametric models introduced
+already include a factor model for the observed variables, which can
+incorporate multiple indicators. In addition to this, these indicators
+can also be non-normally distributed.
 
-- Against expectation the cusp-catastrophe was inferred best
-- Due to being more resistant to external perturbations
-- Higher gradient towards the attractor
-- Point at figure with dynamic errors
-- Rerunning the simulation with much lower dynamic error variances showed
-that then the cusp model was inferred better.
-
-- For the oter three simulation conditions, sampling at a higher frequency is
-generally desirable
-- Here choices may be influenced by prior knowledge about the variability
-of certain constructs
-- Sampling for longer periods of time is a design choice and if the
-functional behaviour of the latent process is expected to change over the
-sampling period that should be taken into account
--Lastly, reducing dynamic errors is generally advisable.
-
-- Here we focussed on inferring non-liear trends but the possibilities of
-these methods are rather more interesting
-- Estimate non-linear autoregressive functions
-- Estimate state-space models or differential equation models
-non-parametrically
-- Infer input forces to differential equation models
-- Combine everything togther to test partial theories
-
-- Limitations
-- Only few processes considered
-- Processes with constant wigglyness in the sense of the LPR or GP may change
-the picture
-- Focus mostly on univariate singe subject desing with iid gaussian errors
-
-- There are many ways to extend these methods
-- Multilevel extensions are somewhat already available
-- Measurement models are somewhat already available
-- Multivariate models run into an issue of
-
-\section{Conclusion}
+Laslty, there are many ways in which the presented methods can be used to
+study multivariate data. This is because, even though all methods were used
+to infer time dependent non-linear processes in this paper, they can in theory
+be used to estimate many smooth and continuous functions (and even non-smooth
+and non-continuous functions to the degree presented in this paper). This
+makes it possible to for example infer non-linear
+cross- and autoregressive relationships from data in discrete time
+\parencite{wood_generalized_2006, rasmussen_gaussian_2006,
+  eleftheriadis_identification_2017}
+and non-linear differential equation models in continuous time
+\parencite{yildiz_learning_2018}. For the presented processes in particular
+this should even be more appropriate, since they were generated using
+differential equation models.
+These models also present the exciting possibility to combine partial
+parametric models with non-linear data driven functions.
+Another possibility
+is to infer an unobserved input variable to a parametric differential equation
+model \parencite{alvarez_latent_2009,nayek_gaussian_2019}. Laslty, it is
+possible to infer non-linear seasonality and cyclic components on indicator
+variables \parencite{clark_dynamic_2023}.
 
 \printbibliography[]
 

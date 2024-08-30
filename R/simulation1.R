@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 05-06-2024                                                   #
+#' Last Modified: 30-08-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -236,3 +236,127 @@ for (run in c("pilot", "simulation")) {
     )
   }
 }
+
+
+library(pomp)
+library(circumstance)
+library(doFuture)
+library(tidyverse)
+plan(multicore)
+
+exp_growth_ode <- Csnippet("
+  double dW = rnorm(0, sqrt(dt));
+  Y += r * (a - Y) * dt + sigma_dyn * dW;
+")
+
+rmeas <- Csnippet("
+  Y_obs = rnorm(Y, sigma_meas);
+")
+
+init <- Csnippet("
+  Y = -2;
+")
+
+exp_growth_pomp <- pomp(
+  data = data.frame(time = 1:200, Y_obs = NA),
+  times = "time",
+  t0 = 0,
+  rprocess = euler(exp_growth_ode, delta.t = (50 / 7) / 234),
+  rinit = init,
+  rmeasure = rmeas,
+  statenames = "Y",
+  paramnames = c("r", "a", "sigma_dyn", "sigma_meas")
+)
+
+df <- simulate(
+  exp_growth_pomp,
+  params = c(r = 0.02, a = 2, sigma_dyn = sqrt(1), sigma_meas = sqrt(1)),
+  format = "data.frame"
+)
+
+plot(df$time, df$Y_obs)
+lines(df$time, df$Y)
+
+exp_growth_pomp@data <- array(df$Y_obs,
+  dim = c(1, 200),
+  dimnames = list("Y_obs")
+)
+
+dmeas <- Csnippet("
+  lik = dnorm(Y_obs, Y, sigma_meas, give_log);
+")
+
+pf_exp <- pfilter(
+  exp_growth_pomp,
+  Np = 10000,
+  dmeasure = dmeas,
+  params = c(r = 0.02, a = 2, sigma_dyn = sqrt(1), sigma_meas = sqrt(1)),
+  paramnames = c("sigma_meas"),
+  statenames = c("Y")
+)
+
+logLik(pf_exp)
+plot(pf_exp)
+as(pf_exp, "data.frame")
+
+guesses <- sobol_design(
+  lower = c(r = 0, a = 0, sigma_dyn = 0, sigma_meas = 0),
+  upper = c(r = 5, a = 100, sigma_dyn = 100, sigma_meas = 100),
+  nseq = 5
+)
+
+plot(guesses, pch = 16)
+
+m_exp <- mif2(
+  exp_growth_pomp,
+  params = guesses[1, ],
+  Np = 1000,
+  Nmif = 20,
+  dmeasure = dmeas,
+  partrans = parameter_trans(log = c("r", "a", "sigma_dyn", "sigma_meas")),
+  rw.sd = rw_sd(r = 0.02, a = 0.02, sigma_dyn = 0.02, sigma_meas = 0.02),
+  cooling.fraction.50 = 0.5,
+  paramnames = c("r", "a", "sigma_dyn", "sigma_meas"),
+  statenames = c("Y")
+)
+plot(m_exp)
+
+logmeanexp(
+  logLik(circumstance::pfilter(m_exp, Nrep = 5)),
+  se = TRUE, ess = TRUE
+)
+
+mifs <- circumstance::mif2(
+  m_exp,
+  starts = guesses,
+  Nmif = 30,
+  Np = 2000
+)
+plot(mifs)
+
+mifs |>
+  circumstance::pfilter(Nrep = 5) |>
+  logLik() |>
+  melt() |>
+  separate(name, into = c(".id", "rep")) |>
+  group_by(.id) |>
+  reframe(melt(logmeanexp(value, se = TRUE))) |>
+  ungroup() |>
+  bind_rows(
+    mifs |> coef() |> melt()
+  ) |>
+  pivot_wider() |>
+  rename(
+    loglik = est,
+    loglik.se = se
+  ) -> estimates
+estimates
+
+
+estimates |>
+  bind_rows(guesses) |>
+  filter(is.na(loglik) | loglik>max(loglik,na.rm=TRUE)-30) |>
+  mutate(col=if_else(is.na(loglik),"#99999955","#ff0000ff")) |>
+  {
+    \(dat) pairs(~loglik+r+sigma+K+N_0,data=dat,col=dat$col,pch=16)
+  }()

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 21-08-2024                                                   #
+#' Last Modified: 02-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -54,12 +54,13 @@ simulate <- function(
   ## Simulate the data
   cat("\n\nSimulating Data: ")
   sim_count <- counter()
-  sim_grid[, dat := lapply(
+  sim_grid[, dat := future_lapply(
     gen_model,
     function(x) {
       cat(sim_count(), " ")
       get_tsm_data(sim_tsm(x))
-    }
+    },
+    future.seed = TRUE
   )]
 
   ## Add analysis methods to the simulation and fill in information

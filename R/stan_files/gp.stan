@@ -3,7 +3,7 @@
 // Author: Jan Ian Failenschmid                                               //
 // Created Date: 08-04-2024                                                   //
 // -----                                                                      //
-// Last Modified: 18-08-2024                                                  //
+// Last Modified: 02-09-2024                                                  //
 // Modified By: Jan Ian Failenschmid                                          //
 // -----                                                                      //
 // Copyright (c) 2024 by Jan Ian Failenschmid                                 //
@@ -59,7 +59,7 @@ parameters {
 
 model {
   // rho ~ inv_gamma(100, 250);
-  rho ~ lognormal(log(700/xsd), 1);
+  rho ~ normal(0, 1);
   alpha ~ normal(0, 2);
   sigma ~ normal(0, 1);
 

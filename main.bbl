@@ -1616,7 +1616,7 @@
       \true{uniqueprimaryauthor}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{R package version 0.8.0, https://discourse.mc-stan.org}
+      \field{note}{R package version 0.8.1, https://discourse.mc-stan.org}
       \field{title}{cmdstanr: R Interface to 'CmdStan'}
       \field{year}{2024}
       \verb{urlraw}

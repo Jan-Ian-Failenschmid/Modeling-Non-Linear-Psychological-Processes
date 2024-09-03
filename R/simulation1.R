@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 30-08-2024                                                   #
+#' Last Modified: 02-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -237,7 +237,7 @@ for (run in c("pilot", "simulation")) {
   }
 }
 
-
+## Test pomp
 library(pomp)
 library(circumstance)
 library(doFuture)
@@ -302,7 +302,7 @@ as(pf_exp, "data.frame")
 guesses <- sobol_design(
   lower = c(r = 0, a = 0, sigma_dyn = 0, sigma_meas = 0),
   upper = c(r = 5, a = 100, sigma_dyn = 100, sigma_meas = 100),
-  nseq = 5
+  nseq = 10
 )
 
 plot(guesses, pch = 16)
@@ -352,11 +352,102 @@ mifs |>
   ) -> estimates
 estimates
 
+starts <- estimates |>
+  filter(!is.na(loglik)) |>
+  filter(loglik > max(loglik) - 10) |>
+  select(-.id, -loglik, -loglik.se)
 
-estimates |>
-  bind_rows(guesses) |>
-  filter(is.na(loglik) | loglik>max(loglik,na.rm=TRUE)-30) |>
-  mutate(col=if_else(is.na(loglik),"#99999955","#ff0000ff")) |>
-  {
-    \(dat) pairs(~loglik+r+sigma+K+N_0,data=dat,col=dat$col,pch=16)
-  }()
+mifs <- mif2(m_exp, starts = starts) |>
+  mif2()
+
+mifs |>
+  circumstance::pfilter(Nrep = 5) |>
+  logLik() |>
+  melt() |>
+  separate(name, into = c(".id", "rep")) |>
+  group_by(.id) |>
+  reframe(melt(logmeanexp(value, se = TRUE))) |>
+  ungroup() |>
+  bind_rows(
+    mifs |> coef() |> melt()
+  ) |>
+  pivot_wider() |>
+  rename(
+    loglik = est,
+    loglik.se = se
+  ) -> estimates
+estimates
+
+mcmc_samples <- pmcmc(
+  pf_exp,
+  starts = estimates[, 4:7],
+  Nmcmc = 4000, Np = 200,
+  dprior = Csnippet(r"{
+      lik = dunif(r, 0, 50, 1) + dunif(a, 0, 50, 1) +
+            dunif(sigma_dyn, 0, 100, 1) + dunif(sigma_meas, 0, 100, 1);
+      lik = (give_log) ? lik : exp(lik);}"),
+  paramnames = c("r", "a", "sigma_dyn", "sigma_meas"),
+  proposal = mvn_rw_adaptive(
+    rw.sd = c(r = 0.05, a = 10, sigma_dyn = 10, sigma_meas = 10),
+    scale.start = 100, shape.start = 100
+  )
+)
+
+library(coda)
+mcmc_samples |> traces() -> traces
+rejectionRate(traces[, c("r", "a", "sigma_dyn", "sigma_meas")])
+
+traces |> autocorr.diag(lags = c(1, 5, 10, 50, 100))
+
+traces |>
+  lapply(as.data.frame) |>
+  lapply(rowid_to_column, "iter") |>
+  bind_rows(.id = "chain") |>
+  select(chain, iter, loglik, r, a, sigma_dyn, sigma_meas) |>
+  pivot_longer(c(-chain, -iter)) |>
+  ggplot(aes(x = iter, group = chain, color = chain, y = value)) +
+  guides(color = "none") +
+  labs(x = "iteration", y = "") +
+  geom_line(alpha = 0.3) +
+  geom_smooth(method = "loess", se = FALSE) +
+  facet_wrap(name ~ ., scales = "free_y", strip.position = "left", ncol = 2) +
+  theme(
+    strip.placement = "outside",
+    strip.background = element_rect(fill = NA, color = NA)
+  )
+
+gelman.diag(traces[, c("r", "a", "sigma_dyn", "sigma_meas")])
+
+
+
+# Test dynr
+cusp_catastrophe <- new("gen_model",
+  model_name = "cusp_catastrophe",
+  model_type = "DE",
+  time = 200,
+  # Set dyn_er to 0 and overwrite during the simulation
+  delta = (50 / 7) / 234, # Integer divides 3, 6, and 9 obs. per day
+  stepsize = (50 / 7) / 9, # Gets overwritten anyway
+  pars = list(a = -5, dyn_er = 1, omega = -(2 * pi / 50)^2),
+  start = list(
+    formula(y ~ 1.9),
+    formula(v ~ 0),
+    formula(b ~ -10)
+  ),
+  state_eq = list(
+    formula(y ~ -(4 * y^3 + 2 * a * y + b)),
+    formula(b ~ v),
+    formula(v ~ omega * b)
+  ),
+  dynamic_error = list(
+    formula(y ~ dyn_er),
+    formula(b ~ 0),
+    formula(v ~ 0)
+  ),
+  meas_eq = list(formula(y_obs ~ y + rnorm(1, 0, 1)))
+)
+
+data <- get_tsm_data(sim_tsm(cusp_catastrophe))
+data
+
+plot(as.ts(data$y))

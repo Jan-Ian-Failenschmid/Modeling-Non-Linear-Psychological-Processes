@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  30 AUG 2024 12:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.8.16)  30 AUG 2024 21:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/jan_failenschmid/research/project_1/paper_1/main.tex
-(/home/jan_failenschmid/research/project_1/paper_1/main.tex
+**/home/jan_failenschmid/research/project_1/Modeling-Non-Linear-Psychological-Processes/main.tex
+(/home/jan_failenschmid/research/project_1/Modeling-Non-Linear-Psychological-Processes/main.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (./apa7.cls
 Document Class: apa7 2021/11/21 v2.14 APA formatting (7th edition)
@@ -1213,12 +1213,12 @@ Package logreq Info: Writing requests to 'main.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  34391 strings out of 480247
- 658139 string characters out of 5896151
+ 658247 string characters out of 5896151
  1403090 words of memory out of 5000000
  51576 multiletter control sequences out of 15000+600000
  542019 words of font info for 125 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 99i,11n,103p,2315b,5221s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 99i,11n,103p,2351b,5221s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
 Output written on main.pdf (40 pages, 2353652 bytes).
 PDF statistics:

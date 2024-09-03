@@ -27,6 +27,7 @@ library(dynr)
 library(nprobust)
 library(data.table)
 library(ggdist)
+library(future.apply)
 
 # Load functions
 invisible(sapply(
@@ -160,9 +161,9 @@ poly <- new("method_poly",
 )
 
 ### Run simulation -------------------------------------------------------------
-repetitions <- 100 # Number of repetitions in the pilot sample
+repetitions <- 20 # Number of repetitions in the pilot sample
 mc_error_target <- 0.05 # Desired monte carlo error
-for (run in c("gam_test")) {
+for (run in c("pilot")) {
   # Set seed
   if (run == "pilot") {
     set.seed(12345)
@@ -175,11 +176,11 @@ for (run in c("gam_test")) {
   system.time({
     sim <- simulate(
       gen_model_list = list(
-        # exp_growth, log_growth, damped_oscillator, cusp_catastrophe
-        damped_oscillator, cusp_catastrophe
+        exp_growth, log_growth, damped_oscillator, cusp_catastrophe
+        # damped_oscillator, cusp_catastrophe
       ),
-      # method_list = list(locpol, gp, gam, dynm),
-      method_list = list(gam),
+      method_list = list(locpol, gp, gam, dynm),
+      # method_list = list(gam),
       conditions = list(
         time = c(100, 200), # 2 & 4 weeks rescaled to 1 week = 50 units
         # 3, 6, 9, measurements per day

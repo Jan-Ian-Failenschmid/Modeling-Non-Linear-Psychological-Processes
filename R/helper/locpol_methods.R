@@ -24,18 +24,12 @@ setClass(
 
 setMethod("fit", "method_locpol", function(method, data) {
   # Estimate local polynomial with orders 1, 3, and 5
-  loc_fit_list <- lapply(c(1, 3, 5), function(p, method, data) {
-    loc_fit <- lprobust_cust(
-      x = data$time, y = data$y_obs, eval = data$time,
-      p = p, kernel = "gau", bwselect = "imse-dpi",
-      bwcheck = 0, diag_A = TRUE
-    )
-    gcv <- get_cv(loc_fit$Estimate, data$y_obs)
-    return(list(loc_fit, gcv))
-  }, method = method, data = data)
-
-  # Select the local polynomial fit with the smalles gcv
-  loc_fit <- loc_fit_list[[which.min(sapply(loc_fit_list, "[[", 2))]][[1]]
+  loc_fit <- lprobust_cust(
+    x = data$time, y = data$y_obs, eval = data$time,
+    p = 3, bwselect = "imse-dpi",
+    bwcheck = 0, diag_A = TRUE, imsegrid = 200
+  )
+  gcv <- get_cv(loc_fit$Estimate, data$y_obs)
 
   # There is no convergence, so just set to true
   slot(method, "converged") <- TRUE

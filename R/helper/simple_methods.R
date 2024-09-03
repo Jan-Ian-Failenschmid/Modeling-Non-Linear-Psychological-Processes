@@ -1,7 +1,7 @@
 #' ----------------------------------------------------------------------------#
-#' Title: GAM Methods                                                          #
+#' Title: Simple linear regression methd                                      #
 #' Author: Jan Ian Failenschmid                                                #
-#' Created Date: 11-04-2024                                                    #
+#' Created Date: 03-09-2024                                                    #
 #' -----                                                                       #
 #' Last Modified: 03-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
@@ -13,25 +13,17 @@
 #' License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html           #
 #' ----------------------------------------------------------------------------#
 
-#' Class and methods for the generalized additive models class
-require(mgcv)
-
-# Gams
+# SLR
 setClass(
-  "method_gam",
+  "method_simple",
   contains = "method"
 )
 
-setMethod("fit", "method_gam", function(method, data) {
-  # fit <- gam(y_obs ~ s(time, bs = "tp", k = nrow(data)), data = data)
-  n <- nrow(data)
-  fit <- gam(y_obs ~ s(time, bs = "tp", k = n - 1),
-    data = data, method = "ML"
-  )
-
+setMethod("fit", "method_simple", function(method, data) {
+  fit <- lm(y_obs ~ time, data = data)
 
   # Method generics schould always return the adjusted method object
-  slot(method, "converged") <- fit$converged
+  slot(method, "converged") <- TRUE
 
   if (slot(method, "converged")) {
     inference <- predict(fit, se.fit = TRUE)
@@ -47,16 +39,15 @@ setMethod("fit", "method_gam", function(method, data) {
     slot(method, "mse") <- calc_mse(method, data)
 
     # Calculate gcv
-    # slot(method, "gcv") <- fit$gcv.ubre
+    X <- model.matrix(fit)
+    A <- X %*% solve(t(X) %*% X) %*% t(X)
+    n <- nrow(X)
     slot(method, "gcv") <-
       (n * sum((data$y_obs - as.vector(inference$fit))^2)) /
-        (n - sum(influence(fit)))^2
+        (n - sum(diag(A)))^2
 
     # Calculate confidence interval coverage
     slot(method, "ci_coverage") <- ci_test(method, data)
-
-    # Extract wigglyness parameter
-    slot(method, "wiggliness") <- fit$sp
   }
 
   # Method generics schould always return the adjusted method object

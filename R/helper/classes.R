@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 06-08-2024                                                   #
+#' Last Modified: 03-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -277,6 +277,8 @@ setClass(
     gcv = "numeric",
     # Confidence interval coverage
     ci_coverage = "numeric",
+    # Wiggliness parameter
+    wiggliness = "numeric",
     # Convergence
     converged = "logical"
   ),
@@ -289,6 +291,7 @@ setClass(
     mse = NA_real_,
     gcv = NA_real_,
     ci_coverage = NA_real_,
+    wiggliness = NA_real_,
     converged = FALSE
   )
 )
@@ -335,7 +338,7 @@ setMethod("show", "method", function(object) {
   if (is.na(slot(object, "gen_model"))) {
     out <- c(
       out,
-      "\n\nNo generative model has been assigned to the moethod."
+      "\n\nNo generative model has been assigned to the method."
     )
   } else {
     out <- c(
@@ -369,6 +372,7 @@ setMethod("show", "method", function(object) {
     "\nMSE:", round(slot(object, "mse"), 3),
     "\nGCV:", round(slot(object, "gcv"), 3),
     "\nCI coverage:", round(slot(object, "ci_coverage"), 3),
+    "\n Wiggliness:", round(slot(object, "wiggliness"), 3),
     "\n\nThe state inference is:\n"
   )
   cat(out)

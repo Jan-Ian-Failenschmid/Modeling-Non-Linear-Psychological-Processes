@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 26-04-2024                                                   #
+#' Last Modified: 03-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -120,6 +120,11 @@ setMethod("fit", "method_gp", function(method, data) {
 
     # Calculate confidence interval coverage
     slot(method, "ci_coverage") <- ci_test(method, data)
+
+    # Extract wigglyness parameter
+    slot(method, "wiggliness") <- mean(
+      gp_fit$draws("rho", format = "draws_df")$rho
+    )
   }
 
   # Method generics schould always return the adjusted method object

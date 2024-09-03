@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 11-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 25-04-2024                                                   #
+#' Last Modified: 03-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -62,6 +62,9 @@ setMethod("fit", "method_locpol", function(method, data) {
 
   # Calculate confidence interval coverage
   slot(method, "ci_coverage") <- ci_test(method, data)
+
+  # Extract wigglyness parameter
+  slot(method, "wiggliness") <- loc_fit$Estimate[1, 2]
 
   # Method generics schould always return the adjusted method object
   return(method)

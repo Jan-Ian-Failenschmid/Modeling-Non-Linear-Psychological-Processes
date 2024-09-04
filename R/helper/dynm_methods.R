@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 15-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 02-09-2024                                                   #
+#' Last Modified: 03-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -24,7 +24,7 @@ setClass(
 )
 
 setMethod("fit", "method_dynm", function(method, data) {
-  n <- 10 * 4
+  n <- 5 * 4
   if (method@gen_model == "exp_growth") {
     start_val <- data.frame(
       b = runif(n, -1, 0),
@@ -116,12 +116,16 @@ setMethod("fit", "method_dynm", function(method, data) {
 fit_dynm <- function(fit_fun, start, data) {
   for (i in 1:2) {
     if (i == 1) {
-      start_val <- start
+      fit <- future_apply(start, 1, fit_fun,
+        data = data,
+        simplify = FALSE,
+        future.seed = TRUE
+      )
     } else if (i == 2) {
-      start_val <- do.call(
+      new_start <- do.call(
         rbind,
         lapply(
-          fit[order(dev, decreasing = FALSE)[1:(nrow(start_val) / 4)]],
+          fit[order(dev, decreasing = FALSE)[1:(nrow(start) / 4)]],
           function(fit) {
             if (class(fit) == "dynrCook") {
               coef(fit)
@@ -132,16 +136,20 @@ fit_dynm <- function(fit_fun, start, data) {
         )
       )
 
-      start_val <- apply(
-        start_val[rep(seq_len(nrow(start_val)), each = 4), ], 2,
+      new_start <- apply(
+        new_start[rep(seq_len(nrow(new_start)), each = 2), ], 2,
         jitter
       )
+
+      fit <- list(
+        fit,
+        future_apply(new_start, 1, fit_fun,
+          data = data,
+          simplify = FALSE,
+          future.seed = TRUE
+        )
+      )
     }
-    fit <- future_apply(start_val, 1, fit_fun,
-      data = data,
-      simplify = FALSE,
-      future.seed = TRUE
-    )
 
     dev <- sapply(fit, function(x) {
       if (class(x) == "dynrCook") {
@@ -208,7 +216,7 @@ fit_dynm_log_growth <- function(start, data) {
   )
 
   model$lb[c("r", "k", "dyn_er", "meas_er", "y_nod")] <- c(
-    0, 0, 0, 0, -100
+    1e-6, 1e-6, 1e-6, 1e-6, -100
   )
 
   model$ub[c("r", "k", "dyn_er", "meas_er", "y_nod")] <- c(
@@ -276,11 +284,11 @@ fit_dynm_exp_growth <- function(start, data) {
 
   # Constraint parameter space to realistic values
   model$lb[c("b", "a", "dyn_er", "meas_er", "y_nod")] <- c(
-    -100, 0, 0, 0, -100
+    -100, 1e-6, 1e-6, 1e-6, -100
   )
 
   model$ub[c("b", "a", "dyn_er", "meas_er", "y_nod")] <- c(
-    0, 100, 1e+3, 1e+3, 100
+    -1e-6, 100, 1e+3, 1e+3, 100
   )
 
   dynr_fit <- tryCatch(dynr.cook(model),
@@ -338,6 +346,15 @@ fit_dynm_damp_osc <- function(start, data) {
     dynamics = dynamics, measurement = meas, noise = ecov,
     initial = initial, data = dynr_dat
   )
+
+  model$lb[c("k", "c", "dyn_er", "meas_er", "y_nod", "v_nod")] <- c(
+    -5, -5, 1e-6, 1e-6, -100, -100
+  )
+
+  model$ub[c("k", "c", "dyn_er", "meas_er", "y_nod", "v_nod")] <- c(
+    -1e-6, -1e-6, 1e+3, 1e+3, 100, 100
+  )
+
 
   dynr_fit <- tryCatch(dynr.cook(model),
     error = function(cond) {
@@ -412,7 +429,7 @@ fit_dynm_cusp_catas <- function(start, data) {
   model$ub[
     c("a", "omega", "dyn_er", "meas_er", "y_nod", "b_nod", "v_nod")
   ] <- c(
-    100, 0, 1e+3, 1e+3, 100, 100, 100
+    100, -1e-6, 1e+3, 1e+3, 100, 100, 100
   )
 
   dynr_fit <- tryCatch(dynr.cook(model),

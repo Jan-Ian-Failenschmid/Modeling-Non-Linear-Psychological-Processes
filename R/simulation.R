@@ -161,7 +161,7 @@ poly <- new("method_poly",
 )
 
 ### Run simulation -------------------------------------------------------------
-repetitions <- 20 # Number of repetitions in the pilot sample
+repetitions <- 16 # Number of repetitions in the pilot sample
 mc_error_target <- 0.05 # Desired monte carlo error
 for (run in c("pilot")) {
   # Set seed
@@ -179,8 +179,8 @@ for (run in c("pilot")) {
         exp_growth, log_growth, damped_oscillator, cusp_catastrophe
         # damped_oscillator, cusp_catastrophe
       ),
-      method_list = list(locpol, gp, gam, dynm),
-      # method_list = list(gam),
+      # method_list = list(locpol, gp, gam, dynm),
+      method_list = list(gam, dynm),
       conditions = list(
         time = c(100, 200), # 2 & 4 weeks rescaled to 1 week = 50 units
         # 3, 6, 9, measurements per day

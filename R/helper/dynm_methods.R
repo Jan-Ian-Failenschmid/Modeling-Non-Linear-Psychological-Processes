@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 15-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 03-09-2024                                                   #
+#' Last Modified: 04-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -216,11 +216,11 @@ fit_dynm_log_growth <- function(start, data) {
   )
 
   model$lb[c("r", "k", "dyn_er", "meas_er", "y_nod")] <- c(
-    1e-6, 1e-6, 1e-6, 1e-6, -100
+    1e-6, 1e-6, 1e-6, 1e-6, -1e+3
   )
 
   model$ub[c("r", "k", "dyn_er", "meas_er", "y_nod")] <- c(
-    100, 100, 1e+3, 1e+3, 100
+    1e+3, 1e+3, 1e+3, 1e+3, 1e+3
   )
 
   dynr_fit <- tryCatch(dynr.cook(model),
@@ -284,11 +284,11 @@ fit_dynm_exp_growth <- function(start, data) {
 
   # Constraint parameter space to realistic values
   model$lb[c("b", "a", "dyn_er", "meas_er", "y_nod")] <- c(
-    -100, 1e-6, 1e-6, 1e-6, -100
+    -1e+3, 1e-6, 1e-6, 1e-6, -1e+3
   )
 
   model$ub[c("b", "a", "dyn_er", "meas_er", "y_nod")] <- c(
-    -1e-6, 100, 1e+3, 1e+3, 100
+    -1e-6, 1e+3, 1e+3, 1e+3, 1e+3
   )
 
   dynr_fit <- tryCatch(dynr.cook(model),
@@ -346,15 +346,6 @@ fit_dynm_damp_osc <- function(start, data) {
     dynamics = dynamics, measurement = meas, noise = ecov,
     initial = initial, data = dynr_dat
   )
-
-  model$lb[c("k", "c", "dyn_er", "meas_er", "y_nod", "v_nod")] <- c(
-    -5, -5, 1e-6, 1e-6, -100, -100
-  )
-
-  model$ub[c("k", "c", "dyn_er", "meas_er", "y_nod", "v_nod")] <- c(
-    -1e-6, -1e-6, 1e+3, 1e+3, 100, 100
-  )
-
 
   dynr_fit <- tryCatch(dynr.cook(model),
     error = function(cond) {
@@ -423,13 +414,13 @@ fit_dynm_cusp_catas <- function(start, data) {
   model$lb[
     c("a", "omega", "dyn_er", "meas_er", "y_nod", "b_nod", "v_nod")
   ] <- c(
-    -100, -100, 1e-6, 1e-6, -100, -100, -100
+    -1e+3, -1e+3, 1e-6, 1e-6, -1e+3, -1e+3, -1e+3
   )
 
   model$ub[
     c("a", "omega", "dyn_er", "meas_er", "y_nod", "b_nod", "v_nod")
   ] <- c(
-    100, -1e-6, 1e+3, 1e+3, 100, 100, 100
+    +1e+3, -1e-6, 1e+3, 1e+3, 1e+3, 1e+3, 1e+3
   )
 
   dynr_fit <- tryCatch(dynr.cook(model),

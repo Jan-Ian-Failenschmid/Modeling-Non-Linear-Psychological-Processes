@@ -998,6 +998,69 @@
       \verb https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13974
       \endverb
     \endentry
+    \entry{cui_unlocking_2023}{misc}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=cfe768df6ed8376536c539ad340acc39}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={Jingmeng},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=607ae218fe10ec10db880da032dd2246}{%
+           family={Hasselman},
+           familyi={H\bibinitperiod},
+           given={Fred},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dffdf859cc1cf8e9a56c514d1587f56d}{%
+           family={Lichtwarck-Aschoff},
+           familyi={L\bibinithyphendelim A\bibinitperiod},
+           given={Anna},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en-us}%
+      }
+      \list{publisher}{1}{%
+        {PsyArXiv}%
+      }
+      \strng{namehash}{06caa1ee88cc3ca2768b674acd8855c0}
+      \strng{fullhash}{ff4d3a177b3a42f708e01d104c13c929}
+      \strng{bibnamehash}{ff4d3a177b3a42f708e01d104c13c929}
+      \strng{authorbibnamehash}{ff4d3a177b3a42f708e01d104c13c929}
+      \strng{authornamehash}{06caa1ee88cc3ca2768b674acd8855c0}
+      \strng{authorfullhash}{ff4d3a177b3a42f708e01d104c13c929}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{The availability of smart devices has made it possible to collect intensive longitudinal data (ILD) from individuals, providing a unique opportunity to study the complex dynamics of psychological systems. Existing time-series methods often have limitations, such as assuming linear interactions or having restricted forms, leading to difficulties in capturing the complex nature of these systems. To address this issue, we introduce fitlandr, a method with implementation as an R package that integrates nonparametric estimation of the drift-diffusion function and stability landscape. The drift-diffusion function is estimated using the Multivariate Kernel Estimator (MVKE, Bandi \& Moloche, 2018), and the stability landscape is estimated through Monte-Carlo estimation of the steady-state distribution (Cui et al., 2021, 2022). Using a simulated emotional system, we demonstrate that fitlandr can effectively recover bistable dynamics from data, even in the presence of moderate noise, and that it primarily relies on dynamic information from the system instead of distributional information. We then apply the method to two empirical single-participant ESM datasets and compared the results with the simulation datasets. Whereas both datasets show a bimodal distribution, fitlandr only revealed bistability in one of them, indicating that bimodality in ILD does not necessarily imply the existence of bistability in the underlying system. These results demonstrate the potential of fitlandr as a tool for uncovering the rich, nonlinear dynamics of psychological systems from ILD.}
+      \field{month}{2}
+      \field{shorttitle}{Unlocking nonlinear dynamics and multistability from intensive longitudinal data}
+      \field{title}{Unlocking nonlinear dynamics and multistability from intensive longitudinal data: {A} novel method}
+      \field{urlday}{11}
+      \field{urlmonth}{9}
+      \field{urlyear}{2023}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.31234/osf.io/wjzg2
+      \endverb
+      \verb{file}
+      \verb Full Text PDF:C\:\\Users\\failensc\\Zotero\\storage\\2BSKA626\\Cui et al. - 2023 - Unlocking nonlinear dynamics and multistability fr.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://psyarxiv.com/wjzg2/
+      \endverb
+      \verb{url}
+      \verb https://psyarxiv.com/wjzg2/
+      \endverb
+      \keyw{Quantitative Methods,Social and Behavioral Sciences}
+    \endentry
     \entry{de_bot_dynamic_2007}{article}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=5b76aa680325889fdfa604f12c1ac201}{%
@@ -1616,7 +1679,7 @@
       \true{uniqueprimaryauthor}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{R package version 0.8.1, https://discourse.mc-stan.org}
+      \field{note}{R package version 0.8.0, https://discourse.mc-stan.org}
       \field{title}{cmdstanr: R Interface to 'CmdStan'}
       \field{year}{2024}
       \verb{urlraw}
@@ -2032,6 +2095,68 @@
       \endverb
       \verb{url}
       \verb https://doi.apa.org/doi/10.1037/a0038822
+      \endverb
+    \endentry
+    \entry{humberg_estimating_2024}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=5cf036d59421f26cf2cbf7b706335b09}{%
+           family={Humberg},
+           familyi={H\bibinitperiod},
+           given={Sarah},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=aaaf9baf0cd299fbaefdcbab1435bbd4}{%
+           family={Grund},
+           familyi={G\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ce235affb93f0340d33b3c1831a5f525}{%
+           family={Nestler},
+           familyi={N\bibinitperiod},
+           given={Steffen},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{519fff495e9b999d764228368f56aa51}
+      \strng{fullhash}{244bba00fd5301a79830923ba0dea962}
+      \strng{bibnamehash}{244bba00fd5301a79830923ba0dea962}
+      \strng{authorbibnamehash}{244bba00fd5301a79830923ba0dea962}
+      \strng{authornamehash}{519fff495e9b999d764228368f56aa51}
+      \strng{authorfullhash}{244bba00fd5301a79830923ba0dea962}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Abstract Multilevel structural equation modeling (MSEM) is a statistical framework of major relevance for research concerned with people’s intrapersonal dynamics. An application domain that is rapidly gaining relevance is the study of individual differences in the within-person association (WPA) of variables that fluctuate over time. For instance, an individual’s social reactivity – their emotional response to social situations – can be represented as the association between repeated measurements of the individual’s social interaction quantity and momentary well-being. MSEM allows researchers to investigate the associations between WPAs and person-level outcome variables (e.g., life satisfaction) by specifying the WPAs as random slopes in the structural equation on level 1 and using the latent representations of the slopes to predict outcomes on level 2. Here, we are concerned with the case in which a researcher is interested in nonlinear effects of WPAs on person-level outcomes – a U-shaped effect of a WPA, a moderation effect of two WPAs, or an effect of congruence between two WPAs – such that the corresponding MSEM includes latent interactions between random slopes. We evaluate the nonlinear MSEM approach for the three classes of nonlinear effects (U-shaped, moderation, congruence) and compare it with three simpler approaches: a simple two-step approach, a single-indicator approach, and a plausible values approach. We use a simulation study to compare the approaches on accuracy of parameter estimates and inference. We derive recommendations for practice and provide code templates and an illustrative example to help researchers implement the approaches.}
+      \field{issn}{1554-3528}
+      \field{journaltitle}{Behavior Research Methods}
+      \field{month}{7}
+      \field{number}{7}
+      \field{shorttitle}{Estimating nonlinear effects of random slopes}
+      \field{title}{Estimating nonlinear effects of random slopes: {A} comparison of multilevel structural equation modeling with a two-step, a single-indicator, and a plausible values approach}
+      \field{urlday}{4}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{volume}{56}
+      \field{year}{2024}
+      \field{urldateera}{ce}
+      \field{pages}{7912\bibrangedash 7938}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.3758/s13428-024-02462-9
+      \endverb
+      \verb{urlraw}
+      \verb https://link.springer.com/10.3758/s13428-024-02462-9
+      \endverb
+      \verb{url}
+      \verb https://link.springer.com/10.3758/s13428-024-02462-9
       \endverb
     \endentry
     \entry{jebb_time_2015}{article}{}
@@ -2621,6 +2746,63 @@
       \endverb
       \verb{url}
       \verb https://doi.apa.org/doi/10.1037/0033-295X.108.1.57
+      \endverb
+    \endentry
+    \entry{oberauer_addressing_2019}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=cbaa140ad631a14166a497a14bef366a}{%
+           family={Oberauer},
+           familyi={O\bibinitperiod},
+           given={Klaus},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e7ebb66ea12299a9aea6e35ae34511ab}{%
+           family={Lewandowsky},
+           familyi={L\bibinitperiod},
+           given={Stephan},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{34aa4fb6b5ad71e7fd48bcef141d5f65}
+      \strng{fullhash}{34aa4fb6b5ad71e7fd48bcef141d5f65}
+      \strng{bibnamehash}{34aa4fb6b5ad71e7fd48bcef141d5f65}
+      \strng{authorbibnamehash}{34aa4fb6b5ad71e7fd48bcef141d5f65}
+      \strng{authornamehash}{34aa4fb6b5ad71e7fd48bcef141d5f65}
+      \strng{authorfullhash}{34aa4fb6b5ad71e7fd48bcef141d5f65}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1069-9384, 1531-5320}
+      \field{journaltitle}{Psychonomic Bulletin \& Review}
+      \field{month}{10}
+      \field{number}{5}
+      \field{title}{Addressing the theory crisis in psychology}
+      \field{urlday}{13}
+      \field{urlmonth}{12}
+      \field{urlyear}{2021}
+      \field{volume}{26}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \field{pages}{1596\bibrangedash 1618}
+      \range{pages}{23}
+      \verb{doi}
+      \verb 10.3758/s13423-019-01645-2
+      \endverb
+      \verb{file}
+      \verb Volltext:C\:\\Users\\failensc\\Zotero\\storage\\DWUJKJV3\\Oberauer und Lewandowsky - 2019 - Addressing the theory crisis in psychology.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.3758/s13423-019-01645-2
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.3758/s13423-019-01645-2
       \endverb
     \endentry
     \entry{R-dynr}{article}{}

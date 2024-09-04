@@ -3,7 +3,7 @@
 % Author: Jan Ian Failenschmid                                                 %
 % Created Date: 13-03-2024                                                     %
 % -----                                                                        %
-% Last Modified: 30-08-2024                                                    %
+% Last Modified: 04-09-2024                                                    %
 % Modified By: Jan Ian Failenschmid                                            %
 % -----                                                                        %
 % Copyright (c) 2024 by Jan Ian Failenschmid                                   %
@@ -23,7 +23,8 @@
 \graphicspath{ {./figures} } % Gaphics Path
 \addbibresource{bibliography.bib} % Literature bibliography
 \addbibresource{R_bib.bib} % R bibliography
-
+\DeclareMathOperator*{\argmin}{argmin}
+\setcounter{secnumdepth}{3}
 % Title Page
 \title{Modeling Non-Linear Psychological Processes: Reviewing and Evaluating
   (Non-) parametric Approaches and Their Applicability to Intensive
@@ -65,9 +66,9 @@ ecological momentary assessment (EMA), experience sampling, or similar methods
 \parencite{fritz_so_2023}. In these studies one or more individuals are
 assessed at a high frequency (multiple times per day) using brief
 questionnaires or passive measurement devices. These rich data allow
-researchers to examine complex temporal variations in latent psychological
-variables within an ecologically valid context and to explain them through
-(between-person differences) in within-person processes.
+researchers to examine complex temporal variations in the underlying
+psychological variables within an ecologically valid context and to explain
+them through (between-person differences) in within-person processes.
 
 Due to these ILD studies, many non-linear psychological phenomena and processes
 have been discovered during recent years. Clear examples of this are the
@@ -89,17 +90,8 @@ both of which are common model choices for these kinds of processes.
   \fitfigure{exemplar_no_process_noise.png}
   \figurenote{This figure shows four demonstrated psychological non-linear
     processes. Panels (a) and (b) show exponential and logistic growth curves,
-    respectively, which have been shown to describe intellectual and cognitive
-    development \parencite{kunnen_dynamic_2012,mcardle_comparative_2002},
-    motor skill learning \parencite{newell_time_2001}, and second language
-    acquisition \parencite{de_bot_dynamic_2007}. Panel (c)
-    shows a cusp model from catastrophe theory that exhibits apparent jumps
-    between two stable states. As such, it has been used to describe the
-    perception of mental flow \parencite{ceja_suddenly_2012} or alcohol use
-    relapse \parencite{witkiewitz_modeling_2007}.
-    Lastly, panel (d) shows a damped oscillator, which describes
-    the return of a perturbed system to baseline, which has been proposed as a
-    model for affect regulation \parencite{chow_emotion_2005}.}
+    respectively. Panel (c) shows a cusp catastrophe model.
+    Lastly, panel (d) shows a damped oscillator.}
   \label{fig:examplar_npn}
 \end{figure}
 
@@ -129,18 +121,23 @@ This model is exemplified in Figure~\ref{fig:examplar_npn}~(d).
 
 Although initial evidence for non-linearity in psychological research exists,
 theories about the nature and form of non-linear psychological processes remain
-scarce \parencite{tan_time-varying_2011}. Such theories could, for instance,
-take the form of formal dynamic models, describing how a process changes over
-time, such as differential equation \parencite{cooper_dynamical_2012} or
-state-space models \parencite{durbin_time_2012}. However, in order
-to develop these types of theories it is
-necessary to first identify phenomena, which are replicable and empirically
-observable features of the underlying processes, such as the described
-state switching or regulatory oscillations. Formal theories about the
-underlying process should then be able to explain these phenomena and different
-candidate theories can be compared on their success to do so
-\parencite{borsboom_theory_2021}.
-Unfortunately, researchers are currently ill-equipped to infer non-linear
+scarce \parencite{tan_time-varying_2011}. Frequently, psychological theories
+are very general \parencite{oberauer_addressing_2019} and ILD studies have the
+potential to refine these theories through a nuanced understanding of how the
+involved psychological varibales interact dynamically over time. Such
+refined theories could, for instance, take the form of formal dynamic models,
+such as differential equation \parencite{cooper_dynamical_2012} or state-space
+models \parencite{durbin_time_2012}, describing how a given process changes
+over time. However, in order to develop these types of
+theories it is necessary to first identify phenomena in ILD, which are
+replicable and empirically observable features of the underlying processes,
+such as the described state switching or regulatory oscillations. Formal
+theories about the underlying process should then be able to explain these
+phenomena and different candidate theories can be compared on their success
+to do so \parencite{borsboom_theory_2021}. While the study of non-linear
+phenomena in ILD is receiving increasingly more attention in psychology
+\parencite{cui_unlocking_2023,humberg_estimating_2024},
+researchers are currently still ill-equipped to infer non-linear
 phenomena from ILD due to a lack of advanced statistical methods that are
 flexible enough to adequately capture and explore these processes, which
 hinders the development and evaluation of guiding theories.
@@ -189,18 +186,19 @@ smooth processes for which many of these methods were originally developed are
 unlikely to occur in psychological research.
 
 To address this important gap, this article reviews three advanced non-linear
-analysis methods and evaluates their applicability to typical ILD scenarios.
-Specifically, we compare how well each method can recover different latent
-processes under common ILD conditions in a simulation study. We also
+analysis methods and evaluates their applicability to typical ILD scenarios
+(Section~\ref{method_introduction}). Specifically, we compare how well
+each method can recover different latent processes under common ILD
+conditions in a simulation study (Section~\ref{simulation}). We also
 demonstrate the conclusions that can be drawn from each method by applying them
-to an existing dataset. The methods reviewed in this article are semi- and
-non-parametric regression techniques that are able infer non-linear functions
-from data while accommodating varying degrees of prior knowledge.
-Further, to introduce these methods accessibly and apply them under
-conditions where software implementations are available, this article
-focuses on the univariate single-subject design.
+to an existing dataset (Section~\ref{empirical_example}). The methods
+reviewed in this article are semi- and non-parametric regression techniques
+that are able infer non-linear functions from data while accommodating
+varying degrees of prior knowledge. Further, to introduce these methods
+accessibly and apply them under conditions where software implementations
+are available, this article focuses on the univariate single-subject design.
 
-\section{Non-linear analysis methods}
+\section{Non-linear analysis methods}\label{method_introduction}
 
 \subsection{Local polynomial regression}
 
@@ -214,19 +212,17 @@ observations
 \parencite{fan_adaptive_1995, ruppert_multivariate_1994, fan_local_2018}.
 
 To determine the value that the LPR predicts at a specific time point, the data
-
-is centered around that point (by shifting the data along the time axis so
-that the chosen time point is at zero), and a low-order polynomial is fitted
+is first centered around that point (by shifting the data along the time axis
+so that the chosen time point is at zero), and a low-order polynomial is fitted
 around it. Additionally, to account for the fact that the polynomial
 approximation is more accurate for data points closer in time, a weighting
 function is applied during the polynomial estimation. This function assigns
-weights to each data point
-based on its distance from the point of interest. The value of that the
-LPR predicts for the chosen time point is then given by the intercept of the
-locally weighted polynomial at this time point. To find the value that the LPR
-predicts for a different time point, the same procedure is repeated,
-centering the data around the new point of interest. Since it is theoretically
-possible to repeat this process at infinitely many
+weights to each data point based on its distance from the point of interest.
+The value of that the LPR predicts for the chosen time point is then given by
+the intercept of the locally weighted polynomial at this time point.
+To find the value that the LPR predicts for a different time point, the same
+procedure is repeated,centering the data around the new point of interest.
+Since it is theoretically possible to repeat this process at infinitely many
 time points, LPR is a non-parametric technique. Figure~\ref{fig:locpol_dem}
 shows the estimated LPR for the example process introduced in
 Figure~\ref{fig:examplar_npn}~(d).  In this figure, three truncated examples of
@@ -243,6 +239,26 @@ in red, which contribute to the overarching LPR for this process.\@
     points.}
   \label{fig:locpol_dem}
 \end{figure}
+
+\begin{equation} \label{eq:lpr_equations}
+  \begin{aligned}
+    y_t          & = f(t) + \epsilon_t                            \\
+    \textbf{X}   & =
+    \begin{bmatrix}
+      1      & (t_1 - t^*)^1 & \dots  & (t_1 - t^*)^p \\
+      \vdots & \vdots        & \ddots & \vdots        \\
+      1      & (t_n - t^*)^1 & \dots  & (t_n - t^*)^p
+    \end{bmatrix} \\
+    \textbf{W}   & =
+    \begin{bmatrix}
+      K(\frac{t_1 - t^*}{h}) &        &                        \\
+                             & \ddots &                        \\
+                             &        & K(\frac{t_n - t^*}{h})
+    \end{bmatrix}                          \\
+    \hat{f}(t^*) & =
+    Intercept((\textbf{X}^T\textbf{WX})^{-1}\textbf{X}^T\textbf{Wy})
+  \end{aligned}
+\end{equation}
 
 When fitting an LPR, several decisions must be
 made regarding the degree of the local polynomials and the optimal weighting of
@@ -312,6 +328,32 @@ functions providing a mean estimate for the underlying process.
     drawn functions.}
   \label{fig:gp_dem}
 \end{figure}
+
+\begin{equation}\label{eq:gp_equations}
+  \begin{aligned}
+    y_t                                & = f(t) + \epsilon_t
+    \\
+    P(f \, | \, \theta)                & \sim GP(m(\textbf{t} \, | \, \theta),
+    \,
+    cov(\textbf{t}, \, \textbf{t} \, | \, \theta ))
+    \\
+    P(f, \, \theta \, | \, \textbf{y}) & \propto P(\textbf{y} \, | \, f, \,
+    \theta ) P(f \, | \, \theta) P(\theta)
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \begin{aligned}
+    P(f(\textbf{t}^*) \, | \, \textbf{y} , \, \theta) & \sim
+    MvN(K(\textbf{t}^*, \textbf{t}){[K(\textbf{t}, \textbf{t}) + \sigma^2
+            \textbf{I}]}^{-1}\textbf{y}, K(\textbf{t}^*, \,
+    \textbf{t}){[K(\textbf{t}, \textbf{t}) + \sigma^2
+            \textbf{I}]}^{-1} K(\textbf{t}, \textbf{t}^*))
+    \\
+    K(\textbf{t}, \textbf{t})                         & = cov(\textbf{t}, \,
+    \textbf{t} \, | \, \theta), \quad \theta \sim P(\theta \, | \, \textbf{y})
+  \end{aligned}
+\end{equation}
 
 The GP prior is parameterized by a mean function and a covariance function,
 which are continuous extensions of the mean vector and covariance matrix of a
@@ -401,6 +443,16 @@ functions that make up the smooth term are shown in red.
   \label{fig:gam_dem}
 \end{figure}
 
+\begin{equation}\label{eq:gam_equations}
+  \begin{aligned}
+    y_t        & = f(t) + \epsilon_t                                \\
+    \hat{f}    & = \sum^J_{j=1} \beta_j(t)x_j                       \\
+    \beta_j(t) & = \sum^K_{k=1} \alpha_{j, k} R_{j, k}(t)           \\
+    \hat{f}    & = \argmin_\alpha \sum^n_{i=1} (y_t - \hat{f}(t)) +
+    \lambda \int (\hat{f}'')^2 dt
+  \end{aligned}
+\end{equation}
+
 Compared to the previous methods, GAMs offer a more accessible modeling
 framework,
 enabling the specific modeling and testing of partial theories. For instance, a
@@ -415,7 +467,7 @@ this penalty weight does not assume constant wigglyness. Lastly, the
 basis function coefficients within each smooth term can be interpreted,
 but the specific interpretations depend on the spline basis used.
 
-\section{Simulation}
+\section{Simulation} \label{simulation}
 
 \subsection{Problem}
 
@@ -890,7 +942,7 @@ advisable in practice. This could, for example, be achieved by measuring
 context variables and other sources of perturbations and incorporating
 them into the model.
 
-\section{An Empirical Example}
+\section{An Empirical Example} \label{empirical_example}
 
 In the following, the three analysis methods previously introduced were
 applied to depression data from the Leuven clinical study. This study used

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 02-09-2024                                                   #
+#' Last Modified: 05-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -81,7 +81,7 @@ simulate <- function(
   )]
 
   ## Fit analysis methods and record performance measures
-  cat("\n\nModel Ftting:    ")
+  cat("\n\nModel Fitting:    ")
   fit_count <- counter()
   # Fit model by condition
   for (i in seq_len(ncond)) {

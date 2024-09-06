@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 15-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 04-09-2024                                                   #
+#' Last Modified: 06-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -27,26 +27,26 @@ setMethod("fit", "method_dynm", function(method, data) {
   n <- 5 * 4
   if (method@gen_model == "exp_growth") {
     start_val <- data.frame(
-      b = runif(n, -1, 0),
-      a = runif(n, 0, 1),
-      dyn_er = runif(n, 0, var(data$y_obs, na.rm = TRUE)),
-      meas_er = runif(n, 0, var(data$y_obs, na.rm = TRUE)),
+      b = runif(n, -1, 1e-6),
+      a = runif(n, 1e-6, 1),
+      dyn_er = runif(n, 1e-6, var(data$y_obs, na.rm = TRUE)),
+      meas_er = runif(n, 1e-6, var(data$y_obs, na.rm = TRUE)),
       y_nod = runif(n, -10, 10)
     )
 
     dynr_fit <- quiet(fit_dynm(fit_dynm_exp_growth, start_val, data))
   } else if (method@gen_model == "log_growth") {
     start_val <- data.frame(
-      r = runif(n, 0, 5),
-      k = runif(n, 0, 50),
-      dyn_er = runif(n, 0, var(data$y_obs, na.rm = TRUE)),
-      meas_er = runif(n, 0, var(data$y_obs, na.rm = TRUE)),
-      y_nod = runif(n, 0, 10)
+      r = runif(n, 1e-6, 5),
+      k = runif(n, 1e-6, 50),
+      dyn_er = runif(n, 1e-6, var(data$y_obs, na.rm = TRUE)),
+      meas_er = runif(n, 1e-6, var(data$y_obs, na.rm = TRUE)),
+      y_nod = runif(n, 1e-6, 10)
     )
     dynr_fit <- quiet(fit_dynm(fit_dynm_log_growth, start_val, data))
   } else if (method@gen_model == "cusp_catastrophe") {
     start_val <- data.frame(
-      omega = runif(n, -5, 0),
+      omega = runif(n, -5, 1e-6),
       a = runif(n, -10, 10),
       dyn_er = runif(n, 0, var(data$y_obs, na.rm = TRUE)),
       meas_er = runif(n, 0, var(data$y_obs, na.rm = TRUE)),
@@ -58,10 +58,10 @@ setMethod("fit", "method_dynm", function(method, data) {
     dynr_fit <- quiet(fit_dynm(fit_dynm_cusp_catas, start_val, data))
   } else if (method@gen_model == "damped_oscillator") {
     start_val <- data.frame(
-      k = runif(n, -1, 0),
-      c = runif(n, -1, 0),
-      dyn_er = runif(n, 0, var(data$y_obs, na.rm = TRUE)),
-      meas_er = runif(n, 0, var(data$y_obs, na.rm = TRUE)),
+      k = runif(n, -1, 1e-6),
+      c = runif(n, -1, 1e-6),
+      dyn_er = runif(n, 1e-6, var(data$y_obs, na.rm = TRUE)),
+      meas_er = runif(n, 1e-6, var(data$y_obs, na.rm = TRUE)),
       y_nod = runif(n, -10, 10),
       v_nod = runif(n, -10, 10)
     )
@@ -353,6 +353,12 @@ fit_dynm_damp_osc <- function(start, data) {
       return(dynr_fit)
     }
   )
+
+  if (class(dynr_fit) == "dynrCook") {
+    c(deviance(dynr_fit), coef(dynr_fit))
+  } else {
+    c(1e10, start)
+  }
 }
 
 

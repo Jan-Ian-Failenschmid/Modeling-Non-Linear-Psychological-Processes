@@ -179,7 +179,7 @@ for (run in c("pilot")) {
         exp_growth, log_growth, damped_oscillator, cusp_catastrophe
         # damped_oscillator, cusp_catastrophe
       ),
-      method_list = list(locpol, gp, gam, dynm, simple, poly),
+      method_list = list(locpol, gp, gam, simple, poly),
       # method_list = list(gam, dynm),
       conditions = list(
         time = c(100, 200), # 2 & 4 weeks rescaled to 1 week = 50 units

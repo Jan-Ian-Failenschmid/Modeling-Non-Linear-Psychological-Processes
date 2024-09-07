@@ -3,7 +3,7 @@
 % % Author: Jan Ian Failenschmid % Created Date: 13-03-2024
 % %
 % -----                                                                        %
-% Last Modified: 05-09-2024                                                    %
+% Last Modified: 07-09-2024                                                    %
 % % Modified By: Jan Ian Failenschmid
 % %
 % %
@@ -18,7 +18,7 @@
 % %
 % -----------------------------------------------------------------------------%
 
-\documentclass[jou, floatsintext]{apa7}
+\documentclass[man, floatsintext]{apa7}
 
 % Dependencies
 \usepackage{csquotes, amsmath, amssymb, mathptmx, enumitem}
@@ -59,7 +59,7 @@
 
 \maketitle
 
-Psychological constructs are increasingly viewed as components of complex
+Psychological constructs are increasingly understood as components of complex
 dynamic systems \parencite{nesselroade_studying_2004, wang_investigating_2012}.
 This perspective emphasizes that these constructs fluctuate over time and
 within individuals. To study these variations and the underlying processes,
@@ -82,9 +82,9 @@ non-linear trajectory from a (person specific) starting point towards an
 Additional examples of asymptotic growth over the shorter time spans that are
 typically studied with ILD include motor skill development
 \parencite{newell_time_2001} and second language acquisition
-\parencite{de_bot_dynamic_2007}. Figure~\ref{fig:examplar_npn} shows an
-exponential growth function (a) and a logistic growth function (b), both of
-which are common model choices for these kinds of processes.
+\parencite{de_bot_dynamic_2007}. Figure~\ref{fig:examplar_npn} shows
+common model choices for these kinds of processes in the form of an
+exponential growth function (a) and a logistic growth function (b).
 
 \begin{figure}[!ht]
   \caption{Examples of non-linear processes demonstrated to occur in
@@ -110,9 +110,9 @@ its parameters \parencite{van_der_maas_sudden_2003,chow_cusp_2015} and has been
 exemplified in Figure~\ref{fig:examplar_npn}~(c).
 
 As a final example, one may consider (self-) regulatory systems, which maintain
-a desired state by counteracting external perturbations. These systems regulate
-adaptively, meaning that the regulation strength depends on the distance
-between the current and desired states. The common autoregressive model
+a desired state by counteracting external perturbations. In these systems the
+regulatory force often depends on the distance
+between the current and the desired states. The common autoregressive model
 describes such a system in which the regulation strength depends linearly on
 this distance. However, this relationship may also be non-linear, such that the
 regulatory force changes disproportionately with larger mismatches. Such a
@@ -123,26 +123,28 @@ model is exemplified in Figure~\ref{fig:examplar_npn}~(d).
 Although initial evidence for non-linearity in psychological research exists,
 theories about the nature and form of non-linear psychological processes remain
 scarce \parencite{tan_time-varying_2011}. Frequently, psychological theories
-are very general \parencite{oberauer_addressing_2019} and ILD studies have the
+are too general \parencite{oberauer_addressing_2019} to predict specific
+non-linear dynamics and ILD studies could have the
 potential to refine these theories through a nuanced understanding of how the
-involved psychological varibales interact dynamically over time. Such refined
+involved psychological variables interact over time. Such refined
 theories could, for instance, take the form of formal dynamic models, such as
 differential equation \parencite{cooper_dynamical_2012} or state-space models
 \parencite{durbin_time_2012}, describing how a given process changes over time.
-However, in order to develop these types of theories it is necessary to first
+However, in order to develop these types of theories it is first necessary to
 identify phenomena in ILD, which are replicable and empirically observable
 features of the underlying processes, such as the described state switching or
 regulatory oscillations. Formal theories about the underlying process should
 then be able to explain these phenomena and different candidate theories can be
 compared on their success to do so \parencite{borsboom_theory_2021}. While the
 study of non-linear phenomena in ILD is receiving increasingly more attention
-in psychology \parencite{cui_unlocking_2023,humberg_estimating_2024},
-researchers are currently still ill-equipped to infer non-linear phenomena from
-ILD due to a lack of advanced statistical methods that are flexible enough to
-adequately capture and explore these processes, which hinders the development
-and evaluation of guiding theories. Due to this lack of adequate available
-statistical methods, non-linear trends are most often addressed in psychology
-through polynomial regression or spline regression.
+in psychology and different statistical techniques are developed to explore
+these phenomena \parencite{cui_unlocking_2023,humberg_estimating_2024},
+researchers are currently still limited in their ability to infer non-linear
+phenomena from ILD due to a lack of advanced statistical methods that are
+flexible enough to adequately capture and explore these processes, which
+hinders the development and evaluation of guiding theories. Due to this lack of
+adequate available statistical methods, non-linear trends are most often
+addressed in psychology through polynomial regression or spline regression.
 
 Polynomial regression \parencite{jebb_time_2015} uses higher-order terms (e.g.,
 squared or cubed time) as predictors in a standard multiple linear regression
@@ -188,12 +190,12 @@ analysis methods and evaluates their applicability to typical ILD scenarios
 method can recover different latent processes under common ILD conditions in a
 simulation study (Section~\ref{simulation}). We also demonstrate the
 conclusions that can be drawn from each method by applying them to an existing
-dataset (Section~\ref{empirical_example}). The methods reviewed in this article
-are semi- and non-parametric regression techniques that are able infer
-non-linear functions from data while accommodating varying degrees of prior
-knowledge. Further, to introduce these methods accessibly and apply them under
-conditions where software implementations are available, this article focuses
-on the univariate single-subject design.
+dataset (Section~\ref{empirical_example}). The specific methods reviewed in
+this article are semi- and non-parametric regression techniques that are able
+infer non-linear functions from data while accommodating varying degrees of
+prior knowledge. Further, to introduce these methods accessibly and apply them
+under conditions where software implementations are available, this article
+focuses on the univariate single-subject design.
 
 \section{Non-linear analysis methods}\label{method_introduction}
 

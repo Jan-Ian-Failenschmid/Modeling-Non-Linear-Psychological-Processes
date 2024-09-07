@@ -426,17 +426,17 @@ fit_dynm_cusp_catas <- function(start, data) {
     initial = initial, data = dynr_dat
   )
 
-  model$lb[
-    c("a", "omega", "dyn_er", "meas_er", "y_nod", "b_nod", "v_nod")
-  ] <- c(
-    -1e+3, -1e+3, 1e-6, 1e-6, -1e+3, -1e+3, -1e+3
-  )
+  # model$lb[
+  #   c("a", "omega", "dyn_er", "meas_er", "y_nod", "b_nod", "v_nod")
+  # ] <- c(
+  #   -1e+3, -1e+3, 1e-6, 1e-6, -1e+3, -1e+3, -1e+3
+  # )
 
-  model$ub[
-    c("a", "omega", "dyn_er", "meas_er", "y_nod", "b_nod", "v_nod")
-  ] <- c(
-    +1e+3, -1e-6, 1e+3, 1e+3, 1e+3, 1e+3, 1e+3
-  )
+  # model$ub[
+  #   c("a", "omega", "dyn_er", "meas_er", "y_nod", "b_nod", "v_nod")
+  # ] <- c(
+  #   +1e+3, -1e-6, 1e+3, 1e+3, 1e+3, 1e+3, 1e+3
+  # )
 
   dynr_fit <- tryCatch(dynr.cook(model),
     error = function(cond) {

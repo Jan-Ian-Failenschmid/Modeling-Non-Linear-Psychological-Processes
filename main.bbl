@@ -1679,7 +1679,7 @@
       \true{uniqueprimaryauthor}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{R package version 0.8.0, https://discourse.mc-stan.org}
+      \field{note}{R package version 0.8.1, https://discourse.mc-stan.org}
       \field{title}{cmdstanr: R Interface to 'CmdStan'}
       \field{year}{2024}
       \verb{urlraw}
@@ -3364,63 +3364,6 @@
       \endverb
       \verb{url}
       \verb http://journals.sagepub.com/doi/10.1177/0049124103253773
-      \endverb
-    \endentry
-    \entry{wagenmakers_aic_2004}{article}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=d0127560e030afe2fdab5e2b35378c37}{%
-           family={Wagenmakers},
-           familyi={W\bibinitperiod},
-           given={Eric-Jan},
-           giveni={E\bibinithyphendelim J\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=060041b0a14bacfe8f64f0654fafaed4}{%
-           family={Farrell},
-           familyi={F\bibinitperiod},
-           given={Simon},
-           giveni={S\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{b3f5d86bb2e278c1149c833a6a739b38}
-      \strng{fullhash}{b3f5d86bb2e278c1149c833a6a739b38}
-      \strng{bibnamehash}{b3f5d86bb2e278c1149c833a6a739b38}
-      \strng{authorbibnamehash}{b3f5d86bb2e278c1149c833a6a739b38}
-      \strng{authornamehash}{b3f5d86bb2e278c1149c833a6a739b38}
-      \strng{authorfullhash}{b3f5d86bb2e278c1149c833a6a739b38}
-      \field{sortinit}{W}
-      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{1069-9384, 1531-5320}
-      \field{journaltitle}{Psychonomic Bulletin \& Review}
-      \field{month}{2}
-      \field{number}{1}
-      \field{title}{{AIC} model selection using {Akaike} weights}
-      \field{urlday}{28}
-      \field{urlmonth}{2}
-      \field{urlyear}{2024}
-      \field{volume}{11}
-      \field{year}{2004}
-      \field{urldateera}{ce}
-      \field{pages}{192\bibrangedash 196}
-      \range{pages}{5}
-      \verb{doi}
-      \verb 10.3758/BF03206482
-      \endverb
-      \verb{file}
-      \verb Wagenmakers and Farrell - 2004 - AIC model selection using Akaike weights.pdf:C\:\\Users\\failensc\\Zotero\\storage\\NSU6MMXK\\Wagenmakers and Farrell - 2004 - AIC model selection using Akaike weights.pdf:application/pdf
-      \endverb
-      \verb{urlraw}
-      \verb http://link.springer.com/10.3758/BF03206482
-      \endverb
-      \verb{url}
-      \verb http://link.springer.com/10.3758/BF03206482
       \endverb
     \endentry
     \entry{wahba_spline_1980}{inbook}{}

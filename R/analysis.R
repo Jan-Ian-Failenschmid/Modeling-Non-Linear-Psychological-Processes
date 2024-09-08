@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 30-08-2024                                                   #
+#' Last Modified: 08-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -36,8 +36,8 @@ load("R/data/simulation_results_17_05_2024_06_59.Rdata")
 load("R/data/err_test_data_27_05_2024_15_11.Rdata")
 load("R/data/err_test_results_27_05_2024_15_11.Rdata")
 load("R/data/exp_growth_test_results_28_05_2024_04_13.Rdata")
-load("R/data/gam_test_data_06_08_2024_15_56.Rdata")
-load("R/data/gam_test_results_06_08_2024_15_56.Rdata")
+load("R/data/pilot_data_04_09_2024_22_04.Rdata")
+load("R/data/pilot_results_04_09_2024_22_04.Rdata")
 
 res <- as.data.table(res)
 sim <- as.data.table(sim)
@@ -259,10 +259,13 @@ anova(fit_bic_gcv)
 # ToDo: Add missing data to improve model fitting?
 
 par(mfrow = c(3, 4))
-ilustr <- 
-  sim[, model_name := sapply(gen_model, function(x) {x@model_name})][, 
-  .I[time == 100 & time == unique(time)[1] & dyn_er == sqrt(1)], 
-    by = model_name][, .SD[7], by = model_name]
+ilustr <-
+  sim[, model_name := sapply(gen_model, function(x) {
+    x@model_name
+  })][,
+    .I[time == 100 & time == unique(time)[1] & dyn_er == sqrt(1)],
+    by = model_name
+  ][, .SD[7], by = model_name]
 
 method <- c("LPR", "GP", "GAM")
 
@@ -270,8 +273,10 @@ par(mfrow = c(4:3))
 for (j in 1:4) {
   for (i in 1:3) {
     plot(sim$method[[ilustr$V1[j]]][[i]], sim = sim)
-    title(paste0("Process: ", ilustr$model_name[j], 
-                "; Method: ", method[i]))
+    title(paste0(
+      "Process: ", ilustr$model_name[j],
+      "; Method: ", method[i]
+    ))
   }
 }
 

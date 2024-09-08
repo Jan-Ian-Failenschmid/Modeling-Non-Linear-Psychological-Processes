@@ -1,12 +1,14 @@
 # Fdb version 3
-["biber main"] 1725546989 "main.bcf" "main.bbl" "main" 1725699179
-  "main.bcf" 1725699179 132610 bd1befb3bba7d49e234c987439fe1c5b "pdflatex"
+["biber main"] 1725732557 "main.bcf" "main.bbl" "main" 1725732943
+  "R_bib.bib" 1725699621 3995 d2543902443662495f36baef9d3758f8 ""
+  "bibliography.bib" 1725453064 295298 267a3509a32ff98693e5d0058662f246 ""
+  "main.bcf" 1725732943 132482 17197544d45e7794682d1f09ca3a72fc "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1725699176 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1725699179
+["pdflatex"] 1725732940 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1725732943
   "/etc/texmf/web2c/texmf.cnf" 1701959205 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1725699170 66757 42bcbe872a051414a2d493e1337056b4 ""
+  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1725732939 67972 bbeb505f3821a618d6858055ddde224a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -243,11 +245,11 @@
   "figures/gp_demonstration.png" 1714122207 584542 e30de3f8dc9a7d4aba92e20fd5c401c2 ""
   "figures/locpol_demonstration.png" 1714122102 122600 74e31a0c96b379e96b0c9e28979ab19c ""
   "figures/results.png" 1724269958 134960 0c014faf8d73e197b5b52b2c13a7f6a1 ""
-  "main.aux" 1725699179 22218 cc6e0e0a6900b3b6b164f00257c39159 "pdflatex"
-  "main.bbl" 1725546991 191799 85d8ff74a253435e8638f77593dabbab "biber main"
-  "main.out" 1725699179 3511 f62e9602efebe15c60cbdec94328c767 "pdflatex"
-  "main.run.xml" 1725699179 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
-  "main.tex" 1725699170 66757 42bcbe872a051414a2d493e1337056b4 ""
+  "main.aux" 1725732943 22013 66c504414fa4953546aad570d9494f2d "pdflatex"
+  "main.bbl" 1725732560 189595 9410ca9c899732fad21c5e05eab67b64 "biber main"
+  "main.out" 1725732943 3511 f62e9602efebe15c60cbdec94328c767 "pdflatex"
+  "main.run.xml" 1725732943 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
+  "main.tex" 1725732939 67972 bbeb505f3821a618d6858055ddde224a ""
   (generated)
   "main.aux"
   "main.bcf"

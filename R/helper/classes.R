@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 03-09-2024                                                   #
+#' Last Modified: 08-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -318,7 +318,7 @@ setMethod("plot", "method", function(
     any(sapply(method_list, identical, y = x))
   }))][[1]]
 
-  plot(x = data$time, data[[observation]])
+  plot(x = data$time, data[[observation]], ...)
   lines(x = data$time, y = data[[state]])
   lines(x = data$time, y = slot(x, "estimate"), col = "red")
   lines(x = data$time, y = slot(x, "ci")$lb, col = "red", lty = 2)

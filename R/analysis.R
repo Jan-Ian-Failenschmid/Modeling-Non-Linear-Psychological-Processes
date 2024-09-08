@@ -54,7 +54,7 @@ res$model[res$model == "cusp_catastrophe"] <- "Cusp Catastrophe"
 
 res$method[res$method == "locpol"] <- "Local Polynomial Regression"
 res$method[res$method == "gp"] <- "Gaussian Process Regression"
-res$method[res$method == "gam"] <- "Generall Additive Modelling"
+res$method[res$method == "gam"] <- "General Additive Modelling"
 res$method[res$method == "dynm"] <- "Dynamic Modelling"
 res$method[res$method == "simple"] <- "Linear Regression"
 res$method[res$method == "poly"] <- "Polynomial Regression"
@@ -70,7 +70,7 @@ contrasts(res$model) <- contr.sum(levels(res$model))
 res$method <- factor(res$method,
   levels = c(
     "Local Polynomial Regression", "Gaussian Process Regression",
-    "Generall Additive Modelling", # "Dynamic Modelling",
+    "General Additive Modelling", # "Dynamic Modelling",
     "Linear Regression", "Polynomial Regression"
   )
 )
@@ -82,11 +82,13 @@ contrasts(res$weeks) <- contr.sum(levels(res$weeks))
 res$meas <- factor(res$meas)
 contrasts(res$meas) <- contr.sum(levels(res$meas))
 
-res$dyn_var <- factor(res$dyn_var)
+res$dyn_var <- factor(res$dyn_var,
+  levels = c(.5, 1, 2),
+  labels = c(".5", "1", "2")
+)
 contrasts(res$dyn_var) <- contr.sum(levels(res$dyn_var))
 
-### Analysis -------------------------------------------------------------------
-## Descriptives
+### Descriptives ---------------------------------------------------------------
 res_summary <- res[, .(
   mse_mean = mean(mse, na.rm = TRUE),
   mse_se = sd(mse, na.rm = TRUE) / sqrt(.N),
@@ -103,14 +105,50 @@ by = .(method, model, time, stepsize, dyn_er)
 
 View(res_summary)
 
-## Visulization
+### Visulization ---------------------------------------------------------------
+dpi <- 300
 x11()
-plot_results(res = res, "mse", "mean", "weeks", "meas", "dyn_var")
-plot_results(res = res, "gcv", "mean", "meas")
-plot_results(res = res, "gcv", "all", "weeks", "meas", "dyn_var")
-plot_results(res = res, "ci_coverage", "all", "weeks", "meas", "dyn_var")
+for (what in c("all", "missing")) {
+  p1 <- plot_results(res = res, "mse", what, "weeks", "meas", "dyn_var")
+  p1 <- p1 + theme(
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank()
+  ) +
+    labs(y = "MSE", fill = "Process", color = "Process")
 
-## Clean datas
+  p2 <- plot_results(res = res, "gcv", what, "weeks", "meas", "dyn_var")
+  p2 <- p2 + theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank()
+  ) +
+    labs(y = "GCV", fill = "Process", color = "Process")
+
+  p3 <- plot_results(res = res, "ci_coverage", what, "weeks", "meas", "dyn_var")
+  p3 <- p3 + theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    axis.text.x = element_text(size = 5)
+  ) +
+    labs(
+      x = "Simulation Conditions", y = "CI Coverage", ,
+      fill = "Process", color = "Process"
+    ) +
+    ylim(0, 1) +
+    annotate("text", x = -1, y = -3, label = "Test") +
+    coord_cartesian(clip = "off")
+
+  p_comb <- p1 / p2 / p3 +
+    plot_layout(guides = "collect") & theme(legend.position = "right")
+  p_comb
+
+  ggsave(paste0("figures/complete_results_", what, ".png"), p_comb,
+    width = 1920 * (dpi / 72), height = 1080 * (dpi / 72), units = "px", dpi = dpi, limitsize = FALSE
+  )
+}
+
+### Clean data -----------------------------------------------------------------
 # Remove all oversmoothed GAMS
 ind_gam <- sim[, .I[sapply(method, function(x) {
   est <- x[[3]]@estimate
@@ -144,28 +182,83 @@ ind_dynm <- c(ind_dynm, na.omit(res[
 res_clean <- res
 res_clean[c(ind_gam, ind_dynm), c("mse", "gcv", "ci_coverage")] <- NA
 
-### Plot results
-p1 <- plot_results(res = res_clean, "mse", "mean", legend = FALSE)
-p2 <- plot_results(res = res_clean, "mse", "mean", "weeks")
-p3 <- plot_results(res = res_clean, "mse", "mean", "meas", legend = FALSE)
-p4 <- plot_results(res = res_clean, "mse", "mean", "dyn_var")
+### Plot mean results ----------------------------------------------------------
+for (var in c(1, 2, 3)) {
+  outcome <- switch(var,
+    a = "mse",
+    b = "gcv",
+    c = "ci_coverage"
+  )
+  var_name <- switch(var,
+    a = "MSE",
+    b = "GCV",
+    c = "CI coverage"
+  )
+  y_lab_str <- paste0("Mean ", var_name)
+  p1 <- plot_results(res = res, outcome, "mean")
+  p1 <- p1 + theme(
+    axis.text.x = element_blank()
+  ) + labs(
+    title = "a) Effect of Analysis Method for each Process",
+    y = y_lab_str, fill = "Process", color = "Process",
+    x = "Process"
+  )
 
-p_comp <- (p1 + p2) /
-  (p3 + p4)
+  p2 <- plot_results(res = res, outcome, "mean", "weeks")
+  p2 <- p2 + theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank()
+  ) + labs(
+    title = "b) Effect of Measurement Period for each Method and Process",
+    y = y_lab_str, fill = "Process", color = "Process",
+    x = "Measurement Period (in weeks)"
+  )
 
-ggsave("figures/results.png", p_comp,
-  width = 1920,
-  height = 1080, units = "px", dpi = "screen"
-)
+  p3 <- plot_results(res = res, outcome, "mean", "meas")
+  p3 <- p3 + theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+  ) + labs(
+    title = "c) Effect of Measurement Frequency for each Method and Process",
+    y = y_lab_str, fill = "Process", color = "Process",
+    x = "Measurement Frequency (per day)"
+  )
 
-ci_plot <- plot_results(
-  res = res_clean, "ci_coverage", "mean", "weeks", "meas", "dyn_var"
-)
+  p4 <- plot_results(res = res, outcome, "mean", "dyn_var")
+  p4 <- p4 + theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank()
+  ) + labs(
+    title =
+      "d) Effect of Dynamic Error Variance for each Method and Process",
+    y = y_lab_str, fill = "Process", color = "Process",
+    x = "Dynamic Error Variance"
+  )
 
-ggsave("figures/ci_plot.png", ci_plot,
-  width = 1920,
-  height = 1080, units = "px", dpi = "screen"
-)
+  p_comb <- p1 / p2 / p3 / p4 +
+    plot_layout(guides = "collect") & theme(legend.position = "right")
+
+  p_ranges_y <- c(
+    ggplot_build(p_comb[[1]])$layout$panel_scales_y[[1]]$range$range,
+    ggplot_build(p_comb[[2]])$layout$panel_scales_y[[1]]$range$range
+  )
+
+  if (var == 3) p_ranges_y <- c(0, 1)
+
+  p_comb <- p_comb & ylim(min(p_ranges_y), max(p_ranges_y))
+
+  if (var == 3) {
+    p_comb <- p_comb & annotate("rect",
+      xmin = -Inf, xmax = Inf, ymin = 0.93, ymax = 0.97,
+      alpha = 0.5
+    ) & geom_hline(yintercept = 0.95, color = "black")
+  }
+
+  ggsave(paste0("figures/mean_results_", outcome, ".png"), p_comb,
+    width = 1920 * (dpi / 72), height = 1080 * (dpi / 72), units = "px",
+    dpi = dpi, limitsize = FALSE
+  )
+}
 
 # Mischellaneous
 dat_id <- res_clean[
@@ -262,29 +355,49 @@ anova(fit_bic_gcv)
 ### Trying to fit the cusp model -----------------------------------------------
 # ToDo: Add missing data to improve model fitting?
 
-par(mfrow = c(3, 4))
-ilustr <-
-  sim[, model_name := sapply(gen_model, function(x) {
-    x@model_name
-  })][,
-    .I[time == 100 & time == unique(time)[1] & dyn_er == sqrt(1)],
-    by = model_name
-  ][, .SD[7], by = model_name]
+ilustr <- sim[, model_name := sapply(gen_model, function(x) {
+  x@model_name
+})][,
+  .I[time == 200 & stepsize == unique(stepsize)[1] & dyn_er == sqrt(1)],
+  by = model_name
+][, .SD[2], by = model_name]
 
-method <- c("LPR", "GP", "GAM")
+method <-
+  c(
+    "Local Polynomial Regression",
+    "Gaussian Process Regression",
+    "General Additive Model",
+    "Simple Linear Regression",
+    "Polynomial Regression"
+  )
 
-par(mfrow = c(4:3))
+process <- c(
+  "Exponential Growth", "Logistic Growth",
+  "Damped Oscillator", "Cusp Catastrophe"
+)
+png(
+  file = "./figures/smooth.png",
+  width = 1960, height = 1080
+)
+par(mfrow = c(4:5))
 for (j in 1:4) {
-  for (i in 1:3) {
-    plot(sim$method[[ilustr$V1[j]]][[i]], sim = sim)
-    title(paste0(
-      "Process: ", ilustr$model_name[j],
-      "; Method: ", method[i]
-    ))
+  for (i in 1:5) {
+    plot(sim$method[[ilustr$V1[j]]][[i]],
+      sim = sim,
+      axes = FALSE, xlab = "", ylab = "" 
+    )
+    axis(1, at = c(0, 50, 100, 150, 200), 
+    labels = c("", "Week 1", "", "Week 2", ""), line = c(0, 200))
+    if (j == 1) {
+      title(method[i])
+    } else if (j == 4) {
+      title(xlab = "Time", main = NULL)
+    } 
+    if (i == 1) {
+      title(ylab = process[i], main = NULL)
+    } else {
+       title(main = NULL)
+    }
   }
 }
-
-
-sim[, ]
-
-unique(sim$gen_model)
+dev.off()

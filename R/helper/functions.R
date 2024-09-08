@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 05-09-2024                                                   #
+#' Last Modified: 08-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -526,14 +526,10 @@ plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
           seed = 1, width = .1
         )
       ) +
-      facet_wrap(~method) +
+      facet_grid(cols = vars(method)) +
       theme_minimal() +
       theme(
-        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
-        axis.title = element_text(size = 30),
-        legend.text = element_text(size = 30),
-        legend.title = element_text(size = 30),
-        strip.text = element_text(size = 30)
+        text = element_text(size = 20)
       ) +
       ylab(outcome)
   } else if (style == "mean") {
@@ -560,10 +556,9 @@ plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
       geom_errorbar(
         aes(ymin = mean - se, ymax = mean + se)
       ) +
-      facet_wrap(~method) +
+      facet_grid(cols = vars(method)) +
       theme_minimal() +
       theme(
-        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
         text = element_text(size = 20)
       ) +
       ylab(outcome)
@@ -578,10 +573,9 @@ plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
       x = group, y = missing, fill = model
     )) +
       geom_col() +
-      facet_wrap(~method) +
+      facet_grid(cols = vars(method)) +
       theme_minimal() +
       theme(
-        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
         text = element_text(size = 20)
       ) +
       ylab(outcome)
@@ -591,8 +585,17 @@ plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
     breaks <- g$layout$panel_params[[1]]$x$breaks
     breaks_new <- sapply(breaks, function(x) {
       x <- strsplit(x, "-")[[1]]
-      return(paste(x[seq(2, length(x))], collapse = " - "))
+      x <- gsub("[^0-9.-]", "", x)
+      return(paste(x[seq(2, length(x))], collapse = " "))
     })
+    breaks_new <- unlist(lapply(
+      strwrap(breaks_new,
+        width = 1,
+        simplify = FALSE
+      ),
+      paste0,
+      collapse = "\n"
+    ))
     names(breaks_new) <- NULL
     gg <- gg + scale_x_discrete(labels = breaks_new)
     suppressWarnings(print(gg))

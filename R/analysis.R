@@ -47,7 +47,7 @@ res[, dyn_var := dyn_er^2]
 res[, meas := 1 / (stepsize * (7 / 50))]
 
 
-res$model[res$model == " exp_growth"] <- "Exponential Growth"
+res$model[res$model == "exp_growth"] <- "Exponential Growth"
 res$model[res$model == "log_growth"] <- "Logistic Growth"
 res$model[res$model == "damped_oscillator"] <- "Damped Oscillator"
 res$model[res$model == "cusp_catastrophe"] <- "Cusp Catastrophe"
@@ -56,6 +56,8 @@ res$method[res$method == "locpol"] <- "Local Polynomial Regression"
 res$method[res$method == "gp"] <- "Gaussian Process Regression"
 res$method[res$method == "gam"] <- "Generall Additive Modelling"
 res$method[res$method == "dynm"] <- "Dynamic Modelling"
+res$method[res$method == "simple"] <- "Linear Regression"
+res$method[res$method == "poly"] <- "Polynomial Regression"
 
 res$model <- factor(res$model,
   levels = c(
@@ -68,7 +70,8 @@ contrasts(res$model) <- contr.sum(levels(res$model))
 res$method <- factor(res$method,
   levels = c(
     "Local Polynomial Regression", "Gaussian Process Regression",
-    "Generall Additive Modelling", "Dynamic Modelling"
+    "Generall Additive Modelling", # "Dynamic Modelling",
+    "Linear Regression", "Polynomial Regression"
   )
 )
 contrasts(res$method) <- contr.sum(levels(res$method))
@@ -103,6 +106,7 @@ View(res_summary)
 ## Visulization
 x11()
 plot_results(res = res, "mse", "mean", "weeks", "meas", "dyn_var")
+plot_results(res = res, "gcv", "mean", "meas")
 plot_results(res = res, "gcv", "all", "weeks", "meas", "dyn_var")
 plot_results(res = res, "ci_coverage", "all", "weeks", "meas", "dyn_var")
 

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 06-09-2024                                                   #
+#' Last Modified: 09-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -161,7 +161,7 @@ poly <- new("method_poly",
 )
 
 ### Run simulation -------------------------------------------------------------
-repetitions <- 30 # Number of repetitions in the pilot sample
+repetitions <- 2 # Number of repetitions in the pilot sample
 mc_error_target <- 0.05 # Desired monte carlo error
 for (run in c("pilot")) {
   # Set seed
@@ -177,10 +177,9 @@ for (run in c("pilot")) {
     sim <- simulate(
       gen_model_list = list(
         exp_growth, log_growth, damped_oscillator, cusp_catastrophe
-        # damped_oscillator, cusp_catastrophe
       ),
-      method_list = list(locpol, gp, gam, dynm, simple, poly),
-      # method_list = list(gam, dynm),
+      # method_list = list(locpol, gp, gam, dynm, simple, poly),
+      method_list = list(gam, dynm),
       conditions = list(
         time = c(100, 200), # 2 & 4 weeks rescaled to 1 week = 50 units
         # 3, 6, 9, measurements per day

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 23-05-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 21-08-2024                                                   #
+#' Last Modified: 08-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -37,6 +37,7 @@ library(marginaleffects) # GAMM probing
 library(ggplot2) # Plotting
 library(patchwork)
 library(papaja) # Export package list
+library(lme4)
 
 # Load functions
 invisible(sapply(
@@ -105,7 +106,6 @@ df_raw[
   ), tz = "CET")
 ]
 
-
 df_raw[, time0 := difftime(time, min(time), units = "hours"), by = UUID]
 
 min_monday <- min(df_raw$time[weekdays(df_raw$time) == "Monday"])
@@ -127,6 +127,22 @@ grouped_df <- df[, .(data = list(.SD)),
 nrow(grouped_df) # Number of participants
 summary(df[, .(age = unique(AGE_BL)), by = UUID][, age])
 summary(df[, .(gender = unique(as.factor(GENDER_BL))), by = UUID][, gender])
+
+
+### GAMM modelling -------------------------------------------------------------
+gamm_free <- gam(DEP_ES ~ s(as.numeric(time0), by = UUID), data = df)
+
+lmm <- lme(DEP_ES ~ as.numeric(time0),
+  random = ~ 1 + as.numeric(time0) | UUID,
+  data = df, correlation = corAR1(),
+  na.action = na.omit
+)
+
+acf(residuals(lmm, type = "normalized"))
+
+plot(lmm, fitted(.) ~ as.numeric(time0), type = "l")
+
+plot(lmm, residuals(.) ~ fitted(.), type = "p")
 
 
 #### Idiographic modelling

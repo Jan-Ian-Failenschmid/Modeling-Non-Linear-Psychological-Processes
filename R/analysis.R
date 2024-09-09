@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 08-09-2024                                                   #
+#' Last Modified: 09-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -34,10 +34,10 @@ invisible(sapply(
 load("R/data/simulation_data_17_05_2024_06_59.Rdata")
 load("R/data/simulation_results_17_05_2024_06_59.Rdata")
 load("R/data/err_test_data_27_05_2024_15_11.Rdata")
-load("R/data/err_test_results_27_05_2024_15_11.Rdata")
-load("R/data/exp_growth_test_results_28_05_2024_04_13.Rdata")
-load("R/data/pilot_data_04_09_2024_22_04.Rdata")
-load("R/data/pilot_results_04_09_2024_22_04.Rdata")
+load("R/data/pilot_data_09_09_2024_02_54.Rdata")
+load("R/data/pilot_results_09_09_2024_02_54.Rdata")
+load("R/data/pilot_data_09_09_2024_01_47.Rdata")
+load("R/data/pilot_results_09_09_2024_01_47.Rdata")
 
 res <- as.data.table(res)
 sim <- as.data.table(sim)
@@ -70,7 +70,7 @@ contrasts(res$model) <- contr.sum(levels(res$model))
 res$method <- factor(res$method,
   levels = c(
     "Local Polynomial Regression", "Gaussian Process Regression",
-    "General Additive Modelling", # "Dynamic Modelling",
+    "General Additive Modelling", "Dynamic Modelling",
     "Linear Regression", "Polynomial Regression"
   )
 )
@@ -87,6 +87,8 @@ res$dyn_var <- factor(res$dyn_var,
   labels = c(".5", "1", "2")
 )
 contrasts(res$dyn_var) <- contr.sum(levels(res$dyn_var))
+
+res <- res[method != "Linear Regression", ]
 
 ### Descriptives ---------------------------------------------------------------
 res_summary <- res[, .(
@@ -384,19 +386,21 @@ for (j in 1:4) {
   for (i in 1:5) {
     plot(sim$method[[ilustr$V1[j]]][[i]],
       sim = sim,
-      axes = FALSE, xlab = "", ylab = "" 
+      axes = FALSE, xlab = "", ylab = ""
     )
-    axis(1, at = c(0, 50, 100, 150, 200), 
-    labels = c("", "Week 1", "", "Week 2", ""), line = c(0, 200))
+    axis(1,
+      at = c(0, 50, 100, 150, 200),
+      labels = c("", "Week 1", "", "Week 2", ""), line = c(0, 200)
+    )
     if (j == 1) {
       title(method[i])
     } else if (j == 4) {
       title(xlab = "Time", main = NULL)
-    } 
+    }
     if (i == 1) {
       title(ylab = process[i], main = NULL)
     } else {
-       title(main = NULL)
+      title(main = NULL)
     }
   }
 }

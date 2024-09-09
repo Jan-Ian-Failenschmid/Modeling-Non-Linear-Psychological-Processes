@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 15-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 07-09-2024                                                   #
+#' Last Modified: 09-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -75,7 +75,7 @@ setMethod("fit", "method_dynm", function(method, data) {
   conv <- class(dynr_fit) == "dynrCook" &&
     !any(is.na(summary(dynr_fit)$Coefficients)) &&
     dynr_fit$exitflag > 0 &&
-    max(dynr_fit@error_cov_smooth_final[1, 1, ]) >= 1e-3
+    min(dynr_fit@error_cov_smooth_final[1, 1, ]) >= 1e-3
 
   slot(method, "converged") <- conv
 
@@ -141,7 +141,7 @@ fit_dynm <- function(fit_fun, start, data) {
         jitter
       )
 
-      fit <- list(
+      fit <- c(
         fit,
         future_apply(new_start, 1,
           function(start, data) {
@@ -162,7 +162,8 @@ fit_dynm <- function(fit_fun, start, data) {
 
     dev <- sapply(fit, function(x) {
       if (class(x) == "dynrCook") {
-        if (any(is.na(x$standard.errors))) {
+        if (any(is.na(x$standard.errors)) |
+          min(x@error_cov_smooth_final[1, 1, ]) < 1e-3) {
           1e+9
         } else {
           deviance(x)
@@ -362,12 +363,6 @@ fit_dynm_damp_osc <- function(start, data) {
       return(dynr_fit)
     }
   )
-
-  if (class(dynr_fit) == "dynrCook") {
-    c(deviance(dynr_fit), coef(dynr_fit))
-  } else {
-    c(1e10, start)
-  }
 }
 
 

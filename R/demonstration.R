@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 23-05-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 08-09-2024                                                   #
+#' Last Modified: 09-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -137,12 +137,12 @@ lmm <- lme(DEP_ES ~ as.numeric(time0),
   data = df, correlation = corAR1(),
   na.action = na.omit
 )
-
+summary(lmm)
 acf(residuals(lmm, type = "normalized"))
 
-plot(lmm, fitted(.) ~ as.numeric(time0), type = "l")
+plot(lmm, fitted(.) ~ as.numeric(time0), type = "l", main = "Fitted values of the random intercept and slope model", xlab = "Time")
 
-plot(lmm, residuals(.) ~ fitted(.), type = "p")
+plot(lmm, residuals(.) ~ fitted(.), type = "p", main = "Residuals vs. fitted values")
 
 
 #### Idiographic modelling

@@ -161,7 +161,7 @@ poly <- new("method_poly",
 )
 
 ### Run simulation -------------------------------------------------------------
-repetitions <- 2 # Number of repetitions in the pilot sample
+repetitions <- 30 # Number of repetitions in the pilot sample
 mc_error_target <- 0.05 # Desired monte carlo error
 for (run in c("pilot")) {
   # Set seed

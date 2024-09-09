@@ -3,7 +3,7 @@
 % % Author: Jan Ian Failenschmid % Created Date: 13-03-2024
 % %
 % -----                                                                        %
-% Last Modified: 07-09-2024                                                    %
+% Last Modified: 09-09-2024                                                    %
 % % Modified By: Jan Ian Failenschmid
 % %
 % %
@@ -747,7 +747,7 @@ times.
 To assess how effectively each method captured the non-linear process at the
 observed time points, we calculated the mean squared error (MSE) between the
 estimated and generated process values. Additionally, to evaluate how well each
-method would predict unobserved process values within the process range, we
+method would predict unobserved processmod values within the process range, we
 computed the generalized cross-validation
 \parencite[GCV;][]{golub_generalized_1979} criterion for each method and data
 set. The GCV is a more computationally efficient and rotation-invariant version
@@ -789,7 +789,40 @@ process or an underestimation of the standard errors.
 
 \subsection{Results (Template)}
 
+In the simulation a small proportion of GP regressions and parametric models
+did not converge. This is most likely due to the small sample sizes considered
+and the automated model fitting in the simulation. Most notably, the parametric
+models were not able to infer the cusp catastrophe from the small simulated
+data sets due to the complexity of the model. Figure~\ref{fig:missing} shows
+the proportion of data sets for which each method did not converge in each
+of the simulated conditions. The perfomrance measures of the methdos that
+did not converge were removed from the following analysis.
+
+\begin{figure}[!t]
+  \caption{Average confidence interval coverage across all processes, analysis
+    methods, and simulation conditions}
+  \fitfigure{complete_results_missing.png}
+  \label{fig:missing}
+\end{figure}
+
 \subsubsection{Capturing the non-linear process}
+
+First, it is noteworthy that visually all considered methods were able to
+mean predict the simulated processes satisfyingly.
+Figure~\ref{fig:smooth} shows how an example from each process was inferred by
+all of the considered methods. The predicted mean produced by all methods
+followed the simulated processes accurately, although the LPR appears to
+underfit for some data sets. In addition to that, towards the ends of the
+simualted time-series the GP regression sometimes tends towards zero (which
+is a property of the squared exponential kernel used) and the polynomial
+regressions appears to overfit with excessive uncertainty.
+
+\begin{figure}[!t]
+  \caption{Average confidence interval coverage across all processes, analysis
+    methods, and simulation conditions}
+  \fitfigure{smooth.png}
+  \label{fig:smooth}
+\end{figure}
 
 For both outcome measures, the AIC and BIC model weights indicated the most
 complex model, which included all interactions, as the best-fitting model with
@@ -848,15 +881,15 @@ and the damped oscillator were inferred. However, contrary to our expectations,
 the cusp-catastrophe process was inferred with a lower MSE and GCV by all
 methods.
 
-\begin{figure}[!t]
-  \caption{Average MSE values based on the simulation results}
-  \fitfigure{results.png}
-  \figurenote{Panel (a) shows the effect of the analysis methods for each
-    latent process. The other three panels show the effects of measurement
-    period (b), measurement frequency (c), and dynamic error variance (d) for
-    each analysis method and latent process.}
-  \label{fig:results}
-\end{figure}
+% \begin{figure}[!t]
+%   \caption{Average MSE values based on the simulation results}
+%   \fitfigure{results.png}
+%   \figurenote{Panel (a) shows the effect of the analysis methods for each
+%     latent process. The other three panels show the effects of measurement
+%     period (b), measurement frequency (c), and dynamic error variance (d) for
+%     each analysis method and latent process.}
+%   \label{fig:results}
+% \end{figure}
 
 The effect of the sampling period is illustrated in
 Figure~\ref{fig:results}~(b), showing that extending the sampling period from
@@ -883,12 +916,12 @@ average confidence interval coverages achieved by the GAM are more accurate and
 more stable across the different conditions than the coverages of the LPR and
 GP\@.
 
-\begin{figure}[!t]
-  \caption{Average confidence interval coverage across all processes, analysis
-    methods, and simulation conditions}
-  \fitfigure{ci_plot.png}
-  \label{fig:ci_plot}
-\end{figure}
+% \begin{figure}[!t]
+%   \caption{Average confidence interval coverage across all processes, analysis
+%     methods, and simulation conditions}
+%   \fitfigure{ci_plot.png}
+%   \label{fig:ci_plot}
+% \end{figure}
 
 \subsection{Conclusion}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  7 SEP 2024 20:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  9 SEP 2024 11:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1171,42 +1171,59 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [17]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [18 <./figures/exemplar_process_noise.png>] [19] [20] [21] [22] [23]
-<./figures/results.png, id=363, 1927.2pt x 1084.05pt>
-File: ./figures/results.png Graphic file (type png)
-<use ./figures/results.png>
-Package pdftex.def Info: ./figures/results.png  used on input line 853.
+ [18 <./figures/exemplar_process_noise.png>] [19] [20] [21] [22]
+<./figures/complete_results_missing.png, id=357, 1927.2pt x 1084.05pt>
+File: ./figures/complete_results_missing.png Graphic file (type png)
+<use ./figures/complete_results_missing.png>
+Package pdftex.def Info: ./figures/complete_results_missing.png  used on input line 804.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
-
+ [23]
+<./figures/smooth.png, id=366, 1967.35pt x 1084.05pt>
+File: ./figures/smooth.png Graphic file (type png)
+<use ./figures/smooth.png>
+Package pdftex.def Info: ./figures/smooth.png  used on input line 823.
+(pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
+ [24 <./figures/complete_results_missing.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [24] [25]
-<./figures/ci_plot.png, id=380, 1927.2pt x 1084.05pt>
-File: ./figures/ci_plot.png Graphic file (type png)
-<use ./figures/ci_plot.png>
-Package pdftex.def Info: ./figures/ci_plot.png  used on input line 889.
-(pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
+ [25 <./figures/smooth.png (PNG copy)>]
 
-Underfull \vbox (badness 1072) has occurred while \output is active []
+LaTeX Warning: Reference `fig:results' on page 26 undefined on input line 873.
 
- [26 <./figures/results.png (PNG copy)>] [27 <./figures/ci_plot.png>]
+[26]
+
+LaTeX Warning: Reference `fig:results' on page 27 undefined on input line 895.
+
+
+LaTeX Warning: Reference `fig:results' on page 27 undefined on input line 901.
+
+
+LaTeX Warning: Reference `fig:results' on page 27 undefined on input line 903.
+
+
+LaTeX Warning: Reference `fig:ci_plot' on page 27 undefined on input line 909.
+
+[27]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [28] [29] [30] [31]
-<./figures/demonstration_smooths.png, id=427, 1927.2pt x 1084.05pt>
+<./figures/demonstration_smooths.png, id=424, 1927.2pt x 1084.05pt>
 File: ./figures/demonstration_smooths.png Graphic file (type png)
 <use ./figures/demonstration_smooths.png>
-Package pdftex.def Info: ./figures/demonstration_smooths.png  used on input line 1075.
+Package pdftex.def Info: ./figures/demonstration_smooths.png  used on input line 1108.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [32 <./figures/demonstration_smooths.png (PNG copy)>] [33]
+ [32] [33 <./figures/demonstration_smooths.png (PNG copy)>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [34] [35] [36
 
 ] [37] [38] [39] [40] [41] [42] AED endfloat: Processing end Figures and Tables [43] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: F62E9602EFEBE15C60CBDEC94328C767;3511.
 Package logreq Info: Writing requests to 'main.run.xml'.
@@ -1214,18 +1231,18 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34447 strings out of 480247
- 659341 string characters out of 5896151
- 1405458 words of memory out of 5000000
- 51601 multiletter control sequences out of 15000+600000
+ 34449 strings out of 480247
+ 659494 string characters out of 5896151
+ 1405509 words of memory out of 5000000
+ 51603 multiletter control sequences out of 15000+600000
  554206 words of font info for 145 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,15n,103p,2315b,5221s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (43 pages, 2375666 bytes).
+Output written on main.pdf (43 pages, 3270670 bytes).
 PDF statistics:
- 633 PDF objects out of 1000 (max. 8388607)
- 551 compressed objects within 6 object streams
+ 630 PDF objects out of 1000 (max. 8388607)
+ 548 compressed objects within 6 object streams
  156 named destinations out of 1000 (max. 500000)
  229 words of extra memory for PDF output out of 10000 (max. 10000000)
 

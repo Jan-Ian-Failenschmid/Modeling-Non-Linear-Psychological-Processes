@@ -3,7 +3,7 @@
 % % Author: Jan Ian Failenschmid % Created Date: 13-03-2024
 % %
 % -----                                                                        %
-% Last Modified: 09-09-2024                                                    %
+% Last Modified: 10-09-2024                                                    %
 % % Modified By: Jan Ian Failenschmid
 % %
 % %
@@ -787,7 +787,7 @@ coverage proportions above 97\% suggested overestimated standard errors, while
 those below 93\% indicated either a poor approximation of the underlying
 process or an underestimation of the standard errors.
 
-\subsection{Results (Template)}
+\subsection{Results}
 
 In the simulation a small proportion of GP regressions and parametric models
 did not converge. This is most likely due to the small sample sizes considered
@@ -807,15 +807,20 @@ did not converge were removed from the following analysis.
 
 \subsubsection{Capturing the non-linear process}
 
-First, it is noteworthy that visually all considered methods were able to
-mean predict the simulated processes satisfyingly.
-Figure~\ref{fig:smooth} shows how an example from each process was inferred by
-all of the considered methods. The predicted mean produced by all methods
-followed the simulated processes accurately, although the LPR appears to
-underfit for some data sets. In addition to that, towards the ends of the
-simualted time-series the GP regression sometimes tends towards zero (which
-is a property of the squared exponential kernel used) and the polynomial
-regressions appears to overfit with excessive uncertainty.
+First, it is noteworthy that all considered methods visually performed well in
+mean predicting the simulated processes. Figure~\ref{fig:smooth} illustrates an
+example from each process being inferred by all methods. The predicted means
+produced by each method closely followed the simulated processes, although the
+LPR appears to underfit for some data sets. Additionally, near the boundaries
+(i.e., the ends) of the simulated time series, the GP regression sometimes
+trends towards zero, a characteristic of the squared exponential kernel (as
+seen by comparing the GP inference in Figure~\ref{fig:gp_dem} to the estimates
+in Figure~\ref{fig:gam_dem} or~\ref{fig:locpol_dem}). Further, the polynomial
+regression appears to overfit near the boundary, resulting in excessive
+uncertainty, which is a known behavior of polynomial regressions. However,
+there is considerable variation and overlap in the accuracy of the different
+methods across the various data sets. This highlights the need for a more
+formal and objective analysis of the performance of each method.
 
 \begin{figure}[!t]
   \caption{Average confidence interval coverage across all processes, analysis
@@ -824,26 +829,27 @@ regressions appears to overfit with excessive uncertainty.
   \label{fig:smooth}
 \end{figure}
 
-For both outcome measures, the AIC and BIC model weights indicated the most
-complex model, which included all interactions, as the best-fitting model with
-a model weight of 1. Although the residuals for both models showed considerable
-deviations from normality, characterized by being platykurtic, the residual
-distributions were unimodal and approximately symmetric. Therefore, given the
-large sample sizes in this simulation, the ANOVAs are expected to be robust
-against these deviations. However, a Breusch-Pagan test indicated
-heteroscedasticity in the residuals for both outcome measures, which was
-subsequently corrected. After applying these corrections and using Bonferroni
-adjustments for conducting two separate ANOVAs, the type-III ANOVA for MSE
-revealed significant main and interaction effects, except for one four-way
-interaction and the five-way interaction. The type-III ANOVA for the GCV values
-indicated that all effects were significant. Although most higher-order
-interactions had partial-$\eta^2$ values close to zero for both outcome
-measures. Table \ref{tab:peta} presents the partial-$\eta^2$ values for all
-effects that showed at least a small effect size, highlighting that the largest
-effects were associated with the main effects and interactions that include the
-analysis method and the latent process. Therefore, the following section will
-focus on analyzing these effects. For a comprehensive overview of all effects
-in the model, see Appendix C.
+To achieve this, two separate ANOVAs were fitted to the MSE and GCV values,
+including all possible main and interaction effects. Although the residuals for
+both models showed considerable deviations from normality, which were mainly
+characterized by being platykurtic, the residuals were unimodal and
+approximately symmetric. Given the large sample sizes in this simulation, we
+thus assumed that the ANOVAs were robust to these deviations. Further, a
+Breusch-Pagan test indicated heteroscedasticity in the residuals for both
+outcome measures, which was corrected for using heteroscedasticity-consistent
+standard errors. Laslty, Bonferroni corrections were applied to adjust the
+p-values for conducting two separate ANOVAs.
+
+The type-III ANOVA for MSE revealed significant main and interaction effects,
+except for one four-way interaction and the five-way interaction. The type-III
+ANOVA for the GCV values indicated that all effects were significant. However,
+due to the large sample size, even very small effects might be statistically
+significant. Therefore, table~\ref{tab:peta} presents all effects for which the
+partial-$\eta^2$ (the proportion of variance explained by an effect after
+accounting for all other effects) indicates at least a small effect size for
+either the MSE or the GCV\@. The following sections will focus on describing
+these effects and a comprehensive overview of all effects in the models is can
+be in Appendix C.
 
 \begin{table}[htbp]
   \vspace*{2em}
@@ -870,58 +876,83 @@ in the model, see Appendix C.
   \end{threeparttable}
 \end{table}
 
-Figure~\ref{fig:results}~(a) shows the mean effect of different analysis
-methods for each process, averaged across sampling periods, frequency, and
-dynamic error variances. As expected, the parametric models consistently show
-the lowest MSE and GCV across all processes. Among the semi- and non-parametric
-techniques, the GAM performed the best in terms of MSE and GCV, followed by the
-LPR and the GP infer the latent processes with the least accuracy.
-Additionally, there are some differences in how accurately both growth curves
-and the damped oscillator were inferred. However, contrary to our expectations,
-the cusp-catastrophe process was inferred with a lower MSE and GCV by all
-methods.
+Figure~\ref{fig:mean_results_mse}~(a) illustrates the mean MSE values with
+which each method inferred each process, averaged across sampling periods,
+frequencies, and dynamic error variances. This figure shows the main effect of
+the analysis method, as there are clear differences in the mean MSE with which
+each method inferred all processes. Specifically, the parametric modeling
+showed the lowest average MSE, followed closely by the GAMs and polynomial
+regression.Additionally, Figure~\ref{fig:mean_results_mse}~(a) illustrates the
+main effect of the processes, since there are differences in the mean MSE
+values with which each process was inferred by all the methods. Most notably,
+the cusp catastrophe was inferred with lower MSE values than the other
+processes by all methods. Finally, one can see that there is an interaction
+between the analysis method and the processes, since the differences in how
+accurately each process was inferred differ between the methods. For example,
+the difference between the MSEs for the cusp catastrophe and the MSEs for the
+other processes is larger for the LPR than for the other considered methods.
 
-% \begin{figure}[!t]
-%   \caption{Average MSE values based on the simulation results}
-%   \fitfigure{results.png}
-%   \figurenote{Panel (a) shows the effect of the analysis methods for each
-%     latent process. The other three panels show the effects of measurement
-%     period (b), measurement frequency (c), and dynamic error variance (d) for
-%     each analysis method and latent process.}
-%   \label{fig:results}
-% \end{figure}
+\begin{figure}[!t]
+  \caption{Average MSE values based on the simulation results}
+  \fitfigure{mean_results_mse.png}
+  \figurenote{Panel (a) shows the effect of the analysis methods for each
+    latent process. The other three panels show the effects of measurement
+    period (b), measurement frequency (c), and dynamic error variance (d) for
+    each analysis method and latent process.}
+  \label{fig:mean_results_mse}
+\end{figure}
 
-The effect of the sampling period is illustrated in
-Figure~\ref{fig:results}~(b), showing that extending the sampling period from
-one to two weeks decreased the mean MSE and GCV values for the parametric
-models and GAM, but increased these values for the LPR and GP\@. This partially
-aligns with our expectations, as we predicted this effect would be absent for
-the LPR and GP when inferring the cusp catastrophe model, which is not
-supported by the data. Increasing the sampling frequency
-(Figure~\ref{fig:results}~c) generally led to lower mean MSE and GCV values,
-for all methods and processes. Lastly, larger dynamic error variances
-(Figure~\ref{fig:results}~d) resulted in higher mean MSE and GCV values across
-all processes and analysis methods, with this effect being least pronounced in
-the cusp-catastrophe model.
+Figure~\ref{fig:mean_results_mse}~(b) shows the average MSE over different
+measurement periods for each analysis method and process, averaged over
+measurement frequencies and dynamic error variances. The results indicate that
+sampling over the entire process, rather than just the first half, led to
+higher average MSE values for both local and global polynomial regression
+across all processes except the cusp catastrophe. This effect was much less
+pronounced for the GP regression and GAMs, and was reversed for the parametric
+models. Further, Figure~\ref{fig:mean_results_mse}~(c) illustrates that the
+mean MSE generally decreased with larger sampling frequencies for each method
+and process, while averaging ove the sampling periods and dynamic error
+variances. Lastly, Figure~\ref{fig:mean_results_mse}~(d) demonstrates that
+larger dynamic error variances increased the mean MSE values across all methods
+and processes, when averaged over sampling periods and frequencies. However,
+this effect was least pronounced for the cusp catastrophe.
+
+Figure~\ref{fig:mean_results_gcv} displays the corresponding effects for the
+mean GCV values. Similar to the MSE results, the GAMs show a mean GCV value
+closest to the benchmark parametric models. However, while the polynomial
+regression had lower mean MSE values than the GP regression across all
+conditions, the GP regression had a lower mean GCV across all conditions. This
+suggests that while the polynomial regression was more accurate at inferring
+the underlying processes at the measurement points, the GP regression was more
+accurate at interpolating omitted data points (while keeping the parameters of
+the covariance function fixed). The effects of measurement period, frequency,
+and dynamic error variance on the mean GCV appear to follow the same patterns
+as observed for the mean MSE\@.
+
+\begin{figure}[!t]
+  \caption{Average GCV values based on the simulation results}
+  \fitfigure{mean_results_gcv.png}
+  \figurenote{Panel (a) shows the effect of the analysis methods for each
+    latent process. The other three panels show the effects of measurement
+    period (b), measurement frequency (c), and dynamic error variance (d) for
+    each analysis method and latent process.}
+  \label{fig:mean_results_gcv}
+\end{figure}
 
 \subsubsection{Uncertainty quantification}
 
-Figure~\ref{fig:ci_plot} shows the average confidence interval coverage
-proportion for each condition in the simulation. It can be seen that the only
-analysis method which produces an average confidence interval coverage within
-the prespecified accuracy interval of 93\% to 97\% is the parametric modelling.
-All three non and semi-parametric analysis methods produced average confidence
-interval coverages considerably below 93\%. However, among these methods the
-average confidence interval coverages achieved by the GAM are more accurate and
-more stable across the different conditions than the coverages of the LPR and
-GP\@.
+Figure~\ref{fig:mean_results_ci_coverage} shows the average confidence interval
+coverage proportion for the conditions described above. The gray area
+represents an average confidence interval coverage between 93\% and 97\%. The
+parametric models produced confidence intervals closest to this range, followed
+by the GAMs and the polynomial regression.
 
-% \begin{figure}[!t]
-%   \caption{Average confidence interval coverage across all processes, analysis
-%     methods, and simulation conditions}
-%   \fitfigure{ci_plot.png}
-%   \label{fig:ci_plot}
-% \end{figure}
+\begin{figure}[!t]
+  \caption{Average confidence interval coverage across all processes, analysis
+    methods, and simulation conditions}
+  \fitfigure{mean_results_ci_coverage.png}
+  \label{fig:mean_results_ci_coverage}
+\end{figure}
 
 \subsection{Conclusion}
 

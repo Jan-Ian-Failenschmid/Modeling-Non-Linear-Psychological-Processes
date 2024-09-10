@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 09-09-2024                                                   #
+#' Last Modified: 10-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -17,6 +17,7 @@
 library(ggplot2)
 library(ggdist)
 library(data.table)
+library(papaja)
 library(lmtest)
 library(car)
 library(effectsize)
@@ -109,46 +110,58 @@ View(res_summary)
 
 ### Visulization ---------------------------------------------------------------
 dpi <- 300
-x11()
-for (what in c("all", "missing")) {
-  p1 <- plot_results(res = res, "mse", what, "weeks", "meas", "dyn_var")
-  p1 <- p1 + theme(
+p1 <- plot_results(res = res, "mse", "all", "weeks", "meas", "dyn_var")
+p1 <- p1 +
+  theme_apa() +
+  theme(
     axis.text.x = element_blank(),
     axis.title.x = element_blank()
   ) +
-    labs(y = "MSE", fill = "Process", color = "Process")
+  labs(y = "MSE", fill = "Process", color = "Process")
 
-  p2 <- plot_results(res = res, "gcv", what, "weeks", "meas", "dyn_var")
-  p2 <- p2 + theme(
-    strip.background = element_blank(),
+p2 <- plot_results(res = res, "gcv", "all", "weeks", "meas", "dyn_var")
+p2 <- p2 +
+  theme_apa() +
+  theme(
     strip.text.x = element_blank(),
     axis.text.x = element_blank(),
     axis.title.x = element_blank()
   ) +
-    labs(y = "GCV", fill = "Process", color = "Process")
+  labs(y = "GCV", fill = "Process", color = "Process")
 
-  p3 <- plot_results(res = res, "ci_coverage", what, "weeks", "meas", "dyn_var")
-  p3 <- p3 + theme(
-    strip.background = element_blank(),
+p3 <- plot_results(res = res, "ci_coverage", "all", "weeks", "meas", "dyn_var")
+p3 <- p3 +
+  theme_apa() +
+  theme(
     strip.text.x = element_blank(),
     axis.text.x = element_text(size = 5)
   ) +
-    labs(
-      x = "Simulation Conditions", y = "CI Coverage", ,
-      fill = "Process", color = "Process"
-    ) +
-    ylim(0, 1) +
-    annotate("text", x = -1, y = -3, label = "Test") +
-    coord_cartesian(clip = "off")
+  labs(
+    x = "Simulation Conditions", y = "CI Coverage", ,
+    fill = "Process", color = "Process"
+  ) +
+  ylim(0, 1)
 
-  p_comb <- p1 / p2 / p3 +
-    plot_layout(guides = "collect") & theme(legend.position = "right")
-  p_comb
+p_comb <- p1 / p2 / p3 +
+  plot_layout(guides = "collect") & theme(legend.position = "right")
+p_comb
 
-  ggsave(paste0("figures/complete_results_", what, ".png"), p_comb,
-    width = 1920 * (dpi / 72), height = 1080 * (dpi / 72), units = "px", dpi = dpi, limitsize = FALSE
-  )
-}
+ggsave("figures/complete_results_all.png", p_comb,
+  width = 1920 * (dpi / 72), height = 1080 * (dpi / 72), units = "px", dpi = dpi, limitsize = FALSE
+)
+
+pmiss <- plot_results(res = res, "mse", "missing", "weeks", "meas", "dyn_var")
+pmiss <- pmiss +
+  scale_y_continuous(expand = expansion(mult = 0, add = 0)) +
+  theme_apa() +
+  theme(
+    axis.text.x = element_text(size = 5)
+  ) +
+  labs(y = "Proportion Not-converged", fill = "Process", color = "Process")
+
+ggsave("figures/complete_results_missing.png", pmiss,
+  width = 1920 * (dpi / 72), height = 1080 * (dpi / 72), units = "px", dpi = dpi, limitsize = FALSE
+)
 
 ### Clean data -----------------------------------------------------------------
 # Remove all oversmoothed GAMS
@@ -198,51 +211,58 @@ for (var in c(1, 2, 3)) {
   )
   y_lab_str <- paste0("Mean ", var_name)
   p1 <- plot_results(res = res, outcome, "mean")
-  p1 <- p1 + theme(
-    axis.text.x = element_blank()
-  ) + labs(
-    title = "a) Effect of Analysis Method for each Process",
-    y = y_lab_str, fill = "Process", color = "Process",
-    x = "Process"
-  )
+  p1 <- p1 +
+    theme_apa() +
+    theme(
+      axis.text.x = element_blank()
+    ) + labs(
+      title = "a) Effect of Analysis Method for each Process",
+      y = y_lab_str, fill = "Process", color = "Process",
+      x = "Process"
+    )
 
   p2 <- plot_results(res = res, outcome, "mean", "weeks")
-  p2 <- p2 + theme(
-    strip.background = element_blank(),
-    strip.text.x = element_blank()
-  ) + labs(
-    title = "b) Effect of Measurement Period for each Method and Process",
-    y = y_lab_str, fill = "Process", color = "Process",
-    x = "Measurement Period (in weeks)"
-  )
+  p2 <- p2 +
+    theme_apa() +
+    theme(
+      strip.text.x = element_blank()
+    ) + labs(
+      title = "b) Effect of Measurement Period for each Method and Process",
+      y = y_lab_str, fill = "Process", color = "Process",
+      x = "Measurement Period (in weeks)"
+    )
 
   p3 <- plot_results(res = res, outcome, "mean", "meas")
-  p3 <- p3 + theme(
-    strip.background = element_blank(),
-    strip.text.x = element_blank(),
-  ) + labs(
-    title = "c) Effect of Measurement Frequency for each Method and Process",
-    y = y_lab_str, fill = "Process", color = "Process",
-    x = "Measurement Frequency (per day)"
-  )
+  p3 <- p3 +
+    theme_apa() +
+    theme(
+      strip.text.x = element_blank(),
+    ) + labs(
+      title = "c) Effect of Measurement Frequency for each Method and Process",
+      y = y_lab_str, fill = "Process", color = "Process",
+      x = "Measurement Frequency (per day)"
+    )
 
   p4 <- plot_results(res = res, outcome, "mean", "dyn_var")
-  p4 <- p4 + theme(
-    strip.background = element_blank(),
-    strip.text.x = element_blank()
-  ) + labs(
-    title =
-      "d) Effect of Dynamic Error Variance for each Method and Process",
-    y = y_lab_str, fill = "Process", color = "Process",
-    x = "Dynamic Error Variance"
-  )
+  p4 <- p4 +
+    theme_apa() +
+    theme(
+      strip.text.x = element_blank()
+    ) + labs(
+      title =
+        "d) Effect of Dynamic Error Variance for each Method and Process",
+      y = y_lab_str, fill = "Process", color = "Process",
+      x = "Dynamic Error Variance"
+    )
 
   p_comb <- p1 / p2 / p3 / p4 +
     plot_layout(guides = "collect") & theme(legend.position = "right")
 
   p_ranges_y <- c(
     ggplot_build(p_comb[[1]])$layout$panel_scales_y[[1]]$range$range,
-    ggplot_build(p_comb[[2]])$layout$panel_scales_y[[1]]$range$range
+    ggplot_build(p_comb[[2]])$layout$panel_scales_y[[1]]$range$range,
+    ggplot_build(p_comb[[3]])$layout$panel_scales_y[[1]]$range$range,
+    ggplot_build(p_comb[[4]])$layout$panel_scales_y[[1]]$range$range
   )
 
   if (var == 3) p_ranges_y <- c(0, 1)
@@ -369,7 +389,8 @@ method <-
     "Local Polynomial Regression",
     "Gaussian Process Regression",
     "General Additive Model",
-    "Simple Linear Regression",
+    "Dynamic Modelling",
+    "Linear Regression",
     "Polynomial Regression"
   )
 
@@ -381,24 +402,28 @@ png(
   file = "./figures/smooth.png",
   width = 1960, height = 1080
 )
-par(mfrow = c(4:5))
+par(mfrow = c(4, 4), cex.lab = 1.5, cex.main = 1.5)
 for (j in 1:4) {
-  for (i in 1:5) {
+  for (i in c(1:3, 6)) {
     plot(sim$method[[ilustr$V1[j]]][[i]],
       sim = sim,
       axes = FALSE, xlab = "", ylab = ""
     )
+
+    axis(2, at = seq(-10, 10, 2), cex.axis = 1.5)
+
     axis(1,
-      at = c(0, 50, 100, 150, 200),
-      labels = c("", "Week 1", "", "Week 2", ""), line = c(0, 200)
+      at = c(0, 50, 150, 200),
+      labels = c("", "Week 1", "Week 2", ""), cex.axis = 1.5, padj = 1
     )
+
     if (j == 1) {
       title(method[i])
     } else if (j == 4) {
       title(xlab = "Time", main = NULL)
     }
     if (i == 1) {
-      title(ylab = process[i], main = NULL)
+      title(ylab = process[j], main = NULL)
     } else {
       title(main = NULL)
     }

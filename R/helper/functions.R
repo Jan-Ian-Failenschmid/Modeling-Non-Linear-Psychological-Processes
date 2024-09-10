@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 08-09-2024                                                   #
+#' Last Modified: 10-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -565,7 +565,7 @@ plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
   } else if (style == "missing") {
     res$outcome <- res[, c(outcome), with = FALSE]
     res_mis <- res[, .(
-      missing = sum(is.na(outcome)),
+      missing = sum(is.na(outcome) / length(outcome)),
       group = unique(group)
     ), by = c("model", "method", grp_var)]
 

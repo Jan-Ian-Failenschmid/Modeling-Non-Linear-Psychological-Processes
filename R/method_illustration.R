@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 04-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 26-04-2024                                                   #
+#' Last Modified: 10-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -16,7 +16,9 @@
 
 
 ### Set-up ---------------------------------------------------------------------
-pacman::p_load(nprobust, mgcv, cmdstanr)
+library(nprobust)
+library(mgcv)
+library(cmdstanr)
 # Load functions
 invisible(sapply(
   c(paste0("./R/helper/", dir(path = "./R/helper"))),
@@ -90,10 +92,17 @@ png(
 )
 
 plot(dat$time, dat$y_obs,
-  main = "Local polynomial regression demonstration",
-  xlab = "Time", ylab = "Y",
-  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex
+  main = "",
+  xlab = "Time", ylab = "",
+  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE
 ) # Data points
+axis(2, at = seq(-10, 10, 2), cex.axis = cex)
+
+axis(1,
+  at = c(0, 50, 150, 200),
+  labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+)
+
 lines(dat$time, dat$y, lty = 2, lwd = 3) # State function
 lines(dat$time, lp_fit$Estimate[, 5], lwd = 3) # Estimated line
 # Local polynomials
@@ -123,10 +132,17 @@ png(
 )
 
 plot(dat$time, dat$y_obs,
-  main = "Generalized additive model demonstration",
-  xlab = "Time", ylab = "Y",
-  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex
+  main = "",
+  xlab = "Time", ylab = "",
+  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE
 ) # Data points
+
+axis(2, at = seq(-10, 10, 2), cex.axis = cex)
+axis(1,
+  at = c(0, 50, 150, 200),
+  labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+)
+
 lines(dat$time, dat$y, lty = 2, lwd = 3) # State functions
 lines(dat$time, fitted(gam_fit), lwd = 3) # Predictions
 # Basis function values
@@ -172,9 +188,16 @@ gp_post_pred(gp_fit,
   f_name = "f_post_predict", time = dat$time,
   obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
-  main = "Gaussian process demonstration",
-  xlab = "Time", ylab = "Y",
+  main = "",
+  xlab = "Time", ylab = "", axes = FALSE
 )
+
+axis(2, at = seq(-10, 10, 2), cex.axis = cex)
+axis(1,
+  at = c(0, 50, 150, 200),
+  labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+)
+
 lines(dat$time, dat$y, lty = 2, lwd = 3)
 lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
 legend(150, 3.5,

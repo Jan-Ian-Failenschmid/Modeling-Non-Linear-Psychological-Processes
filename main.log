@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  9 SEP 2024 11:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  10 SEP 2024 13:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1178,71 +1178,71 @@ File: ./figures/complete_results_missing.png Graphic file (type png)
 Package pdftex.def Info: ./figures/complete_results_missing.png  used on input line 804.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
  [23]
-<./figures/smooth.png, id=366, 1967.35pt x 1084.05pt>
+<./figures/smooth.png, id=368, 1967.35pt x 1084.05pt>
 File: ./figures/smooth.png Graphic file (type png)
 <use ./figures/smooth.png>
-Package pdftex.def Info: ./figures/smooth.png  used on input line 823.
+Package pdftex.def Info: ./figures/smooth.png  used on input line 828.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
  [24 <./figures/complete_results_missing.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [25 <./figures/smooth.png (PNG copy)>]
-
-LaTeX Warning: Reference `fig:results' on page 26 undefined on input line 873.
-
-[26]
-
-LaTeX Warning: Reference `fig:results' on page 27 undefined on input line 895.
-
-
-LaTeX Warning: Reference `fig:results' on page 27 undefined on input line 901.
-
-
-LaTeX Warning: Reference `fig:results' on page 27 undefined on input line 903.
-
-
-LaTeX Warning: Reference `fig:ci_plot' on page 27 undefined on input line 909.
-
-[27]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [28] [29] [30] [31]
-<./figures/demonstration_smooths.png, id=424, 1927.2pt x 1084.05pt>
-File: ./figures/demonstration_smooths.png Graphic file (type png)
-<use ./figures/demonstration_smooths.png>
-Package pdftex.def Info: ./figures/demonstration_smooths.png  used on input line 1108.
+ [25 <./figures/smooth.png (PNG copy)>] [26]
+<./figures/mean_results_mse.png, id=388, 1927.2pt x 1084.05pt>
+File: ./figures/mean_results_mse.png Graphic file (type png)
+<use ./figures/mean_results_mse.png>
+Package pdftex.def Info: ./figures/mean_results_mse.png  used on input line 897.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [32] [33 <./figures/demonstration_smooths.png (PNG copy)>]
+ [27]
+<./figures/mean_results_gcv.png, id=399, 1927.2pt x 1084.05pt>
+File: ./figures/mean_results_gcv.png Graphic file (type png)
+<use ./figures/mean_results_gcv.png>
+Package pdftex.def Info: ./figures/mean_results_gcv.png  used on input line 934.
+(pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
+<./figures/mean_results_ci_coverage.png, id=401, 1927.2pt x 1084.05pt>
+File: ./figures/mean_results_ci_coverage.png Graphic file (type png)
+<use ./figures/mean_results_ci_coverage.png>
+Package pdftex.def Info: ./figures/mean_results_ci_coverage.png  used on input line 953.
+(pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
+ [28 <./figures/mean_results_mse.png>] [29 <./figures/mean_results_gcv.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34] [35] [36
+ [30 <./figures/mean_results_ci_coverage.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] [37] [38] [39] [40] [41] [42] AED endfloat: Processing end Figures and Tables [43] (./main.aux)
+ [31] [32] [33]
+<./figures/demonstration_smooths.png, id=446, 1927.2pt x 1084.05pt>
+File: ./figures/demonstration_smooths.png Graphic file (type png)
+<use ./figures/demonstration_smooths.png>
+Package pdftex.def Info: ./figures/demonstration_smooths.png  used on input line 1139.
+(pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
+ [34]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Warning: There were undefined references.
+ [35 <./figures/demonstration_smooths.png (PNG copy)>] [36] [37] [38
 
+] [39] [40] [41] [42] [43] [44] AED endfloat: Processing end Figures and Tables [45] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F62E9602EFEBE15C60CBDEC94328C767;3511.
+(rerunfilecheck)             Checksum: 506BD1924CE87180ACAC59F457EDBDFD;3447.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34449 strings out of 480247
- 659494 string characters out of 5896151
- 1405509 words of memory out of 5000000
- 51603 multiletter control sequences out of 15000+600000
+ 34479 strings out of 480247
+ 660460 string characters out of 5896151
+ 1405812 words of memory out of 5000000
+ 51625 multiletter control sequences out of 15000+600000
  554206 words of font info for 145 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,15n,103p,2315b,5221s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (43 pages, 3270670 bytes).
+Output written on main.pdf (45 pages, 3566849 bytes).
 PDF statistics:
- 630 PDF objects out of 1000 (max. 8388607)
- 548 compressed objects within 6 object streams
- 156 named destinations out of 1000 (max. 500000)
- 229 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 653 PDF objects out of 1000 (max. 8388607)
+ 567 compressed objects within 6 object streams
+ 161 named destinations out of 1000 (max. 500000)
+ 244 words of extra memory for PDF output out of 10000 (max. 10000000)
 

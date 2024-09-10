@@ -21,8 +21,8 @@ library(papaja)
 library(lmtest)
 library(car)
 library(effectsize)
-library(marginaleffects)
-library(emmeans)
+# library(marginaleffects)
+# library(emmeans)
 library(patchwork)
 
 # Load functions
@@ -31,17 +31,23 @@ invisible(sapply(
   source
 ))
 
-### Load data ------------------------------------------------------------------
-load("R/data/simulation_data_17_05_2024_06_59.Rdata")
-load("R/data/simulation_results_17_05_2024_06_59.Rdata")
-load("R/data/err_test_data_27_05_2024_15_11.Rdata")
-load("R/data/pilot_data_09_09_2024_02_54.Rdata")
-load("R/data/pilot_results_09_09_2024_02_54.Rdata")
+### Load and prepare data ------------------------------------------------------
 load("R/data/pilot_data_09_09_2024_01_47.Rdata")
 load("R/data/pilot_results_09_09_2024_01_47.Rdata")
 
-res <- as.data.table(res)
-sim <- as.data.table(sim)
+res1 <- as.data.table(res)
+res1 <- res1[!method %in% c("simple", "dynm"), ]
+sim1 <- as.data.table(sim)
+
+load("R/data/pilot_data_10_09_2024_14_31.Rdata")
+load("R/data/pilot_results_10_09_2024_14_31.Rdata")
+
+res2 <- as.data.table(res)
+res2 <- res2[!method %in% c("gam"), ]
+sim2 <- as.data.table(sim)
+
+res <- as.data.table(rbind(res1, res2))
+sim <- sim1
 
 res[, weeks := ifelse(time == 100, 1, 2)]
 res[, dyn_var := dyn_er^2]
@@ -56,7 +62,7 @@ res$model[res$model == "cusp_catastrophe"] <- "Cusp Catastrophe"
 res$method[res$method == "locpol"] <- "Local Polynomial Regression"
 res$method[res$method == "gp"] <- "Gaussian Process Regression"
 res$method[res$method == "gam"] <- "General Additive Modelling"
-res$method[res$method == "dynm"] <- "Dynamic Modelling"
+res$method[res$method == "dynm"] <- "Parametric Modelling"
 res$method[res$method == "simple"] <- "Linear Regression"
 res$method[res$method == "poly"] <- "Polynomial Regression"
 
@@ -71,8 +77,8 @@ contrasts(res$model) <- contr.sum(levels(res$model))
 res$method <- factor(res$method,
   levels = c(
     "Local Polynomial Regression", "Gaussian Process Regression",
-    "General Additive Modelling", "Dynamic Modelling",
-    "Linear Regression", "Polynomial Regression"
+    "General Additive Modelling",
+    "Linear Regression", "Polynomial Regression", "Parametric Modelling"
   )
 )
 contrasts(res$method) <- contr.sum(levels(res$method))
@@ -89,8 +95,6 @@ res$dyn_var <- factor(res$dyn_var,
 )
 contrasts(res$dyn_var) <- contr.sum(levels(res$dyn_var))
 
-res <- res[method != "Linear Regression", ]
-
 ### Descriptives ---------------------------------------------------------------
 res_summary <- res[, .(
   mse_mean = mean(mse, na.rm = TRUE),
@@ -106,10 +110,12 @@ res_summary <- res[, .(
 by = .(method, model, time, stepsize, dyn_er)
 ]
 
-View(res_summary)
+# View(res_summary)
 
 ### Visulization ---------------------------------------------------------------
 dpi <- 300
+
+# Complete results plot
 p1 <- plot_results(res = res, "mse", "all", "weeks", "meas", "dyn_var")
 p1 <- p1 +
   theme_apa() +
@@ -150,6 +156,7 @@ ggsave("figures/complete_results_all.png", p_comb,
   width = 1920 * (dpi / 72), height = 1080 * (dpi / 72), units = "px", dpi = dpi, limitsize = FALSE
 )
 
+# Missing data plot
 pmiss <- plot_results(res = res, "mse", "missing", "weeks", "meas", "dyn_var")
 pmiss <- pmiss +
   scale_y_continuous(expand = expansion(mult = 0, add = 0)) +
@@ -164,40 +171,18 @@ ggsave("figures/complete_results_missing.png", pmiss,
 )
 
 ### Clean data -----------------------------------------------------------------
-# Remove all oversmoothed GAMS
-ind_gam <- sim[, .I[sapply(method, function(x) {
-  est <- x[[3]]@estimate
-  ind <- seq_along(est)
-  fit <- lm(est ~ ind)
-  sum(residuals(fit)^2)
-}) < 1e-10]] * 4 - 1 # Find all linear gams n = 773
+### ?
+# test <- res2[method == "dynm", ][, .I[ci_coverage <= .8]]
+# test <- na.omit(test)
+# ind <- which.max(res2[method == "dynm", ][test, ci_coverage])
+# meth <- sim2$method[[test[ind]]][[2]]
+# plot(meth, sim = sim2)
 
-ind_gam <- sim[, .I[sapply(method, function(x) {
-  est <- x[[3]]@estimate
-  ind <- seq_along(est)
-  fit <- lm(est ~ ind)
-  summary(fit)$sigma
-}) < 0.14]] * 4 - 1 # Find all gams with insignificant smooth terms n = 847 + 3
-ind_gam <- c(ind_gam, c(3028, 6772, 6103, 5521) * 4 - 1) # Remove rest manually
-
-# Remove all undersmoothed GAMS
-ind_gam <- c(ind_gam, which(res$gcv == 0)) # Find all gams with gcv = 0
-
-# Remove all dynm with NA confidence interval
-ind_dynm <- sim[, .I[sapply(method, function(x) {
-  any(sapply(x[[4]]@ci, anyNA))
-})]] * 4
-
-# Remove all dynm with weird GCVs
-ind_dynm <- c(ind_dynm, na.omit(res[
-  method == "dynm",
-  .I[gcv > 10 | gcv < .5]
-] * 4))
-
-res_clean <- res
-res_clean[c(ind_gam, ind_dynm), c("mse", "gcv", "ci_coverage")] <- NA
+# res_clean <- res
+# res_clean[c(ind_gam, ind_dynm), c("mse", "gcv", "ci_coverage")] <- NA
 
 ### Plot mean results ----------------------------------------------------------
+# Simulation conditions plots
 for (var in c(1, 2, 3)) {
   outcome <- switch(var,
     a = "mse",
@@ -282,101 +267,8 @@ for (var in c(1, 2, 3)) {
   )
 }
 
-# Mischellaneous
-dat_id <- res_clean[
-  method == "dynm",
-  order(gcv, decreasing = TRUE)[1:137]
-]
-inspect(dat_id[1], "dynm", sim)
 
-data <- sim$dat[[dat_id[20, V1]]]
-fit <- gam(y_obs ~ s(time, bs = "tp", k = nrow(data) - 1), data = data)
-summary(fit)
-plot(fit)
-
-x <- sim$method[[ind]][[3]]@estimate
-y <- seq_along(x)
-test_fit <- lm(x ~ y)
-
-## Inference
-predictor <- c("method", "model", "weeks", "meas", "dyn_var")
-
-# Model selection - Univariate
-# mse
-fit_fun_mse <- function(rhs, data) {
-  form <- as.formula(paste0("mse ~ ", rhs))
-  fit <- lm(form, data = data)
-  return(fit)
-}
-
-mse_sel <- model_search(fit_fun_mse, predictor, data = res_clean)
-plot(seq_len(nrow(mse_sel)), mse_sel$w_AIC, type = "l")
-plot(seq_len(nrow(mse_sel)), mse_sel$w_BIC, type = "l")
-
-# GCV
-fit_fun_gcv <- function(rhs, data) {
-  form <- as.formula(paste0("gcv ~ ", rhs))
-  fit <- lm(form, data = data)
-  return(fit)
-}
-
-gcv_sel <- model_search(fit_fun_gcv, predictor, data = res_clean)
-plot(seq_len(nrow(gcv_sel)), gcv_sel$w_AIC, type = "l")
-plot(seq_len(nrow(gcv_sel)), gcv_sel$w_BIC, type = "l")
-
-# Model fitting
-# AIC
-fit_aic_mse <- lm(
-  as.formula(
-    paste0("mse ~ ", mse_sel$predictors[which.max(mse_sel$w_AIC)])
-  ),
-  data = res_clean
-)
-qqnorm(resid(fit_aic_mse))
-qqline(resid(fit_aic_mse))
-hist(resid(fit_aic_mse))
-bptest(fit_aic_mse)
-
-aov_mse <- Anova(fit_aic_mse, singular.ok = TRUE)
-effectsize(aov_mse, partial = TRUE)
-
-emmeans(fit_aic_mse, specs = "model")
-emmeans(fit_aic_mse, specs = "method")
-
-fit_aic_gcv <- lm(
-  as.formula(
-    paste0("gcv ~ ", gcv_sel$predictors[which.max(gcv_sel$w_AIC)])
-  ),
-  data = res
-)
-
-qqnorm(resid(fit_aic_gcv))
-qqline(resid(fit_aic_gcv))
-hist(resid(fit_aic_gcv))
-bptest(fit_aic_gcv)
-
-aov_gcv <- Anova(fit_aic_gcv, singular.ok = TRUE)
-effectsize(aov_gcv, partial = TRUE)
-# BIC
-fit_bic_mse <- lm(
-  as.formula(
-    paste0("mse ~ ", mse_sel$predictors[which.max(mse_sel$w_BIC)])
-  ),
-  data = res
-)
-anova(fit_bic_mse)
-
-fit_bic_gcv <- lm(
-  as.formula(
-    paste0("gcv ~ ", gcv_sel$predictors[which.max(gcv_sel$w_BIC)])
-  ),
-  data = res
-)
-anova(fit_bic_gcv)
-
-### Trying to fit the cusp model -----------------------------------------------
-# ToDo: Add missing data to improve model fitting?
-
+# Smoothing plot
 ilustr <- sim[, model_name := sapply(gen_model, function(x) {
   x@model_name
 })][,
@@ -389,7 +281,7 @@ method <-
     "Local Polynomial Regression",
     "Gaussian Process Regression",
     "General Additive Model",
-    "Dynamic Modelling",
+    "Parametric Modelling",
     "Linear Regression",
     "Polynomial Regression"
   )
@@ -402,7 +294,9 @@ png(
   file = "./figures/smooth.png",
   width = 1960, height = 1080
 )
+
 par(mfrow = c(4, 4), cex.lab = 1.5, cex.main = 1.5)
+
 for (j in 1:4) {
   for (i in c(1:3, 6)) {
     plot(sim$method[[ilustr$V1[j]]][[i]],
@@ -430,3 +324,65 @@ for (j in 1:4) {
   }
 }
 dev.off()
+
+### ANOVA ----------------------------------------------------------------------
+# MSE
+res_aov <- res[method != "Parametric Modelling", c(1:4, 9:11)]
+res_aov$method <- factor(res_aov$method,
+  levels = c(
+    "Local Polynomial Regression", "Gaussian Process Regression",
+    "General Additive Modelling", "Polynomial Regression"
+  )
+)
+contrasts(res_aov$method) <- contr.sum(levels(res_aov$method))
+
+names(res_aov) <- c("Method", "Process", "mse", "gcv", "SP", "DEV", "SF")
+
+# MSE
+mse_lm <- lm(mse ~ Method * Process * SP * SF * DEV, data = res_aov)
+
+qqnorm(resid(mse_lm))
+qqline(resid(mse_lm))
+hist(resid(mse_lm), probability = TRUE)
+curve(dnorm(x, sd = sd(resid(mse_lm))), add = TRUE, yaxt = "n")
+psych::describe(resid(mse_lm))
+
+# shapiro.test(df$Gewicht)
+bptest(mse_lm)
+leveneTest(mse_lm)
+
+mse_aov <- Anova(mse_lm, type = "III")
+mse_aov_test <- Anova(mse_lm, type = "III", white.adjust = "hc3")
+
+
+apa_table(mse_aov_test)
+
+mse_etas <- eta_squared(mse_aov)
+
+# GCV
+gcv_lm <- lm(gcv ~ method * model * weeks * meas * dyn_var, data = res_aov)
+
+qqnorm(resid(gcv_lm))
+qqline(resid(gcv_lm))
+hist(resid(gcv_lm), probability = TRUE)
+curve(dnorm(x, sd = sd(resid(gcv_lm))), add = TRUE, yaxt = "n")
+psych::describe(resid(gcv_lm))
+
+# shapiro.test(df$Gewicht)
+bptest(gcv_lm)
+leveneTest(gcv_lm)
+
+gcv_aov <- Anova(gcv_lm, type = "III")
+gcv_aov_test <- Anova(gcv_lm, type = "III", white.adjust = "hc3")
+
+gcv_etas <- eta_squared(gcv_aov)
+
+# Table outputs
+etsq_tabel <- as.data.table(cbind(mse_etas[, 1:2], gcv_etas[, 2]))
+names(etsq_tabel) <- c("Effect", "MSE Eta2_partial", "GCV Eta2_partial")
+ind <- as.vector(etsq_tabel[, 2] >= 0.01 | etsq_tabel[, 3] >= 0.01)
+
+writeLines(
+  apa_table(etsq_tabel[ind, ]),
+  "./tables/eta_squares.txt"
+)

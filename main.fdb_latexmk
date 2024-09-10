@@ -1,12 +1,12 @@
 # Fdb version 3
-["biber main"] 1725968583 "main.bcf" "main.bbl" "main" 1725968594
-  "R_bib.bib" 1725864488 3995 2a4a566a480a2314e48a043846441d20 ""
+["biber main"] 1725972038 "main.bcf" "main.bbl" "main" 1725972052
+  "R_bib.bib" 1725972038 3995 d2543902443662495f36baef9d3758f8 ""
   "bibliography.bib" 1725453064 295298 267a3509a32ff98693e5d0058662f246 ""
-  "main.bcf" 1725968594 132482 17197544d45e7794682d1f09ca3a72fc "pdflatex"
+  "main.bcf" 1725972052 132482 17197544d45e7794682d1f09ca3a72fc "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1725968589 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1725968594
+["pdflatex"] 1725972047 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1725972052
   "/etc/texmf/web2c/texmf.cnf" 1701959205 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1725962375 71690 8445f939844607d7cde621b53724d8a3 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -248,10 +248,10 @@
   "figures/mean_results_gcv.png" 1725966920 395053 71346e9ff047fe5f8ceb88dad8f8166e ""
   "figures/mean_results_mse.png" 1725966917 412639 9676e8d137e5032c5d18759783a4006a ""
   "figures/smooth.png" 1725968286 344834 6c43fbc8681f686a32955f78d6320582 ""
-  "main.aux" 1725968594 23116 a1f7af95f8b3abd1d1ad52e5832e57a1 "pdflatex"
-  "main.bbl" 1725968584 189595 b50ac33671bed44ffd5f21ceb3b61eb3 "biber main"
-  "main.out" 1725968594 3447 506bd1924ce87180acac59f457edbdfd "pdflatex"
-  "main.run.xml" 1725968594 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
+  "main.aux" 1725972052 23116 6299e516cf4efd2cdf6ff73a63ce57ec "pdflatex"
+  "main.bbl" 1725972041 189595 9410ca9c899732fad21c5e05eab67b64 "biber main"
+  "main.out" 1725972052 3447 506bd1924ce87180acac59f457edbdfd "pdflatex"
+  "main.run.xml" 1725972052 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
   "main.tex" 1725962375 71690 8445f939844607d7cde621b53724d8a3 ""
   (generated)
   "main.aux"

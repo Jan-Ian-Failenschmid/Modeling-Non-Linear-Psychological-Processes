@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 09-09-2024                                                   #
+#' Last Modified: 11-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -162,7 +162,7 @@ poly <- new("method_poly",
 
 ### Run simulation -------------------------------------------------------------
 repetitions <- 30 # Number of repetitions in the pilot sample
-mc_error_target <- 0.05 # Desired monte carlo error
+mc_error_target <- 0.1 # Desired monte carlo error
 for (run in c("pilot")) {
   # Set seed
   if (run == "pilot") {

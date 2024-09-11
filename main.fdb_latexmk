@@ -1,14 +1,14 @@
 # Fdb version 3
-["biber main"] 1726005029 "main.bcf" "main.bbl" "main" 1726006075
+["biber main"] 1726051644 "main.bcf" "main.bbl" "main" 1726051659
   "R_bib.bib" 1725972038 3995 d2543902443662495f36baef9d3758f8 ""
   "bibliography.bib" 1725453064 295298 267a3509a32ff98693e5d0058662f246 ""
-  "main.bcf" 1726006075 132482 17197544d45e7794682d1f09ca3a72fc "pdflatex"
+  "main.bcf" 1726051659 132991 3113b71261e987a0ca7c0373edabe74e "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1726006070 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1726006075
+["pdflatex"] 1726051651 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1726051659
   "/etc/texmf/web2c/texmf.cnf" 1701959205 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1726006070 72710 aeb5377dd88069391a2d1ec7a4d0ec1e ""
+  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1726051635 77027 fc75da075a4753e241c8052628db4dc1 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -213,6 +213,7 @@
   "/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1575674187 9715 b051d5b493d9fe5f4bc251462d039e5f ""
   "/usr/share/texlive/texmf-dist/tex/latex/scalerel/scalerel.sty" 1483104048 7825 43f8c26a0a3916d218f4f48c29aa92e4 ""
   "/usr/share/texlive/texmf-dist/tex/latex/threeparttable/threeparttable.sty" 1267981840 13506 a4e71a27db1a69b6fabada5beebf0844 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty" 1636758526 12694 6c23725d50ab9d1e2d3ce482c58ffcf3 ""
   "/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty" 1622581934 13197 df0fe9a9695763546b59e02a008447b3 ""
   "/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty" 1622581934 10214 00ce62e730d0cfe22b35e8f1c84949c7 ""
   "/usr/share/texlive/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
@@ -227,6 +228,7 @@
   "/usr/share/texmf/fonts/tfm/public/lm/rm-lmbx12.tfm" 1254938640 11880 ea60d06924270684e6f852f3141c992b ""
   "/usr/share/texmf/fonts/tfm/public/lm/rm-lmbx6.tfm" 1254938640 11852 eda7061aa4cc8552ba736dae866e4460 ""
   "/usr/share/texmf/fonts/tfm/public/lm/rm-lmbx7.tfm" 1254938640 11864 44cdb751af976143ebc0bed7eb1df9f4 ""
+  "/usr/share/texmf/fonts/tfm/public/lm/rm-lmbx8.tfm" 1254938640 11868 731e03b24d399279cf9609d002110394 ""
   "/usr/share/texmf/fonts/tfm/public/lm/rm-lmbx9.tfm" 1254938640 11872 6fc83bd89656207db7e11b4f7ac7546e ""
   "/usr/share/texmf/tex/latex/lm/lmodern.sty" 1256929440 1606 c17281c7cff2bbd7ff0173e1433487ec ""
   "/usr/share/texmf/tex/latex/lm/omllmm.fd" 1256929440 888 44447a3a3af84a22454ef89500942d93 ""
@@ -248,11 +250,11 @@
   "figures/mean_results_gcv.png" 1725987694 413116 58037d37f7e7c9d47a35a351288d599e ""
   "figures/mean_results_mse.png" 1725987692 428573 e542713ab58d26b7bfdc2ffec3843062 ""
   "figures/smooth.png" 1725987698 344834 6c43fbc8681f686a32955f78d6320582 ""
-  "main.aux" 1726006075 22836 8da7c1d59427b9146d948e6d1dc847db "pdflatex"
-  "main.bbl" 1726005030 189595 9410ca9c899732fad21c5e05eab67b64 "biber main"
-  "main.out" 1726006075 3447 506bd1924ce87180acac59f457edbdfd "pdflatex"
-  "main.run.xml" 1726006075 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
-  "main.tex" 1726006070 72710 aeb5377dd88069391a2d1ec7a4d0ec1e ""
+  "main.aux" 1726051659 23558 8c35faf801375d80187f2fb139ecfaad "pdflatex"
+  "main.bbl" 1726051646 189595 9410ca9c899732fad21c5e05eab67b64 "biber main"
+  "main.out" 1726051659 3447 506bd1924ce87180acac59f457edbdfd "pdflatex"
+  "main.run.xml" 1726051659 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
+  "main.tex" 1726051635 77027 fc75da075a4753e241c8052628db4dc1 ""
   (generated)
   "main.aux"
   "main.bcf"

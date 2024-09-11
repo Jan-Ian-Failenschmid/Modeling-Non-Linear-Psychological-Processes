@@ -161,6 +161,10 @@ poly <- new("method_poly",
   method_name = "poly"
 )
 
+poly_orth <- new("method_poly_orth",
+  method_name = "poly_orth"
+)
+
 ### Run simulation -------------------------------------------------------------
 repetitions <- 30 # Number of repetitions in the pilot sample
 mc_error_target <- 0.1 # Desired monte carlo error
@@ -179,8 +183,8 @@ for (run in c("pilot")) {
       gen_model_list = list(
         exp_growth, log_growth, damped_oscillator, cusp_catastrophe
       ),
-      # method_list = list(locpol, gp, gam, dynm, simple, poly),
-      method_list = list(gam, dynm),
+      # method_list = list(locpol, gp, gam, dynm, simple, poly_orth),
+      method_list = list(gam, poly),
       conditions = list(
         time = c(100, 200), # 2 & 4 weeks rescaled to 1 week = 50 units
         # 3, 6, 9, measurements per day

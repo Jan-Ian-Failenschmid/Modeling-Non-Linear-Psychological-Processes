@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 10-09-2024                                                   #
+#' Last Modified: 11-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -153,7 +153,8 @@ p_comb <- p1 / p2 / p3 +
 p_comb
 
 ggsave("figures/complete_results_all.png", p_comb,
-  width = 1920 * (dpi / 72), height = 1080 * (dpi / 72), units = "px", dpi = dpi, limitsize = FALSE
+  width = 1920 * (dpi / 72), height = 1080 * (dpi / 72), units = "px",
+  dpi = dpi, limitsize = FALSE
 )
 
 # Missing data plot

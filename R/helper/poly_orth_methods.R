@@ -1,7 +1,7 @@
 #' ----------------------------------------------------------------------------#
-#' Title:                                                                      #
+#' Title: Polynomial regression methods                                        #
 #' Author: Jan Ian Failenschmid                                                #
-#' Created Date: 11-09-2024                                                    #
+#' Created Date: 03-09-2024                                                    #
 #' -----                                                                       #
 #' Last Modified: 11-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
@@ -13,20 +13,25 @@
 #' License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html           #
 #' ----------------------------------------------------------------------------#
 
-# Polynomial regression
+# Polynomial regression with orthogonal polynomials
 setClass(
-  "method_poly",
+  "method_poly_orth",
   contains = "method"
 )
 
-setMethod("fit", "method_poly", function(method, data) {
+setMethod("fit", "method_poly_orth", function(method, data) {
   model_list <- list()
   p <- 1
   fit <- TRUE
   while (fit) {
-    poly_fit <- lm(y_obs ~ poly(time, degree = p, raw = TRUE), data = data)
+    poly_fit <- tryCatch(
+      lm(y_obs ~ poly(time, degree = p), data = data),
+      error = function(cond) {
+        FALSE
+      }
+    )
 
-    if (!any(is.na(coef(poly_fit)))) {
+    if (class(poly_fit) == "lm") {
       model_list[[p]] <- poly_fit
       p <- p + 1
     } else {
@@ -35,9 +40,11 @@ setMethod("fit", "method_poly", function(method, data) {
   }
 
   gcv_list <- sapply(model_list, function(fit) {
+    X <- model.matrix(fit)
+    A <- X %*% solve(t(X) %*% X) %*% t(X)
     n <- nrow(X)
-    (n * sum((data$y_obs - fitted(fit))^2)) /
-      (n - sum(hatvalues(fit)))^2
+    (n * sum((data$y_obs - A %*% data$y_obs)^2)) /
+      (n - sum(diag(A)))^2
   })
 
   fit <- model_list[[which.min(gcv_list)]]

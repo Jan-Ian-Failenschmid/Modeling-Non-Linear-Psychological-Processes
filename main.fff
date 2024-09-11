@@ -1,5 +1,8 @@
-\begin{figure*}[!ht]
-  \caption{The ten least and most wiggly processes as inferred by each method}
-  \fitfigure{demonstration_smooths.png}
-  \label{fig:dem_smooth}
+\begin{figure*}[!t]
+  \caption{Non-linear exemplar processes with dynamic errors}
+  \fitfigure{exemplar_process_noise.png}
+  \figurenote{This figure shows one possible realization of how the exemplar
+    processes could unfold with dynamic errors. The processes have dynamic
+    error standard deviations of 0.25 (left) and 0.5 (right).}
+  \label{fig:exemplar_pn}
 \end{figure*}

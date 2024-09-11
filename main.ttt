@@ -1,0 +1,51 @@
+\begin{table*}[!t]
+  \begin{center}
+    \begin{threeparttable}
+      \caption{A comparison of LPR, GP regression and GAMs}
+      \label{tab:meth_sum}
+      \begin{tabular}{
+          L{\dimexpr 0.25\linewidth-2\tabcolsep}
+          L{\dimexpr 0.25\linewidth-2\tabcolsep}
+          L{\dimexpr 0.25\linewidth-2\tabcolsep}
+          L{\dimexpr 0.25\linewidth-2\tabcolsep}}
+        \toprule
+                                                                       &
+        \multicolumn{1}{c}{LPR}
+                                                                       &
+        \multicolumn{1}{c}{GP}                                         &
+        \multicolumn{1}{c}{GAM}
+        \\
+        \midrule
+        Unit of Analysis                                               &
+                                                                       &
+                                                                       &
+        \\ \midrule
+        Data Structure                                                 &
+                                                                       &
+                                                                       &
+        \\ \midrule
+        Extensions                                                     &
+        Variable bandwidth and polynomial degrees                      &
+        Many in theory, few implemented in software                    &
+        Multivariate and multilevel input data
+        \\ \midrule
+        Key assumptions                                                &
+        Process should be p-times differentiable, constant wigglyness  &
+        Process should be similar to the functions described by the GP &
+        Process should be smooth, homoscedasticity
+        \\ \midrule
+        Estimation                                                     &
+        OLS                                                            &
+        Bayesian                                                       &
+        OLS, MLE, Bayesian
+        \\ \midrule
+        Key sources of information                                     &
+        \textcite{fan_local_2018}                                      &
+        \textcite{rasmussen_gaussian_2006}                             &
+        \textcite{wood_generalized_2006}
+        \\
+        \bottomrule
+      \end{tabular}
+    \end{threeparttable}
+  \end{center}
+\end{table*}

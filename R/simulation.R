@@ -166,9 +166,9 @@ poly_orth <- new("method_poly_orth",
 )
 
 ### Run simulation -------------------------------------------------------------
-repetitions <- 30 # Number of repetitions in the pilot sample
+repetitions <- 5 # Number of repetitions in the pilot sample
 mc_error_target <- 0.1 # Desired monte carlo error
-for (run in c("pilot")) {
+for (run in c("simulation")) {
   # Set seed
   if (run == "pilot") {
     set.seed(12345)
@@ -183,8 +183,7 @@ for (run in c("pilot")) {
       gen_model_list = list(
         exp_growth, log_growth, damped_oscillator, cusp_catastrophe
       ),
-      # method_list = list(locpol, gp, gam, dynm, simple, poly_orth),
-      method_list = list(gam, poly),
+      method_list = list(locpol, gp, gam, dynm, simple, poly, poly_orth),
       conditions = list(
         time = c(100, 200), # 2 & 4 weeks rescaled to 1 week = 50 units
         # 3, 6, 9, measurements per day
@@ -246,7 +245,7 @@ for (run in c("pilot")) {
     n_ind <- max(sapply(mcse, function(x) min(which(x < mc_error_target))))
 
     # Select the sufficient sample size, with an upper limit of 100
-    repetitions <- min(c(nsim[n_ind], 5), na.rm = TRUE)
+    repetitions <- min(c(nsim[n_ind], 100), na.rm = TRUE)
 
     cat(
       "The simulation run will be perfomed with", repetitions,

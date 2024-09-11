@@ -36,7 +36,7 @@ load("R/data/pilot_data_09_09_2024_01_47.Rdata")
 load("R/data/pilot_results_09_09_2024_01_47.Rdata")
 
 res1 <- as.data.table(res)
-res1 <- res1[!method %in% c("simple", "dynm"), ]
+res1 <- res1[!method %in% c("simple", "dynm", "poly"), ]
 sim1 <- as.data.table(sim)
 
 load("R/data/pilot_data_10_09_2024_14_31.Rdata")
@@ -46,7 +46,11 @@ res2 <- as.data.table(res)
 res2 <- res2[!method %in% c("gam"), ]
 sim2 <- as.data.table(sim)
 
-res <- as.data.table(rbind(res1, res2))
+load("R/data/pilot_results_11_09_2024_18_39.Rdata")
+res3 <- as.data.table(res)
+res3 <- res3[!method %in% c("gam"), ]
+
+res <- as.data.table(rbind(res1, res2, res3))
 sim <- sim1
 
 res[, weeks := ifelse(time == 100, 1, 2)]
@@ -361,7 +365,7 @@ apa_table(mse_aov_test)
 mse_etas <- eta_squared(mse_aov)
 
 # GCV
-gcv_lm <- lm(gcv ~ method * model * weeks * meas * dyn_var, data = res_aov)
+gcv_lm <- lm(gcv ~ Method * Process * SP * SF * DEV, data = res_aov)
 
 qqnorm(resid(gcv_lm))
 qqline(resid(gcv_lm))

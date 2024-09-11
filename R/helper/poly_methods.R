@@ -35,7 +35,7 @@ setMethod("fit", "method_poly", function(method, data) {
   }
 
   gcv_list <- sapply(model_list, function(fit) {
-    n <- nrow(X)
+    n <- length(fitted(fit))
     (n * sum((data$y_obs - fitted(fit))^2)) /
       (n - sum(hatvalues(fit)))^2
   })

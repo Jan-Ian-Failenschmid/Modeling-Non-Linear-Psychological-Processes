@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 09-09-2024                                                   #
+#' Last Modified: 11-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -161,9 +161,9 @@ poly <- new("method_poly",
 )
 
 ### Run simulation -------------------------------------------------------------
-repetitions <- 30 # Number of repetitions in the pilot sample
+repetitions <- 5 # Number of repetitions in the pilot sample
 mc_error_target <- 0.05 # Desired monte carlo error
-for (run in c("pilot")) {
+for (run in c("pilot", "simulation")) {
   # Set seed
   if (run == "pilot") {
     set.seed(12345)
@@ -241,7 +241,7 @@ for (run in c("pilot")) {
     n_ind <- max(sapply(mcse, function(x) min(which(x < mc_error_target))))
 
     # Select the sufficient sample size, with an upper limit of 100
-    repetitions <- min(c(nsim[n_ind], 100), na.rm = TRUE)
+    repetitions <- min(c(nsim[n_ind], 5), na.rm = TRUE)
 
     cat(
       "The simulation run will be perfomed with", repetitions,

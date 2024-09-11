@@ -4,6 +4,7 @@
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
 #' Last Modified: 11-09-2024                                                   #
+#' Last Modified: 11-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -241,7 +242,7 @@ for (run in c("pilot")) {
     n_ind <- max(sapply(mcse, function(x) min(which(x < mc_error_target))))
 
     # Select the sufficient sample size, with an upper limit of 100
-    repetitions <- min(c(nsim[n_ind], 100), na.rm = TRUE)
+    repetitions <- min(c(nsim[n_ind], 5), na.rm = TRUE)
 
     cat(
       "The simulation run will be perfomed with", repetitions,

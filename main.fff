@@ -1,3 +1,58 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!t]
+  \caption{Examples of non-linear processes demonstrated to occur in
+    psychological time series}
+  \fitfigure{exemplar_no_process_noise.png}
+  \figurenote{This figure shows four demonstrated psychological non-linear
+    processes. Panels (a) and (b) show exponential and logistic growth curves,
+    respectively. Panel (c) shows a cusp catastrophe model. Lastly, panel (d)
+    shows a damped oscillator.}
+  \label{fig:examplar_npn}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!t]
+  \caption{Demonstration of a local polynomial regression}
+  \fitfigure{locpol_demonstration.png}
+  \figurenote{This figure shows how LPR (solid black) estimates the underlying
+    process (dotted black). Here, three exemplary local cubic regressions (red)
+    are shown that provide the values that the LPR predicts at the time points
+    50, 100, and 150. The complete LPR was plotted by evaluating
+    such local cubic regressions at 200 points along the time axis.}
+  \label{fig:locpol_dem}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!t]
+  \caption{Demonstration of a Gaussian process regression}
+  \fitfigure{gp_demonstration.png}
+  \figurenote{This figure shows how a Gaussian process regression estimates the
+    underlying process (dotted black). Here, a sample of functions drawn from
+    the posterior Gaussian process probability distribution with a squared
+    exponential kernel is shown (red). The predicted value for the underlying
+    process is then obtained by averaging the drawn functions.}
+  \label{fig:gp_dem}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!t]
+  \caption{Demonstration of the construction of a GAM}
+  \fitfigure{gam_demonstration.png}
+  \figurenote{This figure shows how generalized additive models (solid black)
+    estimate the underlying process (dotted black). Here, the predicted values
+    for the process at any point in time correspond to the weighted average of
+    the basis functions (red).}
+  \label{fig:gam_dem}
+\end{figure*}
+\efloatseparator
+ 
 \begin{figure*}[!t]
   \caption{Non-linear exemplar processes with dynamic errors}
   \fitfigure{exemplar_process_noise.png}
@@ -5,4 +60,57 @@
     processes could unfold with dynamic errors. The processes have dynamic
     error standard deviations of 0.25 (left) and 0.5 (right).}
   \label{fig:exemplar_pn}
+\end{figure*}
+\efloatseparator
+ 
+\begin{sidewaysfigure*}[htbp]
+  \caption{Example process inference by each of the introduced methods}
+  \fitfigure{smooth.png}
+  \label{fig:smooth}
+  \figurenote{This figure shows how each of the introduced methods inferred an
+    example of each of the processes from the simulation.}
+\end{sidewaysfigure*}
+\efloatseparator
+ 
+\begin{sidewaysfigure*}[htbp]
+  \caption{Mean MSE effects}
+  \fitfigure{mean_results_mse.png}
+  \figurenote{Panel (a) shows the effect of the analysis method for each
+    process. The other three panels show the effects of measurement
+    period (b), measurement frequency (c), and dynamic error variance (d) for
+    each analysis method and latent process.}
+  \label{fig:mean_results_mse}
+\end{sidewaysfigure*}
+\efloatseparator
+ 
+\begin{sidewaysfigure*}[htbp]
+  \caption{Mean GCV effects}
+  \fitfigure{mean_results_gcv.png}
+  \figurenote{Panel (a) shows the effect of the analysis methods for each
+    latent process. The other three panels show the effects of measurement
+    period (b), measurement frequency (c), and dynamic error variance (d) for
+    each analysis method and latent process.}
+  \label{fig:mean_results_gcv}
+\end{sidewaysfigure*}
+\efloatseparator
+ 
+\begin{sidewaysfigure*}[htbp]
+  \caption{Average confidence interval coverage across all processes, analysis
+    methods, and simulation conditions}
+  \fitfigure{mean_results_ci_coverage.png}
+  \figurenote{Panel (a) shows the effect of the analysis methods for each
+    latent process. The other three panels show the effects of measurement
+    period (b), measurement frequency (c), and dynamic error variance (d) for
+    each analysis method and latent process.}
+  \label{fig:mean_results_ci_coverage}
+\end{sidewaysfigure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[!t]
+  \caption{The ten least and most wiggly idiographic latent depression
+    processes as inferred by the LPRs, GPs, and GAMs}
+  \fitfigure{demonstration_smooths.png}
+  \label{fig:dem_smooth}
 \end{figure*}

@@ -2223,6 +2223,70 @@
       \verb http://journal.frontiersin.org/Article/10.3389/fpsyg.2015.00727/abstract
       \endverb
     \endentry
+    \entry{jianan_case_2023}{misc}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=389acd57045e70059057ac457f593777}{%
+           family={Jianan},
+           familyi={J\bibinitperiod},
+           given={Zhang},
+           giveni={Z\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d54da061206b03b4d52261992f7b4f92}{%
+           family={Yiyi},
+           familyi={Y\bibinitperiod},
+           given={Wang},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dd40e38a61a33779b272eea7972dd339}{%
+           family={Hongyi},
+           familyi={H\bibinitperiod},
+           given={Duan},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0e8ec233a0ce993aded5dfea07be7846}{%
+           family={Qingyang},
+           familyi={Q\bibinitperiod},
+           given={Li},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{57d5b2b226c490e730cfb464221dbcab}
+      \strng{fullhash}{38230cba3d6b37fde6f9d8e7a9b49178}
+      \strng{bibnamehash}{38230cba3d6b37fde6f9d8e7a9b49178}
+      \strng{authorbibnamehash}{38230cba3d6b37fde6f9d8e7a9b49178}
+      \strng{authornamehash}{57d5b2b226c490e730cfb464221dbcab}
+      \strng{authorfullhash}{38230cba3d6b37fde6f9d8e7a9b49178}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this study, we conduct a thorough and meticulous examination of the Runge phenomenon. Initially, we engage in an extensive review of relevant literature, which aids in delineating the genesis and essence of the Runge phenomenon, along with an exploration of both conventional and contemporary algorithmic solutions. Subsequently, the paper delves into a diverse array of resolution methodologies, encompassing classical numerical approaches, regularization techniques, mock-Chebyshev interpolation, the TISI (Three-Interval Interpolation Strategy), external pseudo-constraint interpolation, and interpolation strategies predicated upon Singular Value Decomposition (SVD). For each method, we not only introduce but also innovate a novel algorithm to effectively address the phenomenon. This paper executes detailed numerical computations for each method, employing visualization techniques to vividly illustrate the efficacy of various strategies in mitigating the Runge phenomenon. Our findings reveal that although traditional methods exhibit commendable performance in certain instances, novel approaches such as mock-Chebyshev interpolation and regularization-centric methods demonstrate marked superiority in specific contexts. Moreover, the paper provides a critical analysis of these methodologies, specifically highlighting the constraints and potential avenues for enhancement in SVD decomposition-based interpolation strategies. In conclusion, we propose future research trajectories and underscore the imperative of further exploration into interpolation strategies, with an emphasis on their practical application validation. This article serves not only as a comprehensive resource on the Runge phenomenon for researchers but also offers pragmatic guidance for resolving real-world interpolation challenges.}
+      \field{annotation}{Comment: 13 Figures 9 Pages. After first submission, there was a revision of the authorship order, which was the result of joint discussions}
+      \field{month}{11}
+      \field{note}{arXiv:2311.11253 [cs, math]}
+      \field{title}{A case study of the {Lunger} phenomenon based on multiple algorithms}
+      \field{urlday}{12}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb arXiv Fulltext PDF:C\:\\Users\\failensc\\Zotero\\storage\\3FLCS7DN\\Jianan et al. - 2023 - A case study of the Lunger phenomenon based on mul.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\failensc\\Zotero\\storage\\77U6Y7U8\\2311.html:text/html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2311.11253
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2311.11253
+      \endverb
+      \keyw{Mathematics - Numerical Analysis}
+    \endentry
     \entry{kalokerinos_emote_nodate}{unpublished}{}
       \name{author}{11}{}{%
         {{un=0,uniquepart=base,hash=1bf6cafb85e0a166a412f6a7ab0c9784}{%
@@ -2419,6 +2483,61 @@
       \endverb
       \verb{url}
       \verb https://www.jstor.org/stable/43299758
+      \endverb
+    \endentry
+    \entry{koval_changing_2012}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=c534f76f6db6712a5aa104af267f00a3}{%
+           family={Koval},
+           familyi={K\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2863d27ddc4b78a7a0496654b8e15822}{%
+           family={Kuppens},
+           familyi={K\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{f79b70d016a40c6c59f1a6d5ab7eb961}
+      \strng{fullhash}{f79b70d016a40c6c59f1a6d5ab7eb961}
+      \strng{bibnamehash}{f79b70d016a40c6c59f1a6d5ab7eb961}
+      \strng{authorbibnamehash}{f79b70d016a40c6c59f1a6d5ab7eb961}
+      \strng{authornamehash}{f79b70d016a40c6c59f1a6d5ab7eb961}
+      \strng{authorfullhash}{f79b70d016a40c6c59f1a6d5ab7eb961}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{1931-1516, 1528-3542}
+      \field{journaltitle}{Emotion}
+      \field{month}{4}
+      \field{number}{2}
+      \field{shorttitle}{Changing emotion dynamics}
+      \field{title}{Changing emotion dynamics: {Individual} differences in the effect of anticipatory social stress on emotional inertia.}
+      \field{urlday}{13}
+      \field{urlmonth}{9}
+      \field{urlyear}{2024}
+      \field{volume}{12}
+      \field{year}{2012}
+      \field{urldateera}{ce}
+      \field{pages}{256\bibrangedash 267}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1037/a0024756
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.apa.org/doi/10.1037/a0024756
+      \endverb
+      \verb{url}
+      \verb https://doi.apa.org/doi/10.1037/a0024756
       \endverb
     \endentry
     \entry{kruschke_doing_2011}{book}{}

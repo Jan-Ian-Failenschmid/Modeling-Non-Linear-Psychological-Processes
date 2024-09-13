@@ -261,9 +261,9 @@ for (var in c(1, 2, 3)) {
 
   if (var == 3) {
     p_comb <- p_comb & annotate("rect",
-      xmin = -Inf, xmax = Inf, ymin = 0.93, ymax = 0.97,
-      alpha = 0.5
-    ) & geom_hline(yintercept = 0.95, color = "black")
+      xmin = -Inf, xmax = Inf, ymin = 0.89, ymax = 1,
+      alpha = 0.3
+    )
   }
 
   ggsave(paste0("figures/mean_results_", outcome, ".png"), p_comb,

@@ -3,8 +3,8 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 11-09-2024                                                   #
-#' Last Modified: 11-09-2024                                                   #
+#' Last Modified: 12-09-2024                                                   #
+#' Last Modified: 12-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -166,7 +166,7 @@ poly_orth <- new("method_poly_orth",
 )
 
 ### Run simulation -------------------------------------------------------------
-repetitions <- 5 # Number of repetitions in the pilot sample
+repetitions <- 100 # Number of repetitions in the pilot sample
 mc_error_target <- 0.1 # Desired monte carlo error
 for (run in c("simulation")) {
   # Set seed

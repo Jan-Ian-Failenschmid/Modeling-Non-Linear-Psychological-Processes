@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 23-05-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 09-09-2024                                                   #
+#' Last Modified: 18-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -366,9 +366,11 @@ grouped_df[, gam_pred := mapply(function(fit, data) {
   )
 }, fit = gam_fit, data = data, SIMPLIFY = FALSE)]
 
-grouped_df[, gam_sp := lapply(gam_fit, function(fit) {
-  fit$sp
+grouped_df[, gam_edf := lapply(gam_fit, function(fit) {
+  summary(fit)$edf
 })]
+
+sum(grouped_df$gam_edf < 1.001)
 
 grouped_df[, gam_resid := mapply(
   function(data, gam_pred) {
@@ -507,43 +509,75 @@ gp_low <- gp_low +
   xlab("Momentary depression") +
   ylab("Differenced time")
 
-gam_high <- plot_ml_pred(
-  id = grouped_df$UUID[order(unlist(grouped_df$gam_sp))[1:np]],
-  pred = grouped_df$gam_pred_plot[order(unlist(grouped_df$gam_sp))[1:np]],
-  dat = grouped_df$data[order(unlist(grouped_df$gam_sp))[1:np]],
-  var = "DEP_ES", time = "time0"
-)
-gam_high <- gam_high +
-  ggtitle("GAMs with the lowest smoothing parameter") +
-  xlab("Momentary depression") +
-  ylab("Differenced time")
-
+# From here
+# Gam with the lowest edf
 gam_low <- plot_ml_pred(
-  id = grouped_df$UUID[order(unlist(grouped_df$gam_sp),
-    decreasing = TRUE
-  )[1:np]],
-  pred = grouped_df$gam_pred_plot[order(unlist(grouped_df$gam_sp),
-    decreasing = TRUE
-  )[1:np]],
-  dat = grouped_df$data[order(unlist(grouped_df$gam_sp),
-    decreasing = TRUE
-  )[1:np]],
+  id = grouped_df$UUID[order(unlist(grouped_df$gam_edf))[1:np]],
+  pred = grouped_df$gam_pred_plot[order(unlist(grouped_df$gam_edf))[1:np]],
+  dat = grouped_df$data[order(unlist(grouped_df$gam_edf))[1:np]],
   var = "DEP_ES", time = "time0"
 )
 gam_low <- gam_low +
-  ggtitle("GAMs with the highest smoothing parameter") +
-  xlab("Momentary depression") +
-  ylab("Differenced time")
+  ggtitle("a) Ten Participants with the lowest EDF") +
+  xlab("") +
+  ylab("Momentary depression")
 
-complete_plot <- (locpol_low | gp_low | gam_low) /
-  (locpol_high | gp_high | gam_high)
-
-ggsave("figures/demonstration_smooths.png", complete_plot,
-  width = 1920,
-  height = 1080, units = "px", dpi = "screen"
+# Gam with the highest edf
+gam_high <- plot_ml_pred(
+  id = grouped_df$UUID[order(unlist(grouped_df$gam_edf),
+    decreasing = TRUE
+  )[1:np]],
+  pred = grouped_df$gam_pred_plot[order(unlist(grouped_df$gam_edf),
+    decreasing = TRUE
+  )[1:np]],
+  dat = grouped_df$data[order(unlist(grouped_df$gam_edf),
+    decreasing = TRUE
+  )[1:np]],
+  var = "DEP_ES", time = "time0"
 )
+gam_high <- gam_high +
+  ggtitle("b) Ten Participants with the highest EDF") +
+  xlab("") +
+  ylab("")
 
+# unique(ggplot_build(gam_high)$data[[1]]$fill)
 
+# Oscillating GAM 1
+gam_osc1 <- plot_ml_pred(
+  id = grouped_df$UUID[12],
+  pred = grouped_df$gam_pred_plot[12],
+  dat = grouped_df$data[12],
+  var = "DEP_ES", time = "time0"
+)
+gam_osc1 <- gam_osc1 +
+  ggtitle("c) Smooth for Participant 61") +
+  xlab("Time since first assessment") +
+  ylab("Momentary depression") +
+  scale_fill_manual(values = "#00BFC4") +
+  scale_color_manual(values = "#00BFC4")
+
+# Oscillating GAM 2
+gam_osc2 <- plot_ml_pred(
+  id = grouped_df$UUID[8],
+  pred = grouped_df$gam_pred_plot[8],
+  dat = grouped_df$data[8],
+  var = "DEP_ES", time = "time0"
+)
+gam_osc2 <- gam_osc2 +
+  ggtitle("d) Smooth for Participant 83") +
+  xlab("Time since first assessment") +
+  ylab("") +
+  scale_fill_manual(values = "#F8766D") +
+  scale_color_manual(values = "#F8766D")
+
+complete_plot <- (gam_low | gam_high) /
+  (gam_osc1 | gam_osc2)
+
+dpi <- 300
+ggsave("figures/demonstration_smooths.png", complete_plot,
+  width = 1920 * (dpi / 72), height = 1080 * (dpi / 72), units = "px",
+  dpi = dpi, limitsize = FALSE
+)
 #### Multilevel modelling
 ### GAMM------------------------------------------------------------------------
 gamm_ri <- gam(DEP_ES ~ s(UUID, bs = "re"), data = df)

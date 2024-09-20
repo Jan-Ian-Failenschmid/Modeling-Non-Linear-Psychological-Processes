@@ -1,14 +1,14 @@
 # Fdb version 3
-["biber main"] 1726209076 "main.bcf" "main.bbl" "main" 1726210998
+["biber main"] 1726820168 "main.bcf" "main.bbl" "main" 1726820183
   "R_bib.bib" 1725972038 3995 d2543902443662495f36baef9d3758f8 ""
   "bibliography.bib" 1726209032 298450 19d53f7444888074f4247746e2ec3a03 ""
-  "main.bcf" 1726210998 133294 1fe3fcef9176e23e0561e6a84626d094 "pdflatex"
+  "main.bcf" 1726820183 132949 4ff9ac697e1bda61480341da9a6198dc "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1726210994 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1726210998
+["pdflatex"] 1726820176 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1726820183
   "/etc/texmf/web2c/texmf.cnf" 1701959205 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1726210993 81879 3c973d69b82d8c9081e0069894ba2935 ""
+  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1726820168 77453 71db4d92d155a3e2555f7e2d2054f342 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -245,7 +245,7 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1701959211 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1710489976 1405646 fd8705762bb3367aa7323ee58ef2eb6d ""
   "apa7.cls" 1712065878 59347 3c73717beac5f082d2c3a882625f10cb ""
-  "figures/demonstration_smooths.png" 1724269958 758377 f6f71374c0925d99809673dc4d0ef4c7 ""
+  "figures/demonstration_smooths.png" 1726650035 2661200 d74d6d89797ed84aef390814eabcceb6 ""
   "figures/exemplar_no_process_noise.png" 1725968565 69062 3e489e933c611af74158a7fd967ddaa0 ""
   "figures/exemplar_process_noise.png" 1725968570 105939 b50aa2d14f7aad72f741d4c50407f34d ""
   "figures/gam_demonstration.png" 1725964726 230362 7d97c1700feb46727187686c1c680ede ""
@@ -255,11 +255,11 @@
   "figures/mean_results_gcv.png" 1726082074 414429 5785632ae589984bcb467bcff5e09654 ""
   "figures/mean_results_mse.png" 1726082072 407142 2dce81d1795f6f5f2e2ba38d64f21b4f ""
   "figures/smooth.png" 1726082077 344834 6c43fbc8681f686a32955f78d6320582 ""
-  "main.aux" 1726210998 24152 7a55058510de4125c911971215788b6d "pdflatex"
-  "main.bbl" 1726209077 196080 c3083ae26fbbdcf613b2aca5dbe12950 "biber main"
-  "main.out" 1726210998 3397 118dbfae8939c2c476eb5132338413fa "pdflatex"
-  "main.run.xml" 1726210998 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
-  "main.tex" 1726210993 81879 3c973d69b82d8c9081e0069894ba2935 ""
+  "main.aux" 1726820183 23117 cf4781dce413b8590c1d92aa67435e6e "pdflatex"
+  "main.bbl" 1726820169 193436 31b1f9480e0d203f234aced50cc5acf9 "biber main"
+  "main.out" 1726820183 3140 aacf83fc0cfe03e064326b41282ca6c4 "pdflatex"
+  "main.run.xml" 1726820183 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
+  "main.tex" 1726820168 77453 71db4d92d155a3e2555f7e2d2054f342 ""
   (generated)
   "main.aux"
   "main.bcf"

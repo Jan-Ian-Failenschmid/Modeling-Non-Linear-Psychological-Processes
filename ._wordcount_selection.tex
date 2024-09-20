@@ -1,13 +1,16 @@
-indicating that LPR should be at least as accurate as GAMs and GPs for
-p-times differentiable processes \parencite{fan_local_1997}. It is however
-unclear whether these results generalize to the non-differentiable processes
-that we suspect can be found most often in psychology. Lastly, the tested
-polynomial regression inferred the underlying processes least accurately. This appeared
-to be due to numerical model instability that resulted in underfitting, since
-not enough higher-order terms could be included in the models, and due to
-divergence towards the ends of the timeseries. The numerical model instability
-can be mitigated by using orthogonal polynomials, which are however more
-difficult to interpret. Generally, there appears to be no reason to use
-a global polynomial regression instead of a GAM, in any situation in which
-prior theory does not strongly suggest that the process follows a low order
-polynomial trajectory.
+
+In practice researchers also need to choose the degree of the local
+polynomials, which additionally reflects an assumption about how smooth the
+underlying process is. Specifically, for a first-degree LPR, the process should
+not exhibit any corners, discontinuities, or vertical sections. This ensures
+that the processes rate of change (i.e., derivative), approximated by the
+first-order polynomial term, is well behaved. Higher-order local polynomials
+require this smoothness for increasingly complex rates of change. For instance,
+a second-degree LPR requires that the rate of change itself is smooth, in turn
+ensuring that its rate of change is well behaved. This property should hold for
+all $p$ rates of change of a process when using an LPR with $p$ degrees (under
+Taylor's theorem). Typically, the degree of the local polynomials is chosen to
+be low and odd. This choice reflects a bias-variance tradeoff, where
+higher-order polynomials reduce bias but increase variance only when
+transitioning from an odd to an even power
+\parencite{ruppert_multivariate_1994}.

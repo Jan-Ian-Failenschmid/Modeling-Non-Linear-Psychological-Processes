@@ -1,21 +1,21 @@
 [0] Config.pm:307> INFO - This is Biber 2.17
 [0] Config.pm:310> INFO - Logfile is 'main.blg'
-[44] biber:340> INFO - === Fri Sep 13, 2024, 08:31:16
-[54] Biber.pm:418> INFO - Reading 'main.bcf'
-[102] Biber.pm:972> INFO - Found 67 citekeys in bib section 0
-[109] Biber.pm:4383> INFO - Processing section 0
-[116] Biber.pm:4574> INFO - Looking for bibtex file 'bibliography.bib' for section 0
-[130] bibtex.pm:1713> INFO - LaTeX decoding ...
-[327] bibtex.pm:1518> INFO - Found BibTeX data source 'bibliography.bib'
-[587] Biber.pm:4574> INFO - Looking for bibtex file 'R_bib.bib' for section 0
-[588] bibtex.pm:1713> INFO - LaTeX decoding ...
-[594] bibtex.pm:1518> INFO - Found BibTeX data source 'R_bib.bib'
-[685] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[685] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[685] Biber.pm:4203> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-US'
-[685] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
-[730] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[786] bbl.pm:757> INFO - Output to main.bbl
-[786] Biber.pm:130> WARN - ISBN '978-1-4419-2918-1 978-1-4757-3462-1' in entry 'harrell_general_2001' is invalid - run biber with '--validate_datamodel' for details.
-[786] Biber.pm:130> WARN - Duplicate entry key: 'R-RJ-2021-048' in file 'R_bib.bib', skipping ...
-[786] Biber.pm:132> INFO - WARNINGS: 2
+[53] biber:340> INFO - === Fri Sep 20, 2024, 10:16:09
+[163] Biber.pm:418> INFO - Reading 'main.bcf'
+[213] Biber.pm:972> INFO - Found 66 citekeys in bib section 0
+[221] Biber.pm:4383> INFO - Processing section 0
+[229] Biber.pm:4574> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[247] bibtex.pm:1713> INFO - LaTeX decoding ...
+[447] bibtex.pm:1518> INFO - Found BibTeX data source 'bibliography.bib'
+[747] Biber.pm:4574> INFO - Looking for bibtex file 'R_bib.bib' for section 0
+[748] bibtex.pm:1713> INFO - LaTeX decoding ...
+[756] bibtex.pm:1518> INFO - Found BibTeX data source 'R_bib.bib'
+[853] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[853] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[853] Biber.pm:4203> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'en-US'
+[853] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[897] bbl.pm:654> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[940] bbl.pm:757> INFO - Output to main.bbl
+[940] Biber.pm:130> WARN - ISBN '978-1-4419-2918-1 978-1-4757-3462-1' in entry 'harrell_general_2001' is invalid - run biber with '--validate_datamodel' for details.
+[940] Biber.pm:130> WARN - Duplicate entry key: 'R-RJ-2021-048' in file 'R_bib.bib', skipping ...
+[941] Biber.pm:132> INFO - WARNINGS: 2

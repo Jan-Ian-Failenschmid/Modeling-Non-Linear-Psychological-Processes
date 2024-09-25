@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 11-09-2024                                                   #
+#' Last Modified: 24-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -53,7 +53,7 @@ res3 <- res3[!method %in% c("gam"), ]
 res <- as.data.table(rbind(res1, res2, res3))
 sim <- sim1
 
-res[, weeks := ifelse(time == 100, 1, 2)]
+res[, weeks := ifelse(time == 100, 2, 4)]
 res[, dyn_var := dyn_er^2]
 res[, meas := 1 / (stepsize * (7 / 50))]
 
@@ -204,7 +204,8 @@ for (var in c(1, 2, 3)) {
   p1 <- p1 +
     theme_apa() +
     theme(
-      axis.text.x = element_blank()
+      axis.text.x = element_blank(),
+      text = element_text(size = 26)
     ) + labs(
       title = "a) Effect of Analysis Method for each Process",
       y = y_lab_str, fill = "Process", color = "Process",
@@ -215,7 +216,8 @@ for (var in c(1, 2, 3)) {
   p2 <- p2 +
     theme_apa() +
     theme(
-      strip.text.x = element_blank()
+      strip.text.x = element_blank(),
+      text = element_text(size = 26)
     ) + labs(
       title = "b) Effect of Measurement Period for each Method and Process",
       y = y_lab_str, fill = "Process", color = "Process",
@@ -227,6 +229,7 @@ for (var in c(1, 2, 3)) {
     theme_apa() +
     theme(
       strip.text.x = element_blank(),
+      text = element_text(size = 26)
     ) + labs(
       title = "c) Effect of Measurement Frequency for each Method and Process",
       y = y_lab_str, fill = "Process", color = "Process",
@@ -237,7 +240,8 @@ for (var in c(1, 2, 3)) {
   p4 <- p4 +
     theme_apa() +
     theme(
-      strip.text.x = element_blank()
+      strip.text.x = element_blank(),
+      text = element_text(size = 26)
     ) + labs(
       title =
         "d) Effect of Dynamic Error Variance for each Method and Process",
@@ -300,7 +304,7 @@ png(
   width = 1960, height = 1080
 )
 
-par(mfrow = c(4, 4), cex.lab = 1.5, cex.main = 1.5)
+par(mfrow = c(4, 4), cex.lab = 3, cex.main = 2.5, cex.axis = 2.5)
 
 for (j in 1:4) {
   for (i in c(1:3, 6)) {
@@ -309,11 +313,11 @@ for (j in 1:4) {
       axes = FALSE, xlab = "", ylab = ""
     )
 
-    axis(2, at = seq(-10, 10, 2), cex.axis = 1.5)
+    axis(2, at = seq(-10, 10, 2), cex.axis = 2.5)
 
     axis(1,
       at = c(0, 50, 150, 200),
-      labels = c("", "Week 1", "Week 2", ""), cex.axis = 1.5, padj = 1
+      labels = c("", "Week 1 & 2", "Week 3 & 4", ""), cex.axis = 2.5, padj = 1
     )
 
     if (j == 1) {

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 10-09-2024                                                   #
+#' Last Modified: 23-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -22,7 +22,7 @@ invisible(sapply(
 ))
 set.seed(41)
 fig_path <- c("./figures/")
-cex <- 1.5 # 2.5
+cex <- 3.5
 
 ### Create Exemplar Plot without Process Nosie ---------------------------------
 png(
@@ -38,7 +38,8 @@ exp_growth <- new("gen_model",
   model_name = "exp_growth",
   model_type = "DE",
   pars = list(yr = 0.02, ya = 2),
-  delta = 1 / 30,
+  delta = (50 / 7) / 234,
+  stepsize = (50 / 7) / 6,
   start = list(
     formula(y ~ -2)
   ),
@@ -54,8 +55,9 @@ make_exemplar_plot(exp_growth,
 )
 axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
-  at = c(0, 50, 150, 200),
-  labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+  at = c(0, 25, 50, 75, 125, 150, 175, 200),
+  labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+  cex.axis = cex, padj = 1
 )
 
 
@@ -65,7 +67,8 @@ log_growth <- new("gen_model",
   model_name = "log_growth",
   model_type = "DE",
   pars = list(k = 4.3, r = 0.04),
-  delta = 1 / 30,
+  delta = (50 / 7) / 234,
+  stepsize = (50 / 7) / 6,
   start = list(
     formula(y ~ 0.3)
   ),
@@ -83,17 +86,18 @@ make_exemplar_plot(log_growth,
 
 axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
-  at = c(0, 50, 150, 200),
-  labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+  at = c(0, 25, 50, 75, 125, 150, 175, 200),
+  labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+  cex.axis = cex, padj = 1
 )
-
 
 # Cusp ---
 cusp_catastrophe <- new("gen_model",
   time = 200,
   model_name = "catastrophe",
   model_type = "DE",
-  delta = 1 / 30,
+  delta = (50 / 7) / 234,
+  stepsize = (50 / 7) / 6,
   pars = list(a = -5),
   start = list(
     formula(y ~ 1.9),
@@ -110,21 +114,25 @@ cusp_catastrophe <- new("gen_model",
 
 make_exemplar_plot(cusp_catastrophe,
   main = "c) Cusp Catastrophe",
-  xlab = "Time", ylab = "", cex = cex, axes = FALSE
+  xlab = "", ylab = "", cex = cex, axes = FALSE
 )
 
 axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
-  at = c(0, 50, 150, 200),
-  labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+  at = c(0, 25, 50, 75, 125, 150, 175, 200),
+  labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+  cex.axis = cex, padj = 1
 )
+
+title(xlab = "Time", line = 4, cex.lab = cex)
 
 # Dampened Oscillator ---
 damped_oscillator <- new("gen_model",
   time = 200,
   model_name = "damped_oscillator",
   model_type = "DE",
-  delta = 1 / 30,
+  delta = (50 / 7) / 234,
+  stepsize = (50 / 7) / 6,
   pars = list(b = 0.01, omega = 0.1),
   start = list(
     formula(y ~ 2),
@@ -139,18 +147,21 @@ damped_oscillator <- new("gen_model",
 
 make_exemplar_plot(damped_oscillator,
   main = "d) Damped Oscillator",
-  xlab = "Time", ylab = "", cex = cex, axes = FALSE
+  xlab = "", ylab = "", cex = cex, axes = FALSE
 )
 
 axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
-  at = c(0, 50, 150, 200),
-  labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+  at = c(0, 25, 50, 75, 125, 150, 175, 200),
+  labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+  cex.axis = cex, padj = 1
 )
+title(xlab = "Time", line = 4, cex.lab = cex)
 
 dev.off()
 
 ### Create Exemplar Plot with Process Nosie ------------------------------------
+cex <- 4
 png(
   file = paste0(fig_path, "exemplar_process_noise.png"),
   width = 1960, height = 1080
@@ -158,7 +169,7 @@ png(
 
 par(mfcol = c(4, 2))
 
-for (dyn_er in c(.25, .5)) {
+for (dyn_er in sqrt(c(.5, 2))) {
   # LCS ---
   latent_change <- new("gen_model",
     time = 200,
@@ -168,7 +179,8 @@ for (dyn_er in c(.25, .5)) {
     dynamic_error = list(
       formula(y ~ dyn_er)
     ),
-    delta = 1 / 30,
+    delta = (50 / 7) / 234,
+    stepsize = (50 / 7) / 3,
     start = list(
       formula(y ~ -2)
     ),
@@ -179,14 +191,19 @@ for (dyn_er in c(.25, .5)) {
   )
 
   make_exemplar_plot(latent_change,
-    main = bquote(paste("Exponential Growth Curve ", sigma, " = ", .(dyn_er))),
-    xlab = "", ylab = "", cex = cex, axes = FALSE
+    main = bquote(paste(
+      "Exponential Growth Curve ", sigma^2, " = ",
+      .(round(dyn_er^2, 1))
+    )),
+    xlab = "", ylab = "", cex = cex, axes = FALSE,
+    col = rep(c("black", "blue"), each = 3 * 14)
   )
 
   axis(2, at = seq(-10, 10, 2), cex.axis = cex)
   axis(1,
-    at = c(0, 50, 150, 200),
-    labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+    at = c(0, 25, 50, 75, 125, 150, 175, 200),
+    labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+    cex.axis = cex, padj = 1
   )
 
   # Logistic growth ---
@@ -198,7 +215,8 @@ for (dyn_er in c(.25, .5)) {
     dynamic_error = list(
       formula(y ~ dyn_er)
     ),
-    delta = 1 / 30,
+    delta = (50 / 7) / 234,
+    stepsize = (50 / 7) / 3,
     start = list(
       formula(y ~ 0.3)
     ),
@@ -210,14 +228,19 @@ for (dyn_er in c(.25, .5)) {
   )
 
   make_exemplar_plot(log_growth,
-    main = bquote(paste("Logistic Growth Curve ", sigma, " = ", .(dyn_er))),
-    xlab = "", ylab = "", cex = cex, axes = FALSE
+    main = bquote(paste(
+      "Logistic Growth Curve ", sigma^2, " = ",
+      .(round(dyn_er^2, 1))
+    )),
+    xlab = "", ylab = "", cex = cex, axes = FALSE,
+    col = rep(c("black", "blue"), each = 3 * 14)
   )
 
   axis(2, at = seq(-10, 10, 2), cex.axis = cex)
   axis(1,
-    at = c(0, 50, 150, 200),
-    labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+    at = c(0, 25, 50, 75, 125, 150, 175, 200),
+    labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+    cex.axis = cex, padj = 1
   )
 
   # Cusp ----
@@ -225,7 +248,8 @@ for (dyn_er in c(.25, .5)) {
     time = 200,
     model_name = "catastrophe",
     model_type = "DE",
-    delta = 1 / 30,
+    delta = (50 / 7) / 234,
+    stepsize = (50 / 7) / 9,
     pars = list(a = -5, dyn_er = dyn_er),
     dynamic_error = list(
       formula(y ~ dyn_er),
@@ -246,14 +270,19 @@ for (dyn_er in c(.25, .5)) {
   )
 
   make_exemplar_plot(cusp_catastrophe,
-    main = bquote(paste("Cusp Catastrophe ", sigma, " = ", .(dyn_er))),
-    xlab = "", ylab = "", cex = cex, axes = FALSE
+    main = bquote(paste(
+      "Cusp Catastrophe ", sigma^2, " = ",
+      .(round(dyn_er^2, 1))
+    )),
+    xlab = "", ylab = "", cex = cex, axes = FALSE,
+    col = rep(c("black", "blue"), each = 9 * 14)
   )
 
   axis(2, at = seq(-10, 10, 2), cex.axis = cex)
   axis(1,
-    at = c(0, 50, 150, 200),
-    labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+    at = c(0, 25, 50, 75, 125, 150, 175, 200),
+    labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+    cex.axis = cex, padj = 1
   )
 
   # Dampened Oscillator ---
@@ -261,7 +290,8 @@ for (dyn_er in c(.25, .5)) {
     time = 200,
     model_name = "damped_oscillator",
     model_type = "DE",
-    delta = 1 / 30,
+    delta = (50 / 7) / 234,
+    stepsize = (50 / 7) / 9,
     pars = list(b = 0.01, omega = 0.1, dyn_er = dyn_er),
     start = list(
       formula(y ~ 2),
@@ -279,15 +309,21 @@ for (dyn_er in c(.25, .5)) {
   )
 
   make_exemplar_plot(damp_osc,
-    main = bquote(paste("Damped Oscillator ", sigma, " = ", .(dyn_er))),
-    xlab = "Time", ylab = "", cex = cex, axes = FALSE
+    main = bquote(paste(
+      "Damped Oscillator ", sigma^2, " = ",
+      .(round(dyn_er^2, 1))
+    )),
+    xlab = "", ylab = "", cex = cex, axes = FALSE,
+    col = rep(c("black", "blue"), each = 9 * 14)
   )
 
   axis(2, at = seq(-10, 10, 2), cex.axis = cex)
   axis(1,
-    at = c(0, 50, 150, 200),
-    labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+    at = c(0, 25, 50, 75, 125, 150, 175, 200),
+    labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+    cex.axis = cex, padj = 1
   )
+  title(xlab = "Time", line = 4, cex.lab = cex)
 }
 
 dev.off()

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 10-09-2024                                                   #
+#' Last Modified: 24-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -472,7 +472,8 @@ gp_posterior_3d <- function(
   fig
 }
 
-make_exemplar_plot <- function(gen_model, main, xlab, ylab, cex, ...) {
+make_exemplar_plot <- function(
+    gen_model, main, xlab, ylab, cex, expr = NULL, ...) {
   #' Convenience function to generate exemplar plots for each of the methods
   dat_list <- sim_tsm(gen_model)
   dat <- get_tsm_data(dat_list)
@@ -482,6 +483,7 @@ make_exemplar_plot <- function(gen_model, main, xlab, ylab, cex, ...) {
     cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, ...
   )
   lines(dat$time, dat$y)
+  eval(expr)
 }
 
 plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
@@ -526,7 +528,10 @@ plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
           seed = 1, width = .1
         )
       ) +
-      facet_grid(cols = vars(method)) +
+      facet_grid(
+        cols = vars(method),
+        labeller = labeller(method = label_wrap_gen(20))
+      ) +
       theme_minimal() +
       theme(
         text = element_text(size = 20)
@@ -556,7 +561,10 @@ plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
       geom_errorbar(
         aes(ymin = mean - se, ymax = mean + se)
       ) +
-      facet_grid(cols = vars(method)) +
+      facet_grid(
+        cols = vars(method),
+        labeller = labeller(method = label_wrap_gen(20))
+      ) +
       theme_minimal() +
       theme(
         text = element_text(size = 20)
@@ -573,7 +581,10 @@ plot_results <- function(res, outcome, style = "all", ..., legend = TRUE) {
       x = group, y = missing, fill = model
     )) +
       geom_col() +
-      facet_grid(cols = vars(method)) +
+      facet_grid(
+        cols = vars(method),
+        labeller = labeller(method = label_wrap_gen(20))
+      ) +
       theme_minimal() +
       theme(
         text = element_text(size = 20)
@@ -686,4 +697,8 @@ counter <- function() {
     i <<- i + 1
     return(i)
   }
+}
+
+wrapper <- function(x, ...) {
+  paste(strwrap(x, ...), collapse = "\n")
 }

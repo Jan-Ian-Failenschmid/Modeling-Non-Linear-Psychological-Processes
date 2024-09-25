@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 04-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 12-09-2024                                                   #
+#' Last Modified: 23-09-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -57,7 +57,7 @@ plot_local_polynomial <- function(
 
 set.seed(41)
 fig_path <- c("./figures/")
-cex <- 2.5
+cex <- 3.5
 # Simulate data ----------------------------------------------------------------
 damp_osc <- new("gen_model",
   time = 200,
@@ -93,15 +93,17 @@ png(
 
 plot(dat$time, dat$y_obs,
   main = "",
-  xlab = "Time", ylab = "",
+  xlab = "", ylab = "",
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE
 ) # Data points
-axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 
+axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
-  at = c(0, 50, 150, 200),
-  labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+  at = c(0, 25, 50, 75, 125, 150, 175, 200),
+  labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+  cex.axis = cex, padj = 1
 )
+title(xlab = "Time", line = 4, cex.lab = cex)
 
 lines(dat$time, dat$y, lty = 2, lwd = 3) # State function
 lines(dat$time, lp_fit$Estimate[, 5], lwd = 3) # Estimated line
@@ -113,7 +115,7 @@ for (eval in c(50, 100, 150)) {
   )
 }
 # Legend
-legend(150, 3.5,
+legend(125, 3.5,
   legend = c("Process", "Prediction", "Local polynomials"),
   col = c("black", "black", "red"), lty = c(2, 1, 1), cex = cex,
   lwd = c(3, 3, 2)
@@ -133,15 +135,17 @@ png(
 
 plot(dat$time, dat$y_obs,
   main = "",
-  xlab = "Time", ylab = "",
+  xlab = "", ylab = "",
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE
 ) # Data points
 
 axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
-  at = c(0, 50, 150, 200),
-  labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+  at = c(0, 25, 50, 75, 125, 150, 175, 200),
+  labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+  cex.axis = cex, padj = 1
 )
+title(xlab = "Time", line = 4, cex.lab = cex)
 
 lines(dat$time, dat$y, lty = 2, lwd = 3) # State functions
 lines(dat$time, fitted(gam_fit), lwd = 3) # Predictions
@@ -153,7 +157,7 @@ for (i in seq_len(ncol(predmat))) {
   )
 }
 # Legend
-legend(150, 3.5,
+legend(125, 3.5,
   legend = c("Process", "Prediction", "Basis function value"),
   col = c("black", "black", "red"), lty = c(2, 1, 1), cex = cex,
   lwd = c(3, 3, 2)
@@ -189,18 +193,20 @@ gp_post_pred(gp_fit,
   obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
   main = "",
-  xlab = "Time", ylab = "", axes = FALSE
+  xlab = "", ylab = "", axes = FALSE
 )
 
 axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
-  at = c(0, 50, 150, 200),
-  labels = c("", "Week 1", "Week 2", ""), cex.axis = cex, padj = 1
+  at = c(0, 25, 50, 75, 125, 150, 175, 200),
+  labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+  cex.axis = cex, padj = 1
 )
+title(xlab = "Time", line = 4, cex.lab = cex)
 
 lines(dat$time, dat$y, lty = 2, lwd = 3)
 lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
-legend(150, 3.5,
+legend(125, 3.5,
   legend = c("Process", "Prediction", "Posterior function draws"),
   col = c("black", "black", "red"), lty = c(2, 1, 1), cex = cex,
   lwd = c(3, 3, 1)

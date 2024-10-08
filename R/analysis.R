@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 24-09-2024                                                   #
+#' Last Modified: 08-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -32,30 +32,22 @@ invisible(sapply(
 ))
 
 ### Load and prepare data ------------------------------------------------------
-load("R/data/pilot_data_09_09_2024_01_47.Rdata")
-load("R/data/pilot_results_09_09_2024_01_47.Rdata")
+load("R/data/simulation_results_27_09_2024_00_32.Rdata")
+res <- as.data.table(res)
+res <- res[!method %in% c("simple", "poly_orth"), ]
 
-res1 <- as.data.table(res)
-res1 <- res1[!method %in% c("simple", "dynm", "poly"), ]
-sim1 <- as.data.table(sim)
+load("R/data/old_data/pilot_data_09_09_2024_01_47.Rdata")
+sim1 <- as.data.table(sim) # LPR, GP, GAM
 
-load("R/data/pilot_data_10_09_2024_14_31.Rdata")
-load("R/data/pilot_results_10_09_2024_14_31.Rdata")
+load("R/data/old_data/pilot_data_10_09_2024_14_31.Rdata")
+sim2 <- as.data.table(sim) # Parametric models
 
-res2 <- as.data.table(res)
-res2 <- res2[!method %in% c("gam"), ]
-sim2 <- as.data.table(sim)
+load("R/data/old_data/pilot_data_11_09_2024_18_39.Rdata")
+sim3 <- sim # Correlated Polynomial Regression
 
-load("R/data/pilot_results_11_09_2024_18_39.Rdata")
-res3 <- as.data.table(res)
-res3 <- res3[!method %in% c("gam"), ]
-
-res <- as.data.table(rbind(res1, res2, res3))
-sim <- sim1
-
-res[, weeks := ifelse(time == 100, 2, 4)]
-res[, dyn_var := dyn_er^2]
-res[, meas := 1 / (stepsize * (7 / 50))]
+res[, SP := ifelse(time == 100, 0.5, 1)]
+res[, DEV := dyn_er^2]
+res[, SF := (1 / (stepsize * (7 / 50))) / 3]
 
 
 res$model[res$model == "exp_growth"] <- "Exponential Growth"
@@ -87,17 +79,17 @@ res$method <- factor(res$method,
 )
 contrasts(res$method) <- contr.sum(levels(res$method))
 
-res$weeks <- factor(res$weeks)
-contrasts(res$weeks) <- contr.sum(levels(res$weeks))
+res$SP <- factor(res$SP)
+contrasts(res$SP) <- contr.sum(levels(res$SP))
 
-res$meas <- factor(res$meas)
-contrasts(res$meas) <- contr.sum(levels(res$meas))
+res$SF <- factor(res$SF)
+contrasts(res$SF) <- contr.sum(levels(res$SF))
 
-res$dyn_var <- factor(res$dyn_var,
+res$DEV <- factor(res$DEV,
   levels = c(.5, 1, 2),
   labels = c(".5", "1", "2")
 )
-contrasts(res$dyn_var) <- contr.sum(levels(res$dyn_var))
+contrasts(res$DEV) <- contr.sum(levels(res$DEV))
 
 ### Descriptives ---------------------------------------------------------------
 res_summary <- res[, .(
@@ -120,7 +112,7 @@ by = .(method, model, time, stepsize, dyn_er)
 dpi <- 300
 
 # Complete results plot
-p1 <- plot_results(res = res, "mse", "all", "weeks", "meas", "dyn_var")
+p1 <- plot_results(res = res, "mse", "all", "SP", "SF", "DEV")
 p1 <- p1 +
   theme_apa() +
   theme(
@@ -129,7 +121,7 @@ p1 <- p1 +
   ) +
   labs(y = "MSE", fill = "Process", color = "Process")
 
-p2 <- plot_results(res = res, "gcv", "all", "weeks", "meas", "dyn_var")
+p2 <- plot_results(res = res, "gcv", "all", "SP", "SF", "DEV")
 p2 <- p2 +
   theme_apa() +
   theme(
@@ -139,7 +131,7 @@ p2 <- p2 +
   ) +
   labs(y = "GCV", fill = "Process", color = "Process")
 
-p3 <- plot_results(res = res, "ci_coverage", "all", "weeks", "meas", "dyn_var")
+p3 <- plot_results(res = res, "ci_coverage", "all", "SP", "SF", "DEV")
 p3 <- p3 +
   theme_apa() +
   theme(
@@ -162,7 +154,7 @@ ggsave("figures/complete_results_all.png", p_comb,
 )
 
 # Missing data plot
-pmiss <- plot_results(res = res, "mse", "missing", "weeks", "meas", "dyn_var")
+pmiss <- plot_results(res = res, "mse", "missing", "SP", "SF", "DEV")
 pmiss <- pmiss +
   scale_y_continuous(expand = expansion(mult = 0, add = 0)) +
   theme_apa() +
@@ -212,31 +204,31 @@ for (var in c(1, 2, 3)) {
       x = "Process"
     )
 
-  p2 <- plot_results(res = res, outcome, "mean", "weeks")
+  p2 <- plot_results(res = res, outcome, "mean", "SP")
   p2 <- p2 +
     theme_apa() +
     theme(
       strip.text.x = element_blank(),
       text = element_text(size = 26)
     ) + labs(
-      title = "b) Effect of Measurement Period for each Method and Process",
+      title = "c) Effect of Measurement Period for each Method and Process",
       y = y_lab_str, fill = "Process", color = "Process",
-      x = "Measurement Period (in weeks)"
+      x = "Measurement Period"
     )
 
-  p3 <- plot_results(res = res, outcome, "mean", "meas")
+  p3 <- plot_results(res = res, outcome, "mean", "SF")
   p3 <- p3 +
     theme_apa() +
     theme(
       strip.text.x = element_blank(),
       text = element_text(size = 26)
     ) + labs(
-      title = "c) Effect of Measurement Frequency for each Method and Process",
+      title = "d) Effect of Measurement Frequency for each Method and Process",
       y = y_lab_str, fill = "Process", color = "Process",
-      x = "Measurement Frequency (per day)"
+      x = "Measurement Frequency"
     )
 
-  p4 <- plot_results(res = res, outcome, "mean", "dyn_var")
+  p4 <- plot_results(res = res, outcome, "mean", "DEV")
   p4 <- p4 +
     theme_apa() +
     theme(
@@ -244,12 +236,12 @@ for (var in c(1, 2, 3)) {
       text = element_text(size = 26)
     ) + labs(
       title =
-        "d) Effect of Dynamic Error Variance for each Method and Process",
+        "b) Effect of Dynamic Error Variance for each Method and Process",
       y = y_lab_str, fill = "Process", color = "Process",
       x = "Dynamic Error Variance"
     )
 
-  p_comb <- p1 / p2 / p3 / p4 +
+  p_comb <- p1 / p4 / p2 / p3 +
     plot_layout(guides = "collect") & theme(legend.position = "right")
 
   p_ranges_y <- c(
@@ -283,7 +275,7 @@ ilustr <- sim[, model_name := sapply(gen_model, function(x) {
 })][,
   .I[time == 200 & stepsize == unique(stepsize)[1] & dyn_er == sqrt(1)],
   by = model_name
-][, .SD[2], by = model_name]
+][, .SD[4], by = model_name]
 
 method <-
   c(
@@ -291,7 +283,6 @@ method <-
     "Gaussian Process Regression",
     "General Additive Model",
     "Parametric Modelling",
-    "Linear Regression",
     "Polynomial Regression"
   )
 
@@ -304,26 +295,51 @@ png(
   width = 1960, height = 1080
 )
 
-par(mfrow = c(4, 4), cex.lab = 3, cex.main = 2.5, cex.axis = 2.5)
+par(
+  mfrow = c(4, 5), cex.lab = 2.5, cex.main = 2.5, cex.axis = 2.5,
+  mar = c(6, 6, 4, 4) + .1
+)
 
 for (j in 1:4) {
-  for (i in c(1:3, 6)) {
-    plot(sim$method[[ilustr$V1[j]]][[i]],
-      sim = sim,
-      axes = FALSE, xlab = "", ylab = ""
-    )
+  for (i in c(1:3, 5, 4)) {
+    if (i %in% c(1:3)) {
+      plot(sim1$method[[ilustr$V1[j]]][[i]],
+        sim = sim1,
+        axes = FALSE, xlab = "", ylab = ""
+      )
+    } else if (i == 4) {
+      if (j == 4) {
+        plot_dat <- sim2$dat[[ilustr$V1[j]]]
+        plot(
+          x = plot_dat$time, y = plot_dat$y_obs,
+          axes = FALSE, xlab = "", ylab = ""
+        )
+        lines(x = plot_dat$time, y = plot_dat$y)
+      } else {
+        plot(sim2$method[[ilustr$V1[j]]][[2]],
+          sim = sim2,
+          axes = FALSE, xlab = "", ylab = ""
+        )
+      }
+    } else if (i == 5) {
+      plot(sim3$method[[ilustr$V1[j]]][[2]],
+        sim = sim3,
+        axes = FALSE, xlab = "", ylab = ""
+      )
+    }
 
     axis(2, at = seq(-10, 10, 2), cex.axis = 2.5)
 
     axis(1,
-      at = c(0, 50, 150, 200),
-      labels = c("", "Week 1 & 2", "Week 3 & 4", ""), cex.axis = 2.5, padj = 1
+      at = c(0, 50, 100, 150, 200),
+      labels = c("", "First Half", "", "Sec. Half", ""), cex.axis = 2.5,
+      padj = 1
     )
 
     if (j == 1) {
       title(method[i])
     } else if (j == 4) {
-      title(xlab = "Time", main = NULL)
+      title(xlab = "Time", main = NULL, line = 5)
     }
     if (i == 1) {
       title(ylab = process[j], main = NULL)

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 04-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 23-09-2024                                                   #
+#' Last Modified: 08-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -99,8 +99,8 @@ plot(dat$time, dat$y_obs,
 
 axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
-  at = c(0, 25, 50, 75, 125, 150, 175, 200),
-  labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+  at = c(0, 50, 100, 150, 200),
+  labels = c("", "", "", "", ""),
   cex.axis = cex, padj = 1
 )
 title(xlab = "Time", line = 4, cex.lab = cex)
@@ -141,8 +141,8 @@ plot(dat$time, dat$y_obs,
 
 axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
-  at = c(0, 25, 50, 75, 125, 150, 175, 200),
-  labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+  at = c(0, 50, 100, 150, 200),
+  labels = c("", "", "", "", ""),
   cex.axis = cex, padj = 1
 )
 title(xlab = "Time", line = 4, cex.lab = cex)
@@ -198,8 +198,8 @@ gp_post_pred(gp_fit,
 
 axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
-  at = c(0, 25, 50, 75, 125, 150, 175, 200),
-  labels = c("", "Week 1", "", "Week 2", "Week 3", "", "Week 4", ""),
+  at = c(0, 50, 100, 150, 200),
+  labels = c("", "", "", "", ""),
   cex.axis = cex, padj = 1
 )
 title(xlab = "Time", line = 4, cex.lab = cex)

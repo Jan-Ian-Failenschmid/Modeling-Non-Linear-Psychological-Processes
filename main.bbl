@@ -19,200 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global}
-    \entry{abdessalem_automatic_2017}{article}{}
-      \name{author}{4}{}{%
-        {{un=0,uniquepart=base,hash=3504183a28f363c5344e7cc008d2ac8f}{%
-           family={Abdessalem},
-           familyi={A\bibinitperiod},
-           given={Anis\bibnamedelima Ben},
-           giveni={A\bibinitperiod\bibinitdelim B\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=140e1bbf9ff75a96647b66808a2d3c38}{%
-           family={Dervilis},
-           familyi={D\bibinitperiod},
-           given={Nikolaos},
-           giveni={N\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=35178a1daed66661315320d335afe656}{%
-           family={Wagg},
-           familyi={W\bibinitperiod},
-           given={David\bibnamedelima J.},
-           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=429eef03aaa7c54050f9d6db9016d3a9}{%
-           family={Worden},
-           familyi={W\bibinitperiod},
-           given={Keith},
-           giveni={K\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{d0f26eaba0cc8547b39dabaef68bfd28}
-      \strng{fullhash}{7df673f277fada671902e5053cef868a}
-      \strng{bibnamehash}{7df673f277fada671902e5053cef868a}
-      \strng{authorbibnamehash}{7df673f277fada671902e5053cef868a}
-      \strng{authornamehash}{d0f26eaba0cc8547b39dabaef68bfd28}
-      \strng{authorfullhash}{7df673f277fada671902e5053cef868a}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{The current work introduces a novel combination of two Bayesian tools, Gaussian Processes (GPs), and the use of the Approximate Bayesian Computation (ABC) algorithm for kernel selection and parameter estimation for machine learning applications. The combined methodology that this research article proposes and investigates offers the possibility to use different metrics and summary statistics of the kernels used for Bayesian regression. The presented work moves a step toward online, robust, consistent, and automated mechanism to formulate optimal kernels (or even mean functions) and their hyperparameters simultaneously offering confidence evaluation when these tools are used for mathematical or engineering problems such as structural health monitoring (SHM) and system identification (SI).}
-      \field{issn}{2297-3362}
-      \field{journaltitle}{Frontiers in Built Environment}
-      \field{month}{8}
-      \field{title}{Automatic {Kernel} {Selection} for {Gaussian} {Processes} {Regression} with {Approximate} {Bayesian} {Computation} and {Sequential} {Monte} {Carlo}}
-      \field{urlday}{28}
-      \field{urlmonth}{11}
-      \field{urlyear}{2023}
-      \field{volume}{3}
-      \field{year}{2017}
-      \field{urldateera}{ce}
-      \field{pages}{52}
-      \range{pages}{1}
-      \verb{doi}
-      \verb 10.3389/fbuil.2017.00052
-      \endverb
-      \verb{file}
-      \verb Abdessalem et al. - 2017 - Automatic Kernel Selection for Gaussian Processes .pdf:C\:\\Users\\failensc\\Zotero\\storage\\RHDWPIVB\\Abdessalem et al. - 2017 - Automatic Kernel Selection for Gaussian Processes .pdf:application/pdf
-      \endverb
-      \verb{urlraw}
-      \verb http://journal.frontiersin.org/article/10.3389/fbuil.2017.00052/full
-      \endverb
-      \verb{url}
-      \verb http://journal.frontiersin.org/article/10.3389/fbuil.2017.00052/full
-      \endverb
-    \endentry
-    \entry{alvarez_latent_2009}{article}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=52d61a4ff63e940ccbd670ee084ca7cc}{%
-           family={Álvarez},
-           familyi={Á\bibinitperiod},
-           given={Mauricio},
-           giveni={M\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=3f392a9a611cfab7216a2fa792d9c119}{%
-           family={Luengo},
-           familyi={L\bibinitperiod},
-           given={David},
-           giveni={D\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=f83d1b861ef00c2c1e490eb5f7360434}{%
-           family={Lawrence},
-           familyi={L\bibinitperiod},
-           given={Neil\bibnamedelima D.},
-           giveni={N\bibinitperiod\bibinitdelim D\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \list{publisher}{1}{%
-        {PMLR}%
-      }
-      \strng{namehash}{1a13f05207755751b6b0412b66675b6c}
-      \strng{fullhash}{1b6510bd9ebdc85b5fa55c669dfedead}
-      \strng{bibnamehash}{1b6510bd9ebdc85b5fa55c669dfedead}
-      \strng{authorbibnamehash}{1b6510bd9ebdc85b5fa55c669dfedead}
-      \strng{authornamehash}{1a13f05207755751b6b0412b66675b6c}
-      \strng{authorfullhash}{1b6510bd9ebdc85b5fa55c669dfedead}
-      \field{sortinit}{Á}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Purely data driven approaches for machine learning present difficulties when data is scarce relative to the complexity of the model or when the model is forced to extrapolate. On the other hand, purely mechanistic approaches need to identify and specify all the interactions in the problem at hand (which may not be feasible) and still leave the issue of how to parameterize the system. In this paper, we present a hybrid approach using Gaussian processes and differential equations to combine data driven modeling with a physical model of the system. We show how different, physically-inspired, kernel functions can be developed through sensible, simple, mechanistic assumptions about the underlying system. The versatility of our approach is illustrated with three case studies from computational biology, motion capture and geostatistics.}
-      \field{journaltitle}{Proceedings of the {Twelth} {International} {Conference} on {Artificial} {Intelligence} and {Statistics}}
-      \field{month}{4}
-      \field{note}{ISSN: 1938-7228}
-      \field{title}{Latent {Force} {Models}}
-      \field{urlday}{11}
-      \field{urlmonth}{9}
-      \field{urlyear}{2023}
-      \field{year}{2009}
-      \field{urldateera}{ce}
-      \field{pages}{9\bibrangedash 16}
-      \range{pages}{8}
-      \verb{file}
-      \verb Full Text PDF:C\:\\Users\\failensc\\Zotero\\storage\\HY8S5EPJ\\Álvarez et al. - 2009 - Latent Force Models.pdf:application/pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://proceedings.mlr.press/v5/alvarez09a.html
-      \endverb
-      \verb{url}
-      \verb https://proceedings.mlr.press/v5/alvarez09a.html
-      \endverb
-    \endentry
-    \entry{aue_prediction_2015}{article}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=a9d5d98b404dd10e0194f3dbbd5ab123}{%
-           family={Aue},
-           familyi={A\bibinitperiod},
-           given={Alexander},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=5c0d9e3ab333df08431b7a092204d784}{%
-           family={Norinho},
-           familyi={N\bibinitperiod},
-           given={Diogo\bibnamedelima Dubart},
-           giveni={D\bibinitperiod\bibinitdelim D\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=3c69ee679930ad6dc731accd63251fcf}{%
-           family={Hörmann},
-           familyi={H\bibinitperiod},
-           given={Siegfried},
-           giveni={S\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{debed8e1e628ac13d850276d689a8a5a}
-      \strng{fullhash}{972a7e01a8a2f9e2b3f9aadfe5fa591a}
-      \strng{bibnamehash}{972a7e01a8a2f9e2b3f9aadfe5fa591a}
-      \strng{authorbibnamehash}{972a7e01a8a2f9e2b3f9aadfe5fa591a}
-      \strng{authornamehash}{debed8e1e628ac13d850276d689a8a5a}
-      \strng{authorfullhash}{972a7e01a8a2f9e2b3f9aadfe5fa591a}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{issn}{0162-1459, 1537-274X}
-      \field{journaltitle}{Journal of the American Statistical Association}
-      \field{month}{1}
-      \field{number}{509}
-      \field{title}{On the {Prediction} of {Stationary} {Functional} {Time} {Series}}
-      \field{urlday}{20}
-      \field{urlmonth}{9}
-      \field{urlyear}{2023}
-      \field{volume}{110}
-      \field{year}{2015}
-      \field{urldateera}{ce}
-      \field{pages}{378\bibrangedash 392}
-      \range{pages}{15}
-      \verb{doi}
-      \verb 10.1080/01621459.2014.909317
-      \endverb
-      \verb{file}
-      \verb Aue et al. - 2015 - On the Prediction of Stationary Functional Time Se.pdf:C\:\\Users\\failensc\\Zotero\\storage\\Z6ZLWH2C\\Aue et al. - 2015 - On the Prediction of Stationary Functional Time Se.pdf:application/pdf
-      \endverb
-      \verb{urlraw}
-      \verb http://www.tandfonline.com/doi/full/10.1080/01621459.2014.909317
-      \endverb
-      \verb{url}
-      \verb http://www.tandfonline.com/doi/full/10.1080/01621459.2014.909317
-      \endverb
-    \endentry
     \entry{betancourt_robust_2020}{misc}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=1982fa604a3f94837efceaa53330b2a4}{%
@@ -248,68 +54,6 @@
       \endverb
       \verb{url}
       \verb https://betanalpha.github.io/assets/case_studies/gaussian_processes.html
-      \endverb
-    \endentry
-    \entry{blanca_non-normal_2017}{article}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=5896816ed30e737ce778a63cfd58dec2}{%
-           family={Blanca},
-           familyi={B\bibinitperiod},
-           given={María\bibnamedelima J.},
-           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=b91fb1540f74d53ac96a43b885fd4e6c}{%
-           family={Alarcón},
-           familyi={A\bibinitperiod},
-           given={Rafael},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=cae237f2af1d0f6db5618034c984010a}{%
-           family={Arnau},
-           familyi={A\bibinitperiod},
-           given={Jaume},
-           giveni={J\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{language}{1}{%
-        {eng}%
-      }
-      \strng{namehash}{14402d6587acd3b30b38c970f69a48e8}
-      \strng{fullhash}{61ab1e7f4d6e3809d4b94836ce09943b}
-      \strng{bibnamehash}{61ab1e7f4d6e3809d4b94836ce09943b}
-      \strng{authorbibnamehash}{61ab1e7f4d6e3809d4b94836ce09943b}
-      \strng{authornamehash}{14402d6587acd3b30b38c970f69a48e8}
-      \strng{authorfullhash}{61ab1e7f4d6e3809d4b94836ce09943b}
-      \field{sortinit}{B}
-      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{journaltitle}{Psicothema}
-      \field{month}{11}
-      \field{number}{29.4}
-      \field{shorttitle}{Non-normal data}
-      \field{title}{Non-normal data: {Is} {ANOVA} still a valid option?}
-      \field{urlday}{21}
-      \field{urlmonth}{8}
-      \field{urlyear}{2024}
-      \field{year}{2017}
-      \field{urldateera}{ce}
-      \field{pages}{552\bibrangedash 557}
-      \range{pages}{6}
-      \verb{doi}
-      \verb 10.7334/psicothema2016.383
-      \endverb
-      \verb{file}
-      \verb Blanca et al. - 2017 - Non-normal data Is ANOVA still a valid option.pdf:C\:\\Users\\failensc\\Zotero\\storage\\HKTG2LHC\\Blanca et al. - 2017 - Non-normal data Is ANOVA still a valid option.pdf:application/pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://doi.org/10.7334/psicothema2016.383
-      \endverb
-      \verb{url}
-      \verb https://doi.org/10.7334/psicothema2016.383
       \endverb
     \endentry
     \entry{cooper_dynamical_2012}{inbook}{}
@@ -571,7 +315,6 @@
       \strng{authorbibnamehash}{93c716362166f2c95a46bd4478ee7dd1}
       \strng{authornamehash}{a073adec4ab96ceec154ed5a9a6ce685}
       \strng{authorfullhash}{93c716362166f2c95a46bd4478ee7dd1}
-      \field{extraname}{1}
       \field{sortinit}{B}
       \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
       \field{extradatescope}{labelyear}
@@ -603,90 +346,6 @@
       \endverb
       \verb{url}
       \verb http://www.tandfonline.com/doi/full/10.1080/00273171.2015.1120182
-      \endverb
-    \endentry
-    \entry{bringmann_changing_2017}{article}{}
-      \name{author}{6}{}{%
-        {{un=0,uniquepart=base,hash=a59c4557c65471245b2b37d025e71ce0}{%
-           family={Bringmann},
-           familyi={B\bibinitperiod},
-           given={Laura\bibnamedelima F.},
-           giveni={L\bibinitperiod\bibinitdelim F\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=bf3ebddfd095dbb39dac14e644fbb58c}{%
-           family={Hamaker},
-           familyi={H\bibinitperiod},
-           given={Ellen\bibnamedelima L.},
-           giveni={E\bibinitperiod\bibinitdelim L\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=647847be61dbd63899b41e476c590cdb}{%
-           family={Vigo},
-           familyi={V\bibinitperiod},
-           given={Daniel\bibnamedelima E.},
-           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=2525d208ae2d774c2a9c9e0ce0c88a63}{%
-           family={Aubert},
-           familyi={A\bibinitperiod},
-           given={André},
-           giveni={A\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=65b66c163ae7aa90fd735ab96a8cce25}{%
-           family={Borsboom},
-           familyi={B\bibinitperiod},
-           given={Denny},
-           giveni={D\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=a62464afee2a784490d87f9a7d3ef86f}{%
-           family={Tuerlinckx},
-           familyi={T\bibinitperiod},
-           given={Francis},
-           giveni={F\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{a073adec4ab96ceec154ed5a9a6ce685}
-      \strng{fullhash}{d3187504c6a9e7766b4438cc1810d2d0}
-      \strng{bibnamehash}{d3187504c6a9e7766b4438cc1810d2d0}
-      \strng{authorbibnamehash}{d3187504c6a9e7766b4438cc1810d2d0}
-      \strng{authornamehash}{a073adec4ab96ceec154ed5a9a6ce685}
-      \strng{authorfullhash}{d3187504c6a9e7766b4438cc1810d2d0}
-      \field{extraname}{2}
-      \field{sortinit}{B}
-      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{abstract}{In psychology, the use of intensive longitudinal data has steeply increased during the past decade. As a result, studying temporal dependencies in such data with autoregressive modeling is becoming common practice. However, standard autoregressive models are often suboptimal as they assume that parameters are time-invariant. This is problematic if changing dynamics (e.g., changes in the temporal dependency of a process) govern the time series. Often a change in the process, such as emotional well-being during therapy, is the very reason why it is interesting and important to study psychological dynamics. As a result, there is a need for an easily applicable method for studying such nonstationary processes that result from changing dynamics. In this article we present such a tool: the semiparametric TV-AR model. We show with a simulation study and an empirical application that the TV-AR model can approximate nonstationary processes well if there are at least 100 time points available and no unknown abrupt changes in the data. Notably, no prior knowledge of the processes that drive change in the dynamic structure is necessary. We conclude that the TV-AR model has significant potential for studying changing dynamics in psychology.}
-      \field{issn}{1939-1463, 1082-989X}
-      \field{journaltitle}{Psychological Methods}
-      \field{month}{9}
-      \field{number}{3}
-      \field{shorttitle}{Changing dynamics}
-      \field{title}{Changing dynamics: {Time}-varying autoregressive models using generalized additive modeling.}
-      \field{urlday}{2}
-      \field{urlmonth}{6}
-      \field{urlyear}{2023}
-      \field{volume}{22}
-      \field{year}{2017}
-      \field{urldateera}{ce}
-      \field{pages}{409\bibrangedash 425}
-      \range{pages}{17}
-      \verb{doi}
-      \verb 10.1037/met0000085
-      \endverb
-      \verb{file}
-      \verb Bringmann et al. - 2017 - Changing dynamics Time-varying autoregressive mod.pdf:C\:\\Users\\failensc\\Zotero\\storage\\7TP6JWAW\\Bringmann et al. - 2017 - Changing dynamics Time-varying autoregressive mod.pdf:application/pdf
-      \endverb
-      \verb{urlraw}
-      \verb http://doi.apa.org/getdoi.cfm?doi=10.1037/met0000085
-      \endverb
-      \verb{url}
-      \verb http://doi.apa.org/getdoi.cfm?doi=10.1037/met0000085
       \endverb
     \endentry
     \entry{R-nprobust}{article}{}
@@ -1752,63 +1411,6 @@
       \verb http://www.tandfonline.com/doi/abs/10.1080/00401706.1979.10489751
       \endverb
     \endentry
-    \entry{golub_generalized_1997}{article}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=8b856da92ad549d323acc679ecf7f474}{%
-           family={Golub},
-           familyi={G\bibinitperiod},
-           given={Gene\bibnamedelima H.},
-           giveni={G\bibinitperiod\bibinitdelim H\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=ff6f0a298ce803c8049c828d1c3a0c3e}{%
-           family={Matt},
-           familyi={M\bibinitperiod},
-           given={Urs},
-           giveni={U\bibinitperiod},
-           givenun=0,
-           prefix={von},
-           prefixi={v\bibinitperiod}}}%
-      }
-      \strng{namehash}{217de523d98fe0ace3b63f704ce60969}
-      \strng{fullhash}{217de523d98fe0ace3b63f704ce60969}
-      \strng{bibnamehash}{217de523d98fe0ace3b63f704ce60969}
-      \strng{authorbibnamehash}{217de523d98fe0ace3b63f704ce60969}
-      \strng{authornamehash}{217de523d98fe0ace3b63f704ce60969}
-      \strng{authorfullhash}{217de523d98fe0ace3b63f704ce60969}
-      \field{sortinit}{G}
-      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Although generalized cross-validation is a popular tool for calculating a regularization parameter, it has been rarely applied to large-scale problems until recently. A major difficulty lies in the evaluation of the cross-validation function that requires the calculation of the trace of an inverse matrix. In the last few years stochastic trace estimators have been proposed to alleviate this problem. This article demonstrates numerical approximation techniques that further reduce the computational complexity. The new approach employs Gauss quadrature to compute lower and upper bounds on the cross-validation function. It only requires the operator form of the system matrix--that is, a subroutine to evaluate matrix-vector products. Thus, the factorization of large matrices can be avoided. The new approach has been implemented in MATLAB. Numerical experiments confirm the remarkable accuracy of the stochastic trace estimator. Regularization parameters are computed for ill-posed problems with 100, 1,000, and 10,000 unknowns.}
-      \field{issn}{1061-8600}
-      \field{journaltitle}{Journal of Computational and Graphical Statistics}
-      \field{note}{Publisher: [American Statistical Association, Taylor \& Francis, Ltd., Institute of Mathematical Statistics, Interface Foundation of America]}
-      \field{number}{1}
-      \field{title}{Generalized {Cross}-{Validation} for {Large}-{Scale} {Problems}}
-      \field{urlday}{29}
-      \field{urlmonth}{11}
-      \field{urlyear}{2023}
-      \field{volume}{6}
-      \field{year}{1997}
-      \field{urldateera}{ce}
-      \field{pages}{1\bibrangedash 34}
-      \range{pages}{34}
-      \verb{doi}
-      \verb 10.2307/1390722
-      \endverb
-      \verb{file}
-      \verb JSTOR Full Text PDF:C\:\\Users\\failensc\\Zotero\\storage\\2J3CZ8HG\\Golub and von Matt - 1997 - Generalized Cross-Validation for Large-Scale Probl.pdf:application/pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://www.jstor.org/stable/1390722
-      \endverb
-      \verb{url}
-      \verb https://www.jstor.org/stable/1390722
-      \endverb
-    \endentry
     \entry{gu_smoothing_2013}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=183ef3019b02f76429f5a7e6d902f6cd}{%
@@ -2307,30 +1909,33 @@
       \field{title}{The {EMOTE} {Database}: {An} open, searchable database of experience sampling data mapping everyday life}
       \field{type}{Manuscript in preparation}
     \endentry
-    \entry{kaufman_bayesian_2010}{article}{}
-      \name{author}{2}{}{%
-        {{un=0,uniquepart=base,hash=9f399003fc39dfca5f0a4ca41b5e2350}{%
-           family={Kaufman},
+    \entry{karch_gaussian_2020}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=1f10a79afda9e0d68b236a1d71c5f448}{%
+           family={Karch},
            familyi={K\bibinitperiod},
-           given={Cari\bibnamedelima G.},
-           giveni={C\bibinitperiod\bibinitdelim G\bibinitperiod},
+           given={Julian\bibnamedelima D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod},
            givenun=0}}%
-        {{un=0,uniquepart=base,hash=8f041e3a37d60c1f16a9ce6d909bbd64}{%
-           family={Sain},
-           familyi={S\bibinitperiod},
-           given={Stephan\bibnamedelima R.},
-           giveni={S\bibinitperiod\bibinitdelim R\bibinitperiod},
+        {{un=0,uniquepart=base,hash=de5248794077b7c85214f4bae90f6bc7}{%
+           family={Brandmaier},
+           familyi={B\bibinitperiod},
+           given={Andreas\bibnamedelima M.},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=614f045f1d8a1c475613d619d6e20262}{%
+           family={Voelkle},
+           familyi={V\bibinitperiod},
+           given={Manuel\bibnamedelima C.},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod},
            givenun=0}}%
       }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{64362154b4def8f9748641b7ff599c0a}
-      \strng{fullhash}{64362154b4def8f9748641b7ff599c0a}
-      \strng{bibnamehash}{64362154b4def8f9748641b7ff599c0a}
-      \strng{authorbibnamehash}{64362154b4def8f9748641b7ff599c0a}
-      \strng{authornamehash}{64362154b4def8f9748641b7ff599c0a}
-      \strng{authorfullhash}{64362154b4def8f9748641b7ff599c0a}
+      \strng{namehash}{bc5d6d201613bd44d75c8f75fa704e57}
+      \strng{fullhash}{8a23570331b5ba08b9da44ad75cbdc11}
+      \strng{bibnamehash}{8a23570331b5ba08b9da44ad75cbdc11}
+      \strng{authorbibnamehash}{8a23570331b5ba08b9da44ad75cbdc11}
+      \strng{authornamehash}{bc5d6d201613bd44d75c8f75fa704e57}
+      \strng{authorfullhash}{8a23570331b5ba08b9da44ad75cbdc11}
       \field{sortinit}{K}
       \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
       \field{extradatescope}{labelyear}
@@ -2338,29 +1943,29 @@
       \true{uniqueprimaryauthor}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Functional analysis of variance (ANOVA) models partition a functional response according to the main eﬀects and interactions of various factors. This article develops a general framework for functional ANOVA modeling from a Bayesian viewpoint, assigning Gaussian process prior distributions to each batch of functional eﬀects. We discuss the choices to be made in specifying such a model, advocating the treatment of levels within a given factor as dependent but exchangeable quantities, and we suggest weakly informative prior distributions for higher level parameters that may be appropriate in many situations. We discuss computationally eﬃcient strategies for posterior sampling using Markov Chain Monte Carlo algorithms, and we emphasize useful graphical summaries based on the posterior distribution of model-based analogues of traditional ANOVA decompositions of variance. We illustrate this process of model speciﬁcation, posterior sampling, and graphical posterior summaries in two examples. The ﬁrst considers the eﬀect of geographic region on the temperature proﬁles at weather stations in Canada. The second example examines sources of variability in the output of regional climate models from a designed experiment.}
-      \field{issn}{1936-0975}
-      \field{journaltitle}{Bayesian Analysis}
+      \field{issn}{1664-1078}
+      \field{journaltitle}{Frontiers in Psychology}
       \field{month}{3}
-      \field{number}{1}
-      \field{title}{Bayesian functional \{{ANOVA}\} modeling using {Gaussian} process prior distributions}
-      \field{urlday}{10}
-      \field{urlmonth}{11}
-      \field{urlyear}{2023}
-      \field{volume}{5}
-      \field{year}{2010}
+      \field{title}{Gaussian {Process} {Panel} {Modeling}—{Machine} {Learning} {Inspired} {Analysis} of {Longitudinal} {Panel} {Data}}
+      \field{urlday}{8}
+      \field{urlmonth}{10}
+      \field{urlyear}{2024}
+      \field{volume}{11}
+      \field{year}{2020}
       \field{urldateera}{ce}
+      \field{pages}{351}
+      \range{pages}{1}
       \verb{doi}
-      \verb 10.1214/10-BA505
+      \verb 10.3389/fpsyg.2020.00351
       \endverb
       \verb{file}
-      \verb Kaufman and Sain - 2010 - Bayesian functional ANOVA modeling using Gaussia.pdf:C\:\\Users\\failensc\\Zotero\\storage\\X5VUUX2K\\Kaufman and Sain - 2010 - Bayesian functional ANOVA modeling using Gaussia.pdf:application/pdf
+      \verb Full Text:C\:\\Users\\failensc\\Zotero\\storage\\BJCEGFNC\\Karch et al. - 2020 - Gaussian Process Panel Modeling—Machine Learning I.pdf:application/pdf
       \endverb
       \verb{urlraw}
-      \verb https://projecteuclid.org/journals/bayesian-analysis/volume-5/issue-1/Bayesian-functional-ANOVA-modeling-using-Gaussian-process-prior/10.1214/10-BA505.full
+      \verb https://www.frontiersin.org/article/10.3389/fpsyg.2020.00351/full
       \endverb
       \verb{url}
-      \verb https://projecteuclid.org/journals/bayesian-analysis/volume-5/issue-1/Bayesian-functional-ANOVA-modeling-using-Gaussian-process-prior/10.1214/10-BA505.full
+      \verb https://www.frontiersin.org/article/10.3389/fpsyg.2020.00351/full
       \endverb
     \endentry
     \entry{kohler_review_2014}{article}{}
@@ -2563,69 +2168,6 @@
       \endverb
       \verb{url}
       \verb https://doi.apa.org/doi/10.1037/0012-1649.38.1.115
-      \endverb
-    \endentry
-    \entry{nayek_gaussian_2019}{article}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=6c83966e67124baab0898e4c20cafacc}{%
-           family={Nayek},
-           familyi={N\bibinitperiod},
-           given={Rajdip},
-           giveni={R\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=5928c65d2d9297b9a7766f5ee3bde0a6}{%
-           family={Chakraborty},
-           familyi={C\bibinitperiod},
-           given={Souvik},
-           giveni={S\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=d01f88b38fe0e561e8a0737f1a6e6cd0}{%
-           family={Narasimhan},
-           familyi={N\bibinitperiod},
-           given={Sriram},
-           giveni={S\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{bdc114531c2e0a151c48aabe9b4166fb}
-      \strng{fullhash}{188e55084622db07105dc96c90969129}
-      \strng{bibnamehash}{188e55084622db07105dc96c90969129}
-      \strng{authorbibnamehash}{188e55084622db07105dc96c90969129}
-      \strng{authornamehash}{bdc114531c2e0a151c48aabe9b4166fb}
-      \strng{authorfullhash}{188e55084622db07105dc96c90969129}
-      \field{sortinit}{N}
-      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{The problem of combined state and input estimation of linear structural systems based on measured responses and a priori knowledge of structural model is considered. A novel methodology using Gaussian process latent force models is proposed to tackle the problem in a stochastic setting. Gaussian process latent force models (GPLFMs) are hybrid models that combine differential equations representing a physical system with data-driven non-parametric Gaussian process models. In this work, the unknown input forces acting on a structure are modelled as Gaussian processes with some chosen covariance functions which are combined with the mechanistic differential equation representing the structure to construct a GPLFM. The GPLFM is then conveniently formulated as an augmented stochastic state-space model with additional states representing the latent force components, and the joint input and state inference of the resulting model is implemented using Kalman ﬁlter. The augmented state-space model of GPLFM is shown as a generalization of the class of input-augmented state-space models, is proven observable, and is robust against drift in force estimation compared to conventional augmented formulations. The hyperparameters governing the covariance functions are estimated using maximum likelihood optimization based on the observed data, thus overcoming the need for manual tuning of the hyperparameters by trial-and-error. To assess the performance of the proposed GPLFM method, several cases of state and input estimation are demonstrated using numerical simulations on a 10-dof shear building and a 76-storey ASCE benchmark ofﬁce tower. Results obtained indicate the superior performance of the proposed approach over conventional Kalman ﬁlter based approaches.}
-      \field{issn}{08883270}
-      \field{journaltitle}{Mechanical Systems and Signal Processing}
-      \field{month}{8}
-      \field{title}{A {Gaussian} process latent force model for joint input-state estimation in linear structural systems}
-      \field{urlday}{12}
-      \field{urlmonth}{9}
-      \field{urlyear}{2023}
-      \field{volume}{128}
-      \field{year}{2019}
-      \field{urldateera}{ce}
-      \field{pages}{497\bibrangedash 530}
-      \range{pages}{34}
-      \verb{doi}
-      \verb 10.1016/j.ymssp.2019.03.048
-      \endverb
-      \verb{file}
-      \verb Nayek et al. - 2019 - A Gaussian process latent force model for joint in.pdf:C\:\\Users\\failensc\\Zotero\\storage\\NDIXQTCB\\Nayek et al. - 2019 - A Gaussian process latent force model for joint in.pdf:application/pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://linkinghub.elsevier.com/retrieve/pii/S0888327019302286
-      \endverb
-      \verb{url}
-      \verb https://linkinghub.elsevier.com/retrieve/pii/S0888327019302286
       \endverb
     \endentry
     \entry{nesselroade_studying_2004}{article}{}
@@ -2923,69 +2465,6 @@
       \verb Rasmussen and Williams - 2006 - Gaussian processes for machine learning.pdf:C\:\\Users\\failensc\\Zotero\\storage\\PHIXG8C7\\Rasmussen and Williams - 2006 - Gaussian processes for machine learning.pdf:application/pdf
       \endverb
       \keyw{Gaussian processes,Data processing,Machine learning,Mathematical models}
-    \endentry
-    \entry{richardson_gaussian_2017}{article}{}
-      \name{author}{3}{}{%
-        {{un=0,uniquepart=base,hash=002c377c45c802f1f5a91b97cda38c1c}{%
-           family={Richardson},
-           familyi={R\bibinitperiod},
-           given={Robert\bibnamedelima R.},
-           giveni={R\bibinitperiod\bibinitdelim R\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=85b5589ac908024bc56d558991942806}{%
-           family={Osborne},
-           familyi={O\bibinitperiod},
-           given={Michael\bibnamedelima A.},
-           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=301522086d949ec2e46ae206f84aca35}{%
-           family={Howey},
-           familyi={H\bibinitperiod},
-           given={David\bibnamedelima A.},
-           giveni={D\bibinitperiod\bibinitdelim A\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{ee976caf9b827eacc6eb1dd8e63f7f1e}
-      \strng{fullhash}{2e8a78d1ef39f18d4a779fb2b653dcd9}
-      \strng{bibnamehash}{2e8a78d1ef39f18d4a779fb2b653dcd9}
-      \strng{authorbibnamehash}{2e8a78d1ef39f18d4a779fb2b653dcd9}
-      \strng{authornamehash}{ee976caf9b827eacc6eb1dd8e63f7f1e}
-      \strng{authorfullhash}{2e8a78d1ef39f18d4a779fb2b653dcd9}
-      \field{sortinit}{R}
-      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Accurately predicting the future capacity and remaining useful life of batteries is necessary to ensure reliable system operation and to minimise maintenance costs. The complex nature of battery degradation has meant that mechanistic modelling of capacity fade has thus far remained intractable; however, with the advent of cloud-connected devices, data from cells in various applications is becoming increasingly available, and the feasibility of data-driven methods for battery prognostics is increasing. Here we propose Gaussian process (GP) regression for forecasting battery state of health, and highlight various advantages of GPs over other data-driven and mechanistic approaches. GPs are a type of Bayesian nonparametric method, and hence can model complex systems whilst handling uncertainty in a principled manner. Prior information can be exploited by GPs in a variety of ways: explicit mean functions can be used if the functional form of the underlying degradation model is available, and multiple-output GPs can effectively exploit correlations between data from different cells. We demonstrate the predictive capability of GPs for short-term and long-term (remaining useful life) forecasting on a selection of capacity vs. cycle datasets from lithium-ion cells.}
-      \field{issn}{03787753}
-      \field{journaltitle}{Journal of Power Sources}
-      \field{month}{7}
-      \field{title}{Gaussian process regression for forecasting battery state of health}
-      \field{urlday}{30}
-      \field{urlmonth}{10}
-      \field{urlyear}{2023}
-      \field{volume}{357}
-      \field{year}{2017}
-      \field{urldateera}{ce}
-      \field{pages}{209\bibrangedash 219}
-      \range{pages}{11}
-      \verb{doi}
-      \verb 10.1016/j.jpowsour.2017.05.004
-      \endverb
-      \verb{file}
-      \verb Richardson et al. - 2017 - Gaussian process regression for forecasting batter.pdf:C\:\\Users\\failensc\\Zotero\\storage\\GFVYLUD3\\Richardson et al. - 2017 - Gaussian process regression for forecasting batter.pdf:application/pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://linkinghub.elsevier.com/retrieve/pii/S0378775317306250
-      \endverb
-      \verb{url}
-      \verb https://linkinghub.elsevier.com/retrieve/pii/S0378775317306250
-      \endverb
     \endentry
     \entry{roberts_gaussian_2013}{article}{}
       \name{author}{6}{}{%
@@ -3603,58 +3082,6 @@
       \field{pages}{3\bibrangedash 36}
       \range{pages}{34}
     \endentry
-    \entry{wood_thin_2003}{article}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=4f816a96f8d000d6cb78dea6a1f2da1d}{%
-           family={Wood},
-           familyi={W\bibinitperiod},
-           given={Simon\bibnamedelima N.},
-           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \strng{fullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \strng{bibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \field{extraname}{2}
-      \field{sortinit}{W}
-      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{I discuss the production of low rank smoothers for d 1 dimensional data, which can be ﬁtted by regression or penalized regression methods. The smoothers are constructed by a simple transformation and truncation of the basis that arises from the solution of the thin plate spline smoothing problem and are optimal in the sense that the truncation is designed to result in the minimum possible perturbation of the thin plate spline smoothing problem given the dimension of the basis used to construct the smoother. By making use of Lanczos iteration the basis change and truncation are computationally efﬁcient. The smoothers allow the use of approximate thin plate spline models with large data sets, avoid the problems that are associated with ‘knot placement’ that usually complicate modelling with regression splines or penalized regression splines, provide a sensible way of modelling interaction terms in generalized additive models, provide low rank approximations to generalized smoothing spline models, appropriate for use with large data sets, provide a means for incorporating smooth functions of more than one variable into non-linear models and improve the computational efﬁciency of penalized likelihood models incorporating thin plate splines. Given that the approach produces spline-like models with a sparse basis, it also provides a natural way of incorporating unpenalized spline-like terms in linear and generalized linear models, and these can be treated just like any other model terms from the point of view of model selection, inference and diagnostics.}
-      \field{issn}{1369-7412, 1467-9868}
-      \field{journaltitle}{Journal of the Royal Statistical Society Series B: Statistical Methodology}
-      \field{month}{2}
-      \field{number}{1}
-      \field{title}{Thin {Plate} {Regression} {Splines}}
-      \field{urlday}{29}
-      \field{urlmonth}{11}
-      \field{urlyear}{2023}
-      \field{volume}{65}
-      \field{year}{2003}
-      \field{urldateera}{ce}
-      \field{pages}{95\bibrangedash 114}
-      \range{pages}{20}
-      \verb{doi}
-      \verb 10.1111/1467-9868.00374
-      \endverb
-      \verb{file}
-      \verb Wood - 2003 - Thin Plate Regression Splines.pdf:C\:\\Users\\failensc\\Zotero\\storage\\7RSC8WNI\\Wood - 2003 - Thin Plate Regression Splines.pdf:application/pdf
-      \endverb
-      \verb{urlraw}
-      \verb https://academic.oup.com/jrsssb/article/65/1/95/7110632
-      \endverb
-      \verb{url}
-      \verb https://academic.oup.com/jrsssb/article/65/1/95/7110632
-      \endverb
-    \endentry
     \entry{wood_generalized_2006}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=4f816a96f8d000d6cb78dea6a1f2da1d}{%
@@ -3676,7 +3103,7 @@
       \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \field{extraname}{3}
+      \field{extraname}{2}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{extradatescope}{labelyear}
@@ -3712,7 +3139,7 @@
       \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \field{extraname}{4}
+      \field{extraname}{3}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{extradatescope}{labelyear}
@@ -3874,6 +3301,88 @@
       \verb http://arxiv.org/abs/1807.05748
       \endverb
       \keyw{Computer Science - Machine Learning,Statistics - Machine Learning}
+    \endentry
+    \entry{yu_gaussian-process_2009}{article}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=f150ef056b01a7a3008359f20f127fcf}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Byron\bibnamedelima M.},
+           giveni={B\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2f7d2033f2af8255e45b666491f83c85}{%
+           family={Cunningham},
+           familyi={C\bibinitperiod},
+           given={John\bibnamedelima P.},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fc689c9981a30218680453dcedd2ae8f}{%
+           family={Santhanam},
+           familyi={S\bibinitperiod},
+           given={Gopal},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=20dcb017b3ab1e3c2941025b0c70b9cc}{%
+           family={Ryu},
+           familyi={R\bibinitperiod},
+           given={Stephen\bibnamedelima I.},
+           giveni={S\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b88f3898557dfebe05a2ff141f5e17b1}{%
+           family={Shenoy},
+           familyi={S\bibinitperiod},
+           given={Krishna\bibnamedelima V.},
+           giveni={K\bibinitperiod\bibinitdelim V\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=277241c95489c0dc41e83a400c407cc8}{%
+           family={Sahani},
+           familyi={S\bibinitperiod},
+           given={Maneesh},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{c9cfa71b86a3b114bbf69e4d5a81a12a}
+      \strng{fullhash}{98155cb85c3d421f988095b428b1a4c7}
+      \strng{bibnamehash}{98155cb85c3d421f988095b428b1a4c7}
+      \strng{authorbibnamehash}{98155cb85c3d421f988095b428b1a4c7}
+      \strng{authornamehash}{c9cfa71b86a3b114bbf69e4d5a81a12a}
+      \strng{authorfullhash}{98155cb85c3d421f988095b428b1a4c7}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We consider the problem of extracting smooth, low-dimensional neural trajectories that summarize the activity recorded simultaneously from many neurons on individual experimental trials. Beyond the benefit of visualizing the high-dimensional, noisy spiking activity in a compact form, such trajectories can offer insight into the dynamics of the neural circuitry underlying the recorded activity. Current methods for extracting neural trajectories involve a two-stage process: the spike trains are first smoothed over time, then a static dimensionality-reduction technique is applied. We first describe extensions of the two-stage methods that allow the degree of smoothing to be chosen in a principled way and that account for spiking variability, which may vary both across neurons and across time. We then present a novel method for extracting neural trajectories—Gaussian-process factor analysis (GPFA)—which unifies the smoothing and dimensionality-reduction operations in a common probabilistic framework. We applied these methods to the activity of 61 neurons recorded simultaneously in macaque premotor and motor cortices during reach planning and execution. By adopting a goodness-of-fit metric that measures how well the activity of each neuron can be predicted by all other recorded neurons, we found that the proposed extensions improved the predictive ability of the two-stage methods. The predictive ability was further improved by going to GPFA. From the extracted trajectories, we directly observed a convergence in neural state during motor planning, an effect that was shown indirectly by previous studies. We then show how such methods can be a powerful tool for relating the spiking activity across a neural population to the subject's behavior on a single-trial basis. Finally, to assess how well the proposed methods characterize neural population activity when the underlying time course is known, we performed simulations that revealed that GPFA performed tens of percent better than the best two-stage method.}
+      \field{issn}{0022-3077, 1522-1598}
+      \field{journaltitle}{Journal of Neurophysiology}
+      \field{month}{7}
+      \field{number}{1}
+      \field{title}{Gaussian-{Process} {Factor} {Analysis} for {Low}-{Dimensional} {Single}-{Trial} {Analysis} of {Neural} {Population} {Activity}}
+      \field{urlday}{22}
+      \field{urlmonth}{11}
+      \field{urlyear}{2023}
+      \field{volume}{102}
+      \field{year}{2009}
+      \field{urldateera}{ce}
+      \field{pages}{614\bibrangedash 635}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1152/jn.90941.2008
+      \endverb
+      \verb{file}
+      \verb Full Text:C\:\\Users\\failensc\\Zotero\\storage\\HJEEKBJC\\Yu et al. - 2009 - Gaussian-Process Factor Analysis for Low-Dimension.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.physiology.org/doi/10.1152/jn.90941.2008
+      \endverb
+      \verb{url}
+      \verb https://www.physiology.org/doi/10.1152/jn.90941.2008
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

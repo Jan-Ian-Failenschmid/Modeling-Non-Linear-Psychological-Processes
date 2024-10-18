@@ -19,6 +19,41 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global}
+    \entry{avery_literature_nodate}{unpublished}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=75400ae6ad80ad0990b4d37046d52bbe}{%
+           family={Avery},
+           familyi={A\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{75400ae6ad80ad0990b4d37046d52bbe}
+      \strng{fullhash}{75400ae6ad80ad0990b4d37046d52bbe}
+      \strng{bibnamehash}{75400ae6ad80ad0990b4d37046d52bbe}
+      \strng{authorbibnamehash}{75400ae6ad80ad0990b4d37046d52bbe}
+      \strng{authornamehash}{75400ae6ad80ad0990b4d37046d52bbe}
+      \strng{authorfullhash}{75400ae6ad80ad0990b4d37046d52bbe}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labeldatesource}{nodate}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper discusses key results from the literature in the field of local polynomial regres sion. Local polynomial regression (LPR) is a nonparametric technique for smoothing scatter plots and modeling functions. For each point, x0, a low-order polynomial WLS regression is fit using only points in some “neighborhood” of x0. The result is a smooth function over the support of the data. LPR has good performance on the boundary and is superior to all other linear smoothers in a minimax sense. The quality of the estimated function is dependent on the choice of weighting function, K, the size the neighborhood, h, and the order of polynomial fit, p. We discuss each of these choices, paying particular attention to bandwidth selection. When choosing h, “plug-in” methods tend to outperform cross-validation methods, but computa tional considerations make the latter a desirable choice. Variable bandwidths are more flexible than global ones, but both can have good asymptotic and finite-sample properties. Odd-order polynomial fits are superior to even fits asymptotically, and an adaptive order method that is robust to bandwidth is discussed. While the Epanechnikov kernel is superior is an asymptotic minimax sense, a variety are used in practice. Extensions to various types of data and other applications of LPR are also discussed.}
+      \field{title}{Literature {Review} for {Local} {Polynomial} {Regression}}
+      \field{type}{Unpublished {Manuscript}}
+      \field{urlday}{28}
+      \field{urlmonth}{11}
+      \field{urlyear}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://casual-inference.com/post/local-polynomial-smoothing.pdf
+      \endverb
+      \verb{url}
+      \verb https://casual-inference.com/post/local-polynomial-smoothing.pdf
+      \endverb
+    \endentry
     \entry{betancourt_robust_2020}{misc}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=1982fa604a3f94837efceaa53330b2a4}{%
@@ -3082,6 +3117,58 @@
       \field{pages}{3\bibrangedash 36}
       \range{pages}{34}
     \endentry
+    \entry{wood_thin_2003}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=4f816a96f8d000d6cb78dea6a1f2da1d}{%
+           family={Wood},
+           familyi={W\bibinitperiod},
+           given={Simon\bibnamedelima N.},
+           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{fullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{bibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
+      \field{extraname}{2}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{I discuss the production of low rank smoothers for d 1 dimensional data, which can be ﬁtted by regression or penalized regression methods. The smoothers are constructed by a simple transformation and truncation of the basis that arises from the solution of the thin plate spline smoothing problem and are optimal in the sense that the truncation is designed to result in the minimum possible perturbation of the thin plate spline smoothing problem given the dimension of the basis used to construct the smoother. By making use of Lanczos iteration the basis change and truncation are computationally efﬁcient. The smoothers allow the use of approximate thin plate spline models with large data sets, avoid the problems that are associated with ‘knot placement’ that usually complicate modelling with regression splines or penalized regression splines, provide a sensible way of modelling interaction terms in generalized additive models, provide low rank approximations to generalized smoothing spline models, appropriate for use with large data sets, provide a means for incorporating smooth functions of more than one variable into non-linear models and improve the computational efﬁciency of penalized likelihood models incorporating thin plate splines. Given that the approach produces spline-like models with a sparse basis, it also provides a natural way of incorporating unpenalized spline-like terms in linear and generalized linear models, and these can be treated just like any other model terms from the point of view of model selection, inference and diagnostics.}
+      \field{issn}{1369-7412, 1467-9868}
+      \field{journaltitle}{Journal of the Royal Statistical Society Series B: Statistical Methodology}
+      \field{month}{2}
+      \field{number}{1}
+      \field{title}{Thin {Plate} {Regression} {Splines}}
+      \field{urlday}{29}
+      \field{urlmonth}{11}
+      \field{urlyear}{2023}
+      \field{volume}{65}
+      \field{year}{2003}
+      \field{urldateera}{ce}
+      \field{pages}{95\bibrangedash 114}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1111/1467-9868.00374
+      \endverb
+      \verb{file}
+      \verb Wood - 2003 - Thin Plate Regression Splines.pdf:C\:\\Users\\failensc\\Zotero\\storage\\7RSC8WNI\\Wood - 2003 - Thin Plate Regression Splines.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://academic.oup.com/jrsssb/article/65/1/95/7110632
+      \endverb
+      \verb{url}
+      \verb https://academic.oup.com/jrsssb/article/65/1/95/7110632
+      \endverb
+    \endentry
     \entry{wood_generalized_2006}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=4f816a96f8d000d6cb78dea6a1f2da1d}{%
@@ -3103,7 +3190,7 @@
       \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \field{extraname}{2}
+      \field{extraname}{3}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{extradatescope}{labelyear}
@@ -3139,7 +3226,7 @@
       \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \field{extraname}{3}
+      \field{extraname}{4}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{extradatescope}{labelyear}

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 08-10-2024                                                   #
+#' Last Modified: 15-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -31,6 +31,50 @@ invisible(sapply(
   source
 ))
 
+### Pilot data -----------------------------------------------------------------
+load("R/data/old_data/pilot_results_09_09_2024_01_47.Rdata")
+res1 <- as.data.table(res) # LPR, GP, GAM
+res1 <- res1[!method %in% c("dynm", "simple", "poly"), ]
+
+load("R/data/old_data/pilot_results_10_09_2024_14_31.Rdata")
+res2 <- as.data.table(res) # Parametric models
+res2 <- res2[!method %in% c("gam"), ]
+
+load("R/data/old_data/pilot_results_11_09_2024_18_39.Rdata")
+res3 <- as.data.table(res) # Parametric models
+res3 <- res3[!method %in% c("gam"), ]
+
+res_pilot <- rbind(res1, res2, res3)
+
+res_summary <- res_pilot[, .(
+  mse_mean = mean(mse, na.rm = TRUE),
+  mse_sd = sd(mse, na.rm = TRUE),
+  mse_missing = sum(is.na(mse)),
+  gcv_mean = mean(gcv, na.rm = TRUE),
+  gcv_sd = sd(gcv, na.rm = TRUE),
+  gcv_missing = sum(is.na(gcv)),
+  ci_coverage_mean = mean(ci_coverage, na.rm = TRUE),
+  ci_coverage_sd = sd(ci_coverage, na.rm = TRUE),
+  ci_coverage_missing = sum(is.na(ci_coverage))
+),
+by = .(method, model, time, stepsize, dyn_er)
+]
+
+nsim <- seq(30, 1000, 5)
+
+# Extract the largest standard deviation by metric across conditions
+mc_sd_max <- sapply(res_summary[, .(mse_sd, gcv_sd, ci_coverage_sd)],
+  max,
+  na.rm = TRUE
+)
+
+# Devide the largest stardard deviations by the sample sizes to find the
+# MC standard errors
+mcse <- lapply(
+  mc_sd_max, function(mce, nsim) mce / sqrt(nsim),
+  nsim = nsim
+)
+
 ### Load and prepare data ------------------------------------------------------
 load("R/data/simulation_results_27_09_2024_00_32.Rdata")
 res <- as.data.table(res)
@@ -57,7 +101,7 @@ res$model[res$model == "cusp_catastrophe"] <- "Cusp Catastrophe"
 
 res$method[res$method == "locpol"] <- "Local Polynomial Regression"
 res$method[res$method == "gp"] <- "Gaussian Process Regression"
-res$method[res$method == "gam"] <- "General Additive Modelling"
+res$method[res$method == "gam"] <- "Generalized Additive Modelling"
 res$method[res$method == "dynm"] <- "Parametric Modelling"
 res$method[res$method == "simple"] <- "Linear Regression"
 res$method[res$method == "poly"] <- "Polynomial Regression"
@@ -73,7 +117,7 @@ contrasts(res$model) <- contr.sum(levels(res$model))
 res$method <- factor(res$method,
   levels = c(
     "Local Polynomial Regression", "Gaussian Process Regression",
-    "General Additive Modelling",
+    "Generalized Additive Modelling",
     "Linear Regression", "Polynomial Regression", "Parametric Modelling"
   )
 )
@@ -166,17 +210,6 @@ pmiss <- pmiss +
 ggsave("figures/complete_results_missing.png", pmiss,
   width = 1920 * (dpi / 72), height = 1080 * (dpi / 72), units = "px", dpi = dpi, limitsize = FALSE
 )
-
-### Clean data -----------------------------------------------------------------
-### ?
-# test <- res2[method == "dynm", ][, .I[ci_coverage <= .8]]
-# test <- na.omit(test)
-# ind <- which.max(res2[method == "dynm", ][test, ci_coverage])
-# meth <- sim2$method[[test[ind]]][[2]]
-# plot(meth, sim = sim2)
-
-# res_clean <- res
-# res_clean[c(ind_gam, ind_dynm), c("mse", "gcv", "ci_coverage")] <- NA
 
 ### Plot mean results ----------------------------------------------------------
 # Simulation conditions plots
@@ -281,7 +314,7 @@ method <-
   c(
     "Local Polynomial Regression",
     "Gaussian Process Regression",
-    "General Additive Model",
+    "Generalized Additive Model",
     "Parametric Modelling",
     "Polynomial Regression"
   )
@@ -356,7 +389,7 @@ res_aov <- res[method != "Parametric Modelling", c(1:4, 9:11)]
 res_aov$method <- factor(res_aov$method,
   levels = c(
     "Local Polynomial Regression", "Gaussian Process Regression",
-    "General Additive Modelling", "Polynomial Regression"
+    "Generalized Additive Modelling", "Polynomial Regression"
   )
 )
 contrasts(res_aov$method) <- contr.sum(levels(res_aov$method))

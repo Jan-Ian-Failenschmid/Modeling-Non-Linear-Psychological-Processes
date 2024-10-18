@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 11-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 03-09-2024                                                   #
+#' Last Modified: 11-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -65,14 +65,21 @@ setMethod("fit", "method_locpol", function(method, data) {
 })
 
 lprobust_cust <- function(
+    # Following lines modified by J.I.F.
+    # Added diag_A argument
     y, x, eval = NULL, neval = NULL, p = NULL, deriv = NULL,
     h = NULL, b = NULL, rho = 1, kernel = "epa", bwselect = NULL,
     bwcheck = 21, bwregul = 1, imsegrid = 30, vce = "nn", covgrid = FALSE,
     cluster = NULL, nnmatch = 3, level = 95, interior = FALSE,
     subset = NULL, diag_A = TRUE) {
-  #' Customization of the lprobust function from the nprobust package.
-  #' Code added to obtain analytic cross-validatin criteria during the
-  #' estimation.
+  #' The source code for this function is part of the cran package nprobust
+  #' version 0.4.0. It is authored by Sebastian Calonico, Matias D. Cattaneo,
+  #' Max H. Farrell and published under a GPL-2 license. The maintainer of the
+  #' package is Sebastian Calonico <sebastian.calonico at columbia.edu>.
+  #' 
+  #' All modification to the original source code by J.I.F. are indicated and
+  #' serve the purpouse of adding the calculation of analytic cross-validation
+  #' criteria in the estimation.
   if (!is.null(subset)) {
     x <- x[subset]
     y <- y[subset]
@@ -255,6 +262,7 @@ lprobust_cust <- function(
     if (h[i] > b[i]) {
       ind <- ind.h
     }
+    # Following lines modified by J.I.F.
     # Added indicators for A calculation here
     if (diag_A) {
       A_ind <- numeric(length(y))
@@ -296,6 +304,7 @@ lprobust_cust <- function(
     beta.bc <- invG.p %*% crossprod(Q.q, eY)
     tau.cl <- factorial(deriv) * beta.p[(deriv + 1), 1]
     tau.bc <- factorial(deriv) * beta.bc[(deriv + 1), 1]
+    # Following lines modified by J.I.F.
     # Added A.cl and A.bc calculation here
     if (diag_A) {
       A.cl <- factorial(deriv) *
@@ -342,6 +351,7 @@ lprobust_cust <- function(
       deriv + 1,
       deriv + 1
     ])
+    # Following lines modified by J.I.F
     if (!diag_A) {
       Estimate[i, ] <- c(
         eval[i], h[i], b[i], eN, tau.cl, tau.bc,

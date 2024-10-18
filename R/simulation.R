@@ -3,8 +3,8 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 10-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 12-09-2024                                                   #
-#' Last Modified: 12-09-2024                                                   #
+#' Last Modified: 10-10-2024                                                   #
+#' Last Modified: 10-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -166,13 +166,13 @@ poly_orth <- new("method_poly_orth",
 )
 
 ### Run simulation -------------------------------------------------------------
-repetitions <- 100 # Number of repetitions in the pilot sample
-mc_error_target <- 0.1 # Desired monte carlo error
 for (run in c("simulation")) {
   # Set seed
   if (run == "pilot") {
+    repetitions <- 30
     set.seed(12345)
   } else if (run == "simulation") {
+    repetitions <- 100
     set.seed(54321)
   }
 
@@ -206,50 +206,4 @@ for (run in c("simulation")) {
   # Extract and save results
   res <- extract_results(sim)
   save(res, file = paste0(out_dir, "/", run, "_results_", sim_time, ".Rdata"))
-
-  if (run == "pilot") {
-    rm(sim) # Remove sim from working environment
-    res <- as.data.table(res)
-    # Calculate summary statistics for each condition
-    res_summary <- res[, .(
-      mse_mean = mean(mse, na.rm = TRUE),
-      mse_sd = sd(mse, na.rm = TRUE),
-      mse_missing = sum(is.na(mse)),
-      gcv_mean = mean(gcv, na.rm = TRUE),
-      gcv_sd = sd(gcv, na.rm = TRUE),
-      gcv_missing = sum(is.na(gcv)),
-      ci_coverage_mean = mean(ci_coverage, na.rm = TRUE),
-      ci_coverage_sd = sd(ci_coverage, na.rm = TRUE),
-      ci_coverage_missing = sum(is.na(ci_coverage))
-    ),
-    by = .(method, model, time, stepsize, dyn_er)
-    ]
-
-    # Create sequence of sample sizes
-    nsim <- seq(30, 1000, 5)
-    # Extract the largest standard deviation by metric across conditions
-    mc_sd_max <- sapply(res_summary[, .(mse_sd, gcv_sd, ci_coverage_sd)],
-      max,
-      na.rm = TRUE
-    )
-
-    # Devide the largest stardard deviations by the sample sizes to find the
-    # MC standard errors
-    mcse <- lapply(
-      mc_sd_max, function(mce, nsim) mce / sqrt(nsim),
-      nsim = nsim
-    )
-    # ToDo: Does not currently work
-    # Find the largest sample size such that the MC error is smaller than
-    # the desired criterion for all three metrics
-    n_ind <- max(sapply(mcse, function(x) min(which(x < mc_error_target))))
-
-    # Select the sufficient sample size, with an upper limit of 100
-    repetitions <- min(c(nsim[n_ind], 100), na.rm = TRUE)
-
-    cat(
-      "The simulation run will be perfomed with", repetitions,
-      "repetitions per cell.\n\n"
-    )
-  }
 }

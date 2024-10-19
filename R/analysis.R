@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 15-10-2024                                                   #
+#' Last Modified: 19-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -104,7 +104,7 @@ res$method[res$method == "gp"] <- "Gaussian Process Regression"
 res$method[res$method == "gam"] <- "Generalized Additive Modelling"
 res$method[res$method == "dynm"] <- "Parametric Modelling"
 res$method[res$method == "simple"] <- "Linear Regression"
-res$method[res$method == "poly"] <- "Polynomial Regression"
+res$method[res$method == "poly"] <- "Global Polynomial Regression"
 
 res$model <- factor(res$model,
   levels = c(
@@ -118,7 +118,7 @@ res$method <- factor(res$method,
   levels = c(
     "Local Polynomial Regression", "Gaussian Process Regression",
     "Generalized Additive Modelling",
-    "Linear Regression", "Polynomial Regression", "Parametric Modelling"
+    "Linear Regression", "Global Polynomial Regression", "Parametric Modelling"
   )
 )
 contrasts(res$method) <- contr.sum(levels(res$method))
@@ -316,7 +316,7 @@ method <-
     "Gaussian Process Regression",
     "Generalized Additive Model",
     "Parametric Modelling",
-    "Polynomial Regression"
+    "Global Polynomial Regression"
   )
 
 process <- c(
@@ -389,7 +389,7 @@ res_aov <- res[method != "Parametric Modelling", c(1:4, 9:11)]
 res_aov$method <- factor(res_aov$method,
   levels = c(
     "Local Polynomial Regression", "Gaussian Process Regression",
-    "Generalized Additive Modelling", "Polynomial Regression"
+    "Generalized Additive Modelling", "Global Polynomial Regression"
   )
 )
 contrasts(res_aov$method) <- contr.sum(levels(res_aov$method))

@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 08-10-2024                                                   #
+#' Last Modified: 18-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -169,6 +169,8 @@ png(
 par(mfcol = c(4, 2))
 
 for (dyn_er in sqrt(c(.5, 2))) {
+  set.seed(1234)
+
   # LCS ---
   latent_change <- new("gen_model",
     time = 200,
@@ -195,10 +197,11 @@ for (dyn_er in sqrt(c(.5, 2))) {
       .(round(dyn_er^2, 1))
     )),
     xlab = "", ylab = "", cex = cex, axes = FALSE,
-    col = rep(c("black", "blue"), each = 3 * 14)
+    col = rep(c("black", "blue"), each = 3 * 14),
+    ylim = c(-10, 12)
   )
 
-  axis(2, at = seq(-10, 10, 2), cex.axis = cex)
+  axis(2, at = seq(-10, 20, 2), cex.axis = cex)
   axis(1,
     at = c(0, 50, 100, 150, 200),
     labels = c("", "", "", "", ""),
@@ -232,10 +235,11 @@ for (dyn_er in sqrt(c(.5, 2))) {
       .(round(dyn_er^2, 1))
     )),
     xlab = "", ylab = "", cex = cex, axes = FALSE,
-    col = rep(c("black", "blue"), each = 3 * 14)
+    col = rep(c("black", "blue"), each = 3 * 14),
+    ylim = c(-5, 14)
   )
 
-  axis(2, at = seq(-10, 10, 2), cex.axis = cex)
+  axis(2, at = seq(-10, 20, 2), cex.axis = cex)
   axis(1,
     at = c(0, 50, 100, 150, 200),
     labels = c("", "", "", "", ""),
@@ -274,7 +278,8 @@ for (dyn_er in sqrt(c(.5, 2))) {
       .(round(dyn_er^2, 1))
     )),
     xlab = "", ylab = "", cex = cex, axes = FALSE,
-    col = rep(c("black", "blue"), each = 9 * 14)
+    col = rep(c("black", "blue"), each = 9 * 14),
+    ylim = c(-5, 5)
   )
 
   axis(2, at = seq(-10, 10, 2), cex.axis = cex)
@@ -313,10 +318,11 @@ for (dyn_er in sqrt(c(.5, 2))) {
       .(round(dyn_er^2, 1))
     )),
     xlab = "", ylab = "", cex = cex, axes = FALSE,
-    col = rep(c("black", "blue"), each = 9 * 14)
+    col = rep(c("black", "blue"), each = 9 * 14),
+    ylim = c(-16, 17)
   )
 
-  axis(2, at = seq(-10, 10, 2), cex.axis = cex)
+  axis(2, at = seq(-20, 20, 2), cex.axis = cex)
   axis(1,
     at = c(0, 50, 100, 150, 200),
     labels = c("", "First Half", "", "Second Half", ""),

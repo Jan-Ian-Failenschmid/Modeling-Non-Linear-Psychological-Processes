@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 23-05-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 18-10-2024                                                   #
+#' Last Modified: 19-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -83,7 +83,7 @@ plot_points <- 300
 ### Load in Data ---------------------------------------------------------------
 # Read in data from secure storage location
 inpd <- c("/mnt/c/Users/failensc/OneDrive - Tilburg University/Documenten/data")
-inpd <- c("/mnt/c/Users/janfa/OneDrive - Tilburg University/Documenten/data")
+# inpd <- c("/mnt/c/Users/janfa/OneDrive - Tilburg University/Documenten/data")
 inpf <- c("/data_downloads_XOVWITVGQ6_2023-11-09Leuven_clinical_study.csv")
 
 df_raw <- fread(paste0(inpd, inpf))
@@ -225,6 +225,9 @@ gam_high <- gam_high +
   xlab("") +
   ylab("")
 
+round(range(unlist(grouped_df$gam_edf)[order(unlist(grouped_df$gam_edf),
+  decreasing = TRUE
+)[1:np]]), 2)
 # unique(ggplot_build(gam_high)$data[[1]]$fill)
 
 # Oscillating GAM 1

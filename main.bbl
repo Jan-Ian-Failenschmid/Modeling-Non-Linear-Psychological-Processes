@@ -383,6 +383,39 @@
       \verb http://www.tandfonline.com/doi/full/10.1080/00273171.2015.1120182
       \endverb
     \endentry
+    \entry{R-brms}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ec69dfaa36b99b02d1d9a3733eae1d23}{%
+           family={Bürkner},
+           familyi={B\bibinitperiod},
+           given={Paul-Christian},
+           giveni={P\bibinithyphendelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{fullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{bibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authorbibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authornamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authorfullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{number}{1}
+      \field{title}{{brms}: An {R} Package for {Bayesian} Multilevel Models Using {Stan}}
+      \field{volume}{80}
+      \field{year}{2017}
+      \field{pages}{1\bibrangedash 28}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.18637/jss.v080.i01
+      \endverb
+    \endentry
     \entry{R-nprobust}{article}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=bf76a9cacec95807f53a25a560e9b6bb}{%
@@ -2061,41 +2094,6 @@
       \verb https://www.jstor.org/stable/43299758
       \endverb
     \endentry
-    \entry{kruschke_doing_2011}{book}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=81a0481c4d0c2f7a95cdc42fda92af07}{%
-           family={Kruschke},
-           familyi={K\bibinitperiod},
-           given={John\bibnamedelima K.},
-           giveni={J\bibinitperiod\bibinitdelim K\bibinitperiod},
-           givenun=0}}%
-      }
-      \list{location}{1}{%
-        {Burlington, MA}%
-      }
-      \list{publisher}{1}{%
-        {Academic Press}%
-      }
-      \strng{namehash}{81a0481c4d0c2f7a95cdc42fda92af07}
-      \strng{fullhash}{81a0481c4d0c2f7a95cdc42fda92af07}
-      \strng{bibnamehash}{81a0481c4d0c2f7a95cdc42fda92af07}
-      \strng{authorbibnamehash}{81a0481c4d0c2f7a95cdc42fda92af07}
-      \strng{authornamehash}{81a0481c4d0c2f7a95cdc42fda92af07}
-      \strng{authorfullhash}{81a0481c4d0c2f7a95cdc42fda92af07}
-      \field{sortinit}{K}
-      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
-      \field{extradatescope}{labelyear}
-      \field{labeldatesource}{year}
-      \true{uniqueprimaryauthor}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{shorttitle}
-      \field{isbn}{978-0-12-381485-2}
-      \field{note}{OCLC: ocn653121532}
-      \field{shorttitle}{Doing bayesian data analysis}
-      \field{title}{Doing bayesian data analysis: a tutorial with {R} and {BUGS}}
-      \field{year}{2011}
-      \keyw{Bayesian statistical decision theory,R (Computer program language)}
-    \endentry
     \entry{kunnen_dynamic_2012}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=3371380e05028c0c3ad492e29aa207b1}{%
@@ -2135,6 +2133,115 @@
       \field{year}{2012}
       \verb{file}
       \verb Kunnen - 2012 - A Dynamic Systems Approach of Adolescent Developme.pdf:C\:\\Users\\failensc\\Zotero\\storage\\VRMX2ZBE\\Kunnen - 2012 - A Dynamic Systems Approach of Adolescent Developme.pdf:application/pdf
+      \endverb
+    \endentry
+    \entry{magee_nonlocal_1998}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=0e5a4a115924a651c8bf6a81c8668410}{%
+           family={Magee},
+           familyi={M\bibinitperiod},
+           given={Lonnie},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{0e5a4a115924a651c8bf6a81c8668410}
+      \strng{fullhash}{0e5a4a115924a651c8bf6a81c8668410}
+      \strng{bibnamehash}{0e5a4a115924a651c8bf6a81c8668410}
+      \strng{authorbibnamehash}{0e5a4a115924a651c8bf6a81c8668410}
+      \strng{authornamehash}{0e5a4a115924a651c8bf6a81c8668410}
+      \strng{authorfullhash}{0e5a4a115924a651c8bf6a81c8668410}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0003-1305, 1537-2731}
+      \field{journaltitle}{The American Statistician}
+      \field{month}{2}
+      \field{number}{1}
+      \field{title}{Nonlocal {Behavior} in {Polynomial} {Regressions}}
+      \field{urlday}{19}
+      \field{urlmonth}{10}
+      \field{urlyear}{2024}
+      \field{volume}{52}
+      \field{year}{1998}
+      \field{urldateera}{ce}
+      \field{pages}{20\bibrangedash 22}
+      \range{pages}{3}
+      \verb{doi}
+      \verb 10.1080/00031305.1998.10480531
+      \endverb
+      \verb{file}
+      \verb Magee - 1998 - Nonlocal Behavior in Polynomial Regressions.pdf:C\:\\Users\\failensc\\Zotero\\storage\\5FH2EYWL\\Magee - 1998 - Nonlocal Behavior in Polynomial Regressions.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://www.tandfonline.com/doi/abs/10.1080/00031305.1998.10480531
+      \endverb
+      \verb{url}
+      \verb http://www.tandfonline.com/doi/abs/10.1080/00031305.1998.10480531
+      \endverb
+    \endentry
+    \entry{marra_coverage_2012}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=374b5121058210f49967cce42cb34f32}{%
+           family={Marra},
+           familyi={M\bibinitperiod},
+           given={Giampiero},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4f816a96f8d000d6cb78dea6a1f2da1d}{%
+           family={Wood},
+           familyi={W\bibinitperiod},
+           given={Simon\bibnamedelima N.},
+           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{17e33220c4cdb49e76762e27b8e7a1aa}
+      \strng{fullhash}{17e33220c4cdb49e76762e27b8e7a1aa}
+      \strng{bibnamehash}{17e33220c4cdb49e76762e27b8e7a1aa}
+      \strng{authorbibnamehash}{17e33220c4cdb49e76762e27b8e7a1aa}
+      \strng{authornamehash}{17e33220c4cdb49e76762e27b8e7a1aa}
+      \strng{authorfullhash}{17e33220c4cdb49e76762e27b8e7a1aa}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We study the coverage properties of Bayesian confidence intervals for the smooth component functions of generalized additive models (GAMs) represented using any penalized regression spline approach. The intervals are the usual generalization of the intervals first proposed by Wahba and Silverman in 1983 and 1985, respectively, to the GAM component context. We present simulation evidence showing these intervals have close to nominal 'across-the-function' frequentist coverage probabilities, except when the truth is close to a straight line/plane function. We extend the argument introduced by Nychka in 1988 for univariate smoothing splines to explain these results. The theoretical argument suggests that close to nominal coverage probabilities can be achieved, provided that heavy oversmoothing is avoided, so that the bias is not too large a proportion of the sampling variability. The theoretical results allow us to derive alternative intervals from a purely frequentist point of view, and to explain the impact that the neglect of smoothing parameter variability has on confidence interval performance. They also suggest switching the target of inference for component-wise intervals away from smooth components in the space of the GAM identifiability constraints.}
+      \field{issn}{0303-6898, 1467-9469}
+      \field{journaltitle}{Scandinavian Journal of Statistics}
+      \field{month}{3}
+      \field{number}{1}
+      \field{title}{Coverage {Properties} of {Confidence} {Intervals} for {Generalized} {Additive} {Model} {Components}}
+      \field{urlday}{23}
+      \field{urlmonth}{1}
+      \field{urlyear}{2024}
+      \field{volume}{39}
+      \field{year}{2012}
+      \field{urldateera}{ce}
+      \field{pages}{53\bibrangedash 74}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1111/j.1467-9469.2011.00760.x
+      \endverb
+      \verb{file}
+      \verb Marra and Wood - 2012 - Coverage Properties of Confidence Intervals for Ge.pdf:C\:\\Users\\failensc\\Zotero\\storage\\LHGYMMP5\\Marra and Wood - 2012 - Coverage Properties of Confidence Intervals for Ge.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/10.1111/j.1467-9469.2011.00760.x
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/10.1111/j.1467-9469.2011.00760.x
       \endverb
     \endentry
     \entry{mcardle_comparative_2002}{article}{}
@@ -2767,6 +2874,54 @@
       \verb{file}
       \verb Full Text PDF:C\:\\Users\\failensc\\Zotero\\storage\\V3KSIB3F\\Tan et al. - 2011 - A Time-Varying Effect Model for Intensive Longitud.pdf:application/pdf
       \endverb
+    \endentry
+    \entry{tolpin_warped_2019}{misc}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=a164c5646da4519b80cfa00b0d0455f8}{%
+           family={Tolpin},
+           familyi={T\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{a164c5646da4519b80cfa00b0d0455f8}
+      \strng{fullhash}{a164c5646da4519b80cfa00b0d0455f8}
+      \strng{bibnamehash}{a164c5646da4519b80cfa00b0d0455f8}
+      \strng{authorbibnamehash}{a164c5646da4519b80cfa00b0d0455f8}
+      \strng{authornamehash}{a164c5646da4519b80cfa00b0d0455f8}
+      \strng{authorfullhash}{a164c5646da4519b80cfa00b0d0455f8}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We introduce a Gaussian process-based model for handling of non-stationarity. The warping is achieved non-parametrically, through imposing a prior on the relative change of distance between subsequent observation inputs. The model allows the use of general gradient optimization algorithms for training and incurs only a small computational overhead on training and prediction. The model finds its applications in forecasting in non-stationary time series with either gradually varying volatility, presence of change points, or a combination thereof. We evaluate the model on synthetic and real-world time series data comparing against both baseline and known state-of-the-art approaches and show that the model exhibits state-of-the-art forecasting performance at a lower implementation and computation cost.}
+      \field{annotation}{Other 6 pages}
+      \field{note}{Version Number: 1}
+      \field{title}{Warped {Input} {Gaussian} {Processes} for {Time} {Series} {Forecasting}}
+      \field{urlday}{19}
+      \field{urlmonth}{10}
+      \field{urlyear}{2024}
+      \field{year}{2019}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/ARXIV.1912.02527
+      \endverb
+      \verb{file}
+      \verb Tolpin - 2019 - Warped Input Gaussian Processes for Time Series Fo.pdf:C\:\\Users\\failensc\\Zotero\\storage\\85394J3I\\Tolpin - 2019 - Warped Input Gaussian Processes for Time Series Fo.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1912.02527
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1912.02527
+      \endverb
+      \keyw{FOS: Computer and information sciences,Machine Learning (cs.LG),Machine Learning (stat.ML)}
     \endentry
     \entry{tsay_nonlinear_2019}{book}{}
       \name{author}{2}{}{%

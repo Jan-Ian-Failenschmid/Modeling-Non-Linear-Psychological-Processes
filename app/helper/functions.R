@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 20-10-2024                                                   #
+#' Last Modified: 21-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -706,13 +706,13 @@ wrapper <- function(x, ...) {
 load_sim_data <- function() {
   require(data.table)
 
-  load("./www/data/old_data/pilot_data_09_09_2024_01_47.Rdata")
+  load("./data/old_data/pilot_data_09_09_2024_01_47.Rdata")
   sim1 <- as.data.table(sim) # LPR, GP, GAM
 
-  load("./www/data/old_data/pilot_data_10_09_2024_14_31.Rdata")
+  load("./data/old_data/pilot_data_10_09_2024_14_31.Rdata")
   sim2 <- as.data.table(sim) # Parametric models
 
-  load("./www/data/old_data/pilot_data_11_09_2024_18_39.Rdata")
+  load("./data/old_data/pilot_data_11_09_2024_18_39.Rdata")
   sim3 <- sim # Correlated Polynomial Regression
 
   return(list(sim1, sim2, sim3))

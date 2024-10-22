@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 20-10-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 21-10-2024                                                   #
+#' Last Modified: 22-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -27,7 +27,7 @@ invisible(sapply(
 ))
 # Define necessary methods
 for (class_name in c(
-  "method_poly",
+  "method_poly", "method_gp",
   "method_poly_orth", "method_simple", "method_dynm"
 )) {
   setClass(
@@ -37,15 +37,12 @@ for (class_name in c(
 }
 
 # Read-in simulation data
-sim <- load_sim_data()
-sim1 <- sim[[1]]
-sim2 <- sim[[2]]
-sim3 <- sim[[3]]
+load("data/simulation_data_27_09_2024_00_32.Rdata")
 
 # Read-in simulation results
 load("./data/simulation_results_27_09_2024_00_32.Rdata")
 res <- as.data.table(res)
-res <- res[!method %in% c("poly_orth"), ]
+
 
 res[, SP := ifelse(time == 100, 0.5, 1)]
 res[, DEV := dyn_er^2]
@@ -63,6 +60,7 @@ res$method[res$method == "gam"] <- "Generalized Additive Modeling"
 res$method[res$method == "dynm"] <- "Parametric Modeling"
 res$method[res$method == "simple"] <- "Linear Regression"
 res$method[res$method == "poly"] <- "Global Polynomial Regression"
+res$method[res$method == "poly_orth"] <- "Orthogonal Polynomial Regression"
 
 res$model <- factor(res$model,
   levels = c(
@@ -76,7 +74,9 @@ res$method <- factor(res$method,
   levels = c(
     "Local Polynomial Regression", "Gaussian Process Regression",
     "Generalized Additive Modeling",
-    "Linear Regression", "Global Polynomial Regression", "Parametric Modeling"
+    "Global Polynomial Regression",
+    "Orthogonal Polynomial Regression",
+    "Linear Regression", "Parametric Modeling"
   )
 )
 contrasts(res$method) <- contr.sum(levels(res$method))
@@ -98,9 +98,10 @@ method_list <- c(
   "Local Polynomial Regression",
   "Gaussian Process Regression",
   "Generalized Additive Modeling",
-  "Global Polynomial Regression",
+  "Parametric Modeling",
   "Linear Regression",
-  "Parametric Modeling"
+  "Global Polynomial Regression",
+  "Orthogonal Polynomial Regression"
 )
 
 process_list <- c(
@@ -110,7 +111,7 @@ process_list <- c(
   "Cusp Catastrophe"
 )
 
-# UI
+# UI ---------------------------------------------------------------------------
 ui <- fluidPage(
   # Header
   headerPanel(h1("Modeling Non-Linear Psychological Processes")),
@@ -136,10 +137,11 @@ ui <- fluidPage(
                 "Gaussian Process Regression",
                 "Generalized Additive Modeling",
                 "Global Polynomial Regression",
+                "Orthogonal Polynomial Regression",
                 "Linear Regression",
                 "Parametric Modeling"
               ),
-              choiceValues = list(1, 2, 3, 4, 5, 6),
+              choiceValues = list(1, 2, 3, 6, 7, 5, 4),
               selected = list(1, 2, 3, 4, 6)
             )
           ),
@@ -185,7 +187,7 @@ ui <- fluidPage(
               "Which data set would you like to plot?",
               value = 1,
               min = 1,
-              max = 30
+              max = 100
             )
           ),
           fluidRow(
@@ -260,6 +262,7 @@ ui <- fluidPage(
                 "Gaussian Process Regression",
                 "Generalized Additive Modeling",
                 "Global Polynomial Regression",
+                "Orthogonal Polynomial Regression",
                 "Linear Regression",
                 "Parametric Modeling"
               ),
@@ -304,10 +307,87 @@ ui <- fluidPage(
       )
     ),
     tabPanel(
+      "ANOVA",
+      sidebarLayout(
+        sidebarPanel(
+          fluidRow(
+            selectInput("anova_dependent",
+              "Which outcome variable would you like to look at?",
+              choices = list(
+                "MSE" = "mse",
+                "GCV" = "gcv"
+              ),
+              selected = "MSE"
+            )
+          ),
+          fluidRow(
+            checkboxGroupInput("anova_independent",
+              "Which predictors would you like to use?",
+              choices = list(
+                "Dynamic Error Variance",
+                "Sampling Period",
+                "Sampling Frequency"
+              )
+            )
+          ),
+          fluidRow(
+            h4("Select which levels of each factor you would like to include:"),
+            checkboxGroupInput("anova_methods",
+              "Methods:",
+              choices = list(
+                "Local Polynomial Regression",
+                "Gaussian Process Regression",
+                "Generalized Additive Modeling",
+                "Global Polynomial Regression",
+                "Orthogonal Polynomial Regression",
+                "Linear Regression"
+              ),
+              selected = list(
+                "Local Polynomial Regression",
+                "Gaussian Process Regression",
+                "Generalized Additive Modeling",
+                "Global Polynomial Regression",
+                "Parametric Modeling"
+              )
+            ),
+            checkboxGroupInput("anova_processes",
+              "Processes:",
+              choices = list(
+                "Exponential Growth",
+                "Logistic Growth",
+                "Damped Oscillator",
+                "Cusp Catastrophe"
+              ),
+              selected = list(
+                "Exponential Growth",
+                "Logistic Growth",
+                "Damped Oscillator",
+                "Cusp Catastrophe"
+              )
+            ),
+            uiOutput(
+              "anova_dynamic_error_levles"
+            ),
+            uiOutput(
+              "anova_sampling_period_levles"
+            ),
+            uiOutput(
+              "anova_sampling_frequency_levles"
+            )
+          ),
+          width = 2
+        ),
+        mainPanel(
+          verbatimTextOutput("test")
+        )
+      )
+    ),
+    tabPanel(
       "Data Generation and Model Fitting",
       sidebarLayout(
         sidebarPanel(
           tabsetPanel(
+            id = "gen_and_switch",
             tabPanel(
               "Data Generation",
               fluidRow(
@@ -362,16 +442,24 @@ ui <- fluidPage(
                 \\(\\delta\\):",
                   value = 200, min = 1
                 ),
-                actionButton("sim_data", "Simulate Data")
+                h4("Simulate Data"),
+                actionButton("sim_data", "Simulate Data"),
+                h5("This may take a while.")
               )
             ),
             tabPanel(
               "Model Fitting",
               fluidRow(
+                h4("Which methods would you like to fit?"),
+                h4("Local Polynomial Regression:"),
                 checkboxInput("fit_lpr", "Fit Local Polynomial Regression"),
-                checkboxInput("fit_gpr", "Fit Gaussian Process Regression"),
+                uiOutput("locpol_settings_ui"),
+                h4("Generalized Additive Model:"),
                 checkboxInput("fit_gam", "Fit Generalized Additive Model"),
-                actionButton("fit_models", "Fit Models")
+                uiOutput("gam_settings_ui"),
+                h4("Fit models:"),
+                actionButton("fit_models", "Fit Models"),
+                h5("This may take a while.")
               )
             )
           ),
@@ -381,7 +469,7 @@ ui <- fluidPage(
           fluidRow(
             h2("Data Generation:"),
             column(
-              width = 6,
+              width = 7,
               h3("Model Equations:"),
               uiOutput(
                 "model_equations"
@@ -397,47 +485,26 @@ ui <- fluidPage(
               offset = 0
             ),
             column(
-              width = 6,
+              width = 5,
+              uiOutput("tsm_model_header"),
               plotOutput("tsm_model", width = "auto", height = "auto"),
               offset = 0
             )
           ),
-          fluidRow(h2("Model Fitting:")),
-          fluidRow(
-            h3("Generalized Additive Model:"),
-            column(
-              width = 6,
-              plotOutput("gam_plot_pap", width = "auto", height = "auto"),
-              offset = 0
-            ),
-            column(
-              width = 6,
-              offset = 0
-            )
-          ),
-          fluidRow(
-            h3("Local Polynomial Regression:"),
-            column(
-              width = 6,
-              plotOutput("locpol_plot_pap", width = "auto", height = "auto"),
-              offset = 0
-            ),
-            column(
-              width = 6,
-              offset = 0
-            )
-          )
+          uiOutput("fit_ui_header"),
+          uiOutput("gam_ui_pop"),
+          uiOutput("locpol_ui_pop")
         )
       )
     )
   )
 )
 
-# server
+# Server -----------------------------------------------------------------------
 server <- function(input, output) {
-  ### Smoothing Plots -----
+  ## Smoothing Plots -----------------------------------------------------------
   # Find data set indicators
-  ilustr <- reactive(sim1[, model_name := sapply(gen_model, function(x) {
+  ilustr <- reactive(sim[, model_name := sapply(gen_model, function(x) {
     x@model_name
   })][,
     .I[time == ifelse(input$smooth_period == "Half", 100, 200) &
@@ -456,16 +523,8 @@ server <- function(input, output) {
 
       for (j in as.numeric(input$smooth_processes)) {
         for (i in as.numeric(input$smooth_methods)) {
-          if (i %in% c(1:3, 5)) {
-            method <- sim1$method[[ilustr()$V1[j]]][[i]]
-            sim <- sim1
-          } else if (i == 4) {
-            method <- sim3$method[[ilustr()$V1[j]]][[2]]
-            sim <- sim3
-          } else if (i == 6) {
-            method <- sim2$method[[ilustr()$V1[j]]][[2]]
-            sim <- sim2
-          }
+          method <- sim$method[[ilustr()$V1[j]]][[i]]
+
           converged <- method@converged
           if (converged) {
             plot(method,
@@ -510,7 +569,7 @@ server <- function(input, output) {
     }
   )
 
-  ### Results plot ----
+  ## Results plot --------------------------------------------------------------
   # Select input levels
   output$dynamic_error_levles <- renderUI({
     if ("Dynamic Error Variance" %in% input$results_independent) {
@@ -620,12 +679,72 @@ server <- function(input, output) {
 
       p
     },
-    width = 2400,
-    height = 1200
+    width = 1800,
+    height = 1000
   )
 
+  ## ANOVA ---------------------------------------------------------------------
+  output$anova_dynamic_error_levles <- renderUI({
+    if ("Dynamic Error Variance" %in% input$anova_independent) {
+      checkboxGroupInput("results_dyn_var",
+        "Dynamic Error Variance:",
+        choices = list(
+          ".5",
+          "1",
+          "2"
+        ),
+        selected = list(
+          ".5",
+          "1",
+          "2"
+        )
+      )
+    }
+  })
 
-  ### Data Generation ----
+  output$anova_sampling_period_levles <- renderUI({
+    if ("Sampling Period" %in% input$anova_independent) {
+      checkboxGroupInput("results_sampling_period",
+        "Sampling Period:",
+        choiceNames = list(
+          "Half",
+          "Full"
+        ),
+        choiceValues = list(
+          0.5, 1
+        ),
+        selected = list(
+          0.5, 1
+        )
+      )
+    }
+  })
+
+  output$anova_sampling_frequency_levles <- renderUI({
+    if ("Sampling Frequency" %in% input$anova_independent) {
+      checkboxGroupInput("results_sampling_frequency",
+        "Sampling Frequency:",
+        choices = list(
+          "1",
+          "2",
+          "3"
+        ),
+        selected = list(
+          "1",
+          "2",
+          "3"
+        )
+      )
+    }
+  })
+
+
+  output$test <- renderPrint({
+    contrasts(res$method)
+  })
+
+  ## Data Generation and model fitting -----------------------------------------
+  ### Model equations ----------------------------------------------------------
   output$set_seed_input <- renderUI({
     if (input$dg_set_seed) {
       numericInput("dg_seed", "Seed Value:", value = 1, min = 1)
@@ -683,7 +802,7 @@ server <- function(input, output) {
           value = -5, min = 0
         ),
         numericInput("omega", "Asymptote \\(\\omega\\):",
-          value = -(2 * pi / 50)^2, min = 0
+          value = -0.016, min = 0
         ),
       )
     }
@@ -691,60 +810,61 @@ server <- function(input, output) {
 
   output$model_equations <- renderUI({
     if (input$dg_process_choice == "Exponential Growth") {
-      withMathJax(h3(paste0(
+      withMathJax(h4(paste0(
         "$$
       \\begin{aligned}
-        &dy = \\theta  (\\mu - y) dt + \\sigma_\\eta dW_t \\\\
+        &dy = \\theta  (\\mu - y) \\, dt + \\sigma_\\eta \\, dW_t \\\\
         \\\\
         &dy = ",
         input$r, " (",
-        input$a, " - y) dt + ",
-        input$sigma_eta, " dW_t
+        input$a, " - y) \\, dt + ",
+        input$sigma_eta, " \\, dW_t
       \\end{aligned}
       $$"
       )))
     } else if (input$dg_process_choice == "Logistic Growth") {
-      withMathJax(h3(paste0(
+      withMathJax(h4(paste0(
         "$$
       \\begin{aligned}
-        &dy = \\theta y (1 - \\frac{y}{\\mu}) dt + \\sigma_\\eta dW_t \\\\
+        &dy = \\theta y (1 - \\frac{y}{\\mu}) \\, dt +
+        \\sigma_\\eta \\, dW_t \\\\
         \\\\
         &dy = ",
         input$r, " y (1 - \\frac{y}{",
-        input$a, "}) dt + ",
-        input$sigma_eta, " dW_t
+        input$a, "}) \\, dt + ",
+        input$sigma_eta, " \\, dW_t
       \\end{aligned}
       $$"
       )))
     } else if (input$dg_process_choice == "Damped Oscillator") {
-      withMathJax(h3(paste0(
+      withMathJax(h4(paste0(
         "$$
       \\begin{aligned}
-        &dy = vdt \\\\
-        &dv = (-2 k v - c^2 y) dt + \\sigma_\\eta dW_t \\\\
+        &dy = v \\, dt \\\\
+        &dv = (-2 k v - c^2 y) \\, dt + \\sigma_\\eta \\, dW_t \\\\
         \\\\
-        &dy = vdt \\\\
+        &dy = v \\, dt \\\\
         &dv = (-2 * ",
         input$k, " v - ",
-        input$c, "^2 y) dt + ",
-        input$sigma_eta, " dW_t
+        input$c, "^2 y) \\, dt + ",
+        input$sigma_eta, " \\, dW_t
       \\end{aligned}
       $$"
       )))
     } else if (input$dg_process_choice == "Cusp Catastrophe") {
-      withMathJax(h3(paste0(
+      withMathJax(h4(paste0(
         "$$
       \\begin{aligned}
-        &dy = -(4  y^3 + 2  a  y + b)dt + \\sigma_\\eta dW_t\\\\
-        &db = vdt \\\\
-        &dv = \\omega b dt \\\\
+        &dy = -(4  y^3 + 2  a  y + b) \\, dt + \\sigma_\\eta \\, dW_t\\\\
+        &db = v \\, dt \\\\
+        &dv = \\omega b \\, dt \\\\
         \\\\
         &dy = -(4 y^3 + 2 * ",
-        input$a, " * y + b)dt + ",
-        input$sigma_eta, " dW_t\\\\
-        &db = vdt \\\\
+        input$a, " * y + b) \\, dt + ",
+        input$sigma_eta, " \\, dW_t\\\\
+        &db = v \\, dt \\\\
         &dv = ",
-        input$omega, " b dt
+        input$omega, " b \\, dt
       \\end{aligned}
       $$"
       )))
@@ -753,91 +873,91 @@ server <- function(input, output) {
 
   output$em_equations <- renderUI({
     if (input$dg_process_choice == "Exponential Growth") {
-      withMathJax(h3(paste0(
+      withMathJax(h4(paste0(
         "$$
       \\begin{aligned}
-        &h =  \\frac{\\Delta t}{\\delta} \\\\
-        &y_{t+h} = y_t + h (\\theta  (\\mu - y_t)) + \\sigma_\\eta \\eta_t,
-        \\quad \\eta_t \\sim N(0, h) \\\\
+        &y_{t+\\frac{\\Delta t}{\\delta}} = y_t +
+        \\frac{\\Delta t}{\\delta} (\\theta  (\\mu - y_t)) +
+        \\sigma_\\eta \\eta_t \\\\
+        &\\eta_t \\sim N(0, \\frac{\\Delta t}{\\delta}) \\\\
         \\\\
-        &",
-        input$t_step / input$subdiv,
-        " = \\frac{", input$t_step, "}{", input$subdiv, "} \\\\
-        &y_{t+",
-        input$t_step / input$subdiv, "} = y_t +",
-        input$t_step / input$subdiv, " (",
+
+        &y_{t+ \\frac{", input$t_step, "}{", input$subdiv, "}} = y_t +
+        \\frac{", input$t_step, "}{", input$subdiv, "} (",
         input$r, "  (", input$a, " - y_t)) + ",
-        input$sigma_eta, " \\eta_t,
-        \\quad \\eta_t \\sim N(0,",
-        input$t_step / input$subdiv, ")
+        input$sigma_eta, " \\eta_t \\\\
+        &\\eta_t \\sim N(0,
+        \\frac{", input$t_step, "}{", input$subdiv, "})
       \\end{aligned}
       $$"
       )))
     } else if (input$dg_process_choice == "Logistic Growth") {
-      withMathJax(h3(paste0(
+      withMathJax(h4(paste0(
         "$$
       \\begin{aligned}
-        &h =  \\frac{\\Delta t}{\\delta} \\\\
-        &y_{t+h} = y_t + h (\\theta y (1 - \\frac{y}{\\mu})) +
-        \\sigma_\\eta \\eta_t,
-        \\quad \\eta_t \\sim N(0, h) \\\\
+        &y_{t+\\frac{\\Delta t}{\\delta}} = y_t +
+        \\frac{\\Delta t}{\\delta} (\\theta y (1 - \\frac{y}{\\mu})) +
+        \\sigma_\\eta \\eta_t \\\\
+        &\\eta_t \\sim N(0, \\frac{\\Delta t}{\\delta}) \\\\
         \\\\
-        &",
-        input$t_step / input$subdiv,
-        " = \\frac{", input$t_step, "}{", input$subdiv, "} \\\\
-        &y_{t+",
-        input$t_step / input$subdiv, "} = y_t +",
-        input$t_step / input$subdiv, "(",
+
+        &y_{t+ \\frac{", input$t_step, "}{", input$subdiv, "}} = y_t +
+        \\frac{", input$t_step, "}{", input$subdiv, "}(",
         input$r, " y (1 - \\frac{y_t}{", input$a, "})) + ",
-        input$sigma_eta, " \\eta_t,
-        \\quad \\eta_t \\sim N(0, ",
-        input$t_step / input$subdiv, ")
+        input$sigma_eta, " \\eta_t \\\\
+        &\\eta_t \\sim N(0, \\frac{", input$t_step, "}{", input$subdiv, "})
       \\end{aligned}
       $$"
       )))
     } else if (input$dg_process_choice == "Damped Oscillator") {
-      withMathJax(h3(paste0(
+      withMathJax(h4(paste0(
         "$$
       \\begin{aligned}
-        &h =  \\frac{\\Delta t}{\\delta} \\\\
-        &y_{t+h} = y_t + h v_t +
-        \\sigma_\\eta \\eta_t,
-        \\quad \\eta_t \\sim N(0, h) \\\\
-        &v_{t+h} = v_t + h (-2 k v_t - c^2 y_t) \\\\
+        &y_{t + \\frac{\\Delta t}{\\delta}} = y_t +
+        \\frac{\\Delta t}{\\delta} v_t +
+        \\sigma_\\eta \\eta_t \\\\\
+        &v_{t+\\frac{\\Delta t}{\\delta}} = v_t +
+        \\frac{\\Delta t}{\\delta} (-2 k v_t - c^2 y_t) \\\\
+        &\\eta_t \\sim N(0, \\frac{\\Delta t}{\\delta}) \\\\
         \\\\
-        &",
-        input$t_step / input$subdiv,
-        " = \\frac{", input$t_step, "}{", input$subdiv, "} \\\\
-        &y_{t+h} = y_t + ", input$t_step / input$subdiv, "v_t + ",
-        input$sigma_eta, " \\eta_t, \\quad \\eta_t \\sim N(0, ",
-        input$t_step / input$subdiv, ") \\\\
-        &v_{t+h} = v_t + ", input$t_step / input$subdiv, "(-2 * ",
+        &y_{t+\\frac{", input$t_step, "}{", input$subdiv, "}} = y_t +
+        \\frac{", input$t_step, "}{", input$subdiv, "} v_t + ",
+        input$sigma_eta, " \\eta_t \\\\
+        &v_{t+\\frac{", input$t_step, "}{", input$subdiv, "}} = v_t +
+        \\frac{", input$t_step, "}{", input$subdiv, "}(-2 * ",
         input$k, " v_t - ",
-        input$c, "^2 y_t)
+        input$c, "^2 y_t) \\\\
+        &\\eta_t \\sim N(0, \\frac{", input$t_step, "}{", input$subdiv, "})
       \\end{aligned}
       $$"
       )))
     } else if (input$dg_process_choice == "Cusp Catastrophe") {
-      withMathJax(h3(paste0(
+      withMathJax(h4(paste0(
         "$$
       \\begin{aligned}
         &h =  \\frac{\\Delta t}{\\delta} \\\\
-        &y_{t+h} = y_t - h (4  y_t^3 + 2  a  y + b_t) +
-        \\sigma_\\eta \\eta_t,
-        \\quad \\eta_t \\sim N(0, h) \\\\
-        &b_{t+h} = b_t + h v_t \\\\
-        &v_{t+h} = v_t + h (\\omega b_t) \\\\
+        &y_{t+\\frac{\\Delta t}{\\delta}} = y_t -
+        \\frac{\\Delta t}{\\delta} (4  y_t^3 + 2  a  y + b_t) +
+        \\sigma_\\eta \\eta_t \\\\
+        &b_{t+\\frac{\\Delta t}{\\delta}} = b_t +
+        \\frac{\\Delta t}{\\delta} v_t \\\\
+        &v_{t+\\frac{\\Delta t}{\\delta}} = v_t +
+        \\frac{\\Delta t}{\\delta} (\\omega b_t) \\\\
+        &\\eta_t \\sim N(0, \\frac{\\Delta t}{\\delta}) \\\\
         \\\\
         &",
         input$t_step / input$subdiv,
         " = \\frac{", input$t_step, "}{", input$subdiv, "} \\\\
-        &y_{t+h} = y_t - ", input$t_step / input$subdiv, "(4 y_t^3 + 2 + ",
+        &y_{t+\\frac{", input$t_step, "}{", input$subdiv, "}} = y_t -
+        \\frac{", input$t_step, "}{", input$subdiv, "}(4 y_t^3 + 2 + ",
         input$a, " + y + b_t) +",
-        input$sigma_eta, " \\eta_t,
-        \\quad \\eta_t \\sim N(0, ", input$t_step / input$subdiv, ") \\\\
-        &b_{t+h} = b_t + ", input$t_step / input$subdiv, "v_t \\\\
-        &v_{t+h} = v_t + ", input$t_step / input$subdiv, "(",
-        input$omega, " b_t)
+        input$sigma_eta, " \\eta_t \\\\
+        &b_{t+\\frac{", input$t_step, "}{", input$subdiv, "}} = b_t +
+        \\frac{", input$t_step, "}{", input$subdiv, "}v_t \\\\
+        &v_{t+\\frac{", input$t_step, "}{", input$subdiv, "}} = v_t +
+        \\frac{", input$t_step, "}{", input$subdiv, "}(",
+        input$omega, " b_t) \\\\
+        &\\eta_t \\sim N(0, \\frac{", input$t_step, "}{", input$subdiv, "})
       \\end{aligned}
       $$"
       )))
@@ -845,7 +965,7 @@ server <- function(input, output) {
   })
 
   output$meas_equations <- renderUI({
-    withMathJax(h3(paste0(
+    withMathJax(h4(paste0(
       "$$
       \\begin{aligned}
         &y^{Obs}_{t} = y_t + \\sigma_\\epsilon \\epsilon_t, \\quad
@@ -859,6 +979,7 @@ server <- function(input, output) {
     )))
   })
 
+  ### Data generation ----------------------------------------------------------
   gen_tsm <- reactive({
     if (input$dg_process_choice == "Exponential Growth") {
       new("gen_model",
@@ -979,7 +1100,7 @@ server <- function(input, output) {
       )
     }
   })
-  # Create eventReactive copy!!!
+
   tsm_data <- eventReactive(input$sim_data, {
     if (input$dg_set_seed) {
       set.seed(input$dg_seed)
@@ -987,26 +1108,76 @@ server <- function(input, output) {
     get_tsm_data(sim_tsm(gen_tsm()))
   })
 
-  output$tsm_model <- renderPlot(
-    {
-      head(tsm_data())
-      plot(
-        x = tsm_data()$time, y = tsm_data()$y_obs,
-        axes = FALSE, xlab = "Time", ylab = "y"
+  observeEvent(input$sim_data, {
+    output$tsm_model_header <- renderUI(
+      fluidRow(
+        h3("Generated Data:")
       )
-      lines(x = tsm_data()$time, y = tsm_data()$y)
+    )
+  })
 
-      axis(2)
+  observeEvent(input$sim_data, {
+    output$tsm_model <- renderPlot(
+      {
+        plot(
+          x = tsm_data()$time, y = tsm_data()$y_obs,
+          axes = FALSE, xlab = "Time", ylab = "y"
+        )
+        lines(x = tsm_data()$time, y = tsm_data()$y)
 
-      axis(1,
-        padj = 1
+        axis(2)
+
+        axis(1,
+          padj = 1
+        )
+      },
+      width = 550,
+      height = 400
+    )
+  })
+
+  ### Model fitting ------------------------------------------------------------
+  hideTab(inputId = "gen_and_switch", target = "Model Fitting")
+
+  observeEvent(input$sim_data, {
+    showTab(inputId = "gen_and_switch", target = "Model Fitting")
+  })
+
+  observeEvent(input$fit_models, {
+    output$fit_ui_header <- renderUI({
+      if (input$fit_lpr | input$fit_gam) {
+        fluidRow(h2("Model Fitting:"))
+      }
+    })
+  })
+
+  tsm_data_mod_fit <- eventReactive(input$fit_models, {
+    tsm_data()
+  })
+
+  ## Fit and plot local polynomial paper
+  output$locpol_settings_ui <- renderUI({
+    if (input$fit_lpr) {
+      fluidRow(
+        column(
+          width = 12,
+          selectInput("locpol_settings_kernel", "Kernel:",
+            choices = list(
+              "Gaussian" = "gau",
+              "Epanechnikov" = "epa",
+              "Triangular" = "tri",
+              "Uniform" = "uni"
+            )
+          ),
+          selectInput("locpol_settings_polynomial_degree", "Polynomial Degree:",
+            choices = list("1", "3", "5")
+          ),
+          checkboxInput("lpr_summary", "Print Summary")
+        )
       )
-    },
-    width = 1000,
-    height = 1000
-  )
+    }
+  })
 
-  ### Model fitting ----
   locpol_inst <- eventReactive(input$fit_models, {
     if (input$fit_lpr) {
       new("method_locpol",
@@ -1018,7 +1189,7 @@ server <- function(input, output) {
 
   locpol_fit_pap <- eventReactive(input$fit_models, {
     if (input$fit_lpr) {
-      fit(locpol_inst(), tsm_data())
+      fit(locpol_inst(), tsm_data_mod_fit())
     }
   })
 
@@ -1027,17 +1198,25 @@ server <- function(input, output) {
       {
         if (input$fit_lpr) {
           plot(
-            x = tsm_data()$time, y = tsm_data()$y_obs,
+            x = tsm_data_mod_fit()$time, y = tsm_data_mod_fit()$y_obs,
             axes = FALSE, xlab = "Time", ylab = "y"
           )
-          lines(x = tsm_data()$time, y = tsm_data()$y)
-          lines(x = tsm_data()$time, locpol_fit_pap()@estimate, col = "red")
           lines(
-            x = tsm_data()$time, locpol_fit_pap()@ci$lb, col = "red",
+            x = tsm_data_mod_fit()$time,
+            y = tsm_data_mod_fit()$y
+          )
+          lines(
+            x = tsm_data_mod_fit()$time,
+            locpol_fit_pap()@estimate, col = "red"
+          )
+          lines(
+            x = tsm_data_mod_fit()$time,
+            locpol_fit_pap()@ci$lb, col = "red",
             lty = 2
           )
           lines(
-            x = tsm_data()$time, locpol_fit_pap()@ci$ub, col = "red",
+            x = tsm_data_mod_fit()$time,
+            locpol_fit_pap()@ci$ub, col = "red",
             lty = 2
           )
           axis(2)
@@ -1047,17 +1226,123 @@ server <- function(input, output) {
           )
         }
       },
-      width = 1000,
-      height = 1000
+      width = 600,
+      height = 400
     )
   })
 
+  output$locpol_print_pap <- renderPrint({
+    if (input$lpr_summary) print(locpol_fit_pap())
+  })
 
-  gp_inst <- eventReactive(input$fit_models, {
+  ## Fit and plot local polynomial user
+  locpol_inst_usr <- eventReactive(input$fit_models, {
+    if (input$fit_lpr) {
+      new("method_locpol_usr",
+        method_name = "locpol custom",
+        gen_model = input$dg_process_choice,
+        conditions = list(
+          input$locpol_settings_kernel,
+          input$locpol_settings_polynomial_degree
+        )
+      )
+    }
+  })
+
+  locpol_fit_usr <- eventReactive(input$fit_models, {
+    if (input$fit_lpr) {
+      fit(locpol_inst_usr(), tsm_data_mod_fit())
+    }
+  })
+
+  observeEvent(input$fit_models, {
+    output$locpol_plot_usr <- renderPlot(
+      {
+        if (input$fit_lpr) {
+          plot(
+            x = tsm_data_mod_fit()$time, y = tsm_data_mod_fit()$y_obs,
+            axes = FALSE, xlab = "Time", ylab = "y"
+          )
+          lines(
+            x = tsm_data_mod_fit()$time,
+            y = tsm_data_mod_fit()$y
+          )
+          lines(
+            x = tsm_data_mod_fit()$time,
+            locpol_fit_usr()@estimate, col = "red"
+          )
+          lines(
+            x = tsm_data_mod_fit()$time,
+            locpol_fit_usr()@ci$lb, col = "red",
+            lty = 2
+          )
+          lines(
+            x = tsm_data_mod_fit()$time,
+            locpol_fit_usr()@ci$ub, col = "red",
+            lty = 2
+          )
+          axis(2)
+
+          axis(1,
+            padj = 1
+          )
+        }
+      },
+      width = 600,
+      height = 400
+    )
+  })
+
+  output$locpol_print_usr <- renderPrint({
+    if (input$lpr_summary) print(locpol_fit_usr())
+  })
+
+  ## Render Locpol UI
+  observeEvent(input$fit_models, {
+    output$locpol_ui_pop <- renderUI({
+      if (input$fit_lpr) {
+        fluidRow(
+          h3("Local Polynomial Regression:"),
+          column(
+            width = 7,
+            h4("LPR fit using the same configurations as in the paper:"),
+            plotOutput("locpol_plot_pap", width = "auto", height = "auto"),
+            verbatimTextOutput("locpol_print_pap"),
+            offset = 0
+          ),
+          column(
+            width = 5,
+            h4("LPR fit using your configurations:"),
+            plotOutput("locpol_plot_usr", width = "auto", height = "auto"),
+            verbatimTextOutput("locpol_print_usr"),
+            offset = 0
+          )
+        )
+      }
+    })
+  })
+
+  ## Fit and plot gam paper
+  output$gam_settings_ui <- renderUI({
     if (input$fit_gam) {
-      new("method_gp",
-        method_name = "gp",
-        gen_model = input$dg_process_choice
+      fluidRow(
+        column(
+          width = 12,
+          selectInput("gam_settings_spline_basis", "Spline Basis:",
+            choices = list(
+              "Thin-plate" = "tp",
+              "Cubic" = "cr",
+              "Cyclic Cubic" = "cc",
+              "P-Splines" = "ps"
+            )
+          ),
+          numericInput("gam_settings_numbbasis",
+            "Number of Basis Functions:",
+            -1,
+            min = -1, max = nrow(tsm_data())
+          ),
+          checkboxInput("gam_summary", "Print Summary")
+        )
       )
     }
   })
@@ -1072,7 +1357,9 @@ server <- function(input, output) {
   })
 
   gam_fit_pap <- eventReactive(input$fit_models, {
-    fit(gam_inst(), tsm_data())
+    if (input$fit_gam) {
+      fit(gam_inst(), tsm_data_mod_fit())
+    }
   })
 
   observeEvent(input$fit_models, {
@@ -1080,13 +1367,22 @@ server <- function(input, output) {
       {
         if (input$fit_gam) {
           plot(
-            x = tsm_data()$time, y = tsm_data()$y_obs,
+            x = tsm_data_mod_fit()$time, y = tsm_data_mod_fit()$y_obs,
             axes = FALSE, xlab = "Time", ylab = "y"
           )
-          lines(x = tsm_data()$time, y = tsm_data()$y)
-          lines(x = tsm_data()$time, gam_fit_pap()@estimate, col = "red")
-          lines(x = tsm_data()$time, gam_fit_pap()@ci$lb, col = "red", lty = 2)
-          lines(x = tsm_data()$time, gam_fit_pap()@ci$ub, col = "red", lty = 2)
+          lines(x = tsm_data_mod_fit()$time, y = tsm_data_mod_fit()$y)
+          lines(
+            x = tsm_data_mod_fit()$time,
+            gam_fit_pap()@estimate, col = "red"
+          )
+          lines(
+            x = tsm_data_mod_fit()$time,
+            gam_fit_pap()@ci$lb, col = "red", lty = 2
+          )
+          lines(
+            x = tsm_data_mod_fit()$time,
+            gam_fit_pap()@ci$ub, col = "red", lty = 2
+          )
           axis(2)
 
           axis(1,
@@ -1094,9 +1390,95 @@ server <- function(input, output) {
           )
         }
       },
-      width = 1000,
-      height = 1000
+      width = 600,
+      height = 400
     )
+  })
+
+  output$gam_print_pap <- renderPrint({
+    if (input$gam_summary) print(gam_fit_pap())
+  })
+
+  ## Fit and plot gam usr
+  gam_inst_usr <- eventReactive(input$fit_models, {
+    if (input$fit_gam) {
+      new("method_gam_usr",
+        method_name = "gam",
+        gen_model = input$dg_process_choice,
+        conditions = list(
+          input$gam_settings_spline_basis,
+          input$gam_settings_numbbasis
+        )
+      )
+    }
+  })
+
+  gam_fit_usr <- eventReactive(input$fit_models, {
+    if (input$fit_gam) {
+      fit(gam_inst_usr(), tsm_data_mod_fit())
+    }
+  })
+
+  observeEvent(input$fit_models, {
+    output$gam_plot_usr <- renderPlot(
+      {
+        if (input$fit_gam) {
+          plot(
+            x = tsm_data_mod_fit()$time, y = tsm_data_mod_fit()$y_obs,
+            axes = FALSE, xlab = "Time", ylab = "y"
+          )
+          lines(x = tsm_data_mod_fit()$time, y = tsm_data_mod_fit()$y)
+          lines(
+            x = tsm_data_mod_fit()$time,
+            gam_fit_usr()@estimate, col = "red"
+          )
+          lines(
+            x = tsm_data_mod_fit()$time,
+            gam_fit_usr()@ci$lb, col = "red", lty = 2
+          )
+          lines(
+            x = tsm_data_mod_fit()$time,
+            gam_fit_usr()@ci$ub, col = "red", lty = 2
+          )
+          axis(2)
+
+          axis(1,
+            padj = 1
+          )
+        }
+      },
+      width = 600,
+      height = 400
+    )
+  })
+
+  output$gam_print_usr <- renderPrint({
+    if (input$gam_summary) print(gam_fit_usr())
+  })
+
+  ### Render gam output UI
+
+  observeEvent(input$fit_models, {
+    output$gam_ui_pop <- renderUI({
+      if (input$fit_gam) {
+        fluidRow(
+          h3("Generalized Additive Model:"),
+          column(
+            width = 7,
+            h4("GAM fit using the same configurations as in the paper:"),
+            plotOutput("gam_plot_pap", width = "auto", height = "auto"),
+            verbatimTextOutput("gam_print_pap"),
+            offset = 0
+          ),
+          column(
+            width = 5,
+            h4("GAM fit using your configurations:"),
+            plotOutput("gam_plot_usr", width = "auto", height = "auto"), verbatimTextOutput("gam_print_usr"),
+            offset = 0
+          )
+        )
+      }
+    })
   })
 }
 

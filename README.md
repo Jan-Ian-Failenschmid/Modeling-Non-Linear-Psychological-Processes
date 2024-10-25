@@ -14,7 +14,7 @@
 
 # Modeling Non-Linear Psychological Processes: Reviewing and Evaluating Non-parametric Approaches and Their Applicability to Intensive Longitudinal Data
 
-This directory contains the suplimentary material to the article title : 
+This directory contains the suplimentary material to the article titled: 
 "Modeling Non-Linear Psychological Processes: Reviewing and Evaluating 
 Non-parametric Approaches and Their Applicability to Intensive Longitudinal Data".
 

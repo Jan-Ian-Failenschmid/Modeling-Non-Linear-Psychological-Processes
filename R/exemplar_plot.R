@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 18-10-2024                                                   #
+#' Last Modified: 28-01-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -15,6 +15,7 @@
 
 
 ### Set-up ---------------------------------------------------------------------
+library(data.table)
 # Load functions
 invisible(sapply(
   c(paste0("./R/helper/", dir(path = "./R/helper"))),
@@ -30,7 +31,7 @@ png(
   width = 1960, height = 1080
 )
 
-par(mfrow = c(2, 2))
+par(mfrow = c(2, 2), lwd = 2.5)
 
 # LCS ---
 exp_growth <- new("gen_model",
@@ -334,3 +335,107 @@ for (dyn_er in sqrt(c(.5, 2))) {
 dev.off()
 
 cat("Figures successfully generated!\n")
+
+### Create summary exemplar plot with process noise ----------------------------
+
+load("R/data/simulation_data_27_09_2024_00_32.Rdata")
+sim[, model_name := sapply(gen_model, function(x) {
+  x@model_name
+})]
+
+png(
+  file = paste0(fig_path, "/stoch_mean_variance.png"),
+  width = 1960, height = 1080
+)
+
+par(
+  mfrow = c(4, 3), cex.lab = 3, cex.main = 3, cex.axis = 3,
+  mar = c(5, 5, 3, 3) + .1
+)
+lay_mat <- matrix(c(
+  3, 2, 1,
+  6, 5, 4,
+  9, 8, 7,
+  12, 11, 10
+), 4, 3, byrow = T)
+layout(lay_mat)
+
+for (model_name_iter in c(
+  "exp_growth", "log_growth", "damped_oscillator", "cusp_catastrophe"
+)) {
+  for (dyn_er_iter in sqrt(c(2, 1, 0.5))) {
+    dat <- sim[
+      time == 200 &
+        dyn_er == dyn_er_iter &
+        stepsize == (50 / 7) / 9 &
+        model_name == model_name_iter,
+      dat
+    ]
+
+    x <- dat[[1]]$time
+
+    dat <- do.call(rbind, lapply(dat, function(x) x$y))
+
+    sum_stat <- t(apply(dat, 2, function(x) {
+      c(
+        quantile(x, probs = c((1 - 0.997) / 2, (1 - 0.95) / 2, (1 - 0.68) / 2)),
+        mean(x),
+        quantile(x, probs = c(
+          1 - ((1 - 0.68) / 2), 1 - ((1 - 0.95) / 2), 1 - ((1 - 0.997) / 2)
+        ))
+      )
+    }))
+
+    if (dyn_er_iter == sqrt(2)) {
+      ylim <- 1.1 * c(min(sum_stat), max(sum_stat))
+    }
+
+    plot(1,
+      type = "n", xlab = "", ylab = "", axes = FALSE,
+      xlim = c(0, 200), ylim = ylim
+    )
+    axis(2, at = seq(-20, 20, 2))
+    axis(1,
+      at = c(0, 50, 100, 150, 200),
+      labels = c("", "First Half", "", "Second Half", ""),
+      padj = 1
+    )
+
+    if (dyn_er_iter == sqrt(0.5)) {
+      if (model_name_iter == "exp_growth") {
+        title(main = expression(paste(sigma^2, " = 0.5")))
+        title(ylab = "Exponential Growth")
+      } else if (model_name_iter == "log_growth") {
+        title(ylab = "Logistic Growth")
+      } else if (model_name_iter == "damped_oscillator") {
+        title(ylab = "Damped Oscillator")
+      } else if (model_name_iter == "cusp_catastrophe") {
+        title(ylab = "Cusp Catastrophe")
+      }
+    } else if (dyn_er_iter == sqrt(1) && model_name_iter == "exp_growth") {
+      title(main = expression(paste(sigma^2, " = 1")))
+    } else if (dyn_er_iter == sqrt(2) && model_name_iter == "exp_growth") {
+      title(main = expression(paste(sigma^2, " = 2")))
+    }
+
+    if (model_name_iter == "cusp_catastrophe") {
+      title(xlab = "Time", line = 4)
+    }
+
+    polygon(
+      x = c(x, rev(x)), y = c(sum_stat[, 1], rev(sum_stat[, 7])),
+      col = rgb(1, 0, 0, 0.3)
+    )
+    polygon(
+      x = c(x, rev(x)), y = c(sum_stat[, 2], rev(sum_stat[, 6])),
+      col = rgb(1, 0, 0, 0.6)
+    )
+    polygon(
+      x = c(x, rev(x)), y = c(sum_stat[, 3], rev(sum_stat[, 5])),
+      col = rgb(1, 0, 0, 1)
+    )
+    lines(x, sum_stat[, 4], lwd = 2.5)
+  }
+}
+
+dev.off()

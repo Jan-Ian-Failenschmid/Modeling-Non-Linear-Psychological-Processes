@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 11-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 03-09-2024                                                   #
+#' Last Modified: 23-10-2024                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -18,14 +18,18 @@ require(mgcv)
 
 # Gams
 setClass(
-  "method_gam",
+  "method_gam_usr",
   contains = "method"
 )
 
-setMethod("fit", "method_gam", function(method, data) {
+setMethod("fit", "method_gam_usr", function(method, data) {
   # fit <- gam(y_obs ~ s(time, bs = "tp", k = nrow(data)), data = data)
   n <- nrow(data)
-  fit <- gam(y_obs ~ s(time, bs = "tp", k = n - 1),
+  fit <- gam(
+    y_obs ~ s(time,
+      bs = slot(method, "conditions")[[1]],
+      k = as.numeric(slot(method, "conditions")[[2]])
+    ),
     data = data, method = "ML"
   )
 
@@ -56,7 +60,7 @@ setMethod("fit", "method_gam", function(method, data) {
     slot(method, "ci_coverage") <- ci_test(method, data)
 
     # Extract wigglyness parameter
-    slot(method, "wiggliness") <- fit$sp
+    slot(method, "wiggliness") <- summary(fit)$edf
   }
 
   # Method generics schould always return the adjusted method object

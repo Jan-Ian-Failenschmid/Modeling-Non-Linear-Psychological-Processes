@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 04-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 28-01-2025                                                   #
+#' Last Modified: 30-01-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -111,8 +111,8 @@ legend(
 
 lp_fit <- lprobust(dat$y_obs, dat$time,
   eval = dat$time[!(dat$time %% 2)], p = 3,
-  kernel = "gau", bwselect = "imse-dpi",
-  bwcheck = 0
+  kernel = "epa", bwselect = "imse-dpi",
+  bwcheck = 0, imsegrid = 200
 )
 
 # Top left plot
@@ -132,12 +132,19 @@ title(xlab = "Time", line = 4, cex.lab = cex)
 
 lines(dat$time, dat$y, lty = 2, lwd = 2.5) # State function
 lines(dat$time[!(dat$time %% 2)], lp_fit$Estimate[, 5], lwd = 2.5)
+
+
+epanechnikov_kernel <- function(x) {
+  ifelse(abs(x) <= 1, 0.75 * (1 - x^2), 0)
+}
+
 # Estimated line
 # Local polynomials
 for (eval in c(98, 100, 102)) {
   plot_local_polynomial(
     x = dat$time, y = dat$y_obs, x_eval = eval,
-    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02
+    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02,
+    K = epanechnikov_kernel
   )
 }
 
@@ -173,17 +180,14 @@ lines(dat$time[!(dat$time %% 2)], lp_fit$Estimate[, 5], lwd = 2.5)
 for (eval in c(98, 100, 102)) {
   plot_local_polynomial(
     x = dat$time, y = dat$y_obs, x_eval = eval,
-    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02
+    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02,
+    K = epanechnikov_kernel
   )
 }
 
 # Top right plot
-gaunechnikov_kernel <- function(x) {
-  ifelse(abs(x) <= 1, 0.75 * (1 - x^2), 0)
-}
-
 loc <- seq(-1.5, 1.5, 0.01)
-weight <- sapply((loc - 0), gaunechnikov_kernel)
+weight <- sapply((loc - 0), epanechnikov_kernel)
 
 plot(loc, weight,
   type = "l",
@@ -203,8 +207,8 @@ title(xlab = expression(paste(Delta, "t / h")), line = 4, cex.lab = cex)
 # Mid left plot
 lp_fit <- lprobust(dat$y_obs, dat$time,
   eval = dat$time[!(dat$time %% 2)], p = 3,
-  kernel = "gau", h = 5,
-  bwcheck = 0
+  kernel = "epa", h = 5,
+  bwcheck = 0, imsegrid = 200
 )
 
 plot(dat$time, dat$y_obs,
@@ -229,7 +233,8 @@ lines(dat$time[!(dat$time %% 2)], lp_fit$Estimate[, 5], lwd = 2.5)
 for (eval in c(50, 100, 150)) {
   plot_local_polynomial(
     x = dat$time, y = dat$y_obs, x_eval = eval,
-    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02
+    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02,
+    K = epanechnikov_kernel
   )
 }
 
@@ -237,8 +242,8 @@ for (eval in c(50, 100, 150)) {
 # Mid center plot
 lp_fit <- lprobust(dat$y_obs, dat$time,
   eval = dat$time[!(dat$time %% 2)], p = 3,
-  kernel = "gau", bwselect = "imse-dpi",
-  bwcheck = 0
+  kernel = "epa", bwselect = "imse-dpi",
+  bwcheck = 0, imsegrid = 200
 )
 
 plot(dat$time, dat$y_obs,
@@ -262,7 +267,8 @@ lines(dat$time[!(dat$time %% 2)], lp_fit$Estimate[, 5], lwd = 2.5)
 for (eval in c(50, 100, 150)) {
   plot_local_polynomial(
     x = dat$time, y = dat$y_obs, x_eval = eval,
-    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02
+    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02,
+    K = epanechnikov_kernel
   )
 }
 
@@ -270,8 +276,8 @@ for (eval in c(50, 100, 150)) {
 # Mid right plot
 lp_fit <- lprobust(dat$y_obs, dat$time,
   eval = dat$time[!(dat$time %% 2)], p = 3,
-  kernel = "gau", h = 30,
-  bwcheck = 0
+  kernel = "epa", h = 75,
+  bwcheck = 0, imsegrid = 200
 )
 
 plot(dat$time, dat$y_obs,
@@ -295,15 +301,16 @@ lines(dat$time[!(dat$time %% 2)], lp_fit$Estimate[, 5], lwd = 2.5)
 for (eval in c(50, 100, 150)) {
   plot_local_polynomial(
     x = dat$time, y = dat$y_obs, x_eval = eval,
-    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02
+    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02,
+    K = epanechnikov_kernel
   )
 }
 
 # Bottom left plot
 lp_fit <- lprobust(dat$y_obs, dat$time,
   eval = dat$time[!(dat$time %% 2)], p = 1,
-  kernel = "gau", bwselect = "imse-dpi",
-  bwcheck = 0
+  kernel = "epa", bwselect = "imse-dpi",
+  bwcheck = 0, imsegrid = 200
 )
 
 plot(dat$time, dat$y_obs,
@@ -327,15 +334,16 @@ lines(dat$time[!(dat$time %% 2)], lp_fit$Estimate[, 5], lwd = 2.5)
 for (eval in c(50, 100, 150)) {
   plot_local_polynomial(
     x = dat$time, y = dat$y_obs, x_eval = eval,
-    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02
+    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02,
+    K = epanechnikov_kernel
   )
 }
 
 # Mid center plot
 lp_fit <- lprobust(dat$y_obs, dat$time,
   eval = dat$time[!(dat$time %% 2)], p = 2,
-  kernel = "gau", bwselect = "imse-dpi",
-  bwcheck = 0
+  kernel = "epa", bwselect = "imse-dpi",
+  bwcheck = 0, imsegrid = 200
 )
 
 plot(dat$time, dat$y_obs,
@@ -359,15 +367,16 @@ lines(dat$time[!(dat$time %% 2)], lp_fit$Estimate[, 5], lwd = 2.5)
 for (eval in c(50, 100, 150)) {
   plot_local_polynomial(
     x = dat$time, y = dat$y_obs, x_eval = eval,
-    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02
+    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02,
+    K = epanechnikov_kernel
   )
 }
 
 # Mid right plot
 lp_fit <- lprobust(dat$y_obs, dat$time,
   eval = dat$time[!(dat$time %% 2)], p = 4,
-  kernel = "gau", bwselect = "imse-dpi",
-  bwcheck = 0
+  kernel = "epa", bwselect = "imse-dpi",
+  bwcheck = 0, imsegrid = 200
 )
 
 plot(dat$time, dat$y_obs,
@@ -391,7 +400,8 @@ lines(dat$time[!(dat$time %% 2)], lp_fit$Estimate[, 5], lwd = 2.5)
 for (eval in c(50, 100, 150)) {
   plot_local_polynomial(
     x = dat$time, y = dat$y_obs, x_eval = eval,
-    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02
+    h = lp_fit$Estimate[1, 2], p = lp_fit$opt$p, threshold = 0.02,
+    K = epanechnikov_kernel
   )
 }
 
@@ -431,43 +441,12 @@ par(lwd = 2.5)
 
 # Top left plot
 gam_fit <- gam(y_obs ~ s(time, bs = "tp", k = 10), data = dat)
-predmat <- as.data.frame(predict(gam_fit, type = "lpmatrix"))
-
-plot(dat$time, dat$y_obs,
-  type = "n",
-  main = "a) Unweighted basis functions",
-  xlab = "", ylab = "",
-  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE
-) # Data points
-
-axis(2, at = seq(-10, 10, 2), cex.axis = cex)
-axis(1,
-  at = c(0, 50, 100, 150, 200),
-  labels = c("", "", "", "", ""),
-  cex.axis = cex, padj = 1
-)
-title(xlab = "Time", line = 4, cex.lab = cex)
-
-# Basis function values
-for (i in seq_len(ncol(predmat))) {
-  lines(
-    x = dat$time, y = predmat[, i],
-    col = rgb(red = 1, green = 0, blue = 0, alpha = 1)
-  )
-}
-lines(dat$time, dat$y, lty = 2, lwd = 3) # State functions
-# lines(dat$time, fitted(gam_fit), lwd = 3) # Predictions
-
-points(dat$time, dat$y_obs)
-
-# Top mid plot
-gam_fit <- gam(y_obs ~ s(time, bs = "tp", k = 10), data = dat)
 predmat <- predict(gam_fit, type = "lpmatrix")
 predmat <- as.data.frame(t(t(predmat) * gam_fit$coefficients))
 
 plot(dat$time, dat$y_obs,
   type = "n",
-  main = "b) Fitted GAM with weighted basis functions",
+  main = "a) Fitted GAM with weighted basis functions",
   xlab = "", ylab = "",
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE
 ) # Data points
@@ -489,6 +468,37 @@ for (i in seq_len(ncol(predmat))) {
 }
 lines(dat$time, dat$y, lty = 2, lwd = 3) # State functions
 lines(dat$time, fitted(gam_fit), lwd = 3) # Predictions
+
+points(dat$time, dat$y_obs)
+
+# Top right plot
+gam_fit <- gam(y_obs ~ s(time, bs = "tp", k = 10), data = dat)
+predmat <- as.data.frame(predict(gam_fit, type = "lpmatrix"))
+
+plot(dat$time, dat$y_obs,
+  type = "n",
+  main = "b) Unweighted basis functions",
+  xlab = "", ylab = "",
+  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE
+) # Data points
+
+axis(2, at = seq(-10, 10, 2), cex.axis = cex)
+axis(1,
+  at = c(0, 50, 100, 150, 200),
+  labels = c("", "", "", "", ""),
+  cex.axis = cex, padj = 1
+)
+title(xlab = "Time", line = 4, cex.lab = cex)
+
+# Basis function values
+for (i in seq_len(ncol(predmat))) {
+  lines(
+    x = dat$time, y = predmat[, i],
+    col = rgb(red = 1, green = 0, blue = 0, alpha = 1)
+  )
+}
+lines(dat$time, dat$y, lty = 2, lwd = 3) # State functions
+# lines(dat$time, fitted(gam_fit), lwd = 3) # Predictions
 
 points(dat$time, dat$y_obs)
 
@@ -594,7 +604,7 @@ predmat <- predict(gam_fit, type = "lpmatrix")
 predmat <- as.data.frame(t(t(predmat) * gam_fit$coefficients))
 
 plot(dat$time, dat$y_obs,
-  main = "e) Smoothing parameter too small",
+  main = "e) Smoothing penalty too small",
   xlab = "", ylab = "",
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE
 ) # Data points
@@ -623,7 +633,7 @@ predmat <- predict(gam_fit, type = "lpmatrix")
 predmat <- as.data.frame(t(t(predmat) * gam_fit$coefficients))
 
 plot(dat$time, dat$y_obs,
-  main = "f) Smoothing parameter too large",
+  main = "f) Smoothing penalty too large",
   xlab = "", ylab = "",
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE
 ) # Data points

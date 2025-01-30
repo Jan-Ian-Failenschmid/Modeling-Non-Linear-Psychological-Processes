@@ -3,7 +3,7 @@
 // Author: Jan Ian Failenschmid                                               //
 // Created Date: 08-04-2024                                                   //
 // -----                                                                      //
-// Last Modified: 20-01-2025                                                  //
+// Last Modified: 29-01-2025                                                  //
 // Modified By: Jan Ian Failenschmid                                          //
 // -----                                                                      //
 // Copyright (c) 2024 by Jan Ian Failenschmid                                 //
@@ -79,7 +79,7 @@ generated quantities {
     matrix[N_obs, N_obs] K = gp_exp_quad_cov(xn, alpha, rho)
       + diag_matrix(rep_vector(square(sigma), N_obs));
     matrix[N_obs, N_obs] A = mdivide_right_spd(K_x1', K);
-    f_predict = A * y_obs;
+    f_predict = (A * yn)*ysd + ymean;
     gcv_val = N_obs*sum((y_obs - f_predict)^2)/((N_obs - trace(A))^2);
     f_post_predict = multi_normal_rng(f_predict, K_x1 - A * K_x1
       + diag_matrix(rep_vector(1e-10, N_obs))); 

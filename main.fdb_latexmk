@@ -1,14 +1,14 @@
 # Fdb version 3
-["biber main"] 1738077433 "main.bcf" "main.bbl" "main" 1738078401
+["biber main"] 1738236325 "main.bcf" "main.bbl" "main" 1738247655
   "R_bib.bib" 1729351420 4548 817574eede4ac037b03e4c53b4249a97 ""
   "bibliography.bib" 1729340923 304940 f5fb30782e2c9c0c1a35a888f77fd26e ""
-  "main.bcf" 1738078401 132801 21579c8cd5a0c68fcf8e8899cfb0638e "pdflatex"
+  "main.bcf" 1738247655 132853 f5e5a10ca201d53621d06af69f41e77e "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1738078393 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1738078401
+["pdflatex"] 1738247644 "/home/jan_failenschmid/research/project_1/paper_1/main.tex" "main.pdf" "main" 1738247655
   "/etc/texmf/web2c/texmf.cnf" 1701959205 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1738078393 101300 b7cffb3ff6ba331fa4487b9daec273b5 ""
+  "/home/jan_failenschmid/research/project_1/paper_1/main.tex" 1738247643 104292 a8d4c4e8f92cdad64c3a87943be8318a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136768653 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -257,19 +257,19 @@
   "figures/demonstration_smooths.png" 1726650035 2661200 d74d6d89797ed84aef390814eabcceb6 ""
   "figures/exemplar_no_process_noise.png" 1737474434 81752 42521b8db78d93035ac91eb1bd7b6533 ""
   "figures/exemplar_process_noise.png" 1737474442 253662 fef798e9e6139550b18319fc78d41d27 ""
-  "figures/gam_demonstration.png" 1737995372 312997 4fce9bca15045484372e33b242a6e8d5 ""
-  "figures/gp_demonstration.png" 1737996223 623448 72cc025903004f2f35a54e58909eaf4c ""
-  "figures/locpol_demonstration.png" 1737995372 284385 5ebfcdceb934fd40e2979defc225a02e ""
+  "figures/gam_demonstration.png" 1738236490 313650 cd25af14069672edd8251cc6639e9262 ""
+  "figures/gp_demonstration.png" 1738156679 622405 1beeeb0c2ea790dfda45291085b2f2a1 ""
+  "figures/locpol_demonstration.png" 1738155800 292296 258862e28a426e1935cbf29317479fe1 ""
   "figures/mean_results_ci_coverage.png" 1729352108 732721 a4e5c76c1a7e731421f63c47f88ce666 ""
   "figures/mean_results_gcv.png" 1729352106 640959 ce1dd7dc1b7a1829a7daf3698159dcbb ""
   "figures/mean_results_mse.png" 1729352103 626577 aa10d93058afd88e83ef96ae5eab8576 ""
   "figures/smooth.png" 1729352109 391659 2572066f985ef83004f21e1e6261ff76 ""
   "figures/stoch_mean_variance.png" 1738056043 547952 8cbbec191ed47beda7c51ef221af3130 ""
-  "main.aux" 1738078401 24498 4f2ad908fb8c410f0298d8cb837c3767 "pdflatex"
-  "main.bbl" 1738077445 178469 8ef378eb62998d4a406ea33c0bf61714 "biber main"
-  "main.out" 1738078401 4030 77b49977bfa3cc0d8023698bd54c4d16 "pdflatex"
-  "main.run.xml" 1738078401 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
-  "main.tex" 1738078393 101300 b7cffb3ff6ba331fa4487b9daec273b5 ""
+  "main.aux" 1738247655 24578 266cf618a1a45f6eb7088a434db78f9e "pdflatex"
+  "main.bbl" 1738236327 178469 8ef378eb62998d4a406ea33c0bf61714 "biber main"
+  "main.out" 1738247655 4030 77b49977bfa3cc0d8023698bd54c4d16 "pdflatex"
+  "main.run.xml" 1738247655 2458 b6014125ead1a366c7178ff1bab36e9d "pdflatex"
+  "main.tex" 1738247643 104292 a8d4c4e8f92cdad64c3a87943be8318a ""
   (generated)
   "main.aux"
   "main.bcf"

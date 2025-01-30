@@ -3,7 +3,7 @@
 % % Author: Jan Ian Failenschmid % Created Date: 13-03-2024
 % %
 % -----                                                                        %
-% Last Modified: 28-01-2025                                                    %
+% Last Modified: 30-01-2025                                                    %
 % % Modified By: Jan Ian Failenschmid
 % %
 % %
@@ -136,7 +136,7 @@ psychological variables within an ecologically valid context and to explain
 them through (between-person differences) in within-person processes.
 
 Through ILD studies, many non-linear psychological phenomena and processes have
-been discovered in recent years \textcolor{blue}{, which either show
+been discovered in recent years, \textcolor{blue}{which either show
   monotonically increasing or decreasing non-linear trajectories or
   non-monotonic
   gradual or even abrupt change}. Clear examples of \textcolor{blue}{ gradual
@@ -152,9 +152,9 @@ motor skill development \parencite{newell_time_2001} and second language
 acquisition \parencite{de_bot_dynamic_2007}. Figure~\ref{fig:examplar_npn}
 shows common \textcolor{blue}{deterministic} model choices for these kinds of
 processes in the form of an exponential growth function (a) and a logistic
-growth function (b). \textcolor{blue}{It is noteworthy, that this exponential
-  growth function has been modelled as a deterministic Ornstein-Uhlenbeck
-  processes, which is the continuous time equivalent to the common lag-one
+growth function (b). \textcolor{blue}{It is noteworthy that this exponential
+  growth function has been modeled as a deterministic Ornstein-Uhlenbeck
+  process, which is the continuous-time equivalent to the common lag-one
   autoregressive model. The (person-specific) mean and slope of the
   autoregressive model therefore correspond to the asymptote and the rate of
   change of the exponential growth model.}
@@ -185,7 +185,7 @@ modelled using a cusp catastrophe model
 \parencite{van_der_maas_sudden_2003,chow_cusp_2015}. This dynamic model has
 been exemplified in Figure~\ref{fig:examplar_npn}~(c).
 
-As a final example \textcolor{blue}{we consider non-monotonic gradual change.
+As a final example, \textcolor{blue}{we consider non-monotonic gradual change.
   This can be found, for example,} in (self-) regulatory systems, which
 maintain a desired state by counteracting external perturbations. In these
 systems, the degree of regulation often depends on the distance between the
@@ -250,8 +250,9 @@ Figure~\ref{fig:examplar_npn}~c~\&~d).
   often require many higher-order terms to accurately capture the intricate
   trajectory. However, the large number of highly correlated parameters in
   these models can lead to model instability, which can cause convergence
-  issues during estimation. This instability may restrict the maximum degree of
-  the polynomial, forcing a simpler model that risks underfitting. Even when
+  issues during estimation. This instability may force researchers to use
+  simpler models, even though these might not be able to capture more complex
+  processes accurately. Even when
   the polynomial degree is optimal, the non-locality of polynomials can result
   in overfitting at the boundaries of the process while underfitting the
   central regions. This may also produce non-sensical predictions, such as
@@ -265,7 +266,7 @@ An alternative approach is piecewise spline regression, which constructs a
 together at specific points, called knots (e.g., connecting multiple cubic
 functions end-to-end into an overarching growth curve;
 \textcite{tsay_nonlinear_2019}). \textcolor{blue}{This alleviates some of the
-  previously described issues, by creating localized models. These models have
+  previously described issues by creating localized models. These models have
   less correlated parameters and are therefore less prone to model instability.
   However, piecewise spline regression still requires researchers to carefully
   select the optimal piecewise functions and knot locations, which may be done
@@ -300,11 +301,12 @@ analysis methods, local polynomial regression, Gaussian processes, and
 generalized additive modelsm, and evaluates their applicability to typical ILD
 scenarios (Section~\ref{method_introduction}). \textcolor{blue}{ The methods
   reviewed in this article are various semi- and non-parametric regression
-  techniques, that were chosen for their ability to model non-linear processes
+  techniques that were chosen for their ability to model non-linear processes
   while accommodating different levels of prior knowledge. Our review
   specifically focuses on methods that provide a clear and transparent
   mechanism
-  for inferring latent processes and for preventing over- and underfitting the
+  for inferring non-linear processes and for preventing over- and underfitting
+  the
   data. Additionally, we limited our selection to methods that are implemented
   in
   the open-source software R \parencite{R-base}, making them readily accessible
@@ -314,7 +316,7 @@ scenarios (Section~\ref{method_introduction}). \textcolor{blue}{ The methods
   measurement frequency requirements.} We additionally compare how well each
 method recovers different non-linear processes under common ILD conditions in a
 simulation study (Section~\ref{simulation}). Lastly, we demonstrate how the
-best-performing method can be applied to analyze an existing dataset
+best-performing method can be applied to analyze an existing data set
 (Section~\ref{empirical_example}). Note that, to introduce these methods
 accessibly and apply them under conditions where software implementations are
 available, this article focuses on the univariate single-subject design.
@@ -349,7 +351,7 @@ and generalized additive models. \textcolor{blue}{
   underlying processes, these methods can help researchers identify functional
   forms that are strong candidates for parametric models by highlighting key
   features in the data that these models should capture.
-  Additionally, the semi-parametric methods can combine incomplete parametric
+  Additionally, semi-parametric methods can combine incomplete parametric
   models with flexible non-parametric components. This ability to test partial
   theories while accurately capturing the underlying processes makes these
   methods especially useful for iterative theory development by, for example,
@@ -371,7 +373,7 @@ non-linear function over the entire set of observations
   generalization of the rolling average for timeseries smoothing. A rolling
   average assumes that observations that are close in time are likely noisy
   indicators of similar process values. Therefore, the value of the process can
-  be estimated at any point in time, by averaging out the measurement error of
+  be estimated at any point in time by averaging out the measurement error of
   data points in close proximity. LPR generalizes this principle by using more
   flexible polynomial regressions instead of an average to approximate the
   process pointwise.
@@ -379,7 +381,7 @@ non-linear function over the entire set of observations
   for the damped oscillator example process (dotted black line) introduced in
   Figure~\ref{fig:examplar_npn}~(d). Three of the one 100 local cubic
   polynomials that were used to estimate this process are shown in red.
-  Figure~\ref{fig:locpol_dem}~(b) shows a zoomed in portion of the process to
+  Figure~\ref{fig:locpol_dem}~(b) zooms in to
   illustrate how each local cubic regression estimates the process value at a
   single time point, which are subsequently connected into an overall estimate
   of the process.}
@@ -506,22 +508,22 @@ time points, LPR is a non-parametric technique.
 \subsubsection{\textcolor{blue}{Practical implementation}}
 
 \textcolor{blue}{
-  When fitting an LPR, researchers need to make three decisions concerning
-  the kernel function, the bandwidth of the kernel, and the degree of the local
+  When fitting an LPR, researchers need to make three decisions concerning the
+  kernel function, the bandwidth of the kernel, and the degree of the local
   polynomials. Regarding the kernel functions, common choices include the
   Gaussian, the Epanechnikov, or the uniform kernel, which assigns equal
   weights to all data points up to a certain distance. Because the Epanechnikov
   kernel has been shown to be optimal in many situations
   \parencite{fan_local_1997}, it constitutes a good default choice if there are
   no strong preferences for other kernels. In practice, different kernel
-  functions rarely result in strongly differing estimates. Nevertheless it is
-  advisable to test the sensitivity of ones conclusions to using different
-  kernel functions.
+  functions rarely result in strongly differing estimates. Nevertheless, it is
+  advisable to conduct sensitivity analyses to assess whether any conclusions
+  depend (strongly) on the chosen kernel.
 }
 
 \textcolor{blue}{
   The bandwidth parameter effectively determines the wiggliness of the
-  estimated process. A bandwidth that is too small, results in an LPR that is
+  estimated process. A bandwidth that is too small results in an LPR that is
   too flexible and overfits the data (Figure~\ref{fig:locpol_dem}~(d)).
   Conversely, a bandwidth that is too large results in an LPR that is not
   flexible enough and underfits the data (Figure~\ref{fig:locpol_dem}~(f)).
@@ -574,18 +576,18 @@ this paper.
 }
 
 \textcolor{blue}{
-An implementation of LPR that includes a bias correction can be found in the
-nprobust R package \parencite{R-nprobust}. The LPR in
-Figure~\ref{fig:examplar_npn}~(a) can be fit using:
-{\fontsize{10}{12}\selectfont\texttt{lprobust(y, time, eval = time, p = 3,
-  kernel = 'epa', bwselect = 'imse-dpi', bwcheck = 0)}} Here we set the
+An implementation of LPR can be found in the nprobust R package
+\parencite{R-nprobust}. The LPR in Figure~\ref{fig:examplar_npn}~(a) can be fit
+using: {\fontsize{10}{12}\selectfont\texttt{lprobust(y, time, eval = time, p =
+  3, kernel = 'epa', bwselect = 'imse-dpi', bwcheck = 0)}}. Here we set the
 polynomial degree to three, chose an Epanechnikov kernel, and specify that the
 bandwidth should be optimized by minimizing the integrated mean squared error.
-The last argument is used to suppress an automated correction of the bandwidth
-towards the beginning and end of the process. This code returns a bias
-corrected estimate of the process, as well as robust standard errors and the
-optimized bandwidth parameter, which can be interpreted as estimate of the
-wigglyness of the process.
+The LPR implemented in nprobust also automatically corrects for the possible
+bias introduced by the finite polynomial degree. The last argument is used to
+suppress an automated correction of the bandwidth towards the beginning and end
+of the process. This code returns a bias-corrected estimate of the process, as
+well as robust standard errors and the optimized bandwidth parameter, which can
+be interpreted as an estimate of the wiggliness of the process.
 }
 
 \subsection{Gaussian process regression}
@@ -631,26 +633,19 @@ inferences about the process \parencite{rasmussen_gaussian_2006}.
 \begin{sidewaysfigure*}[htbp]
   \caption{Demonstration of a Gaussian process regression}
   \fitfigure{gp_demonstration.png}
-  \figurenote{This figure shows how LPR (solid black) estimates the
-    underlying
-    process (dotted black). \textcolor{blue}{
-      Panel (a) shows three of the 100 local cubic regressions used to
-      construct
-      the overall estimate of the process (red). Panel (b) provides a zoomed-in
-      view of a specific section of panel (a), illustrating that the estimated
-      process is composed of the intercepts of the three local cubic
-      regressions.
-      Panel (c) depicts the Epanechnikov kernel that was used in the LPR
-      depicted
-      in panel (a). Panels (d) to (f) illustrate the impact of varying the
-      bandwidth of a local cubic regression. Panel (d) highlights overfitting
-      resulting from a bandwidth that is too narrow, panel (e) shows an
-      optimized
-      bandwidth, and panel (f) depicts underfitting caused by a bandwidth that
-      is
-      too wide. Lastly, panels (g) to (i) display optimized local linear (g),
-      quadratic (h), and quartic (i) regressions, showing the effect of varying
-      the polynomial degree.}
+  \figurenote{This figure shows how GP regression (solid black) estimates the
+    underlying process (dotted black). \textcolor{blue}{ Panel (a) shows a
+      sample from a GP prior with a squared-exponential kernel and halfnormal
+      hyperparameter priors. Panel (b) shows a sample from the corresponding GP
+      posterior distribution. Panel (c) depicts the squared-exponential kernel
+      that was used in panel (A) and (B). Panels (d) and (e) illustrate the
+      impact of fixing the marginal variance of a GP prior to values that are
+      too
+      small or too large resepectively. Panel (f) depicts a Matérn 1/2 kernel
+      that was used in the GP regression in panel (i). Lastly, panels (g) and
+      (h)
+      illustrate the effect of fixing the lengthscale of the GP prior to values
+      that are too small or too large respectively.}
   }
   \label{fig:gp_dem}
 \end{sidewaysfigure*}
@@ -659,8 +654,8 @@ inferences about the process \parencite{rasmussen_gaussian_2006}.
   A GP distribution is defined by a mean function $m(t)$ and a covariance
   function $cov(t, \, t)$. These functions are continuous extensions of the
   mean vector and covariance matrix of a multivariate normal distribution.
-  Together, they define the mean and covariance of the values that functions
-  described by the GP assume at any finite set of time points.
+  Together, they define the mean and covariance of the values that the
+  functions described by the GP assume at any finite set of time points.
 }
 
 \textcolor{blue}{
@@ -723,9 +718,9 @@ the covariance decreases with increasing distances between time points. Such
 that a smaller lengthscale corresponds to a wigglier process.
 \textcolor{blue}{Since GPs typically use a single lengthscale for the entire
   process, they assume a constant level of wiggliness throughout
-  the underlying process.}.
-The marginal standard deviation describes the spread of the functions, which
-are described by the GP at any point in time.
+  the underlying process.}
+The marginal standard deviation describes the spread of the functions described
+by the GP at any point in time.
 
 \subsubsection{\textcolor{blue}{Practical implementation}}
 
@@ -739,7 +734,7 @@ are described by the GP at any point in time.
   estimates are preferred, the Matérn class of kernels may offer suitable
   alternatives. The choice of a specific kernel can be informed by prior
   theory, specific smoothness requirements, or in a data-driven manner by
-  model comparison methods such as Bayes factors or corss-validation.
+  model comparison methods such as Bayes factors or cross-validation.
 }
 
 \textcolor{blue}{
@@ -750,14 +745,14 @@ are described by the GP at any point in time.
   too narrow and unable to adequately capture the process, which leads to
   underfitting. However, a marginal variance that is too large does not result
   in overfitting to the same degree, as shown in Figure~\ref{fig:gp_dem}~(e).
-  Since the lengthscale of the GP controls its wigglyness, a lengthscale that
+  Since the lengthscale of the GP controls its wiggliness, a lengthscale that
   is too small leads to overfitting (Figure~\ref{fig:gp_dem}~(g)), whereas a
   lengthscale that is too large results in underfitting
   (Figure~\ref{fig:gp_dem}~(h)). While the hyperparameters of a GP can be
   optimized in a similar way to those of the other methods presented in this
   paper, we recommend using a full Bayesian approach that assigns prior
   distributions to the hyperparameters. In cases where no prior information is
-  available about the wigglyness or spread of the process, these priors can be
+  available about the wiggliness or spread of the process, these priors can be
   vague to assume that all parameter values are equally likely a priori. In
   practice, it is often helpful to standardize the predictor and outcome
   variables to ensure that the hyperparameter priors are scaled appropriately.
@@ -794,8 +789,8 @@ are described by the GP at any point in time.
 \subsubsection{\textcolor{blue}{Statistical theory}}
 
 Generalized additive models (GAMs) are a class of semi-parametric models that
-can be seen as an extension of regression models that do not use variables as
-predictors of an outcome but so-called smooth terms:
+can be seen as an extension of regression models that \textcolor{blue}{does}
+not use variables as predictors of an outcome but so-called smooth terms:
 
 \begin{equation}
   Y_t = \beta_0 + \sum_{i = 1}^{I} \beta_i(t_i),
@@ -808,8 +803,9 @@ overall estimate of a non-linear process \parencite{wood_generalized_2006,
 inferred from the data through a method called smoothing splines. These
 smoothing splines are very similar to the piecewise splines introduced in the
 introduction in that the smoothing splines also take the form of a basis
-function regression. However, the basis function regression used by the
-smoothing splines does not use the raw predictor values directly. Instead, it
+function regression. \textcolor{blue}{
+  This basis function regression
+} does not use the raw predictor values directly. Instead, it
 combines multiple predefined functions (called basis functions) of the
 predictor $R_{ki}(t_i)$, such as polynomial basis functions of different
 degrees, along with their weights $\alpha_{ki}$ in a regression model:
@@ -821,69 +817,61 @@ degrees, along with their weights $\alpha_{ki}$ in a regression model:
 \noindent Generally, using more basis functions (and thus coefficients) results
 in a smoothing spline (and thus smooth term) that is more flexible, which means
 that it can fit the data closer during the estimation. Smoothing splines rely
-on using enough basis functions to overfit the data, which ensures that they
-are flexible enough to capture the underlying process accurately. In summary,
-GAMs use a sum of smooth terms to model the outcome variable, where each smooth
-term is estimated using a smoothing spline. These smoothing splines build on
-basis functions such that a greater amount of basis functions yields a more
-flexible smoothing spline.
+on using enough basis functions \textcolor{blue}{to be able} to overfit the
+data, which ensures that they are flexible enough to capture the underlying
+process accurately.
 
-Smoothing splines can be constructed using different ways to generate the basis
-functions that constitute the smoothing spline. The most common way to
-construct these basis functions is thin-plate splines, which are a
-generalization of cubic splines \parencite{wood_generalized_2006}. In contrast
-to the piecewise splines introduced earlier, thin-plate splines entirely avoid
-knots. Instead, the latter uses automatically generated and increasingly wiggly
-basis functions that are defined over the entire range of the data and are then
-combined in a basis function regression. When as many basis functions are used
-as there are data points, the resulting thin-plate spline optimally
-interpolates and thus overfits the data. To counteract this overfitting,
-thin-plate splines (and smoothing splines in general) have an additional
-penalty term, similar to those used in a lasso or ridge regression, to control
-how closely the smooth term fits the data during the estimation. This penalty
-balances the complexity and fit of the smooth term, ensuring the model captures
-the underlying process accurately without overfitting
-\parencite{gu_smoothing_2013, wahba_spline_1980}.
-
-Thin-plate splines typically require as many basis functions as data points,
-which can result in highly complex models that are computationally infeasible
-to estimate for larger datasets. To address this, it is possible to approximate
-the thin-plate spline solution using fewer basis functions through a dimension
-reduction technique, similar to principal component analysis
-\parencite{wood_thin_2003}. In this approach, the number of selected basis
-functions should be large enough to capture the process accurately but not so
-large as to be computationally impractical. This procedure is automated in
-standard software \parencite{R-mgcv_a}; however, it is not used in this paper.
-
-The standard error estimates provided by GAMs commonly tend to underestimate
-the uncertainty associated with the process estimate. This occurs because the
-weight given to the penalty term, which balances the model's complexity and
-fit, is typically assumed to be fixed during the standard error estimation,
-overlooking a source of uncertainty. However, simulations have shown that,
-except when estimating process that are close to linear, the standard errors
-remain reasonably accurate, resulting in confidence intervals with close to
-nominal coverage proportions \parencite{marra_coverage_2012}. Additionally, the
-accuracy of the standard errors could be improved through, for example,
-Bayesian estimation, which accounts for the uncertainty in the penalty weight
-\parencite{wood_generalized_2006}.
-
-While GAMs can combine multiple smooth terms, in this paper, we will focus on
-the simplest GAMs consisting of a single smooth term. Figure~\ref{fig:gam_dem}
-illustrates a simple GAM construction with a single smooth term for time
-fitted to the example process. The ten basis functions that constitute the
-thin-plate regression spline used in this example are shown in red.
+In summary, GAMs use a sum of smooth terms to model the
+outcome variable, where each smooth term is estimated using a smoothing spline.
+These smoothing splines build on basis functions such that a greater amount of
+basis functions yields a more flexible smoothing spline. \textcolor{blue}{
+  Figure~\ref{fig:gam_dem}~(a) shows a GAM composed of a single smooth term
+  that was fit to the example process. The ten weighted basis functions that
+  constitute the smoothing spline are shown in red.
+  Figure~\ref{fig:gam_dem}~(b)
+  shows the unweighted basis functions as direct transformations of the
+  predictor variable (i.e., time) before they are combined in the basis
+  function
+  regression.} While GAMs can combine multiple smooth terms, in this paper, we
+will focus on
+the simplest GAMs consisting of a single smooth term.
 
 \begin{figure}[!t]
   \caption{Demonstration of the construction of a GAM}
   \fitfigure{gam_demonstration.png}
   \figurenote{This figure shows how generalized additive models (solid black)
-    estimate the underlying process (dotted black). Here, the predicted values
-    for the process at any point in time correspond to the weighted average of
-    the basis functions (red).}
+    estimate the underlying process (dotted black).
+    \textcolor{blue}{Panel (a) shows a fitted
+      GAM with a single smooth term for time. The ten weighted thin-plate
+      spline basis functions (red) sum to produce an estimated of the
+      underlying. The unweeighted basis functions are depicted in panel (b).
+      Panel (c) and (d) illustrate the effect of fitting a GAM with too few
+      or too many basis functions resepectively. Similarly, panel (e) and (f)
+      illustrate GAMs with a smoothing penalty that is too small or too large,
+      leading to over- or underfitting respectively.}
+  }
   \label{fig:gam_dem}
 \end{figure}
 
-\subsubsection{\textcolor{blue}{Practical implementation}}
+\textcolor{blue}{ Smoothing splines can be constructed using different families
+  of basis functions, called spline bases. } The most common
+\textcolor{blue}{basis is} thin-plate splines, which are a generalization of
+cubic regression splines \parencite{wood_generalized_2006}. In contrast to the
+piecewise
+splines introduced earlier, thin-plate splines entirely avoid knots. Instead,
+thin-plate splines are composed of automatically generated and increasingly
+wiggly basis functions that are defined over the entire range of the data
+(Figure~\ref{fig:gam_dem}~(b)) and are then combined in the basis function
+regression (Figure~\ref{fig:gam_dem}~(a)).
+
+\textcolor{blue}{ When estimating the coefficients (i.e., weights) of the basis
+  function regression, smoothing splines use an additional penalty term, }
+similar to those used in a lasso or ridge regression, to control how closely
+the smooth term fits the data during the estimation.
+\textcolor{blue}{Optimizing the weight of this smoothing} penalty balances the
+complexity and fit of the smooth term, ensuring the model captures the
+underlying process accurately without overfitting
+\parencite{gu_smoothing_2013, wahba_spline_1980}.
 
 GAMs do not have a specific parameter, like the bandwidth in an LPR or the
 lengthscale in a GP, that directly reflects the wiggliness of a process.
@@ -896,10 +884,7 @@ of these coefficients are constrained and cannot vary independently. This
 reduces the effective degrees of freedom for each smooth term. Depending on the
 weight of the penalty, the EDF can range from one (indicating a linear smooth)
 to the total number of basis functions, with larger EDF values generally
-reflecting a wigglier smooth term. Although the EDF are useful for inspecting
-the wiggliness of a smooth term, it is important to note that they are not a
-parameter. As a result, GAMs do not provide a measure of uncertainty in the
-wiggliness of the process as GPs do. However, unlike LPR and GPs, GAMs have the
+reflecting a wigglier smooth term. However, unlike LPR and GPs, GAMs have the
 advantage that they do not assume constant wiggliness in the underlying
 process. This flexibility arises because the penalty term in a GAM only
 captures the overall wiggliness of the estimated process\footnote{Typically in
@@ -909,6 +894,78 @@ and, thus, does not constrain the wiggliness to be constant over time. For
 example, an estimated process may have low wiggliness at the beginning and high
 wiggliness at the end, yet still have the same overall penalty as another
 estimate with consistent moderate wiggliness throughout the entire range.
+
+\textcolor{blue}{
+  The standard error estimates provided by GAMs commonly assume that the weight
+  of the penalty term is fixed, whereas in reality it is most frequently
+  optimized in a data driven manner. Beacuse of this, the standard errors
+  tend to underestimate the uncertainty associated with the process estimate.}
+However, simulations have shown that,
+except when estimating process that are close to linear, the standard errors
+remain reasonably accurate, resulting in confidence intervals with close to
+nominal coverage proportions \parencite{marra_coverage_2012}. Additionally, the
+accuracy of the standard errors could be improved through, for example,
+Bayesian estimation, which accounts for the uncertainty in the penalty weight
+\parencite{wood_generalized_2006}.
+
+\subsubsection{\textcolor{blue}{Practical implementation}}
+
+\textcolor{blue}{
+  When applying GAMs, researchers need to select a spline basis, determine the
+  number of basis functions, and optimize the smoothing penalty weight. For
+  most applications, thin-plate or cubic regression splines are optimal default
+  choices. The number of basis functions should be as large as possible
+  (corresponding to the number of data points minus identifiability
+  constraints) to ensure that the smoothing spline is sufficiently flexible to
+  capture the underlying process accurately. Figure~\ref{fig:gam_dem}~(c) shows
+  a smoothing spline with too few basis functions, leading to underfitting.
+  However, using too many basis functions does not similarly result in
+  overfitting (Figure~\ref{fig:gam_dem}~(d)), as the smoothing penalty can
+  control the excessive model complexity. Nevertheless, a large number of basis
+  functions can make models computationally expensive or infeasible for larger
+  data sets. To address this, dimension reduction techniques similar to
+  principal component analysis can approximate a smoothing spline solution
+  using fewer basis functions \parencite{wood_thin_2003}. In this approach, the
+  number of basis functions should be sufficient to capture the underlying
+  process while remaining computationally practical. This procedure is
+  automated in standard software \parencite{R-mgcv_a}; however, it is not used
+  in this paper.}
+
+\textcolor{blue}{
+  Lastly, the smoothing penalty weight must be optimized to avoid over- or
+  underfitting. A penalty that is too small results in a smoothing spline that
+  is overly flexible and prone to overfitting (Figure~\ref{fig:gam_dem}~(d)).
+  Conversely, a penalty that is too large yields a spline that is not flexible
+  enough, leading to underfitting (Figure~\ref{fig:gam_dem}~(3)). The smoothing
+  penalty weight is typically optimized through data-driven methods, such as
+  directly maximizing the likelihood or using cross-validation.
+}
+
+\textcolor{blue}{ GAMs are implemented in the mgcv package
+  \parencite{R-mgcv_a}. The model shown in Figure~\ref{fig:gam_dem}~(b) was
+  implemented using the code {\fontsize{10}{12}\selectfont\texttt{ gam(y $\sim$
+        s(time, bs = 'tp', k = 10)) }}, which fits the observed data with a
+  single
+  smooth term for time. The syntax specifies that the smooth term should be
+  composed of ten thin-plate spline basis functions, although the number of
+  basis functions can also be set to a larger value or determined
+  automatically. The smoothing penalty weight is automatically optimized in
+  mgcv to minimize the generalized cross-validation error. Similar to GPs, the
+  mgcv model syntax allows for the creation of more sophisticated models by
+  combining multiple smooth terms or incorporating parametric components. }
+
+\textcolor{blue}{
+  Fitting a GAM provides an estimate of the underlying process along with
+  corresponding credible intervals. Additionally, researchers obtain the EDF
+  for
+  each smooth term separately. While the EDF are useful for assessing the
+  wiggliness of a smooth term, it is important to note that they are not model
+  parameters. Consequently, unlike GPs, GAMs do not provide a measure of
+  uncertainty for the wiggliness of the process. The mgcv implementation of
+  GAMs
+  also includes significance tests to determine whether a given smooth term is
+  effectively zero. Lastly, it is possible to extract the individual basis
+  function coefficients from a fitted GAM.}
 
 \subsection{Key differences between the methods}
 
@@ -1132,21 +1189,17 @@ process is not measured close to the asymptote.
 
 \textcolor{blue}{
   Lastly, we manipulated the sampling frequency by varying the number of
-  equidistant measurements taken per time step, with each time step
-  representing
-  an arbitrary unit of time within the sampling period. As a result of this
-  simulation design, the overall sample size in each condition is determined by
-  the combination of the sampling period and the sampling frequency. For
-  example,
-  increasing the sampling frequency within the same period by a factor of two
-  approximately doubles the overall sample size, as the interval between
-  consecutive measurement points is halved. Similarly, doubling the sampling
-  period also doubles the overall sample size without changing the distance
-  between measurements. Sampling frequencies of one, two, and three
-  observations
-  per time step produced sample sizes typical of EMA studies, ranging between
-  43
-  and 253 total observations \parencite{wrzus_ecological_2023}.
+  equidistant measurements taken per time step. As a result of this simulation
+  design, the overall sample size in each condition is determined by the
+  combination of the sampling period and the sampling frequency. For example,
+  increasing the sampling frequency within a fixed period by a factor of two
+  halves the interval between consecutive measurement points and, in turn,
+  approximately doubles the overall sample size. Similarly, doubling the
+  sampling period also doubles the overall sample size without changing the
+  distance between measurements. Sampling frequencies of one, two, and three
+  observations per time step produced sample sizes typical of EMA studies,
+  ranging between 43 and 253 total observations
+  \parencite{wrzus_ecological_2023}.
 } This is illustrated in
 Figure~\ref{fig:exemplar_pn} where the top four panels show examples with one
 observation per time step, whereas the bottom four panels illustrate three
@@ -1189,7 +1242,7 @@ data provided by measuring the process for a longer time, since it relies
 mostly on data in its local neighborhood during the estimation. Therefore,
 extending the sampling period beyond these local neighborhoods was not expected
 to increase the inference accuracy. In contrast, the GAMs and parametric
-models, which do not assume constant wiggliness and utilize the entire dataset
+models, which do not assume constant wiggliness and utilize the entire data set
 during the estimation, were expected to infer all processes more accurately
 with larger sampling periods.
 
@@ -1300,7 +1353,7 @@ Second, GPs were estimated in STAN\footnote{Alternatively, the GP regression
 function, following common practice. Third, GAMs with a single smooth term for
 time were fitted using the mgcv package \parencite{R-mgcv_a}. The polynomial
 regressions were estimated using base R, with correlated (i.e., standard)
-polynomial terms and dataset specific polynomial degrees. Finally, the
+polynomial terms and data set specific polynomial degrees. Finally, the
 parametric stochastic differential equation models corresponding to the true
 data-generating models were estimated using the Dynr package
 \parencite{R-dynr}. After fitting each model to the data, they were used to
@@ -1315,7 +1368,7 @@ corresponding outcome measures were excluded from the following analyses.
   the results, and generate the figures is available in the
   \href{https://osf.io/3ytdx/}{online supplementary material}. Additionally, a
   \href{https://jan-ian-failenschmid.shinyapps.io/modeling_non_linearity_app/}{
-    supplementary web application }, is provided, allowing readers to further
+    supplementary web application } is provided, allowing readers to further
   inspect and explore the results presented in the paper. The web application
   also enables users to simulate data based on any of the processes discussed
   in
@@ -1582,7 +1635,8 @@ protocols, see \textcite{heininga_dynamical_2019}. The diversity in the study
 population makes it likely to find non-linear processes for at least some
 participants.
 
-The dataset used for this application contained 77 participants in the clinical
+The data set used for this application contained 77 participants in the
+clinical
 sample and 40 participants in the control sample, who were matched to the
 clinical sample by gender and age, resulting in a total sample size of
 117\footnote{The original published data set contained one additional

@@ -3,7 +3,7 @@
 // Author: Jan Ian Failenschmid                                               //
 // Created Date: 08-04-2024                                                   //
 // -----                                                                      //
-// Last Modified: 27-01-2025                                                  //
+// Last Modified: 30-01-2025                                                  //
 // Modified By: Jan Ian Failenschmid                                          //
 // -----                                                                      //
 // Copyright (c) 2024 by Jan Ian Failenschmid                                 //
@@ -30,28 +30,16 @@ data {
   int<lower=1> N_obs;
   array[N_obs] real x_obs;
   vector[N_obs] y_obs;
-  // real t_diff_min;
-  // real t_diff_max;
+
 }
 
 transformed data {
   real xmean = mean(x_obs);
-  real ymean = mean(y_obs);
   real xsd = sd(x_obs);
-  real ysd = sd(y_obs);
   vector[N_obs] xs = (to_vector(x_obs) - xmean)/xsd;
-  vector[N_obs] yn = (y_obs - ymean)/ysd;
-  // vector[2] par_guess = [log(10), log(20)]';
-  // vector[2] theta = [t_diff_min, t_diff_max]';
-  // vector[2] par;
-  // array[0] real x_r;
-  // array[0] int x_i;
-
-  // par = algebra_solver(tail_delta, par_guess, theta, x_r, x_i);
-
-  // print("a = ", exp(par[1]));
-  // print("b = ", exp(par[2]));
+  array[N_obs] real xn = to_array_1d(xs);
 }
+
 
 parameters {
   real<lower=0> rho;
@@ -60,16 +48,16 @@ parameters {
 }
 
 model {
-  // rho ~ inv_gamma(100, 250);
+
   rho ~ normal(0, 1);
-  alpha ~ normal(0, 2);
+  alpha ~ normal(0, 5);
   sigma ~ normal(0, 1);
 
   matrix[N_obs, N_obs] cov =  gp_matern_12_cov(xs, xs, alpha, rho)
   + diag_matrix(rep_vector(square(sigma), N_obs));
   matrix[N_obs, N_obs] L_cov = cholesky_decompose(cov);
   
-  yn ~ multi_normal_cholesky(rep_vector(0, N_obs), L_cov);
+  y_obs ~ multi_normal_cholesky(rep_vector(0, N_obs), L_cov);
 }
 
 generated quantities {
@@ -89,3 +77,4 @@ generated quantities {
     // y_predict = normal_rng(f_post_predict, sigma);
   }
 }
+

@@ -3,7 +3,7 @@
 // Author: Jan Ian Failenschmid                                               //
 // Created Date: 08-04-2024                                                   //
 // -----                                                                      //
-// Last Modified: 20-01-2025                                                  //
+// Last Modified: 30-01-2025                                                  //
 // Modified By: Jan Ian Failenschmid                                          //
 // -----                                                                      //
 // Copyright (c) 2024 by Jan Ian Failenschmid                                 //
@@ -36,11 +36,11 @@ transformed data {
 }
 
 generated quantities {
-  // rho ~ inv_gamma(100, 250);
-  real<lower=0> rho = abs(normal_rng(0, 1));
-  real<lower=0> alpha = abs(normal_rng(0, 2));
 
-  matrix[N_obs, N_obs] cov =  gp_exp_quad_cov(xn, alpha, rho)
+  real<lower=0> rho = abs(normal_rng(0, 1));
+  real<lower=0> alpha = abs(normal_rng(0, 5));
+
+  matrix[N_obs, N_obs] cov = gp_exp_quad_cov(xn, alpha, rho)
   + diag_matrix(rep_vector(1e-6, N_obs));
   matrix[N_obs, N_obs] L_cov = cholesky_decompose(cov);
   vector[N_obs] f = multi_normal_cholesky_rng(rep_vector(0, N_obs), L_cov);

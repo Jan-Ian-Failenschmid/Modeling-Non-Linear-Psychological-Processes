@@ -172,8 +172,7 @@ for (run in c("simulation")) {
     repetitions <- 30
     set.seed(12345)
   } else if (run == "simulation") {
-    # repetitions <- 100
-    repetitions <- 5
+    repetitions <- 100
     set.seed(54321)
   }
 
@@ -184,16 +183,13 @@ for (run in c("simulation")) {
       gen_model_list = list(
         exp_growth, log_growth, damped_oscillator, cusp_catastrophe
       ),
-      # method_list = list(locpol, gp, gam, dynm, simple, poly, poly_orth),
-      method_list = list(gp, gam),
+      method_list = list(locpol, gp, gam, dynm, simple, poly, poly_orth),
       conditions = list(
-        # time = c(100, 200), # 2 & 4 weeks rescaled to 1 week = 50 units
-        time = c(200), # 2 & 4 weeks rescaled to 1 week = 50 units
+        time = c(100, 200), # 2 & 4 weeks rescaled to 1 week = 50 units
         # 3, 6, 9, measurements per day
         stepsize = c((50 / 7) / 3, (50 / 7) / 6, (50 / 7) / 9),
         # dynamic error variances of 12.5%, 25%, and 50% of the process range
-        # dyn_er = sqrt(c(.5, 1, 2))
-        dyn_er = sqrt(c(2))
+        dyn_er = sqrt(c(.5, 1, 2))
       ),
       repetitions = repetitions,
       out_dir = out_dir

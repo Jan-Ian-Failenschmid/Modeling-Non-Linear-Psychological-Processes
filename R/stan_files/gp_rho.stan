@@ -64,7 +64,7 @@ generated quantities {
     matrix[N_obs, N_obs] K = gp_exp_quad_cov(xn, alpha, rho)
       + diag_matrix(rep_vector(square(sigma), N_obs));
     matrix[N_obs, N_obs] A = mdivide_right_spd(K_x1', K);
-    f_predict = (A * yn)*ysd + ymean;
+    f_predict = A * y_obs;
     gcv_val = N_obs*sum((y_obs - f_predict)^2)/((N_obs - trace(A))^2);
     f_post_predict = multi_normal_rng(f_predict, K_x1 - A * K_x1
       + diag_matrix(rep_vector(1e-10, N_obs))); 

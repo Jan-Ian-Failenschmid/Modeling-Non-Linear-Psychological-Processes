@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 24-09-2024                                                   #
+#' Last Modified: 31-01-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -482,7 +482,7 @@ make_exemplar_plot <- function(
     main = main, xlab = xlab, ylab = ylab,
     cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, ...
   )
-  lines(dat$time, dat$y)
+  lines(dat$time, dat$y, lwd = 2.5)
   eval(expr)
 }
 

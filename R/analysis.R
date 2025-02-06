@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 19-10-2024                                                   #
+#' Last Modified: 31-01-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -330,7 +330,7 @@ png(
 
 par(
   mfrow = c(4, 5), cex.lab = 2.5, cex.main = 2.5, cex.axis = 2.5,
-  mar = c(6, 6, 4, 4) + .1
+  mar = c(6, 6, 4, 4) + .1, lwd = 2.5
 )
 
 for (j in 1:4) {
@@ -347,7 +347,7 @@ for (j in 1:4) {
           x = plot_dat$time, y = plot_dat$y_obs,
           axes = FALSE, xlab = "", ylab = ""
         )
-        lines(x = plot_dat$time, y = plot_dat$y)
+        lines(x = plot_dat$time, y = plot_dat$y, lwd = 2.5)
       } else {
         plot(sim2$method[[ilustr$V1[j]]][[2]],
           sim = sim2,

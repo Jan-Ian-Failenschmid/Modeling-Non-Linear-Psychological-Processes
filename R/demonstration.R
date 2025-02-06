@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 23-05-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 19-10-2024                                                   #
+#' Last Modified: 31-01-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -192,6 +192,7 @@ grouped_df[, gam_pred_plot := mapply(function(fit, data) {
   )
 }, fit = gam_fit, data = data, SIMPLIFY = FALSE)]
 
+
 ### Results --------------------------------------------------------------------
 # Gam with the lowest edf
 np <- 10
@@ -258,8 +259,16 @@ gam_osc2 <- gam_osc2 +
   scale_fill_manual(values = "#F8766D") +
   scale_color_manual(values = "#F8766D")
 
+gg_hist <- ggplot(data.frame(edf = unlist(grouped_df$gam_edf)), aes(x = edf)) +
+  geom_histogram(fill = "darkgrey", alpha = 0.8) +
+  labs(x = "EDF", y = "Frequency", title = "e) Histogram of EDF values") +
+  theme_apa() +
+  theme(text = element_text(size = 20))
+
+
 complete_plot <- (gam_low | gam_high) /
-  (gam_osc1 | gam_osc2)
+  (gam_osc1 | gam_osc2) /
+  gg_hist + plot_layout(heights = c(2, 2, 1))
 
 # Save plot
 dpi <- 300

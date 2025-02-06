@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 04-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 30-01-2025                                                   #
+#' Last Modified: 04-02-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -19,6 +19,7 @@
 library(nprobust)
 library(mgcv)
 library(cmdstanr)
+library(MASS)
 # Load functions
 invisible(sapply(
   c(paste0("./R/helper/", dir(path = "./R/helper"))),
@@ -940,24 +941,57 @@ lines(dat$time, dat$y, lty = 2, lwd = 3)
 lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
 
 # Bottom right plot
+# mod <- cmdstan_model("./R/stan_files/gp_matern.stan")
+# gp_fit <- mod$sample(
+#   data = data,
+#   seed = 5838298,
+#   chains = 4,
+#   parallel_chains = 4,
+#   refresh = 500
+# )
 
-mod <- cmdstan_model("./R/stan_files/gp_matern.stan")
-gp_fit <- mod$sample(
-  data = data,
-  seed = 5838298,
-  chains = 4,
-  parallel_chains = 4,
-  refresh = 500
-)
+# # Posterior predictive draws
+# gp_post_pred(gp_fit,
+#   f_name = "f_post_predict", time = dat$time,
+#   obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
+#   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
+#   main = "i) Gaussian process posterior Matern kernel",
+#   xlab = "", ylab = "", axes = FALSE
+# )
 
-# Posterior predictive draws
-gp_post_pred(gp_fit,
-  f_name = "f_post_predict", time = dat$time,
-  obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
-  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
-  main = "i) Gaussian process posterior Matern kernel",
-  xlab = "", ylab = "", axes = FALSE
-)
+linear <- function(x, y, alpha = 1, beta = 0.01) {
+  alpha^2 + beta^2 * x * y
+}
+
+matern_12 <- function(x, y, alpha = 1, rho = 50) {
+  alpha^2 * exp(-abs(x - y) / rho)
+}
+
+sqe <- function(x, y, alpha = 1, rho = 50) {
+  alpha^2 * exp(-abs(x - y)^2 / (2 * rho^2))
+}
+
+mu_fun <- function(x) {
+  rep(0, length(x))
+}
+
+cov_fun <- function(x, y, kernel) {
+  outer(x, y, kernel)
+}
+
+draws_list <- lapply(list(linear, matern_12, sqe), function(kernel, x) {
+  as.matrix(mvrnorm(n = 3, mu_fun(x), cov_fun(x, x, kernel)))
+}, x = seq(0, 200, 1))
+
+draws_list <- do.call(rbind, draws_list)
+
+plot(0,
+  type = "n",
+  main = "i) Prior draws from different kernels",
+  xlab = "", ylab = "",
+  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE,
+  xlim = c(0, 200), ylim = c(min(draws_list), max(draws_list))
+) # Data points
 
 axis(2, at = seq(-10, 10, 2), cex.axis = cex)
 axis(1,
@@ -967,8 +1001,10 @@ axis(1,
 )
 title(xlab = "Time", line = 4, cex.lab = cex)
 
-lines(dat$time, dat$y, lty = 2, lwd = 3)
-lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
+colors <- rep(c("black", "blue", "red"), each = 3)
 
+for (i in seq_len(nrow(draws_list))) {
+  lines(seq(0, 200, 1), draws_list[i, ], col = colors[i])
+}
 
 dev.off()

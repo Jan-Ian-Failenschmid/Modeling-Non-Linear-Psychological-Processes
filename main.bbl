@@ -383,7 +383,7 @@
       \verb http://www.tandfonline.com/doi/full/10.1080/00273171.2015.1120182
       \endverb
     \endentry
-    \entry{R-brms}{article}{}
+    \entry{burkner_brms_2017}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=ec69dfaa36b99b02d1d9a3733eae1d23}{%
            family={Bürkner},
@@ -407,7 +407,7 @@
       \field{labeltitlesource}{title}
       \field{journaltitle}{Journal of Statistical Software}
       \field{number}{1}
-      \field{title}{{brms}: An {R} Package for {Bayesian} Multilevel Models Using {Stan}}
+      \field{title}{brms: {An} {R} {Package} for {Bayesian} {Multilevel} {Models} {Using} {Stan}}
       \field{volume}{80}
       \field{year}{2017}
       \field{pages}{1\bibrangedash 28}
@@ -1406,14 +1406,14 @@
       \true{uniqueprimaryauthor}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{R package version 0.8.1, https://discourse.mc-stan.org}
+      \field{note}{R package version 0.8.1.9000, commit f2e152b88fde5c2cde01ff078d5715b3b6248628}
       \field{title}{cmdstanr: R Interface to 'CmdStan'}
       \field{year}{2024}
       \verb{urlraw}
-      \verb https://mc-stan.org/cmdstanr/
+      \verb https://github.com/stan-dev/cmdstanr
       \endverb
       \verb{url}
-      \verb https://mc-stan.org/cmdstanr/
+      \verb https://github.com/stan-dev/cmdstanr
       \endverb
     \endentry
     \entry{golub_generalized_1979}{article}{}
@@ -1516,6 +1516,43 @@
       \field{title}{Smoothing spline {ANOVA} models}
       \field{year}{2013}
       \keyw{Analysis of variance,Smoothing (Statistics),Spline theory}
+    \endentry
+    \entry{hamaker_why_2012}{inbook}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=bf3ebddfd095dbb39dac14e644fbb58c}{%
+           family={Hamaker},
+           familyi={H\bibinitperiod},
+           given={Ellen\bibnamedelima L.},
+           giveni={E\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, US}%
+      }
+      \list{publisher}{1}{%
+        {The Guilford Press}%
+      }
+      \strng{namehash}{bf3ebddfd095dbb39dac14e644fbb58c}
+      \strng{fullhash}{bf3ebddfd095dbb39dac14e644fbb58c}
+      \strng{bibnamehash}{bf3ebddfd095dbb39dac14e644fbb58c}
+      \strng{authorbibnamehash}{bf3ebddfd095dbb39dac14e644fbb58c}
+      \strng{authornamehash}{bf3ebddfd095dbb39dac14e644fbb58c}
+      \strng{authorfullhash}{bf3ebddfd095dbb39dac14e644fbb58c}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This chapter presents reasoning for taking an alternative research approach to the study of processes that unfold within individuals over time as part of their daily lives. To this end I focus on three issues. First, I present a brief historical account that shows the large-sample approach is not necessarily the only appropriate research approach in psychology. Second, I discuss the limitations of this approach, specifically, if our interest is in studying psychological processes that take place within individuals. Finally, I discuss several alternatives to the standard large-sample approach that allow us to take a closer and more detailed look at the processes as they are occurring in daily life. (PsycInfo Database Record (c) 2022 APA, all rights reserved)}
+      \field{booktitle}{Handbook of research methods for studying daily life.}
+      \field{isbn}{978-1-60918-747-7 (Hardcover); 978-1-60918-749-1 (PDF)}
+      \field{title}{Why researchers should think "within-person": {A} paradigmatic rationale.}
+      \field{year}{2012}
+      \field{pages}{43\bibrangedash 61}
+      \range{pages}{19}
+      \keyw{*Cognitive Processes,*Experiences (Events),*Experimentation,*Methodology,History,Personality Processes,Research Psychologists}
     \endentry
     \entry{harrell_general_2001}{inbook}{}
       \name{author}{1}{}{%
@@ -2312,6 +2349,58 @@
       \verb https://doi.apa.org/doi/10.1037/0012-1649.38.1.115
       \endverb
     \endentry
+    \entry{molenaar_manifesto_2004}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=6bba10d193d08839f512610377394be4}{%
+           family={Molenaar},
+           familyi={M\bibinitperiod},
+           given={Peter\bibnamedelimb C.\bibnamedelimi M.},
+           giveni={P\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{6bba10d193d08839f512610377394be4}
+      \strng{fullhash}{6bba10d193d08839f512610377394be4}
+      \strng{bibnamehash}{6bba10d193d08839f512610377394be4}
+      \strng{authorbibnamehash}{6bba10d193d08839f512610377394be4}
+      \strng{authornamehash}{6bba10d193d08839f512610377394be4}
+      \strng{authorfullhash}{6bba10d193d08839f512610377394be4}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{1536-6367, 1536-6359}
+      \field{journaltitle}{Measurement: Interdisciplinary Research \& Perspective}
+      \field{month}{10}
+      \field{number}{4}
+      \field{shorttitle}{A {Manifesto} on {Psychology} as {Idiographic} {Science}}
+      \field{title}{A {Manifesto} on {Psychology} as {Idiographic} {Science}: {Bringing} the {Person} {Back} {Into} {Scientific} {Psychology}, {This} {Time} {Forever}}
+      \field{urlday}{17}
+      \field{urlmonth}{5}
+      \field{urlyear}{2023}
+      \field{volume}{2}
+      \field{year}{2004}
+      \field{urldateera}{ce}
+      \field{pages}{201\bibrangedash 218}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1207/s15366359mea0204_1
+      \endverb
+      \verb{file}
+      \verb Molenaar - 2004 - A Manifesto on Psychology as Idiographic Science .pdf:C\:\\Users\\failensc\\Zotero\\storage\\5FXL34JU\\Molenaar - 2004 - A Manifesto on Psychology as Idiographic Science .pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://www.tandfonline.com/doi/abs/10.1207/s15366359mea0204_1
+      \endverb
+      \verb{url}
+      \verb http://www.tandfonline.com/doi/abs/10.1207/s15366359mea0204_1
+      \endverb
+    \endentry
     \entry{nesselroade_studying_2004}{article}{}
       \name{author}{2}{}{%
         {{un=0,uniquepart=base,hash=f71e8356623d487083ec08fab92973d5}{%
@@ -2349,8 +2438,8 @@
       \field{number}{1}
       \field{shorttitle}{Studying {Intraindividual} {Variability}}
       \field{title}{Studying {Intraindividual} {Variability}: {What} {We} {Have} {Learned} {That} {Will} {Help} {Us} {Understand} {Lives} in {Context}}
-      \field{urlday}{27}
-      \field{urlmonth}{11}
+      \field{urlday}{11}
+      \field{urlmonth}{6}
       \field{urlyear}{2023}
       \field{volume}{1}
       \field{year}{2004}
@@ -2361,7 +2450,7 @@
       \verb 10.1207/s15427617rhd0101&2_3
       \endverb
       \verb{file}
-      \verb Nesselroade and Ram - 2004 - Studying Intraindividual Variability What We Have.pdf:C\:\\Users\\failensc\\Zotero\\storage\\KQCUMASA\\Nesselroade and Ram - 2004 - Studying Intraindividual Variability What We Have.pdf:application/pdf
+      \verb Nesselroade und Ram - 2004 - Studying Intraindividual Variability What We Have.pdf:C\:\\Users\\failensc\\Zotero\\storage\\NB52IEQM\\Nesselroade und Ram - 2004 - Studying Intraindividual Variability What We Have.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb http://www.informaworld.com/openurl?genre=article&doi=10.1207/s15427617rhd0101&2_3&magic=crossref||D404A21C5BB053405B1A640AFFD44AE3
@@ -3297,14 +3386,14 @@
       \field{labeldatesource}{year}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{I discuss the production of low rank smoothers for d 1 dimensional data, which can be ﬁtted by regression or penalized regression methods. The smoothers are constructed by a simple transformation and truncation of the basis that arises from the solution of the thin plate spline smoothing problem and are optimal in the sense that the truncation is designed to result in the minimum possible perturbation of the thin plate spline smoothing problem given the dimension of the basis used to construct the smoother. By making use of Lanczos iteration the basis change and truncation are computationally efﬁcient. The smoothers allow the use of approximate thin plate spline models with large data sets, avoid the problems that are associated with ‘knot placement’ that usually complicate modelling with regression splines or penalized regression splines, provide a sensible way of modelling interaction terms in generalized additive models, provide low rank approximations to generalized smoothing spline models, appropriate for use with large data sets, provide a means for incorporating smooth functions of more than one variable into non-linear models and improve the computational efﬁciency of penalized likelihood models incorporating thin plate splines. Given that the approach produces spline-like models with a sparse basis, it also provides a natural way of incorporating unpenalized spline-like terms in linear and generalized linear models, and these can be treated just like any other model terms from the point of view of model selection, inference and diagnostics.}
+      \field{abstract}{Summary I discuss the production of low rank smoothers for d ≥ 1 dimensional data, which can be fitted by regression or penalized regression methods. The smoothers are constructed by a simple transformation and truncation of the basis that arises from the solution of the thin plate spline smoothing problem and are optimal in the sense that the truncation is designed to result in the minimum possible perturbation of the thin plate spline smoothing problem given the dimension of the basis used to construct the smoother. By making use of Lanczos iteration the basis change and truncation are computationally efficient. The smoothers allow the use of approximate thin plate spline models with large data sets, avoid the problems that are associated with ‘knot placement’ that usually complicate modelling with regression splines or penalized regression splines, provide a sensible way of modelling interaction terms in generalized additive models, provide low rank approximations to generalized smoothing spline models, appropriate for use with large data sets, provide a means for incorporating smooth functions of more than one variable into non-linear models and improve the computational efficiency of penalized likelihood models incorporating thin plate splines. Given that the approach produces spline-like models with a sparse basis, it also provides a natural way of incorporating unpenalized spline-like terms in linear and generalized linear models, and these can be treated just like any other model terms from the point of view of model selection, inference and diagnostics.}
       \field{issn}{1369-7412, 1467-9868}
       \field{journaltitle}{Journal of the Royal Statistical Society Series B: Statistical Methodology}
       \field{month}{2}
       \field{number}{1}
       \field{title}{Thin {Plate} {Regression} {Splines}}
-      \field{urlday}{29}
-      \field{urlmonth}{11}
+      \field{urlday}{8}
+      \field{urlmonth}{6}
       \field{urlyear}{2023}
       \field{volume}{65}
       \field{year}{2003}
@@ -3315,7 +3404,7 @@
       \verb 10.1111/1467-9868.00374
       \endverb
       \verb{file}
-      \verb Wood - 2003 - Thin Plate Regression Splines.pdf:C\:\\Users\\failensc\\Zotero\\storage\\7RSC8WNI\\Wood - 2003 - Thin Plate Regression Splines.pdf:application/pdf
+      \verb 1467-9868.00374:C\:\\Users\\failensc\\Zotero\\storage\\D2HXS4ZJ\\1467-9868.00374:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://academic.oup.com/jrsssb/article/65/1/95/7110632

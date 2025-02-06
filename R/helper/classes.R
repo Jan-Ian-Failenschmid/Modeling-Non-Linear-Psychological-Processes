@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 30-01-2025                                                   #
+#' Last Modified: 31-01-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -319,11 +319,20 @@ setMethod("plot", "method", function(
   }))][[1]]
 
   plot(x = data$time, data[[observation]], ...)
-  lines(x = data$time, y = data[[state]])
+  lines(
+    x = data$time, y = data[[state]],
+    lwd = 2.5
+  )
   if (slot(x, "converged")) {
-    lines(x = data$time, y = slot(x, "estimate"), col = "red")
-    lines(x = data$time, y = slot(x, "ci")$lb, col = "red", lty = 2)
-    lines(x = data$time, y = slot(x, "ci")$ub, col = "red", lty = 2)
+    lines(x = data$time, y = slot(x, "estimate"), col = "red", lwd = 2.5)
+    lines(
+      x = data$time, y = slot(x, "ci")$lb, col = "red", lty = 2,
+      lwd = 2.5
+    )
+    lines(
+      x = data$time, y = slot(x, "ci")$ub, col = "red", lty = 2,
+      lwd = 2.5
+    )
   }
 })
 

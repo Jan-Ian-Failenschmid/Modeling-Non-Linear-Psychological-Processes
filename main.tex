@@ -3,7 +3,7 @@
 % % Author: Jan Ian Failenschmid % Created Date: 13-03-2024
 % %
 % -----                                                                        %
-% Last Modified: 30-01-2025                                                    %
+% Last Modified: 05-02-2025                                                    %
 % % Modified By: Jan Ian Failenschmid
 % %
 % %
@@ -150,14 +150,21 @@ reflects the individual's maximum ability. Additional examples of asymptotic
 growth over shorter time spans that are typically studied with ILD include
 motor skill development \parencite{newell_time_2001} and second language
 acquisition \parencite{de_bot_dynamic_2007}. Figure~\ref{fig:examplar_npn}
-shows common \textcolor{blue}{deterministic} model choices for these kinds of
+shows common \textcolor{blue}{deterministic}\footnote{\textcolor{blue}{
+    Meaning that the models describing the processes do not have a random
+    component and would result in the same trajectories if they were repeated
+    using the same starting values.
+  }} model choices for these kinds of
 processes in the form of an exponential growth function (a) and a logistic
-growth function (b). \textcolor{blue}{It is noteworthy that this exponential
-  growth function has been modeled as a deterministic Ornstein-Uhlenbeck
-  process, which is the continuous-time equivalent to the common lag-one
-  autoregressive model. The (person-specific) mean and slope of the
-  autoregressive model therefore correspond to the asymptote and the rate of
-  change of the exponential growth model.}
+growth function (b). \textcolor{blue}{Both of these models describe asymptotic
+  trends towards a person mean. However, whereas the logistic model only
+  describes asymptotic growth from zero, the exponential model can also capture
+  different starting values and asymptotic decay. Additionally, the exponential
+  model has its largest rate of change in the beginning, while the logistic
+  model
+  starts off changing slowly and has its largest rate of change when reaching
+  the
+  midpoint between zeroe and the asymptote.}
 
 \begin{figure}[!t]
   \caption{Examples of non-linear processes demonstrated to occur in
@@ -183,7 +190,10 @@ where patients suddenly switch from an abstinent state to a relapsed state
 \parencite{witkiewitz_modeling_2007}. This sudden switching behavior has been
 modelled using a cusp catastrophe model
 \parencite{van_der_maas_sudden_2003,chow_cusp_2015}. This dynamic model has
-been exemplified in Figure~\ref{fig:examplar_npn}~(c).
+been exemplified in Figure~\ref{fig:examplar_npn}~(c). \textcolor{blue}{One
+  of the behaviors that the cusp model is most well known for, is that it can
+  suddenly swtich between two seemingly distinct mean levels, when varying on
+  of its parameters.}
 
 As a final example, \textcolor{blue}{we consider non-monotonic gradual change.
   This can be found, for example,} in (self-) regulatory systems, which
@@ -191,13 +201,16 @@ maintain a desired state by counteracting external perturbations. In these
 systems, the degree of regulation often depends on the distance between the
 current and the desired states. The common lag one autoregressive model
 describes such a system in which the regulation strength depends linearly on
-this distance, \textcolor{blue}{resulting in an exponential decay towards the
-  baseline}. However, this relationship may also be non-linear, such that the
+this distance, \textcolor{blue}{resulting in an exponential return to the
+  person mean}. However, this relationship may also be non-linear, such that
+the
 degree of regulation changes disproportionately with larger distances. One
 example of such a possible (self-) regulatory system is emotion regulation,
 which has been modelled using a damped oscillator model
 \parencite{chow_emotion_2005}. This model is exemplified in
-Figure~\ref{fig:examplar_npn}~(d).
+Figure~\ref{fig:examplar_npn}~(d). \textcolor{blue}{The damped oscillator model
+  describes decreasing oscillations around a mean and it was originially
+  devised to describe the oscillations of a pendulum returning back to rest.}
 
 Although initial evidence for non-linearity in psychological research exists,
 theories about the nature and form of non-linear psychological processes remain
@@ -228,16 +241,15 @@ these processes \textcolor{blue}{are currently not well established in
 guiding theories.
 
 Due to adequate statistical methods \textcolor{blue}{not being commonly
-  available}, non-linear trends in
-psychology are often addressed through polynomial or piecewise spline
-regression. Polynomial regression \parencite{jebb_time_2015} uses higher-order
-terms (e.g., squared or cubed time, in addition to a linear effect of time) as
-predictors in a standard multiple linear regression model. While effective for
-relatively simple non-linear relationships, particularly those that can be
-represented as polynomials, this method has significant limitations and likely
-leads to invalid results when applied to more complex processes, such as mean
-switching or (self-) regulatory systems (e.g.,
-Figure~\ref{fig:examplar_npn}~c~\&~d).
+  available}, non-linear trends in psychology are often addressed through
+polynomial regression \parencite{jebb_time_2015}. Polynomial regression uses
+higher-order terms (e.g., squared or cubed time, in addition to a linear
+effect of time) as predictors in a standard multiple linear regression model.
+While effective for relatively simple non-linear relationships, particularly
+those that can be represented as polynomials, this method has significant
+limitations and likely leads to invalid results when applied to more complex
+processes, such as mean switching or (self-) regulatory systems (e.g.,
+Figure~\ref{fig:examplar_npn}~(c)~\&~(d)).
 
 \textcolor{blue}{
   When fitting models with many degrees of freedom, such as a polynomial
@@ -257,24 +269,32 @@ Figure~\ref{fig:examplar_npn}~c~\&~d).
   in overfitting at the boundaries of the process while underfitting the
   central regions. This may also produce non-sensical predictions, such as
   interpolating scores outside the valid range of the scale
-  \textcite{magee_nonlocal_1998, boyd_divergence_2009, harrell_general_2001,
+  \parencite{magee_nonlocal_1998, boyd_divergence_2009, harrell_general_2001,
     jianan_case_2023}.
+}\footnote{\textcolor{blue}{
+    An alternative approach is piecewise spline regression, which
+    constructs a
+    (complex) non-linear trend by joining multiple simple piecewise functions
+    together at specific points, called knots (e.g., connecting multiple cubic
+    functions end-to-end into an overarching growth curve;
+    \textcite{tsay_nonlinear_2019}). \textcolor{blue}{This alleviates some of
+      the
+      previously described issues by creating localized models. These models
+      have
+      less correlated parameters and are therefore less prone to model
+      instability.
+      However, piecewise spline regression still requires researchers to
+      carefully
+      select the optimal piecewise functions and knot locations, which may be
+      done
+      manually or in a data-driven manner}. This can be problematic in practice
+    because, as mentioned, precise guiding theories about the functional form
+    of
+    most psychological processes are lacking \parencite{tan_time-varying_2011}.
+    This absence of clear guidance can quickly lead to misspecified models and
+    invalid results.
+  }
 }
-
-An alternative approach is piecewise spline regression, which constructs a
-(complex) non-linear trend by joining multiple simple piecewise functions
-together at specific points, called knots (e.g., connecting multiple cubic
-functions end-to-end into an overarching growth curve;
-\textcite{tsay_nonlinear_2019}). \textcolor{blue}{This alleviates some of the
-  previously described issues by creating localized models. These models have
-  less correlated parameters and are therefore less prone to model instability.
-  However, piecewise spline regression still requires researchers to carefully
-  select the optimal piecewise functions and knot locations, which may be done
-  manually or in a data-driven manner}. This can be problematic in practice
-because, as mentioned, precise guiding theories about the functional form of
-most psychological processes are lacking \parencite{tan_time-varying_2011}.
-This absence of clear guidance can quickly lead to misspecified models and
-invalid results.
 
 These limitations in the currently available methods underscore the need for
 more sophisticated and data-driven statistical methods to study and explore
@@ -293,8 +313,8 @@ which the different methods were developed match the types of processes
 occurring in psychological research (e.g., the processes depicted in Figure 1)
 to varying degrees, particularly with regard to the assumed smoothness of the
 non-linear process. This means that the method most suitable for the relatively
-smooth process in Figure 1a is not necessarily also the most suitable method
-for rougher changes.
+smooth process in Figure~\ref{fig:examplar_npn} is not necessarily
+also the most suitable method for rougher changes.
 
 To address this important gap, this article reviews three advanced non-linear
 analysis methods, local polynomial regression, Gaussian processes, and
@@ -307,10 +327,11 @@ scenarios (Section~\ref{method_introduction}). \textcolor{blue}{ The methods
   mechanism
   for inferring non-linear processes and for preventing over- and underfitting
   the
-  data. Additionally, we limited our selection to methods that are implemented
+  data. Further, we limited our selection to methods that are implemented
   in
   the open-source software R \parencite{R-base}, making them readily accessible
-  for research applications. Lastly, we prioritized methods that are promising
+  for research applications. Moreover, we prioritized methods that are
+  promising
   for application to psychological ILD, particularly in terms of sample size
   and
   measurement frequency requirements.} We additionally compare how well each
@@ -320,42 +341,36 @@ best-performing method can be applied to analyze an existing data set
 (Section~\ref{empirical_example}). Note that, to introduce these methods
 accessibly and apply them under conditions where software implementations are
 available, this article focuses on the univariate single-subject design.
-
-The methods reviewed in this article are various semi- and non-parametric
-regression techniques, that were chosen for their ability to model non-linear
-processes
-while accommodating different levels of prior knowledge. Our review
-specifically focuses on methods that provide a clear and transparent mechanism
-for inferring latent processes and for preventing
-over- and underfitting the data. Additionally, we limited our
-selection to methods that are implemented in the open-source software R
-\parencite{R-base}, making them readily accessible for research applications.
-Lastly, we prioritized methods that are promising for application to
-psychological ILD, particularly in terms of sample
-size and measurement frequency requirements.
+\textcolor{blue}{ This aligns with the growing trend in psychology focussing on
+  idiographic research \parencite{molenaar_manifesto_2004,hamaker_why_2012}.
+  Furthermore, we demonstrate in the empirical example how estimates of
+  idiographic processes can provide valuable insights into between-person
+  heterogeneity.}
 
 \section{Non-linear analysis methods}\label{method_introduction}
 
 In the following paragraphs, the three semi- and non-parametric regression
 techniques will be introduced: local polynomial regression, Gaussian processes,
-and generalized additive models. \textcolor{blue}{
-  Due to their non-parametric nature, these methods allow researchers to
-  explore
-  the trajectories of psychological processes without requiring prior
-  assumptions
-  about their parametric functional form, similar to how polynomial regression
+and generalized additive models. \textcolor{blue}{ These models make it
+  possible for researchers to explore the shape of psychological processes in a
+  data-driven manner without making assumptions regarding the functional form
+  of the
+  process. Hence, they fall into the same nieche in which polynomial regression
   is
-  currently often applied. This flexibility is particularly valuable for theory
-  development, as formal theories about psychological processes are often
-  represented as parametric models. By providing accurate estimates of the
-  underlying processes, these methods can help researchers identify functional
-  forms that are strong candidates for parametric models by highlighting key
-  features in the data that these models should capture.
-  Additionally, semi-parametric methods can combine incomplete parametric
-  models with flexible non-parametric components. This ability to test partial
-  theories while accurately capturing the underlying processes makes these
-  methods especially useful for iterative theory development by, for example,
-  identifying areas of misfit in parametric models.}
+  currently often applied. Uncovering the shape and behaviour of psychological
+  processes is particularly relevant for theory building as it informs the
+  features that possible candidate theories need to be able to capture and
+  explain. For instance, if a process consistently displays decreasing
+  oscillations or switches between different means, then theory-driven
+  parametric
+  models can be developed and subsequently tested, which can capture these
+  specific behaviors. Additionally, some of the methods introduced below can
+  can
+  combine incomplete parametric models with flexible data-driven components.
+  This
+  makes it possible to test partial theories while maintaining the necessary
+  flexibility to accurately capture the underlying processes. Therefore,
+  these methods are particularly well suited for iterative theory development.}
 
 \subsection{Local polynomial regression}
 
@@ -370,11 +385,17 @@ every point in time. These local polynomials are then combined into a single
 non-linear function over the entire set of observations
 \parencite{fan_adaptive_1995, ruppert_multivariate_1994, fan_local_2018}.
 \textcolor{blue}{This technique shares the same principle as and is a
-  generalization of the rolling average for timeseries smoothing. A rolling
-  average assumes that observations that are close in time are likely noisy
-  indicators of similar process values. Therefore, the value of the process can
-  be estimated at any point in time by averaging out the measurement error of
-  data points in close proximity. LPR generalizes this principle by using more
+  generalization of the rolling average for timeseries smoothing.
+  The idea behind the rolling average is that the value that the process
+  takes at a particular point in time, can be approximated by averaging
+  the observations that are close in time. This approach allows researchers to
+  estimate
+  the process's value at any chosen set of time points. Subsequently, these
+  distinct
+  estimates
+  can be combined to form an overall picture of the non-linear
+  process.
+  LPR generalizes this principle by using more
   flexible polynomial regressions instead of an average to approximate the
   process pointwise.
   Figure~\ref{fig:locpol_dem}~(a) shows the estimated LPR (solid black line)
@@ -416,7 +437,7 @@ non-linear function over the entire set of observations
 \textcolor{blue}{
   Specifically, to predict the value of the univariate process $f$ at an
   arbitrary time point $t^*$ based on the set of observations $y_t$ at the time
-  points $t$ the LPR starts by cenetering the data around the time point $t^*$
+  points $t$ the LPR starts by centering the data around the time point $t^*$
   (by shifting the data along the time axis so that the chosen time point is at
   zero). Afterwards, a low order polynomial regression is fit to the data
   around $t^*$.
@@ -576,18 +597,27 @@ this paper.
 }
 
 \textcolor{blue}{
-An implementation of LPR can be found in the nprobust R package
-\parencite{R-nprobust}. The LPR in Figure~\ref{fig:examplar_npn}~(a) can be fit
-using: {\fontsize{10}{12}\selectfont\texttt{lprobust(y, time, eval = time, p =
-  3, kernel = 'epa', bwselect = 'imse-dpi', bwcheck = 0)}}. Here we set the
-polynomial degree to three, chose an Epanechnikov kernel, and specify that the
-bandwidth should be optimized by minimizing the integrated mean squared error.
-The LPR implemented in nprobust also automatically corrects for the possible
-bias introduced by the finite polynomial degree. The last argument is used to
-suppress an automated correction of the bandwidth towards the beginning and end
-of the process. This code returns a bias-corrected estimate of the process, as
-well as robust standard errors and the optimized bandwidth parameter, which can
-be interpreted as an estimate of the wiggliness of the process.
+  An implementation of LPR can be found in the nprobust R package
+  \parencite{R-nprobust}. The LPR in Figure~\ref{fig:examplar_npn}~(a) can be
+  fit
+  using:}
+
+\textcolor{blue}{\fontsize{10}{12}\selectfont\texttt{lprobust(y, time, eval =
+    time, p = 3, kernel = 'epa', bwselect = 'imse-dpi', bwcheck = 0)}}
+
+\noindent\textcolor{blue}{Here we set the polynomial degree to three, chose an
+  Epanechnikov kernel, and specify that the bandwidth should be optimized by
+  minimizing the integrated mean squared error. The LPR implemented in nprobust
+  also automatically corrects for the possible bias introduced by the finite
+  polynomial degree. The last argument is used to suppress an automated
+  correction of the bandwidth towards the beginning and end of the process.
+  This code returns bias-corrected pointwise estimates of the process at the
+  chosen evaluation points {\fontsize{10}{12}\selectfont\texttt{eval}}, as well
+  as robust standard errors, which are depicted in
+  Figure~\ref{fig:locpol_dem}~(a). Additionally, it provides the optimized
+  bandwidth parameter, which can
+  be interpreted as an estimate of the wiggliness of the process with respect
+  to the chosen polynomial degree.
 }
 
 \subsection{Gaussian process regression}
@@ -641,11 +671,14 @@ inferences about the process \parencite{rasmussen_gaussian_2006}.
       that was used in panel (A) and (B). Panels (d) and (e) illustrate the
       impact of fixing the marginal variance of a GP prior to values that are
       too
-      small or too large resepectively. Panel (f) depicts a Matérn 1/2 kernel
-      that was used in the GP regression in panel (i). Lastly, panels (g) and
-      (h)
-      illustrate the effect of fixing the lengthscale of the GP prior to values
-      that are too small or too large respectively.}
+      small or too large resepectively. Panel (f) depicts a Matérn 1/2 kernel.
+      Panels (g) and (h) illustrate the effect of fixing the lengthscale of the
+      GP prior to values that are too small or too large respectively. Lastly,
+      panel (i) shows three functions drawn from GP priors with
+      different covariance kernels. The black lines show functions drawn from
+      a GP with a dot-product kernel, the red lines show functions drawn from
+      a GP with a squared exponential kernel, and the blue lines show functions
+      drawn from a GP with a Matérn 1/2 kernel. }
   }
   \label{fig:gp_dem}
 \end{sidewaysfigure*}
@@ -679,28 +712,31 @@ described by the GP prior\@. \textcolor{blue}{The dot-product kernel
   (Equation~\ref{eq:dot_prod_kernel}), for example, generates a Gaussian
   process
   that describes linear functions and is equivalent to Bayesian linear
-  regression. In this case, the variances $\sigma_\alpha^2$ and
-  $\sigma_\beta^2$
-  are represent the prior variances of the intercepts and slopes of the linear
-  functions defined by the GP\@.}
+  regression
+  (Figure~\ref{fig:gp_dem}~(i) black). In this case, the variances
+  $\sigma_\alpha^2$ and $\sigma_\beta^2$ are the prior variances of
+  the
+  intercepts and slopes of the linear functions defined by the GP\@.}
 
 \begin{equation}\label{eq:dot_prod_kernel}
   cov(t_i, t_j) = k_{GP}(t_i, t_j) = \sigma_\alpha^2 + \sigma_\beta^2 t_i t_j
 \end{equation}
 
-The default covariance kernel in most standard software is the
-squared exponential (Figure~\ref{fig:gp_dem}~(c)), which produces a
-non-linear Gaussian process that is covariance stationary (such that the
-described covariances between the function values depend only on their
-distance) and very smooth. \textcolor{blue}{This kernel was used for the GPs
-  in Figure~\ref{fig:gp_dem}~(a) and (b). } Using the squared exponential
-covariance kernel imposes a stricter smoothness assumption on the underlying
-process than the smoothness assumption introduced for LPR\@. However, many
-other covariance kernels are available, each resulting in GPs with different
-behaviors and assumptions about the underlying process. A notable example is
-the Matérn class of kernels, which relaxes the strict smoothness assumption
-made by the squared exponential kernel. This makes it possible to model
-rougher processes, as illustrated in (Figure~\ref{fig:gp_dem}~(i)).
+The default covariance kernel in most standard software is the squared
+exponential (Figure~\ref{fig:gp_dem}~(c)), which produces a non-linear Gaussian
+process that is covariance stationary (such that the described covariances
+between the function values depend only on their distance) and very smooth
+(Figure~\ref{fig:gp_dem}~(i) red).
+\textcolor{blue}{This kernel was used for the GPs in
+  Figure~\ref{fig:gp_dem}~(a) and (b). } Using the squared exponential
+covariance
+kernel imposes a stricter smoothness assumption on the underlying process than
+the smoothness assumption introduced for LPR\@. However, many other covariance
+kernels are available, each resulting in GPs with different behaviors and
+assumptions about the underlying process. A notable example is the Matérn class
+of kernels, which relaxes the strict smoothness assumption made by the squared
+exponential kernel. This makes it possible to model rougher processes, as
+illustrated by the blue samples in Figure~\ref{fig:gp_dem}~(i).
 \textcolor{blue}{The Matérn 1/2 kernel (Figure~\ref{fig:gp_dem}~(f)) may be
   particularly relevant for psychological applications, as it describes the
   covariance structure of a continuous-time autoregressive process.} We will,
@@ -730,9 +766,9 @@ by the GP at any point in time.
   deviations from zero, the mean function is typically set to zero. However,
   other mean functions can be chosen to incorporate specific domain knowledge.
   The squared exponential kernel is the default choice in most standard
-  software due to its ability to produce smooth estimates. If less smooth
-  estimates are preferred, the Matérn class of kernels may offer suitable
-  alternatives. The choice of a specific kernel can be informed by prior
+  software because it produces smooth estimates. However, kernels from the
+  Matérn class can be used instead, if less smooth estimates are desired.
+  The choice of a specific kernel can be informed by prior
   theory, specific smoothness requirements, or in a data-driven manner by
   model comparison methods such as Bayes factors or cross-validation.
 }
@@ -751,37 +787,43 @@ by the GP at any point in time.
   (Figure~\ref{fig:gp_dem}~(h)). While the hyperparameters of a GP can be
   optimized in a similar way to those of the other methods presented in this
   paper, we recommend using a full Bayesian approach that assigns prior
-  distributions to the hyperparameters. In cases where no prior information is
-  available about the wiggliness or spread of the process, these priors can be
-  vague to assume that all parameter values are equally likely a priori. In
-  practice, it is often helpful to standardize the predictor and outcome
-  variables to ensure that the hyperparameter priors are scaled appropriately.
-  An advantage of this full Bayesian approach is that it provides uncertainty
-  estimates, not only for the process itself, but also for the lengthscale and
-  marginal variance.
+  distributions to the hyperparameters. An advantage of this full Bayesian
+  approach is that it provides uncertainty estimates, not only for the process
+  itself, but also for the lengthscale and marginal variance, in the form
+  of their respective posterior distributions. In cases where no prior
+  information is available about the wiggliness or spread of the process, these
+  priors can be vague to assume that all parameter values are equally likely a
+  priori. Moreover, in practice, it is often helpful to standardize the
+  predictor and outcome variables to ensure that the hyperparameter priors are
+  scaled appropriately.
 }
 
 \textcolor{blue}{
-  The brms package \parencite{R-brms} provides an accessible implementation of
-  Gaussian process regression using the model syntax
-    {\fontsize{10}{12}\selectfont\texttt{brm(y $\sim$ gp(time))}}. This code
-  automatically uses a squared-exponential kernel (which is currently the only
-  kernel supported by brms) and assigns vague priors to the hyperparameters.
-  Specific informative hyperparameter priors can be added to the
-    {\fontsize{10}{12}\selectfont\texttt{brm}} function using the optional
+  The brms package \parencite{burkner_brms_2017} provides an accessible
+  implementation of
+  Gaussian process regression using the model syntax}
+
+\textcolor{blue}{\fontsize{10}{12}\selectfont\texttt{brm(y $\sim$ gp(time))}}
+
+\noindent\textcolor{blue}{This code
+  automatically uses a squared-exponential kernel and assigns vague priors to
+  the hyperparameters. Specific informative hyperparameter priors can be added
+  to the {\fontsize{10}{12}\selectfont\texttt{brm}} function using the optional
     {\fontsize{10}{12}\selectfont\texttt{prior}} argument. The GP prior used in
   Figure~\ref{fig:gp_dem}~(a) assigns half-normal priors with standard
-  deviations of one to the lengthscale and two to the marginal variance and
-  standardizes the predictor and outcome variables. The brms model syntax also
+  deviations of one to the lengthscale and five to the marginal variance and
+  standardizes the predictor variable. The brms model syntax also
   makes it straightforward to combine multiple GPs in a model or to incorporate
-  parametric components, such as a linear slope. After fitting a GP,
-  researchers
-  obtain posterior samples for the underlying process and any hyperparameters
-  included in the model. The posterior distribution for the lengthscale, in
-  particular, can be understood as an estimate of the wiggliness of the
-  process.
-  These posterior samples can be used to construct point estimates and credible
-  intervals for the process and the hyperparameters.
+  parametric components, such as a linear slope. After fitting a GP using the
+  code presented above, researchers obtain posterior samples for the marginal
+  variance and the lengthscale parameter. The posterior distribution for the
+  lengthscale, in particular, can be understood as an estimate of the
+  wiggliness of the process. Additionally, the posterior samples for the
+  hyperparameters can be used to obtain posterior samples for the
+  underlying process itself, which are depicted Figure~\ref{fig:gp_dem}~(a).
+  These posterior samples can be used to construct
+  point estimates and credible intervals for the process and any of the
+  hyperparameters.
 }
 
 \subsection{Generalized additive models}
@@ -801,10 +843,8 @@ predictor (e.g., time). A GAM combines these different smooth terms into an
 overall estimate of a non-linear process \parencite{wood_generalized_2006,
   wood_inference_2020, hastie_generalized_1999}. The smooth terms $\beta_i$ are
 inferred from the data through a method called smoothing splines. These
-smoothing splines are very similar to the piecewise splines introduced in the
-introduction in that the smoothing splines also take the form of a basis
-function regression. \textcolor{blue}{
-  This basis function regression
+smoothing splines \textcolor{blue}{take the form of a basis function
+  regression, which
 } does not use the raw predictor values directly. Instead, it
 combines multiple predefined functions (called basis functions) of the
 predictor $R_{ki}(t_i)$, such as polynomial basis functions of different
@@ -854,15 +894,14 @@ the simplest GAMs consisting of a single smooth term.
 \end{figure}
 
 \textcolor{blue}{ Smoothing splines can be constructed using different families
-  of basis functions, called spline bases. } The most common
-\textcolor{blue}{basis is} thin-plate splines, which are a generalization of
-cubic regression splines \parencite{wood_generalized_2006}. In contrast to the
-piecewise
-splines introduced earlier, thin-plate splines entirely avoid knots. Instead,
-thin-plate splines are composed of automatically generated and increasingly
-wiggly basis functions that are defined over the entire range of the data
-(Figure~\ref{fig:gam_dem}~(b)) and are then combined in the basis function
-regression (Figure~\ref{fig:gam_dem}~(a)).
+  of basis functions, called spline bases.  The most common
+  basis is thin-plate splines, which are a generalization of
+  cubic regression splines \parencite{wood_generalized_2006}. Thin-plate
+  splines are composed of basis functions, which are automatically
+  generated and increasingly wiggly. Each basis function is defined over the
+  entire range of the data (Figure~\ref{fig:gam_dem}~(b)) and if there are
+  as many basis functions as data points, thin-plate splines can perfectly
+  interpolate the data.}
 
 \textcolor{blue}{ When estimating the coefficients (i.e., weights) of the basis
   function regression, smoothing splines use an additional penalty term, }
@@ -943,29 +982,31 @@ Bayesian estimation, which accounts for the uncertainty in the penalty weight
 
 \textcolor{blue}{ GAMs are implemented in the mgcv package
   \parencite{R-mgcv_a}. The model shown in Figure~\ref{fig:gam_dem}~(b) was
-  implemented using the code {\fontsize{10}{12}\selectfont\texttt{ gam(y $\sim$
-        s(time, bs = 'tp', k = 10)) }}, which fits the observed data with a
-  single
+  implemented using the code}
+
+\textcolor{blue}{\fontsize{10}{12}\selectfont\texttt{ gam(y $\sim$
+    s(time, bs = 'tp', k = 10)) }}
+
+\noindent\textcolor{blue}{which fits the observed data with asingle
   smooth term for time. The syntax specifies that the smooth term should be
   composed of ten thin-plate spline basis functions, although the number of
   basis functions can also be set to a larger value or determined
-  automatically. The smoothing penalty weight is automatically optimized in
-  mgcv to minimize the generalized cross-validation error. Similar to GPs, the
+  automatically. The smoothing penalty weight is by default optimized
+  by minimizing the generalized cross-validation error. Similar to GPs, the
   mgcv model syntax allows for the creation of more sophisticated models by
   combining multiple smooth terms or incorporating parametric components. }
 
 \textcolor{blue}{
-  Fitting a GAM provides an estimate of the underlying process along with
-  corresponding credible intervals. Additionally, researchers obtain the EDF
-  for
-  each smooth term separately. While the EDF are useful for assessing the
-  wiggliness of a smooth term, it is important to note that they are not model
-  parameters. Consequently, unlike GPs, GAMs do not provide a measure of
-  uncertainty for the wiggliness of the process. The mgcv implementation of
-  GAMs
-  also includes significance tests to determine whether a given smooth term is
-  effectively zero. Lastly, it is possible to extract the individual basis
-  function coefficients from a fitted GAM.}
+  Fitting a GAM with the code provided above returns an estimate of the
+  underlying process along with corresponding credible intervals,
+  which are depicted in Figure~\ref{fig:gam_dem}~(a). Additionally,
+  researchers obtain the EDF for each smooth term separately. While the EDF are
+  useful for assessing the wiggliness of a smooth term, it is important to note
+  that they are not model parameters. Consequently, unlike GPs, GAMs do not
+  provide a measure of uncertainty for the wiggliness of the process. The mgcv
+  implementation of GAMs also includes significance tests to determine whether
+  a given smooth term is effectively zero. Lastly, it is possible to extract
+  the individual basis function coefficients from a fitted GAM.}
 
 \subsection{Key differences between the methods}
 
@@ -1276,7 +1317,12 @@ which provides information about how well the model interpolates the process.
   of
   the data points were removed from the model, which makes it possible to
   calculate a cross-validation criterion, without the computationally intensive
-  refitting of the model.}
+  refitting of the model.\footnote{This porcedure was implemented differently
+    in the code or each method. One example of a code implementation can
+    be found in the online supplementary material
+    \href{https://shorturl.at/Lhv9N}{here}.
+  }
+}
 
 To evaluate the uncertainty estimates provided by each method, we recorded
 whether the true generated process was located within the confidence or
@@ -1346,9 +1392,15 @@ configurations used for each method were chosen to reflect how each method is
 most commonly applied in practice and not to optimally infer the simulated, and
 thus known, processes. First, the LPR was estimated using the nprobust package
 \parencite{R-nprobust}, which can correct for the bias inherent in LPRs.
-Second, GPs were estimated in STAN\footnote{Alternatively, the GP regression
-  models used in this article can also be fit using the BRMS package
-  \parencite{R-brms}.}
+Second, GPs were estimated in STAN\footnote{\textcolor{blue}{
+    It is also possible to estimate the
+    Gaussian processes used in the simulation in brms
+    \parencite{burkner_brms_2017}.
+    However,
+    the direct implementation in STAN, which is the Bayesian inference software
+    underlying brms, is computationally more efficient within the context of a
+    simulation study.
+  }}
 \parencite{R-cmdstanr} with a zero mean and a squared exponential covariance
 function, following common practice. Third, GAMs with a single smooth term for
 time were fitted using the mgcv package \parencite{R-mgcv_a}. The polynomial
@@ -1665,28 +1717,41 @@ used in the simulation, we applied GAMs with a single smooth term to explore
 the idiographic processes underlying the data of each individual. Inspecting
 the estimated processes revealed a clear picture of the heterogeneity in the
 processes underlying the data. On the one hand, Figure~\ref{fig:dem_smooth}~(a)
-shows the ten estimated processes with the lowest EDF, corresponding to the
-least wiggly estimated processes, which appear to be essentially linear. In
-fact, for 72 out of 117 participants, the process inferred by the idiographic
-GAMs is effectively a linear trend ($EDF < 1.001$). For some of these
-participants, the linear estimates appear to be due to strong floor effects
-where participants repeatedly indicate depression scores close to zero.
-However, this explanation does not hold for all participants, as some
-participants also received linear estimates without displaying floor effects.
+shows the ten estimated processes with the lowest EDF, representing the least
+wiggly estimated processes, which appear to be essentially linear. In fact, for
+72 out of 117 participants, the processes inferred by the idiographic GAMs were
+effectively a linear trend ($EDF < 1.001$). \textcolor{blue}{ These
+  participants form the largest group within the sample that exhibits
+  functionally
+  similar processes. Due to the linearity of their estimated processes, this
+  group may be well described by, for example, a linear mixed effects model.
+  However, there also appear to be further structural differences between the
+  participants in this group.} For some of these participants, the linear
+estimates appear to be due to strong floor effects where participants
+repeatedly indicate depression scores close to zero. However, this explanation
+does not hold for all participants, as some participants also received linear
+estimates without displaying floor effects.
 
-Figure~\ref{fig:dem_smooth}~(b), on the other hand, shows the ten participants
-with the wiggliest estimated processes, indicated by the largest EDF (between
-5.44 and 19.32). For these participants, the estimated processes clearly
-deviate from a linear trend. Notably, visual inspection of the estimated
-non-linear processes did not reveal any common behaviors across the processes
-of different participants. With respect to the processes introduced in this
-article, two participants show particularly interesting trajectories. Their
-trajectories are shown in Figures~\ref{fig:dem_smooth}~(c) and (d),
-respectively. The process in Figure~\ref{fig:dem_smooth}~(c) closely resembles
-the decreasing oscillations exhibited by a damped oscillator. The process in
+\textcolor{blue}{ On the other hand, the remaining 45 participants had wigglier
+  estimated processes ($EDF > 1.001$), as shown by the EDF distribution in
+  Figure~\ref{fig:dem_smooth}~(e). For these participants, the estimated
+  processes clearly deviate from a linear trend and follow more complex
+  trajectories. } Figure~\ref{fig:dem_smooth}~(b), \textcolor{blue}{for
+  example,} shows the ten participants with the wiggliest estimated processes,
+indicated by the largest EDF (between 5.44 and 19.32). Notably, visual
+inspection of the estimated non-linear processes did not reveal any common
+behaviors across the processes of different participants. With respect to the
+processes introduced in this article, two participants show particularly
+interesting trajectories. Their trajectories are shown in
+Figures~\ref{fig:dem_smooth}~(c) and (d), respectively. The process in
+Figure~\ref{fig:dem_smooth}~(c) closely resembles the decreasing oscillations
+exhibited by a damped oscillator. The process in
 Figure~\ref{fig:dem_smooth}~(d) shows a participant who may be switching
 between a low and a high depression state, with considerable oscillations
-within each state.
+within each state. \textcolor{blue}{A more formal analysis of the between
+  person similarities and differences exhibited by the estimated idiographic
+  processes, could be achieved through, for instance, a cluster analysis.
+  However, this is beyond the scope of this illustration. }
 
 \begin{figure}[!t]
   \caption{Estimated depression processes}
@@ -1807,9 +1872,10 @@ classical leave-one-out cross-validation criterion to reduce the computational
 load of the simulation, the GCV may inadvertently favor the GP regression and
 the parametric models. This is because the analytic form of the GCV
 implicitly requires certain parameters (such as the hyperparameters of the GP
-covariance function) to be estimated on the entire sample and then be fixed (to
-these values) during the cross-validation. For the GP and the parametric models
-this likely improves their ability to predict the omitted data points.
+covariance function \textcolor{blue}{and the residual variance}) to be
+estimated on the entire sample and then be fixed (to these values) during the
+cross-validation. For the GP and the parametric models this likely improves
+their ability to predict the omitted data points.
 
 Finally, the scope of this paper was restricted to univariate single-subject
 data with independent normally distributed measurement errors. This somewhat

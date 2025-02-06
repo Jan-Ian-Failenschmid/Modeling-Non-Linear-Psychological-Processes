@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 25-03-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 24-09-2024                                                   #
+#' Last Modified: 03-02-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -87,6 +87,56 @@ simulate <- function(
   for (i in seq_len(ncond)) {
     # Indicator for all repetitions of a condition
     ind <- seq(1, repetitions) + repetitions * (i - 1)
+    # Model fitting loop
+    sim_grid$method[ind] <- mapply(
+      function(method, data) {
+        cat(fit_count(), " ")
+        lapply(method, fit, data = data)
+      },
+      method = sim_grid$method[ind], data = sim_grid$dat[ind],
+      SIMPLIFY = FALSE
+    )
+    # Save intermittend results in temp file
+    save(sim_grid, file = paste0(out_dir, "/temp.Rdata"))
+  }
+
+  c("\n\n")
+
+  # Return simulation grid
+  return(sim_grid)
+}
+
+restart_simulation <- function(out_dir) {
+  # Load partial simulation
+  load(paste0(out_dir, "/temp.Rdata"))
+
+  # Determine where the simulation stopped
+  not_converged <- sapply(sim_grid$method, function(method) {
+    all(!sapply(method, function(x) slot(x, "converged")))
+  })
+
+  for (i in seq_along(not_converged)) {
+    if (not_converged[i] && all(not_converged[i:length(not_converged)])) {
+      start <- i
+      break
+    }
+  }
+
+  # Derive repetitions
+  repetitions <- nrow(sim_grid) / length(unique(sim_grid$gen_model))
+
+  # Restart simulation
+  cat("\n\nModel Fitting:    ")
+  fit_count <- counter()
+
+  for (i in seq_len(start - 1)) {
+    cat(fit_count(), " ")
+  }
+
+  for (i in ceiling(start / repetitions):length(unique(sim_grid$gen_model))) {
+    # Indicator for all repetitions of a condition
+    ind <- seq(1, repetitions) + repetitions * (i - 1)
+
     # Model fitting loop
     sim_grid$method[ind] <- mapply(
       function(method, data) {

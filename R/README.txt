@@ -1,18 +1,8 @@
-/*
- * Filename: /home/jan_failenschmid/research/project_1/paper_1/README.txt
- * Created Date: Thursday, October 10th 2024, 12:57:24 pm
- * Author: Jan Ian Failenschmid
- * 
- * Copyright (c) 2024 by Jan Ian Failenschmid
- * E-mail: J.I.Failenschmid@tilburguniveristy.edu
- * 
- * License: GNU General Public License v3.0 or later
- * License URL: https://www.gnu.org/licenses/gpl-3.0-standalone.html
- * License File: gpl-3.0.txt
- */
-
 This directory contains the suplimentary material to the article:
 
+Modeling Non-Linear Psychological Processes: Reviewing and Evaluating
+  Non-parametric Approaches and Their Applicability to Intensive
+  Longitudinal Data
 
 Here is an overview of the files in this directory:
 

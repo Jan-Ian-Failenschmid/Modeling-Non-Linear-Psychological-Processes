@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 11-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 11-10-2024                                                   #
+#' Last Modified: 13-02-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -76,7 +76,7 @@ lprobust_cust <- function(
   #' version 0.4.0. It is authored by Sebastian Calonico, Matias D. Cattaneo,
   #' Max H. Farrell and published under a GPL-2 license. The maintainer of the
   #' package is Sebastian Calonico <sebastian.calonico at columbia.edu>.
-  #' 
+  #'
   #' All modification to the original source code by J.I.F. are indicated and
   #' serve the purpouse of adding the calculation of analytic cross-validation
   #' criteria in the estimation.

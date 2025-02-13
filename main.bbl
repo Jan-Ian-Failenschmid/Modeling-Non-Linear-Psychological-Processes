@@ -468,6 +468,39 @@
       \verb http://doi.apa.org/getdoi.cfm?doi=10.1037/met0000085
       \endverb
     \endentry
+    \entry{burkner_brms_2017}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=ec69dfaa36b99b02d1d9a3733eae1d23}{%
+           family={Bürkner},
+           familyi={B\bibinitperiod},
+           given={Paul-Christian},
+           giveni={P\bibinithyphendelim C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{fullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{bibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authorbibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authornamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \strng{authorfullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{number}{1}
+      \field{title}{brms: {An} {R} {Package} for {Bayesian} {Multilevel} {Models} {Using} {Stan}}
+      \field{volume}{80}
+      \field{year}{2017}
+      \field{pages}{1\bibrangedash 28}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.18637/jss.v080.i01
+      \endverb
+    \endentry
     \entry{R-nprobust}{article}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=bf76a9cacec95807f53a25a560e9b6bb}{%
@@ -3895,7 +3928,6 @@
       \endverb
     \endentry
   \enddatalist
-  \missing{burkner_brms_2017}
 \endrefsection
 \endinput
 

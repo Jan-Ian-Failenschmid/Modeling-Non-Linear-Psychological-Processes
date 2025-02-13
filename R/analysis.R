@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 09-02-2025                                                   #
+#' Last Modified: 13-02-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -319,6 +319,7 @@ method <-
     "Gaussian Process Regression",
     "Generalized Additive Model",
     "Parametric Modelling",
+    "",
     "Global Polynomial Regression"
   )
 

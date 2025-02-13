@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  5 FEB 2025 19:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  12 FEB 2025 16:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -972,30 +972,30 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'american'.
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 121.
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 127.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 121.
-LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1050,7 +1050,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 121.
+Package hyperref Info: Link coloring OFF on input line 127.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1060,14 +1060,14 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count483
 )
-LaTeX Info: Redefining \ref on input line 121.
-LaTeX Info: Redefining \pageref on input line 121.
-LaTeX Info: Redefining \nameref on input line 121.
+LaTeX Info: Redefining \ref on input line 127.
+LaTeX Info: Redefining \pageref on input line 127.
+LaTeX Info: Redefining \nameref on input line 127.
  (./main.out) (./main.out)
 \@outlinefile=\write7
 \openout7 = `main.out'.
 
-Class apa7 Info: Language definition file config/APA7american.txt not found on input line 121.
+Class apa7 Info: Language definition file config/APA7american.txt not found on input line 127.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: rotating package is loaded.
@@ -1113,186 +1113,207 @@ Package biblatex Info: Automatic encoding selection.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
- (./main.bbl)
-Package biblatex Info: Reference section=0 on input line 121.
-Package biblatex Info: Reference segment=0 on input line 121.
-LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line 123.
+ (./main.bbl
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                burkner_brms_2017
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+)
+Package biblatex Info: Reference section=0 on input line 127.
+Package biblatex Info: Reference segment=0 on input line 127.
+LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line 129.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line 123.
+LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line 129.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line 123.
+LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line 129.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line 123.
+LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line 129.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 123.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 129.
  (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 123.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 129.
  (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 123.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 129.
  (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 123.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 129.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 123.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 129.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 123.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 129.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 123.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 129.
  [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ] [2] [3]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 157.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 163.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 157.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 163.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 157.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 163.
  [4]
 <./figures/exemplar_no_process_noise.png, id=154, 1967.35pt x 1084.05pt>
 File: ./figures/exemplar_no_process_noise.png Graphic file (type png)
 <use ./figures/exemplar_no_process_noise.png>
-Package pdftex.def Info: ./figures/exemplar_no_process_noise.png  used on input line 172.
+Package pdftex.def Info: ./figures/exemplar_no_process_noise.png  used on input line 178.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
  [5 <./figures/exemplar_no_process_noise.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6] [7]
-Underfull \vbox (badness 7777) has occurred while \output is active []
+ [6]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [8] [9]
-<./figures/locpol_demonstration.png, id=242, 1967.35pt x 1084.05pt>
+ [7] [8] [9]
+<./figures/locpol_demonstration.png, id=244, 1967.35pt x 1084.05pt>
 File: ./figures/locpol_demonstration.png Graphic file (type png)
 <use ./figures/locpol_demonstration.png>
-Package pdftex.def Info: ./figures/locpol_demonstration.png  used on input line 412.
+Package pdftex.def Info: ./figures/locpol_demonstration.png  used on input line 421.
 (pdftex.def)             Requested size: 650.43001pt x 358.39926pt.
-
-Underfull \vbox (badness 1087) has occurred while \output is active []
-
  [10] [11 <./figures/locpol_demonstration.png (PNG copy)>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [12]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [13] [14]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 606.
+ [12] [13] [14]
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 626.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 4752) has occurred while \output is active []
 
- [15]
-<./figures/gp_demonstration.png, id=315, 1967.35pt x 1084.05pt>
+ [15] [16]
+<./figures/gp_demonstration.png, id=326, 1967.35pt x 1084.05pt>
 File: ./figures/gp_demonstration.png Graphic file (type png)
 <use ./figures/gp_demonstration.png>
-Package pdftex.def Info: ./figures/gp_demonstration.png  used on input line 665.
-(pdftex.def)             Requested size: 650.43001pt x 358.39926pt.
- [16] [17 <./figures/gp_demonstration.png (PNG copy)>] [18] [19]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [20] [21]
-<./figures/gam_demonstration.png, id=374, 1967.35pt x 1084.05pt>
-File: ./figures/gam_demonstration.png Graphic file (type png)
-<use ./figures/gam_demonstration.png>
-Package pdftex.def Info: ./figures/gam_demonstration.png  used on input line 881.
+Package pdftex.def Info: ./figures/gp_demonstration.png  used on input line 685.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [22 <./figures/gam_demonstration.png (PNG copy)>] [23] [24] [25] (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
-Overfull \hbox (3.6213pt too wide) in paragraph at lines 1127--1127
+ [17 <./figures/gp_demonstration.png (PNG copy)>]
+<./figures/gp_kernel.png, id=335, 1967.35pt x 1084.05pt>
+File: ./figures/gp_kernel.png Graphic file (type png)
+<use ./figures/gp_kernel.png>
+Package pdftex.def Info: ./figures/gp_kernel.png  used on input line 737.
+(pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
+ [18]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [19 <./figures/gp_kernel.png (PNG copy)>] [20]
+
+LaTeX Warning: Citation 'burkner_brms_2017' on page 21 undefined on input line 838.
+
+[21]
+<./figures/gam_demonstration.png, id=372, 1967.35pt x 1084.05pt>
+File: ./figures/gam_demonstration.png Graphic file (type png)
+<use ./figures/gam_demonstration.png>
+Package pdftex.def Info: ./figures/gam_demonstration.png  used on input line 912.
+(pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
+
+Underfull \vbox (badness 2261) has occurred while \output is active []
+
+ [22]
+Underfull \vbox (badness 6592) has occurred while \output is active []
+
+ [23 <./figures/gam_demonstration.png (PNG copy)>] [24]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+ [25] (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
+Overfull \hbox (3.6213pt too wide) in paragraph at lines 1156--1156
 []|\T1/ptm/m/n/12 Disadvantages|  
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 1127--1127
+Underfull \hbox (badness 10000) in alignment at lines 1156--1156
 [][][][] 
  []
 
-[26] [27]
-<./figures/exemplar_process_noise.png, id=443, 1967.35pt x 1084.05pt>
+[26] [27] [28]
+<./figures/exemplar_process_noise.png, id=456, 1967.35pt x 1084.05pt>
 File: ./figures/exemplar_process_noise.png Graphic file (type png)
 <use ./figures/exemplar_process_noise.png>
-Package pdftex.def Info: ./figures/exemplar_process_noise.png  used on input line 1184.
+Package pdftex.def Info: ./figures/exemplar_process_noise.png  used on input line 1213.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
-<./figures/stoch_mean_variance.png, id=444, 1967.35pt x 1084.05pt>
+<./figures/stoch_mean_variance.png, id=457, 1967.35pt x 1084.05pt>
 File: ./figures/stoch_mean_variance.png Graphic file (type png)
 <use ./figures/stoch_mean_variance.png>
-Package pdftex.def Info: ./figures/stoch_mean_variance.png  used on input line 1200.
+Package pdftex.def Info: ./figures/stoch_mean_variance.png  used on input line 1229.
 (pdftex.def)             Requested size: 650.43001pt x 358.39926pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [28]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [29 <./figures/exemplar_process_noise.png (PNG copy)>] [30 <./figures/stoch_mean_variance.png (PNG copy)>] [31]
-Underfull \vbox (badness 5105) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [32] [33]
-Underfull \vbox (badness 3954) has occurred while \output is active []
+ [32] [33] [34]
 
- [34] [35]
-<./figures/smooth.png, id=513, 1967.35pt x 1084.05pt>
+LaTeX Warning: Citation 'burkner_brms_2017' on page 35 undefined on input line 1432.
+
+[35] [36]
+<./figures/smooth.png, id=524, 1967.35pt x 1084.05pt>
 File: ./figures/smooth.png Graphic file (type png)
 <use ./figures/smooth.png>
-Package pdftex.def Info: ./figures/smooth.png  used on input line 1470.
+Package pdftex.def Info: ./figures/smooth.png  used on input line 1497.
 (pdftex.def)             Requested size: 650.43001pt x 358.39926pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1557.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1584.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1557.
- [36] [37 <./figures/smooth.png (PNG copy)>] [38]
-<./figures/mean_results_mse.png, id=533, 1927.2pt x 1084.05pt>
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1584.
+<./figures/mean_results_mse.png, id=527, 1927.2pt x 1084.05pt>
 File: ./figures/mean_results_mse.png Graphic file (type png)
 <use ./figures/mean_results_mse.png>
-Package pdftex.def Info: ./figures/mean_results_mse.png  used on input line 1582.
+Package pdftex.def Info: ./figures/mean_results_mse.png  used on input line 1609.
 (pdftex.def)             Requested size: 650.43001pt x 365.85936pt.
-<./figures/mean_results_gcv.png, id=537, 1927.2pt x 1084.05pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [37] [38 <./figures/smooth.png (PNG copy)>] [39] [40 <./figures/mean_results_mse.png>]
+<./figures/mean_results_gcv.png, id=551, 1927.2pt x 1084.05pt>
 File: ./figures/mean_results_gcv.png Graphic file (type png)
 <use ./figures/mean_results_gcv.png>
-Package pdftex.def Info: ./figures/mean_results_gcv.png  used on input line 1620.
+Package pdftex.def Info: ./figures/mean_results_gcv.png  used on input line 1647.
 (pdftex.def)             Requested size: 650.43001pt x 365.85936pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [39] [40 <./figures/mean_results_mse.png>] [41 <./figures/mean_results_gcv.png>]
-<./figures/mean_results_ci_coverage.png, id=552, 1927.2pt x 1084.05pt>
+<./figures/mean_results_ci_coverage.png, id=553, 1927.2pt x 1084.05pt>
 File: ./figures/mean_results_ci_coverage.png Graphic file (type png)
 <use ./figures/mean_results_ci_coverage.png>
-Package pdftex.def Info: ./figures/mean_results_ci_coverage.png  used on input line 1643.
+Package pdftex.def Info: ./figures/mean_results_ci_coverage.png  used on input line 1671.
 (pdftex.def)             Requested size: 650.43001pt x 365.85936pt.
- [42] [43 <./figures/mean_results_ci_coverage.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+ [41] [42 <./figures/mean_results_gcv.png>] [43 <./figures/mean_results_ci_coverage.png>]
+Underfull \vbox (badness 3954) has occurred while \output is active []
 
  [44] [45]
-<./figures/demonstration_smooths.png, id=586, 1927.2pt x 1084.05pt>
+<./figures/demonstration_smooths.png, id=592, 1927.2pt x 1084.05pt>
 File: ./figures/demonstration_smooths.png Graphic file (type png)
 <use ./figures/demonstration_smooths.png>
-Package pdftex.def Info: ./figures/demonstration_smooths.png  used on input line 1758.
+Package pdftex.def Info: ./figures/demonstration_smooths.png  used on input line 1786.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
- [46 <./figures/demonstration_smooths.png>] [47] [48]
+ [46] [47 <./figures/demonstration_smooths.png>] [48]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [49] [50] [51
+ [49]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] [52] [53] [54] [55] [56] [57] AED endfloat: Processing end Figures and Tables [58] (./main.aux)
+ [50] [51] [52
+
+] [53] [54] [55] [56] [57] [58] AED endfloat: Processing end Figures and Tables [59] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 77B49977BFA3CC0D8023698BD54C4D16;4030.
 Package logreq Info: Writing requests to 'main.run.xml'.
@@ -1300,11 +1321,11 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 35046 strings out of 480247
- 669167 string characters out of 5896151
- 1423049 words of memory out of 5000000
- 52140 multiletter control sequences out of 15000+600000
- 566194 words of font info for 167 fonts, out of 8000000 for 9000
+ 35078 strings out of 480247
+ 670114 string characters out of 5896151
+ 1423375 words of memory out of 5000000
+ 52164 multiletter control sequences out of 15000+600000
+ 568997 words of font info for 169 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,16n,103p,2315b,5221s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.11} has been referenced but does not exist, replaced by a fixed one
@@ -1330,10 +1351,10 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (58 pages, 6424151 bytes).
+Output written on main.pdf (59 pages, 6664748 bytes).
 PDF statistics:
- 824 PDF objects out of 1000 (max. 8388607)
- 711 compressed objects within 8 object streams
- 190 named destinations out of 1000 (max. 500000)
- 276 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 837 PDF objects out of 1000 (max. 8388607)
+ 722 compressed objects within 8 object streams
+ 194 named destinations out of 1000 (max. 500000)
+ 281 words of extra memory for PDF output out of 10000 (max. 10000000)
 

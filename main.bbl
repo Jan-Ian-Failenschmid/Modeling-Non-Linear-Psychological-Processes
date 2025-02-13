@@ -350,6 +350,7 @@
       \strng{authorbibnamehash}{93c716362166f2c95a46bd4478ee7dd1}
       \strng{authornamehash}{a073adec4ab96ceec154ed5a9a6ce685}
       \strng{authorfullhash}{93c716362166f2c95a46bd4478ee7dd1}
+      \field{extraname}{1}
       \field{sortinit}{B}
       \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
       \field{extradatescope}{labelyear}
@@ -383,37 +384,88 @@
       \verb http://www.tandfonline.com/doi/full/10.1080/00273171.2015.1120182
       \endverb
     \endentry
-    \entry{burkner_brms_2017}{article}{}
-      \name{author}{1}{}{%
-        {{un=0,uniquepart=base,hash=ec69dfaa36b99b02d1d9a3733eae1d23}{%
-           family={Bürkner},
+    \entry{bringmann_changing_2017}{article}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=a59c4557c65471245b2b37d025e71ce0}{%
+           family={Bringmann},
            familyi={B\bibinitperiod},
-           given={Paul-Christian},
-           giveni={P\bibinithyphendelim C\bibinitperiod},
+           given={Laura\bibnamedelima F.},
+           giveni={L\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bf3ebddfd095dbb39dac14e644fbb58c}{%
+           family={Hamaker},
+           familyi={H\bibinitperiod},
+           given={Ellen\bibnamedelima L.},
+           giveni={E\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=647847be61dbd63899b41e476c590cdb}{%
+           family={Vigo},
+           familyi={V\bibinitperiod},
+           given={Daniel\bibnamedelima E.},
+           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2525d208ae2d774c2a9c9e0ce0c88a63}{%
+           family={Aubert},
+           familyi={A\bibinitperiod},
+           given={André},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=65b66c163ae7aa90fd735ab96a8cce25}{%
+           family={Borsboom},
+           familyi={B\bibinitperiod},
+           given={Denny},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a62464afee2a784490d87f9a7d3ef86f}{%
+           family={Tuerlinckx},
+           familyi={T\bibinitperiod},
+           given={Francis},
+           giveni={F\bibinitperiod},
            givenun=0}}%
       }
-      \strng{namehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
-      \strng{fullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
-      \strng{bibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
-      \strng{authorbibnamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
-      \strng{authornamehash}{ec69dfaa36b99b02d1d9a3733eae1d23}
-      \strng{authorfullhash}{ec69dfaa36b99b02d1d9a3733eae1d23}
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{a073adec4ab96ceec154ed5a9a6ce685}
+      \strng{fullhash}{d3187504c6a9e7766b4438cc1810d2d0}
+      \strng{bibnamehash}{d3187504c6a9e7766b4438cc1810d2d0}
+      \strng{authorbibnamehash}{d3187504c6a9e7766b4438cc1810d2d0}
+      \strng{authornamehash}{a073adec4ab96ceec154ed5a9a6ce685}
+      \strng{authorfullhash}{d3187504c6a9e7766b4438cc1810d2d0}
+      \field{extraname}{2}
       \field{sortinit}{B}
       \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{year}
       \true{uniqueprimaryauthor}
       \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Journal of Statistical Software}
-      \field{number}{1}
-      \field{title}{brms: {An} {R} {Package} for {Bayesian} {Multilevel} {Models} {Using} {Stan}}
-      \field{volume}{80}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{In psychology, the use of intensive longitudinal data has steeply increased during the past decade. As a result, studying temporal dependencies in such data with autoregressive modeling is becoming common practice. However, standard autoregressive models are often suboptimal as they assume that parameters are time-invariant. This is problematic if changing dynamics (e.g., changes in the temporal dependency of a process) govern the time series. Often a change in the process, such as emotional well-being during therapy, is the very reason why it is interesting and important to study psychological dynamics. As a result, there is a need for an easily applicable method for studying such nonstationary processes that result from changing dynamics. In this article we present such a tool: the semiparametric TV-AR model. We show with a simulation study and an empirical application that the TV-AR model can approximate nonstationary processes well if there are at least 100 time points available and no unknown abrupt changes in the data. Notably, no prior knowledge of the processes that drive change in the dynamic structure is necessary. We conclude that the TV-AR model has significant potential for studying changing dynamics in psychology.}
+      \field{issn}{1939-1463, 1082-989X}
+      \field{journaltitle}{Psychological Methods}
+      \field{month}{9}
+      \field{number}{3}
+      \field{shorttitle}{Changing dynamics}
+      \field{title}{Changing dynamics: {Time}-varying autoregressive models using generalized additive modeling.}
+      \field{urlday}{2}
+      \field{urlmonth}{6}
+      \field{urlyear}{2023}
+      \field{volume}{22}
       \field{year}{2017}
-      \field{pages}{1\bibrangedash 28}
-      \range{pages}{28}
+      \field{urldateera}{ce}
+      \field{pages}{409\bibrangedash 425}
+      \range{pages}{17}
       \verb{doi}
-      \verb 10.18637/jss.v080.i01
+      \verb 10.1037/met0000085
+      \endverb
+      \verb{file}
+      \verb Bringmann et al. - 2017 - Changing dynamics Time-varying autoregressive mod.pdf:C\:\\Users\\failensc\\Zotero\\storage\\7TP6JWAW\\Bringmann et al. - 2017 - Changing dynamics Time-varying autoregressive mod.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://doi.apa.org/getdoi.cfm?doi=10.1037/met0000085
+      \endverb
+      \verb{url}
+      \verb http://doi.apa.org/getdoi.cfm?doi=10.1037/met0000085
       \endverb
     \endentry
     \entry{R-nprobust}{article}{}
@@ -2073,6 +2125,82 @@
       \verb https://www.frontiersin.org/article/10.3389/fpsyg.2020.00351/full
       \endverb
     \endentry
+    \entry{klaassen_all_2018}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=d989e1c8da3be6ef95bfdf8258ced5c2}{%
+           family={Klaassen},
+           familyi={K\bibinitperiod},
+           given={Fayette},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=1e1107640f519f0334bb32baa57cbb65}{%
+           family={Zedelius},
+           familyi={Z\bibinitperiod},
+           given={Claire\bibnamedelima M.},
+           giveni={C\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ddb4a5ea8d695efbce633272a916cb1f}{%
+           family={Veling},
+           familyi={V\bibinitperiod},
+           given={Harm},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bcab42e2d270a36e7d60be407567b3cc}{%
+           family={Aarts},
+           familyi={A\bibinitperiod},
+           given={Henk},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a0b330c7353d156d6acecd669648416a}{%
+           family={Hoijtink},
+           familyi={H\bibinitperiod},
+           given={Herbert},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{a146138ccba1f917f0e5ec3b69ed0d6c}
+      \strng{fullhash}{1db83b4b42e794dc69b9fecf95285315}
+      \strng{bibnamehash}{1db83b4b42e794dc69b9fecf95285315}
+      \strng{authorbibnamehash}{1db83b4b42e794dc69b9fecf95285315}
+      \strng{authornamehash}{a146138ccba1f917f0e5ec3b69ed0d6c}
+      \strng{authorfullhash}{1db83b4b42e794dc69b9fecf95285315}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{issn}{1554-3528}
+      \field{journaltitle}{Behavior Research Methods}
+      \field{month}{12}
+      \field{number}{6}
+      \field{shorttitle}{All for one or some for all?}
+      \field{title}{All for one or some for all? {Evaluating} informative hypotheses using multiple {N} = 1 studies}
+      \field{urlday}{12}
+      \field{urlmonth}{2}
+      \field{urlyear}{2025}
+      \field{volume}{50}
+      \field{year}{2018}
+      \field{urldateera}{ce}
+      \field{pages}{2276\bibrangedash 2291}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.3758/s13428-017-0992-5
+      \endverb
+      \verb{file}
+      \verb Full Text:C\:\\Users\\failensc\\Zotero\\storage\\SWFJ6WZD\\Klaassen et al. - 2018 - All for one or some for all Evaluating informativ.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb http://link.springer.com/10.3758/s13428-017-0992-5
+      \endverb
+      \verb{url}
+      \verb http://link.springer.com/10.3758/s13428-017-0992-5
+      \endverb
+    \endentry
     \entry{kohler_review_2014}{article}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=618a429305184fc779217a53e139d0c2}{%
@@ -2438,8 +2566,8 @@
       \field{number}{1}
       \field{shorttitle}{Studying {Intraindividual} {Variability}}
       \field{title}{Studying {Intraindividual} {Variability}: {What} {We} {Have} {Learned} {That} {Will} {Help} {Us} {Understand} {Lives} in {Context}}
-      \field{urlday}{11}
-      \field{urlmonth}{6}
+      \field{urlday}{27}
+      \field{urlmonth}{11}
       \field{urlyear}{2023}
       \field{volume}{1}
       \field{year}{2004}
@@ -2450,7 +2578,7 @@
       \verb 10.1207/s15427617rhd0101&2_3
       \endverb
       \verb{file}
-      \verb Nesselroade und Ram - 2004 - Studying Intraindividual Variability What We Have.pdf:C\:\\Users\\failensc\\Zotero\\storage\\NB52IEQM\\Nesselroade und Ram - 2004 - Studying Intraindividual Variability What We Have.pdf:application/pdf
+      \verb Nesselroade and Ram - 2004 - Studying Intraindividual Variability What We Have.pdf:C\:\\Users\\failensc\\Zotero\\storage\\KQCUMASA\\Nesselroade and Ram - 2004 - Studying Intraindividual Variability What We Have.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb http://www.informaworld.com/openurl?genre=article&doi=10.1207/s15427617rhd0101&2_3&magic=crossref||D404A21C5BB053405B1A640AFFD44AE3
@@ -3361,6 +3489,57 @@
       \field{pages}{3\bibrangedash 36}
       \range{pages}{34}
     \endentry
+    \entry{wood_p-values_2013}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=568b7f37fac36f378aa92315d52ada17}{%
+           family={Wood},
+           familyi={W\bibinitperiod},
+           given={S.\bibnamedelimi N.},
+           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{568b7f37fac36f378aa92315d52ada17}
+      \strng{fullhash}{568b7f37fac36f378aa92315d52ada17}
+      \strng{bibnamehash}{568b7f37fac36f378aa92315d52ada17}
+      \strng{authorbibnamehash}{568b7f37fac36f378aa92315d52ada17}
+      \strng{authornamehash}{568b7f37fac36f378aa92315d52ada17}
+      \strng{authorfullhash}{568b7f37fac36f378aa92315d52ada17}
+      \field{extraname}{2}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0006-3444, 1464-3510}
+      \field{journaltitle}{Biometrika}
+      \field{month}{3}
+      \field{number}{1}
+      \field{title}{On p-values for smooth components of an extended generalized additive model}
+      \field{urlday}{19}
+      \field{urlmonth}{7}
+      \field{urlyear}{2024}
+      \field{volume}{100}
+      \field{year}{2013}
+      \field{urldateera}{ce}
+      \field{pages}{221\bibrangedash 228}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1093/biomet/ass048
+      \endverb
+      \verb{file}
+      \verb Accepted Version:C\:\\Users\\failensc\\Zotero\\storage\\D6QZL9SH\\Wood - 2013 - On p-values for smooth components of an extended g.pdf:application/pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://academic.oup.com/biomet/article-lookup/doi/10.1093/biomet/ass048
+      \endverb
+      \verb{url}
+      \verb https://academic.oup.com/biomet/article-lookup/doi/10.1093/biomet/ass048
+      \endverb
+    \endentry
     \entry{wood_thin_2003}{article}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=4f816a96f8d000d6cb78dea6a1f2da1d}{%
@@ -3379,21 +3558,21 @@
       \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \field{extraname}{2}
+      \field{extraname}{3}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{extradatescope}{labelyear}
       \field{labeldatesource}{year}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Summary I discuss the production of low rank smoothers for d ≥ 1 dimensional data, which can be fitted by regression or penalized regression methods. The smoothers are constructed by a simple transformation and truncation of the basis that arises from the solution of the thin plate spline smoothing problem and are optimal in the sense that the truncation is designed to result in the minimum possible perturbation of the thin plate spline smoothing problem given the dimension of the basis used to construct the smoother. By making use of Lanczos iteration the basis change and truncation are computationally efficient. The smoothers allow the use of approximate thin plate spline models with large data sets, avoid the problems that are associated with ‘knot placement’ that usually complicate modelling with regression splines or penalized regression splines, provide a sensible way of modelling interaction terms in generalized additive models, provide low rank approximations to generalized smoothing spline models, appropriate for use with large data sets, provide a means for incorporating smooth functions of more than one variable into non-linear models and improve the computational efficiency of penalized likelihood models incorporating thin plate splines. Given that the approach produces spline-like models with a sparse basis, it also provides a natural way of incorporating unpenalized spline-like terms in linear and generalized linear models, and these can be treated just like any other model terms from the point of view of model selection, inference and diagnostics.}
+      \field{abstract}{I discuss the production of low rank smoothers for d 1 dimensional data, which can be ﬁtted by regression or penalized regression methods. The smoothers are constructed by a simple transformation and truncation of the basis that arises from the solution of the thin plate spline smoothing problem and are optimal in the sense that the truncation is designed to result in the minimum possible perturbation of the thin plate spline smoothing problem given the dimension of the basis used to construct the smoother. By making use of Lanczos iteration the basis change and truncation are computationally efﬁcient. The smoothers allow the use of approximate thin plate spline models with large data sets, avoid the problems that are associated with ‘knot placement’ that usually complicate modelling with regression splines or penalized regression splines, provide a sensible way of modelling interaction terms in generalized additive models, provide low rank approximations to generalized smoothing spline models, appropriate for use with large data sets, provide a means for incorporating smooth functions of more than one variable into non-linear models and improve the computational efﬁciency of penalized likelihood models incorporating thin plate splines. Given that the approach produces spline-like models with a sparse basis, it also provides a natural way of incorporating unpenalized spline-like terms in linear and generalized linear models, and these can be treated just like any other model terms from the point of view of model selection, inference and diagnostics.}
       \field{issn}{1369-7412, 1467-9868}
       \field{journaltitle}{Journal of the Royal Statistical Society Series B: Statistical Methodology}
       \field{month}{2}
       \field{number}{1}
       \field{title}{Thin {Plate} {Regression} {Splines}}
-      \field{urlday}{8}
-      \field{urlmonth}{6}
+      \field{urlday}{29}
+      \field{urlmonth}{11}
       \field{urlyear}{2023}
       \field{volume}{65}
       \field{year}{2003}
@@ -3404,7 +3583,7 @@
       \verb 10.1111/1467-9868.00374
       \endverb
       \verb{file}
-      \verb 1467-9868.00374:C\:\\Users\\failensc\\Zotero\\storage\\D2HXS4ZJ\\1467-9868.00374:application/pdf
+      \verb Wood - 2003 - Thin Plate Regression Splines.pdf:C\:\\Users\\failensc\\Zotero\\storage\\7RSC8WNI\\Wood - 2003 - Thin Plate Regression Splines.pdf:application/pdf
       \endverb
       \verb{urlraw}
       \verb https://academic.oup.com/jrsssb/article/65/1/95/7110632
@@ -3434,7 +3613,7 @@
       \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \field{extraname}{3}
+      \field{extraname}{4}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{extradatescope}{labelyear}
@@ -3470,7 +3649,7 @@
       \strng{authorbibnamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authornamehash}{4f816a96f8d000d6cb78dea6a1f2da1d}
       \strng{authorfullhash}{4f816a96f8d000d6cb78dea6a1f2da1d}
-      \field{extraname}{4}
+      \field{extraname}{5}
       \field{sortinit}{W}
       \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
       \field{extradatescope}{labelyear}
@@ -3716,6 +3895,7 @@
       \endverb
     \endentry
   \enddatalist
+  \missing{burkner_brms_2017}
 \endrefsection
 \endinput
 

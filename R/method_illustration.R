@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 04-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 04-02-2025                                                   #
+#' Last Modified: 09-02-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -673,11 +673,11 @@ png(
 
 layout_mat <- matrix(
   c(
-    2, 2, 3, 3, 4, 4,
-    5, 5, 6, 6, 7, 7,
-    8, 8, 9, 9, 10, 10,
-    1, 1, 1, 1, 1, 1
-  ), 4, 6,
+    2, 2, 3, 3,
+    4, 4, 5, 5,
+    6, 6, 7, 7,
+    1, 1, 1, 1
+  ), 4, 4,
   byrow = TRUE
 )
 layout(mat = layout_mat, heights = c(0.3, 0.3, 0.3, 0.1))
@@ -760,123 +760,7 @@ title(xlab = "Time", line = 4, cex.lab = cex)
 lines(dat$time, dat$y, lty = 2, lwd = 3)
 lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
 
-# Top right plot
-sqe <- function(x, alpha = 1, rho = 1) {
-  alpha^2 * exp(-abs(x)^2 / (2 * rho^2))
-}
-
-loc <- seq(0, 4, 0.01)
-
-plot(loc, sqe(loc),
-  type = "l",
-  main = "c) Squared exponential kernel",
-  xlab = "", ylab = "",
-  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE,
-  lwd = 3
-) # Data points
-
-axis(2,
-  at = c(0, 0.5, 1),
-  labels = c("0", "", expression(alpha^2)), cex.axis = cex
-)
-axis(1,
-  at = c(0, 1, 2, 3, 4),
-  labels = c("0", expression(rho^2), "", expression(paste("3", rho^2)), ""),
-  cex.axis = cex, padj = 1
-)
-title(xlab = expression(paste(Delta, "t")), line = 4, cex.lab = cex)
-
 # Mid left plot
-mod <- cmdstan_model("./R/stan_files/gp_alpha.stan")
-data <- c(data, alpha = 0.1)
-
-gp_fit <- mod$sample(
-  data = data,
-  seed = 5838298,
-  chains = 4,
-  parallel_chains = 4,
-  refresh = 500
-)
-
-# Posterior predictive draws
-gp_post_pred(gp_fit,
-  f_name = "f_post_predict", time = dat$time,
-  obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
-  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
-  main = "d) Marginal variance too small",
-  xlab = "", ylab = "", axes = FALSE
-)
-
-axis(2, at = seq(-10, 10, 2), cex.axis = cex)
-axis(1,
-  at = c(0, 50, 100, 150, 200),
-  labels = c("", "", "", "", ""),
-  cex.axis = cex, padj = 1
-)
-title(xlab = "Time", line = 4, cex.lab = cex)
-
-lines(dat$time, dat$y, lty = 2, lwd = 3)
-lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
-
-# Mid center plot
-mod <- cmdstan_model("./R/stan_files/gp_alpha.stan")
-data$alpha <- 30
-
-gp_fit <- mod$sample(
-  data = data,
-  seed = 5838298,
-  chains = 4,
-  parallel_chains = 4,
-  refresh = 500
-)
-
-# Posterior predictive draws
-gp_post_pred(gp_fit,
-  f_name = "f_post_predict", time = dat$time,
-  obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
-  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
-  main = "e) Marginal variance too large",
-  xlab = "", ylab = "", axes = FALSE
-)
-
-axis(2, at = seq(-10, 10, 2), cex.axis = cex)
-axis(1,
-  at = c(0, 50, 100, 150, 200),
-  labels = c("", "", "", "", ""),
-  cex.axis = cex, padj = 1
-)
-title(xlab = "Time", line = 4, cex.lab = cex)
-
-lines(dat$time, dat$y, lty = 2, lwd = 3)
-lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
-
-# Mid right plot
-matern_12 <- function(x, alpha = 1, rho = 1) {
-  alpha^2 * exp(-abs(x / rho))
-}
-
-loc <- seq(0, 4, 0.01)
-
-plot(loc, matern_12(loc),
-  type = "l",
-  main = "f) Matern 1/2 kernel",
-  xlab = "", ylab = "",
-  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE,
-  lwd = 3
-) # Data points
-
-axis(2,
-  at = c(0, 0.5, 1),
-  labels = c("0", "", expression(alpha^2)), cex.axis = cex
-)
-axis(1,
-  at = c(0, 1, 2, 3, 4),
-  labels = c("0", expression(rho), "", expression(paste("3", rho)), ""),
-  cex.axis = cex, padj = 1
-)
-title(xlab = expression(paste(Delta, "t")), line = 4, cex.lab = cex)
-
-# Bottom left plot
 mod <- cmdstan_model("./R/stan_files/gp_rho.stan")
 data <- c(data, rho = 0.1)
 
@@ -893,7 +777,7 @@ gp_post_pred(gp_fit,
   f_name = "f_post_predict", time = dat$time,
   obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
-  main = "g) Lengthscale too short",
+  main = "c) Lengthscale too short",
   xlab = "", ylab = "", axes = FALSE
 )
 
@@ -908,7 +792,7 @@ title(xlab = "Time", line = 4, cex.lab = cex)
 lines(dat$time, dat$y, lty = 2, lwd = 3)
 lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
 
-# Bottom center plot
+# Mid right plot
 mod <- cmdstan_model("./R/stan_files/gp_rho.stan")
 data$rho <- 1
 
@@ -925,7 +809,39 @@ gp_post_pred(gp_fit,
   f_name = "f_post_predict", time = dat$time,
   obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
-  main = "h) Lengthscale too large",
+  main = "d) Lengthscale too large",
+  xlab = "", ylab = "", axes = FALSE
+)
+
+axis(2, at = seq(-10, 10, 2), cex.axis = cex)
+axis(1,
+  at = c(0, 50, 100, 150, 200),
+  labels = c("", "", "", "", ""),
+  cex.axis = cex, padj = 1
+)
+title(xlab = "Time", line = 4, cex.lab = cex)
+
+lines(dat$time, dat$y, lty = 2, lwd = 3)
+lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
+
+# Bottom left plot
+mod <- cmdstan_model("./R/stan_files/gp_alpha.stan")
+data <- c(data, alpha = 0.1)
+
+gp_fit <- mod$sample(
+  data = data,
+  seed = 5838298,
+  chains = 4,
+  parallel_chains = 4,
+  refresh = 500
+)
+
+# Posterior predictive draws
+gp_post_pred(gp_fit,
+  f_name = "f_post_predict", time = dat$time,
+  obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
+  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
+  main = "e) Marginal variance too small",
   xlab = "", ylab = "", axes = FALSE
 )
 
@@ -941,24 +857,101 @@ lines(dat$time, dat$y, lty = 2, lwd = 3)
 lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
 
 # Bottom right plot
-# mod <- cmdstan_model("./R/stan_files/gp_matern.stan")
-# gp_fit <- mod$sample(
-#   data = data,
-#   seed = 5838298,
-#   chains = 4,
-#   parallel_chains = 4,
-#   refresh = 500
-# )
+mod <- cmdstan_model("./R/stan_files/gp_alpha.stan")
+data$alpha <- 30
 
-# # Posterior predictive draws
-# gp_post_pred(gp_fit,
-#   f_name = "f_post_predict", time = dat$time,
-#   obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
-#   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
-#   main = "i) Gaussian process posterior Matern kernel",
-#   xlab = "", ylab = "", axes = FALSE
-# )
+gp_fit <- mod$sample(
+  data = data,
+  seed = 5838298,
+  chains = 4,
+  parallel_chains = 4,
+  refresh = 500
+)
 
+# Posterior predictive draws
+gp_post_pred(gp_fit,
+  f_name = "f_post_predict", time = dat$time,
+  obs = dat$y_obs, state = rep(-20, 201), alpha = 0.2,
+  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex,
+  main = "f) Marginal variance too large",
+  xlab = "", ylab = "", axes = FALSE
+)
+
+axis(2, at = seq(-10, 10, 2), cex.axis = cex)
+axis(1,
+  at = c(0, 50, 100, 150, 200),
+  labels = c("", "", "", "", ""),
+  cex.axis = cex, padj = 1
+)
+title(xlab = "Time", line = 4, cex.lab = cex)
+
+lines(dat$time, dat$y, lty = 2, lwd = 3)
+lines(x = dat$time, y = gp_fit$summary("f_post_predict")$mean, lwd = 3)
+
+dev.off()
+
+# GP kernel plot
+png(
+  file = paste0(fig_path, "gp_kernel.png"),
+  width = 1960, height = 1080
+)
+
+par(lwd = 2.5, mfrow = c(3, 1))
+
+# Top plot
+sqe <- function(x, alpha = 1, rho = 1) {
+  alpha^2 * exp(-abs(x)^2 / (2 * rho^2))
+}
+
+loc <- seq(0, 4, 0.01)
+
+plot(loc, sqe(loc),
+  type = "l",
+  main = "a) Squared exponential kernel",
+  xlab = "", ylab = "",
+  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE,
+  lwd = 3
+) # Data points
+
+axis(2,
+  at = c(0, 0.5, 1),
+  labels = c("0", "", expression(alpha^2)), cex.axis = cex
+)
+axis(1,
+  at = c(0, 1, 2, 3, 4),
+  labels = c("0", expression(rho^2), "", expression(paste("3", rho^2)), ""),
+  cex.axis = cex, padj = 1
+)
+title(xlab = expression(paste(Delta, "t")), line = 4, cex.lab = cex)
+
+# Mid plot
+matern_12 <- function(x, alpha = 1, rho = 1) {
+  alpha^2 * exp(-abs(x / rho))
+}
+
+loc <- seq(0, 4, 0.01)
+
+plot(loc, matern_12(loc),
+  type = "l",
+  main = "b) Matern 1/2 kernel",
+  xlab = "", ylab = "",
+  cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE,
+  lwd = 3
+) # Data points
+
+axis(2,
+  at = c(0, 0.5, 1),
+  labels = c("0", "", expression(alpha^2)), cex.axis = cex
+)
+axis(1,
+  at = c(0, 1, 2, 3, 4),
+  labels = c("0", expression(rho), "", expression(paste("3", rho)), ""),
+  cex.axis = cex, padj = 1
+)
+title(xlab = expression(paste(Delta, "t")), line = 4, cex.lab = cex)
+
+
+# Bottom plot
 linear <- function(x, y, alpha = 1, beta = 0.01) {
   alpha^2 + beta^2 * x * y
 }
@@ -987,7 +980,7 @@ draws_list <- do.call(rbind, draws_list)
 
 plot(0,
   type = "n",
-  main = "i) Prior draws from different kernels",
+  main = "c) Prior draws from different kernels",
   xlab = "", ylab = "",
   cex.lab = cex, cex.axis = cex, cex.main = cex, cex.sub = cex, axes = FALSE,
   xlim = c(0, 200), ylim = c(min(draws_list), max(draws_list))

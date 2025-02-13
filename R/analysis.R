@@ -3,7 +3,7 @@
 #' Author: Jan Ian Failenschmid                                                #
 #' Created Date: 12-04-2024                                                    #
 #' -----                                                                       #
-#' Last Modified: 31-01-2025                                                   #
+#' Last Modified: 09-02-2025                                                   #
 #' Modified By: Jan Ian Failenschmid                                           #
 #' -----                                                                       #
 #' Copyright (c) 2024 by Jan Ian Failenschmid                                  #
@@ -76,18 +76,21 @@ mcse <- lapply(
 )
 
 ### Load and prepare data ------------------------------------------------------
-load("R/data/simulation_results_27_09_2024_00_32.Rdata")
+load("R/data/combined_results_06_02_2025_21_17.Rdata")
 res <- as.data.table(res)
 res <- res[!method %in% c("simple", "poly_orth"), ]
 
-load("R/data/old_data/pilot_data_09_09_2024_01_47.Rdata")
-sim1 <- as.data.table(sim) # LPR, GP, GAM
 
-load("R/data/old_data/pilot_data_10_09_2024_14_31.Rdata")
-sim2 <- as.data.table(sim) # Parametric models
+# load("R/data/old_data/pilot_data_09_09_2024_01_47.Rdata")
+# sim1 <- as.data.table(sim) # LPR, GP, GAM
 
-load("R/data/old_data/pilot_data_11_09_2024_18_39.Rdata")
-sim3 <- sim # Correlated Polynomial Regression
+# load("R/data/old_data/pilot_data_10_09_2024_14_31.Rdata")
+# sim2 <- as.data.table(sim) # Parametric models
+
+# load("R/data/old_data/pilot_data_11_09_2024_18_39.Rdata")
+# sim3 <- sim # Correlated Polynomial Regression
+
+load("R/data/combined_data_06_02_2025_21_17.Rdata")
 
 res[, SP := ifelse(time == 100, 0.5, 1)]
 res[, DEV := dyn_er^2]
@@ -139,7 +142,7 @@ contrasts(res$DEV) <- contr.sum(levels(res$DEV))
 res_summary <- res[, .(
   mse_mean = mean(mse, na.rm = TRUE),
   mse_se = sd(mse, na.rm = TRUE) / sqrt(.N),
-  mse_missing = sum(is.na(mse)),
+  mse_missing = sum(is.na(mse)) / .N,
   gcv_mean = mean(gcv, na.rm = TRUE),
   gcv_se = sd(gcv, na.rm = TRUE) / sqrt(.N),
   gcv_missing = sum(is.na(gcv)),
@@ -147,7 +150,7 @@ res_summary <- res[, .(
   ci_coverage_se = sd(ci_coverage, na.rm = TRUE) / sqrt(.N),
   ci_coverage_missing = sum(is.na(ci_coverage))
 ),
-by = .(method, model, time, stepsize, dyn_er)
+by = .(method)
 ]
 
 # View(res_summary)
@@ -308,7 +311,7 @@ ilustr <- sim[, model_name := sapply(gen_model, function(x) {
 })][,
   .I[time == 200 & stepsize == unique(stepsize)[1] & dyn_er == sqrt(1)],
   by = model_name
-][, .SD[4], by = model_name]
+][, .SD[3], by = model_name]
 
 method <-
   c(
@@ -334,32 +337,11 @@ par(
 )
 
 for (j in 1:4) {
-  for (i in c(1:3, 5, 4)) {
-    if (i %in% c(1:3)) {
-      plot(sim1$method[[ilustr$V1[j]]][[i]],
-        sim = sim1,
-        axes = FALSE, xlab = "", ylab = ""
-      )
-    } else if (i == 4) {
-      if (j == 4) {
-        plot_dat <- sim2$dat[[ilustr$V1[j]]]
-        plot(
-          x = plot_dat$time, y = plot_dat$y_obs,
-          axes = FALSE, xlab = "", ylab = ""
-        )
-        lines(x = plot_dat$time, y = plot_dat$y, lwd = 2.5)
-      } else {
-        plot(sim2$method[[ilustr$V1[j]]][[2]],
-          sim = sim2,
-          axes = FALSE, xlab = "", ylab = ""
-        )
-      }
-    } else if (i == 5) {
-      plot(sim3$method[[ilustr$V1[j]]][[2]],
-        sim = sim3,
-        axes = FALSE, xlab = "", ylab = ""
-      )
-    }
+  for (i in c(1:3, 6, 4)) {
+    plot(sim$method[[ilustr$V1[j]]][[i]],
+      sim = sim,
+      axes = FALSE, xlab = "", ylab = ""
+    )
 
     axis(2, at = seq(-10, 10, 2), cex.axis = 2.5)
 

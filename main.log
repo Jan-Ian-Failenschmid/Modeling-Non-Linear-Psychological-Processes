@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  13 FEB 2025 15:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.15)  27 FEB 2025 12:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1179,13 +1179,13 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <./figures/locpol_demonstration.png, id=244, 1967.35pt x 1084.05pt>
 File: ./figures/locpol_demonstration.png Graphic file (type png)
 <use ./figures/locpol_demonstration.png>
-Package pdftex.def Info: ./figures/locpol_demonstration.png  used on input line 421.
+Package pdftex.def Info: ./figures/locpol_demonstration.png  used on input line 422.
 (pdftex.def)             Requested size: 650.43001pt x 358.39926pt.
  [10] [11 <./figures/locpol_demonstration.png (PNG copy)>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12] [13] [14]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 626.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 628.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
@@ -1195,7 +1195,7 @@ Underfull \vbox (badness 4752) has occurred while \output is active []
 <./figures/gp_demonstration.png, id=326, 1967.35pt x 1084.05pt>
 File: ./figures/gp_demonstration.png Graphic file (type png)
 <use ./figures/gp_demonstration.png>
-Package pdftex.def Info: ./figures/gp_demonstration.png  used on input line 685.
+Package pdftex.def Info: ./figures/gp_demonstration.png  used on input line 687.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1204,7 +1204,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <./figures/gp_kernel.png, id=335, 1967.35pt x 1084.05pt>
 File: ./figures/gp_kernel.png Graphic file (type png)
 <use ./figures/gp_kernel.png>
-Package pdftex.def Info: ./figures/gp_kernel.png  used on input line 737.
+Package pdftex.def Info: ./figures/gp_kernel.png  used on input line 739.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
  [18]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1213,7 +1213,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <./figures/gam_demonstration.png, id=374, 1967.35pt x 1084.05pt>
 File: ./figures/gam_demonstration.png Graphic file (type png)
 <use ./figures/gam_demonstration.png>
-Package pdftex.def Info: ./figures/gam_demonstration.png  used on input line 912.
+Package pdftex.def Info: ./figures/gam_demonstration.png  used on input line 914.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
 
 Underfull \vbox (badness 2261) has occurred while \output is active []
@@ -1225,12 +1225,12 @@ Underfull \vbox (badness 6592) has occurred while \output is active []
 Underfull \vbox (badness 2435) has occurred while \output is active []
 
  [25] (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
-Overfull \hbox (3.6213pt too wide) in paragraph at lines 1156--1156
+Overfull \hbox (3.6213pt too wide) in paragraph at lines 1159--1159
 []|\T1/ptm/m/n/12 Disadvantages|  
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 1156--1156
+Underfull \hbox (badness 10000) in alignment at lines 1159--1159
 [][][][] 
  []
 
@@ -1238,12 +1238,12 @@ Underfull \hbox (badness 10000) in alignment at lines 1156--1156
 <./figures/exemplar_process_noise.png, id=458, 1967.35pt x 1084.05pt>
 File: ./figures/exemplar_process_noise.png Graphic file (type png)
 <use ./figures/exemplar_process_noise.png>
-Package pdftex.def Info: ./figures/exemplar_process_noise.png  used on input line 1213.
+Package pdftex.def Info: ./figures/exemplar_process_noise.png  used on input line 1216.
 (pdftex.def)             Requested size: 469.75502pt x 258.83748pt.
 <./figures/stoch_mean_variance.png, id=459, 1967.35pt x 1084.05pt>
 File: ./figures/stoch_mean_variance.png Graphic file (type png)
 <use ./figures/stoch_mean_variance.png>
-Package pdftex.def Info: ./figures/stoch_mean_variance.png  used on input line 1229.
+Package pdftex.def Info: ./figures/stoch_mean_variance.png  used on input line 1232.
 (pdftex.def)             Requested size: 650.43001pt x 358.39926pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1255,16 +1255,16 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <./figures/smooth.png, id=527, 1967.35pt x 1084.05pt>
 File: ./figures/smooth.png Graphic file (type png)
 <use ./figures/smooth.png>
-Package pdftex.def Info: ./figures/smooth.png  used on input line 1497.
+Package pdftex.def Info: ./figures/smooth.png  used on input line 1500.
 (pdftex.def)             Requested size: 650.43001pt x 358.39926pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1584.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1587.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1584.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1587.
 <./figures/mean_results_mse.png, id=530, 1927.2pt x 1084.05pt>
 File: ./figures/mean_results_mse.png Graphic file (type png)
 <use ./figures/mean_results_mse.png>
-Package pdftex.def Info: ./figures/mean_results_mse.png  used on input line 1609.
+Package pdftex.def Info: ./figures/mean_results_mse.png  used on input line 1612.
 (pdftex.def)             Requested size: 650.43001pt x 365.85936pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1273,12 +1273,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <./figures/mean_results_gcv.png, id=554, 1927.2pt x 1084.05pt>
 File: ./figures/mean_results_gcv.png Graphic file (type png)
 <use ./figures/mean_results_gcv.png>
-Package pdftex.def Info: ./figures/mean_results_gcv.png  used on input line 1647.
+Package pdftex.def Info: ./figures/mean_results_gcv.png  used on input line 1650.
 (pdftex.def)             Requested size: 650.43001pt x 365.85936pt.
 <./figures/mean_results_ci_coverage.png, id=556, 1927.2pt x 1084.05pt>
 File: ./figures/mean_results_ci_coverage.png Graphic file (type png)
 <use ./figures/mean_results_ci_coverage.png>
-Package pdftex.def Info: ./figures/mean_results_ci_coverage.png  used on input line 1671.
+Package pdftex.def Info: ./figures/mean_results_ci_coverage.png  used on input line 1674.
 (pdftex.def)             Requested size: 650.43001pt x 365.85936pt.
  [41] [42 <./figures/mean_results_gcv.png>] [43 <./figures/mean_results_ci_coverage.png>]
 Underfull \vbox (badness 3954) has occurred while \output is active []
@@ -1287,7 +1287,7 @@ Underfull \vbox (badness 3954) has occurred while \output is active []
 <./figures/demonstration_smooths.png, id=595, 1927.2pt x 1084.05pt>
 File: ./figures/demonstration_smooths.png Graphic file (type png)
 <use ./figures/demonstration_smooths.png>
-Package pdftex.def Info: ./figures/demonstration_smooths.png  used on input line 1786.
+Package pdftex.def Info: ./figures/demonstration_smooths.png  used on input line 1790.
 (pdftex.def)             Requested size: 469.75502pt x 264.22992pt.
  [46] [47 <./figures/demonstration_smooths.png>] [48]
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1307,7 +1307,7 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 Here is how much of TeX's memory you used:
  35085 strings out of 480247
  670408 string characters out of 5896151
- 1423371 words of memory out of 5000000
+ 1423375 words of memory out of 5000000
  52170 multiletter control sequences out of 15000+600000
  566194 words of font info for 167 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1335,7 +1335,7 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist,
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (59 pages, 6665386 bytes).
+Output written on main.pdf (59 pages, 6664852 bytes).
 PDF statistics:
  841 PDF objects out of 1000 (max. 8388607)
  726 compressed objects within 8 object streams

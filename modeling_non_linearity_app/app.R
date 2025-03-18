@@ -42,10 +42,10 @@ for (class_name in c(
 }
 
 # Read-in simulation data
-load("data/simulation_data_27_09_2024_00_32.Rdata")
+load("./data/combined_data_06_02_2025_21_17.Rdata")
 
 # Read-in simulation results
-load("./data/simulation_results_27_09_2024_00_32.Rdata")
+load("./data/combined_results_06_02_2025_21_17.Rdata")
 res <- as.data.table(res)
 
 

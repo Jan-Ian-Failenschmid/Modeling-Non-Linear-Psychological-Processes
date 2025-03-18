@@ -5,6 +5,6 @@ account: jan-ian-failenschmid
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 13108984
-bundleId: 9260425
+bundleId: 9962408
 url: https://jan-ian-failenschmid.shinyapps.io/modeling_non_linearity_app/
 version: 1
